@@ -1,0 +1,173 @@
+<?php
+
+/*
+This file is part of McWebPanel.
+Copyright (C) 2020 Cristina Ibañez, Konata400
+
+    McWebPanel is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    McWebPanel is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; child-src 'none'; object-src 'none'; frame-ancestors 'none'");
+header('X-Content-Type-Options: nosniff');
+header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
+
+require_once("../template/errorreport.php");
+?>
+
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta name="description" content="Instalador">
+  <meta name="author" content="Konata400">
+  <title>McWebPanel Install</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+  <!-- Script AJAX -->
+  <script src="../js/jquery.min.js"></script>
+
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="../img/icons/apple-icon-180x180.png" sizes="180x180">
+  <link rel="icon" href="../img/icons/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../img/icons/favicon-16x16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="../img/icons/favicon.ico">
+</head>
+
+<body>
+  <?php
+  // No se aceptan metodos que no sean post
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  ?>
+    <div class="pt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3"><img class="d-block float-right" src="logo.png" alt="Logo"></div>
+          <div class="col-md-9">
+            <h1 class="display-4 text-left">McWebPanel (Instalacíon)</h1>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <div class="py-2 text-center">
+      <div class="container">
+        <div class="row">
+          <div class="mx-auto col-lg-6 col-10">
+            <h4 class="mb-4 text-left">Configuración</h4>
+            <form class="text-left" action="install3.php" method="POST" id="login-install2">
+
+              <div class="form-group">
+                <label for="eluser" class="">Nombre Usuario (SuperAdmin)</label>
+                <input type="text" class="form-control" id="eluser" name="eluser" required="required">
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="elpass">Contraseña</label>
+                  <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" required="required">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="elrepass">Confirmar Contraseña</label>
+                  <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" required="required">
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <p class="lead" id="textoretorno"></p>
+              </div>
+
+              <div class="form-group">
+                <label for="elnomserv">Nombre Servidor</label>
+                <input type="text" class="form-control" id="elnomserv" name="elnomserv" required="required" placeholder="McWebPanel">
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="elport">Puerto</label>
+                  <input type="number" value="25565" class="form-control" id="elport" name="elport" required="required" placeholder="25565" max="65535" min="1025">
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="maxupload">Subida Archivos (Limite MB)</label>
+                  <select id="maxupload" name="maxupload" class="form-control" required="required">
+                    <option value="128">128 MB</option>
+                    <option value="256">256 MB</option>
+                    <option value="384">384 MB</option>
+                    <option value="512">512 MB</option>
+                    <option value="640">640 MB</option>
+                    <option value="768">768 MB</option>
+                    <option value="896">896 MB</option>
+                    <option value="1024">1024 MB</option>
+                  </select></div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6"> <label for="elram" class="">Memoria Ram Limite</label>
+                <select id="elram" name="elram" class="form-control" required="required">
+                    <?php
+
+                    $salida = shell_exec('free -h | grep Mem');
+                    $totalram = substr($salida, 14, 4);
+                    $totalram = preg_replace('/\s+/', '', $totalram);
+                    $totalram = trim($totalram);
+
+                    for ($i = 1;; $i++) {
+                      if ($i > $totalram) {
+                        break;
+                      }
+                      echo '<option value="' . $i . '">' . $i . ' GB</option>';
+                    }
+
+                    ?>
+                  </select></div>
+                <div class="form-group col-md-6">
+                  <label for="eltipserv">Tipo Servidor</label>
+                  <select id="eltipserv" name="eltipserv" class="form-control" required="required">
+                    <option value="vanilla">Vanilla</option>
+                    <option value="spigot">Spigot</option>
+                    <option value="paper">Paper</option>
+                    <option value="otros">Otros</option>
+                  </select></div>
+              </div>
+              <p class="lead" id="errorsubmit"></p>
+              <button type="submit" id="binstalar" class="btn btn-primary btn-block">Instalar</button>
+            </form>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/install2.js"></script>
+  <?php
+  //FIN DEL IF DEL POST
+  } else {
+    header("location:index.php");
+  }
+  ?>
+
+</body>
+
+</html>
