@@ -30,26 +30,6 @@ $mesactual = date('n');
 $semanactual = date('N');
 $horactual = date('G');
 $minutoactual = date('i');
-//echo $time;
-//echo "<br>";
-//echo "mes: " . $mesactual;
-//echo "<br>";
-//echo "semana: " . $semanactual;
-//echo "<br>";
-//echo "hora: " . $horactual;
-//echo "<br>";
-//echo "minuto: " . $minutoactual;
-//echo "<br>";
-
-//$filecomprovar = "/var/www/mineadmin/cron/respuesta.txt";
-//$open = fopen($filecomprovar,"a");
-//if ( $open ) {
-//    fwrite($open,"ejecutado:". PHP_EOL);
-//    fwrite($open,$RUTAPRINCIPAL . PHP_EOL);
-//    fwrite($open,$RUTACONFIG . PHP_EOL);
-//	fclose($open);
-//}
-
 
 //OBTENER RUTA CONFIG
 $rutaarchivo = $RUTAPRINCIPAL;
@@ -118,7 +98,7 @@ if ($elerror == 0) {
                                                     //TAREA VALIDA PROCEDER A LA EJECUCION
                                                     $tarea = $arrayobtenido[$i]['accion'];
                                                     //echo "DENTRO";
-                                                    
+
                                                     switch ($tarea) {
                                                         case "acc1":
                                                             //APAGAR SERVIDOR
@@ -175,6 +155,21 @@ if ($elerror == 0) {
                                                                     if ($receulaminecraft == "") {
                                                                         $retorno = "no hay eula";
                                                                         $elerror = 1;
+                                                                    }
+                                                                }
+
+                                                                //VERIFICAR EULA
+                                                                if ($elerror == 0) {
+                                                                    if ($receulaminecraft == "") {
+                                                                        $elerror = 1;
+                                                                        $retorno = "noeula";
+                                                                    } elseif ($receulaminecraft == "1") {
+                                                                        $rutaescrivir = $rutacarpetamine;
+                                                                        $rutaescrivir .= "/eula.txt";
+
+                                                                        $file = fopen($rutaescrivir, "w");
+                                                                        fwrite($file, "eula=true" . PHP_EOL);
+                                                                        fclose($file);
                                                                     }
                                                                 }
 
@@ -279,7 +274,6 @@ if ($elerror == 0) {
                                                                 //INICIAR SERVIDOR
                                                                 if ($elerror == 0) {
 
-                                                                    
                                                                     $comandoserver = "";
 
                                                                     $rutacarpetamine = $RUTAPRINCIPAL;
@@ -287,17 +281,14 @@ if ($elerror == 0) {
                                                                     $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
 
                                                                     if ($rectiposerv == "vanilla") {
-                                                                        //java -jar minecraft_server.jar nogui
-                                                                        $comandoserver .= "cd " .$RUTAPRINCIPAL ." && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     } elseif ($rectiposerv == "spigot") {
-                                                                        //shell_exec('cd minecraft1 && screen -dmS minecraft1 java -Xms1G -Xmx8G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar /var/www/mineadmin/minecraft1/server.jar nogui -nojline --log-strip-color');
-                                                                        $comandoserver .= "cd " .$RUTAPRINCIPAL ." && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
                                                                     } elseif ($rectiposerv == "paper") {
-                                                                        $comandoserver .= "cd " .$RUTAPRINCIPAL ." && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     } elseif ($rectiposerv == "otros") {
-                                                                        $comandoserver .= "cd " .$RUTAPRINCIPAL ." && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     }
-                                                                    //echo $comandoserver;
                                                                     $elpid = shell_exec($comandoserver);
                                                                 }
                                                             }
@@ -365,19 +356,11 @@ if ($elerror == 0) {
                                                     }
                                                 }
                                             }
-                                            //echo $arrayobtenido[$i][$d]['minuto'];
-                                            //echo "<br>";
                                         }
-                                        //echo $arrayobtenido[$i][$c]['hora'];
-                                        //echo "<br>";
                                     }
                                 }
-                                //echo $arrayobtenido[$i][$b]['semana'];
-                                //echo "<br>";
                             }
                         }
-                        //echo $arrayobtenido[$i][$a]['mes'];
-                        //echo "<br>";
                     }
                 }
             }
