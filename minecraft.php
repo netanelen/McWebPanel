@@ -97,7 +97,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <h2 class=""><b>Configuracion Minecraft</b></h2>
+                                                    <h2 class=""><b>Configuración Minecraft</b></h2>
                                                     <hr>
                                                     <p class="lead">Nota: Los cambios en la configuración no se aplican hasta que se reinicia el servidor de Minecraft.</p>
                                                     <br>
@@ -236,7 +236,7 @@ require_once("template/header.php");
                                                     <h3 class=""><b>Dificultad</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: Facil (easy)</p>
+                                                    <p class="">Valor Defecto: Fácil (easy)</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -286,7 +286,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Si esta en true, la dificultad es ignorada y fijada en dificil y los jugadores pasan a modo espectador si mueren.</p>
+                                                    <p class="lead">Si está en true, la dificultad es ignorada y fijada en difícil y los jugadores pasan a modo espectador si mueren.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-hardcore">
@@ -376,7 +376,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Los NPC (Aldeanos) podran spawnear en el mapa.</p>
+                                                    <p class="lead">Los NPC (Aldeanos) podrán spawnear en el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-spawn-npcs">
@@ -421,7 +421,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Los Animales (Cerdo, Vaca, etc..) podran spawnear en el mapa.</p>
+                                                    <p class="lead">Los Animales (Cerdo, Vaca, etc.) podrán spawnear en el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-spawn-animals">
@@ -466,7 +466,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Los Monstruos (Creepers, Arañas, etc..) podran spawnear en el mapa.</p>
+                                                    <p class="lead">Los Monstruos (Creepers, Arañas, etc.) podrán spawnear en el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-spawn-monsters">
@@ -578,7 +578,7 @@ require_once("template/header.php");
                                                     <h3 class=""><b>Paquete de recursos</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: Vacio</p>
+                                                    <p class="">Valor Defecto: Vacío</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -606,12 +606,12 @@ require_once("template/header.php");
                                                     <h3 class=""><b>Verificar Paquete de recursos usando SHA1</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: Vacio</p>
+                                                    <p class="">Valor Defecto: Vacío</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Comprueva si el SHA1 corresponde con el fichero seleccionado de la URL.<br>Se utiliza el SHA1 del fichero en cuestion en hexadecimal y en minusculas.</p>
+                                                    <p class="lead">Comprueba si el SHA1 corresponde con el fichero seleccionado de la URL.<br>Se utiliza el SHA1 del fichero en hexadecimal y en minúsculas.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" value="<?php echo (leerlineas('resource-pack-sha1')); ?>" id="form-resource-pack-sha1">
@@ -679,7 +679,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Semilla para generacion de mapas.</p>
+                                                    <p class="lead">Semilla para generación de mapas.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" value="<?php echo (leerlineas('level-seed')); ?>" id="form-level-seed">
@@ -743,15 +743,15 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Configuracion Generacion Mapa</b></h3>
+                                                    <h3 class=""><b>Configuración Generación Mapa</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: Vacio</p>
+                                                    <p class="">Valor Defecto: Vacío</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Configuracion utilizada para personalizar la generación del mapa.</p>
+                                                    <p class="lead">Configuración utilizada para personalizar la generación del mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" value="<?php echo (leerlineas('generator-settings')); ?>" id="form-generator-settings">
@@ -771,7 +771,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Altura Maxima Construir</b></h3>
+                                                    <h3 class=""><b>Altura Máxima Construir</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 256<br>Valor Min: 8 Valor Max: 256</p>
@@ -779,7 +779,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Determina la altura maxima que se podra construir.</p>
+                                                    <p class="lead">Determina la altura máxima que se podrá construir.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('max-build-height')); ?>" id="form-max-build-height" min="8" max="256">
@@ -807,7 +807,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Se generaran estructuras (Aldeas, edificios, etc..) por el mapa.</p>
+                                                    <p class="lead">Se generarán estructuras (Aldeas, edificios, etc.) por el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-generate-structures">
@@ -895,7 +895,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Ajustar la distencia de rendeziado de entidades, si es muy lejano puede causar lag.</p>
+                                                    <p class="lead">Ajustar la distancia de renderizado de entidades, si es muy lejano puede causar lag.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('entity-broadcast-range-percentage')); ?>" id="form-entity-broadcast-range-percentage" min="0" max="500">
@@ -915,7 +915,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Proteccion Spawn</b></h3>
+                                                    <h3 class=""><b>Protección Spawn</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 16<br>Valor Min: 0 - Valor Max: 16</p>
@@ -923,7 +923,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Asignas el radio de proteccion al punto spawn del mapa.</p>
+                                                    <p class="lead">Asignas el radio de protección al punto spawn del mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('spawn-protection')); ?>" id="form-spawn-protection" min="0" max="16">
@@ -943,7 +943,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Tamaño Maximo Mundo (en bloques)</b></h3>
+                                                    <h3 class=""><b>Tamaño Máximo Mundo (en bloques)</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 29999984<br>Valor Min: 1 - Valor Max: 29999984</p>
@@ -951,7 +951,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Asignas el tamaño maximo del mundo, no se podra caminar al llegar al limite</p>
+                                                    <p class="lead">Asignas el tamaño máximo del mundo, no se podrá caminar al llegar al límite</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('max-world-size')); ?>" id="form-max-world-size" min="1" max="29999984">
@@ -1027,7 +1027,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Maximo Jugadores</b></h3>
+                                                    <h3 class=""><b>Máximo Jugadores</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 20<br>Valor Min: 1 - Valor Max: 2147483647</p>
@@ -1035,7 +1035,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Asignas el maximo de jugadores que podran entrar al servidor.</p>
+                                                    <p class="lead">Asignas el máximo de jugadores que podrán entrar al servidor.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('max-players')); ?>" id="form-max-players" min="1" max="2147483647">
@@ -1246,7 +1246,7 @@ require_once("template/header.php");
                                                     <h3 class=""><b>Password RCON</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: Vacio</p>
+                                                    <p class="">Valor Defecto: Vacío</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1279,7 +1279,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">La lista blanca solo permitira entrar a los usuarios que esten en ella cuando este activada.</p>
+                                                    <p class="lead">La lista blanca solo permitirá entrar a los usuarios que estén en ella cuando esté activada.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-white-list">
@@ -1323,7 +1323,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Cuando esta true, los usuarios que no están añadidos en la lista blanca (si está esta habilitada) son expulsados ​​del servidor después de que el servidor vuelve a cargar el archivo de la lista blanca.</p>
+                                                    <p class="lead">Cuando está en true, los usuarios que no están añadidos en la lista blanca (si está esta habilitada) son expulsados ​​del servidor después de que el servidor vuelve a cargar el archivo de la lista blanca.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-enforce-whitelist">
@@ -1362,12 +1362,12 @@ require_once("template/header.php");
                                                     <h3 class=""><b>Ip del Server</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: vacio</p>
+                                                    <p class="">Valor Defecto: Vacío</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Fijar el servidor obligatoriamente a una ip, se recomienda dejarla en blanco.</p>
+                                                    <p class="lead">Fijar el servidor obligatoriamente a una IP, se recomienda dejarla en blanco.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" value="<?php echo (leerlineas('server-ip')); ?>" id="form-server-ip">
@@ -1395,7 +1395,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Hace aparecer el servidor "online en la lista de servidores.<br>Si esta en falso, suprimirá las respuestas de los clientes. Esto significa que aparecerá como fuera de línea, pero seguirá aceptando conexiones.</p>
+                                                    <p class="lead">Hace aparecer el servidor 'online' en la lista de servidores.<br>Si está en falso, suprimirá las respuestas de los clientes. Esto significa que aparecerá como fuera de línea, pero seguirá aceptando conexiones.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-enable-status">
@@ -1439,7 +1439,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Envia los resultados de los comandos de consola a todos los operadores.</p>
+                                                    <p class="lead">Envía los resultados de los comandos de consola a todos los operadores.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-broadcast-console-to-ops">
@@ -1483,7 +1483,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Envia los resultados de los comandos de consola mediante rcon a todos los operadores.</p>
+                                                    <p class="lead">Envía los resultados de los comandos de consola mediante rcon a todos los operadores.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-broadcast-rcon-to-ops">
@@ -1571,7 +1571,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Si el ISP/AS enviado desde el servidor es diferente al del Servidor Autentificacion de Mojang, el jugador es kickeado.</p>
+                                                    <p class="lead">Si el ISP/AS enviado desde el servidor es diferente al del Servidor Autentificación de Mojang, el jugador es kickeado.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-prevent-proxy-connections">
@@ -1651,7 +1651,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Estadisticas Mojang</b></h3>
+                                                    <h3 class=""><b>Estadísticas Mojang</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: True</p>
@@ -1659,7 +1659,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Envia estadisticas del Servidor a Mojang.</p>
+                                                    <p class="lead">Envía estadísticas del Servidor a Mojang.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-snooper-enabled">
@@ -1703,7 +1703,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Modo Syncronizado previene la perdida de datos y corrupcion despues de un crasheo.</p>
+                                                    <p class="lead">Modo Sincronizado previene la perdida de datos y corrupción después de un crasheo.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select class="form-control w-100" id="form-sync-chunk-writes">
@@ -1739,7 +1739,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Tiempo Maximo Respuesta</b></h3>
+                                                    <h3 class=""><b>Tiempo Máximo Respuesta</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 60000<br>Valor Min: 1000 - Valor Max: 60000</p>
@@ -1826,12 +1826,12 @@ require_once("template/header.php");
                                                     <h3 class=""><b>Limite de Paquetes</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: 0 (Sin limite)<br>Requiere Version: 1.16.2 o superior</p>
+                                                    <p class="">Valor Defecto: 0 (Sin limité)<br>Requiere Versión: 1.16.2 o superior</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Permite kikear jugadores que constantemente estan enviando demasiados paquetes en cuestion de segundos.</p>
+                                                    <p class="lead">Permite kikear jugadores que constantemente están enviando demasiados paquetes en cuestión de segundos.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('rate-limit')); ?>" id="form-rate-limit" min="0">
@@ -1851,7 +1851,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <h3 class=""><b>Compresion de red</b></h3>
+                                                    <h3 class=""><b>Compresión de red</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 256<br>Valor Min: 64 - Valor Max: 256</p>
@@ -1887,7 +1887,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Aumentara la distancia de visionado cargando mas chunks desde la posicion donde mira el jugador.</p>
+                                                    <p class="lead">Aumentará la distancia de visionado cargando más chunks desde la posición donde mira el jugador.</p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="number" class="form-control" value="<?php echo (leerlineas('view-distance')); ?>" id="form-view-distance" min="3" max="32">
