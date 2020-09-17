@@ -197,7 +197,7 @@ require_once("template/header.php");
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="elmaxupload">Subida Fichero Maximo (MB)</label>
+                                            <label for="elmaxupload">Subida Fichero Máximo (MB)</label>
                                             <select id="elmaxupload" name="elmaxupload" class="form-control" required="required">
                                                 <?php
 

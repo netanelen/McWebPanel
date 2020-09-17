@@ -81,7 +81,7 @@ function test_input($data)
 
                                                 <div class="col-md-8">
                                                     <div class="card mb-4">
-                                                        <div class="card-header text-white bg-primary">Estadisticas</div>
+                                                        <div class="card-header text-white bg-primary">Estadísticas</div>
                                                         <div class="card-body">
                                                             <img class="d-block float-left mr-2" src="img/cpu.png" alt="CPU">
                                                             <p class="lead" id="textocpu">Cpu:</p>
