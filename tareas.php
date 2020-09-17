@@ -75,7 +75,7 @@ require_once("template/header.php");
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Nombre</th>
-                                                                    <th scope="col">Accion</th>
+                                                                    <th scope="col">Acción</th>
                                                                     <th scope="col">Comando</th>
                                                                     <th scope="col">Estado</th>
                                                                     <th scope="col">Acciones</th>
