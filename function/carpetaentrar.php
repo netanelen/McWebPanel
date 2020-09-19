@@ -20,7 +20,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
-require_once("../config/confopciones.php");
 
 function test_input($data)
 {
@@ -32,8 +31,8 @@ function test_input($data)
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
-	$_SESSION['VALIDADO'] = "NO";
-	$_SESSION['KEYSECRETA'] = "0";
+    $_SESSION['VALIDADO'] = "NO";
+    $_SESSION['KEYSECRETA'] = "0";
 }
 
 //VALIDAMOS SESSION
@@ -41,15 +40,49 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
     if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-        $retorno ="";
-        $verificarex = "";
+        $retorno = "";
+        $elerror = 0;
+        $test = 0;
 
         $archivo = test_input($_POST['action']);
 
-        $_SESSION['RUTACTUAL'] = $archivo;
+        //COMPROBAR SI ESTA VACIO
+        if ($elerror == 0) {
+            if ($archivo == "") {
+                $retorno = "nada";
+                $elerror = 1;
+            }
+        }
 
-        $retorno = "OK";
+        //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+        if ($elerror == 0) {
+            if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
+                $retorno = "rutacambiada";
+                $elerror = 1;
+            }
+        }
 
-    echo $retorno;
+        //COMPOBAR SI HAY ".." "..."
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($archivo, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "novalido";
+                    $elerror = 1;
+                }
+            }
+        }
+
+        if ($elerror == 0) {
+            $_SESSION['RUTACTUAL'] = $archivo;
+            $retorno = "OK";
+        }
+
+        echo $retorno;
     }
 }
