@@ -458,6 +458,10 @@ $(document).ready(function() {
                     success: function(data) {
                         if (data == "nocopy") {
                             alert("Nada que borrar");
+                        } else if (data == "rutacambiada") {
+                            alert("Ruta no valida");
+                        } else if (data == "novalido") {
+                            alert("Ruta no valida");
                         } else if (data == "noexiste") {
                             alert("Hay archivos que no existen");
                         } else if (data == "nowrite") {

@@ -62,13 +62,43 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $archivos = "";
         $retorno = "";
         $elerror = 0;
+        $test = 0;
 
         $archivos = $_POST['action'];
 
+        //COMPROBAR SI ESTA VACIO
         if ($elerror == 0) {
             if ($archivos == "") {
                 $retorno = "nocopy";
                 $elerror = 1;
+            }
+        }
+
+        //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($archivos); $a++) {
+                if ($_SESSION['RUTALIMITE'] != substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']))) {
+                    $retorno = "rutacambiada";
+                    $elerror = 1;
+                }
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..."
+        if ($elerror == 0) {
+            $verificar = array('..', '...');
+
+            for ($a = 0; $a < count($archivos); $a++) {
+
+                for ($i = 0; $i < count($verificar); $i++) {
+
+                    $test = substr_count($archivos[$a], $verificar[$i]);
+
+                    if ($test >= 1) {
+                        $retorno = "novalido";
+                        $elerror = 1;
+                    }
+                }
             }
         }
 
@@ -100,7 +130,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 clearstatcache();
                 if (is_dir($archivos[$a])) {
                     delete_directory($archivos[$a]);
-                }else{
+                } else {
                     unlink($archivos[$a]);
                 }
             }
