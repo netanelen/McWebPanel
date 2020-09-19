@@ -20,7 +20,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
-require_once("../config/confopciones.php");
 
 function test_input($data)
 {
@@ -47,9 +46,36 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         $archivo = test_input($_POST['action']);
 
-        if ($archivo == "") {
-            $retorno = "noruta";
-            $elerror = 1;
+        //COMPROBAR SI ESTA VACIO
+        if ($elerror == 0) {
+            if ($archivo == "") {
+                $retorno = "noruta";
+                $elerror = 1;
+            }
+        }
+
+        //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+        if ($elerror == 0) {
+            if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
+                $retorno = "rutacambiada";
+                $elerror = 1;
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..."
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($archivo, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "novalido";
+                    $elerror = 1;
+                }
+            }
         }
 
         if ($elerror == 0) {
