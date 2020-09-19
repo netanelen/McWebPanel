@@ -120,6 +120,7 @@ function devolverdatos($losbytes, $opcion)
                                                     $getrutalimpia = "";
                                                     $getrutaparseada = "";
                                                     $valencontrado = 0;
+                                                    $rutahta = "";
 
                                                     $recpuerto = CONFIGPUERTO;
                                                     $recram = CONFIGRAM;
@@ -135,7 +136,8 @@ function devolverdatos($losbytes, $opcion)
                                                     $rutaarchivo .= "/" . $reccarpmine;
 
                                                     //FORZAR .htaccess CARPETA SERVIDOR MINECRAFT
-                                                    $file = fopen($rutaarchivo, "w");
+                                                    $rutahta = $rutaarchivo ."/.htaccess";
+                                                    $file = fopen($rutahta, "w");
                                                     fwrite($file, "deny from all" . PHP_EOL);
                                                     fclose($file);
 
