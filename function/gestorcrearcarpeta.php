@@ -44,6 +44,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elnombre = "";
         $retorno = "";
         $elerror = 0;
+        $test = 0;
 
         $archivo = test_input($_POST['action']);
         $elnombre .= $archivo . "/";

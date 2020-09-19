@@ -45,6 +45,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elerror = 0;
         $downOne = "";
         $dirraiz = "";
+        $test = 0;
 
         $archivo = test_input($_POST['action']);
 
