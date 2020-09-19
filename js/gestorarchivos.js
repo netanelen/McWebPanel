@@ -127,9 +127,14 @@ $(document).ready(function() {
 
                         if (data == "1") {
                             location.reload();
+                        } else if (data == "nada") {
+                            alert("No hay ruta");
+                        } else if (data == "rutacambiada") {
+                            alert("Ruta no valida");
+                        } else if (data == "novalido") {
+                            alert("Ruta no valida");
                         } else if (data == "noexiste") {
                             alert("La carpeta no existe");
-                            location.reload();
                         } else if (data == "nowrite") {
                             alert("La carpeta no tiene permisos de escritura");
                         } else if (data == "noborrado") {
