@@ -20,7 +20,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
-require_once("../config/confopciones.php");
 
 function test_input($data)
 {
@@ -47,6 +46,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elerror = 0;
         $nuevofile = "";
         $getinfofile = "";
+        $test = 0;
 
         $archivo = test_input($_POST['action']);
         $renombre = test_input($_POST['renombre']);
@@ -55,10 +55,60 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $nuevofile = $getinfofile['dirname'];
         $nuevofile .= "/" . $renombre;
 
-        //COMPROVAR SI ESTA VACIO
-        if ($renombre == "") {
-            $retorno = "vacio";
-            $elerror = 1;
+        //COMPROVAR SI ESTA VACIO RENOMBRE
+        if ($elerror == 0) {
+            if ($renombre == "") {
+                $retorno = "revacio";
+                $elerror = 1;
+            }
+        }
+
+        //COMPROVAR SI ESTA VACIO ARCHIVO
+        if ($elerror == 0) {
+            if ($archivo == "") {
+                $retorno = "archvacio";
+                $elerror = 1;
+            }
+        }
+
+        //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+        if ($elerror == 0) {
+            if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
+                $retorno = "rutacambiada";
+                $elerror = 1;
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..." EN RUTA
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($archivo, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "novalido";
+                    $elerror = 1;
+                }
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..." EN RENOMBRE
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($nuevofile, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "renomnovalido";
+                    $elerror = 1;
+                }
+            }
         }
 
         //COMPROVAR SI EL NUEVO A CREAR EXISTE
