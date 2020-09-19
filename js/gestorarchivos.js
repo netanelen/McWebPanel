@@ -93,7 +93,10 @@ $(document).ready(function() {
                             location.reload();
                         } else if (data == "noexiste") {
                             alert("El archivo no existe");
-                            location.reload();
+                        } else if (data == "nada") {
+                            alert("No hay ruta a borrar");
+                        } else if (data == "novalido") {
+                            alert("Ruta no valida");
                         } else if (data == "nowrite") {
                             alert("El archivo no tiene permisos de escritura");
                         }
