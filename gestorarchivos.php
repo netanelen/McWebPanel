@@ -129,10 +129,15 @@ function devolverdatos($losbytes, $opcion)
                                                     $recarchivojar = CONFIGARCHIVOJAR;
                                                     $receulaminecraft = CONFIGEULAMINECRAFT;
 
-                                                    //OBTENER RUTA BACKUPS
+                                                    //OBTENER RUTA SERVIDOR MINECRAFT
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
                                                     $rutaarchivo .= "/" . $reccarpmine;
+
+                                                    //FORZAR .htaccess CARPETA SERVIDOR MINECRAFT
+                                                    $file = fopen($rutaarchivo, "w");
+                                                    fwrite($file, "deny from all" . PHP_EOL);
+                                                    fclose($file);
 
                                                     //INICIALIZAR SESSION RUTACTUAL Y RUTALIMITE
                                                     if (!isset($_SESSION['RUTACTUAL'])) {
@@ -337,7 +342,7 @@ function devolverdatos($losbytes, $opcion)
                                                                             <?php
                                                                             if ($tipoarchivo == ".gz" || $tipoarchivo == ".tar" || $tipoarchivo == ".bz2") {
                                                                                 echo ('<button type="button" class="descomprimirtar btn btn-primary mr-1" value="' . $archivoconcreto . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
-                                                                            }elseif($tipoarchivo == ".zip"){
+                                                                            } elseif ($tipoarchivo == ".zip") {
                                                                                 echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $archivoconcreto . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
                                                                             }
                                                                             ?>
