@@ -278,7 +278,6 @@ function devolverdatos($losbytes, $opcion)
                                                                         if (is_dir($archivoconcreto)) {
                                                                             echo ('<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>');
                                                                         } else {
-                                                                            //$getinfofile = pathinfo($archivoconcreto);
                                                                             $tipoarchivo = "." . strtolower($getinfofile['extension']);
 
                                                                             //VER TIPO Y AÑADIR ICONO
