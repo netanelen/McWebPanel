@@ -388,6 +388,8 @@ $(document).ready(function() {
                         alert("No hay permisos de escritura");
                     } else if (data == "carpyaexiste") {
                         alert("La carpeta ya existe");
+                    } else if (data == "novalido") {
+                        alert("Nombre no valido");
                     } else if (data == "OK") {
                         location.reload();
                     }
