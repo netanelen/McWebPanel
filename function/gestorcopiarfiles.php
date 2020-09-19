@@ -20,15 +20,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
-require_once("../config/confopciones.php");
 
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
@@ -41,16 +33,58 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
     if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-        $copiados = "";
+        $copiados = array();
         $retorno = "";
         $elerror = 0;
+        $test = 0;
 
         $copiados = $_POST['action'];
 
+        //COMPROBAR SI ESTA VACIO
         if ($elerror == 0) {
             if ($copiados == "") {
                 $retorno = "nocopy";
                 $elerror = 1;
+            }
+        }
+
+        //SANEAR INPUT ENTRANTE ARRAY
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($copiados); $a++) {
+                $copiados[$a] = trim($copiados[$a]);
+                $copiados[$a] = stripslashes($copiados[$a]);
+                $copiados[$a] = htmlspecialchars($copiados[$a]);
+            }
+        }
+
+        //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+        if ($elerror == 0) {
+
+            for ($a = 0; $a < count($copiados); $a++) {
+
+                if ($_SESSION['RUTALIMITE'] != substr($copiados[$a], 0, strlen($_SESSION['RUTALIMITE']))) {
+                    $retorno = "rutacambiada";
+                    $elerror = 1;
+                }
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..."
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...');
+
+            for ($a = 0; $a < count($copiados); $a++) {
+
+                for ($i = 0; $i < count($verificar); $i++) {
+
+                    $test = substr_count($copiados[$a], $verificar[$i]);
+
+                    if ($test >= 1) {
+                        $retorno = "novalido";
+                        $elerror = 1;
+                    }
+                }
             }
         }
 
