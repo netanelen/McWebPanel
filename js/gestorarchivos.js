@@ -168,6 +168,16 @@ $(document).ready(function() {
 
                         if (data == "1") {
                             location.reload();
+                        } else if (data == "revacio") {
+                            alert("El renombre esta vacio");
+                        } else if (data == "archvacio") {
+                            alert("La ruta esta vacia");
+                        } else if (data == "rutacambiada") {
+                            alert("Ruta no valida");
+                        } else if (data == "novalido") {
+                            alert("Ruta no valida");
+                        } else if (data == "renomnovalido") {
+                            alert("Renombre no valido");
                         } else if (data == "yaexiste") {
                             alert("Ya existe un archivo con ese nombre");
                         } else if (data == "nowrite") {
