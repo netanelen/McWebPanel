@@ -273,10 +273,12 @@ function devolverdatos($losbytes, $opcion)
                                                                             echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $archivoconcreto . '">');
                                                                         }
 
+                                                                        $getinfofile = pathinfo($archivoconcreto);
+
                                                                         if (is_dir($archivoconcreto)) {
                                                                             echo ('<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>');
                                                                         } else {
-                                                                            $getinfofile = pathinfo($archivoconcreto);
+                                                                            //$getinfofile = pathinfo($archivoconcreto);
                                                                             $tipoarchivo = "." . strtolower($getinfofile['extension']);
 
                                                                             //VER TIPO Y AÑADIR ICONO
@@ -358,7 +360,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         } else {
                                                                             if ($fcarpetas[$i] == "..") {
                                                                             ?>
-                                                                                <button type="button" class="atras btn btn-info text-white mr-1" value="<?php echo $archivoconcreto ?>" title="Atras"><img src="img/botones/atras.png" alt="Atras"> Atras</button>
+                                                                                <button type="button" class="atras btn btn-info text-white mr-1" value="<?php echo $getinfofile['dirname']; ?>" title="Atras"><img src="img/botones/atras.png" alt="Atras"> Atras</button>
                                                                             <?php
                                                                             } elseif ($fcarpetas[$i] == ".") {
                                                                             ?>
