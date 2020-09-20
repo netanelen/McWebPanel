@@ -41,7 +41,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
     if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-        $copiados = "";
+        $copiados = array();
         $getpost = "";
         $retorno = "";
         $elerror = 0;
@@ -55,6 +55,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $copiados = $_SESSION['COPIARFILES'];
         }
 
+        //COMPROBAR SI ESTA VACIO
         if ($elerror == 0) {
             if ($copiados == "") {
                 $retorno = "nocopy";
