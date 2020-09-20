@@ -46,9 +46,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $getarchivo = "";
         $limpio = "";
         $lacarpeta = "";
+        $test = 0;
 
         $archivo = test_input($_POST['action']);
 
+        //COMPROBAR SI ESTA VACIO
         if ($elerror == 0) {
             if ($archivo == "") {
                 $retorno = "nada";
@@ -56,14 +58,38 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
-        //comprovar si existe el fichero
+        //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+        if ($elerror == 0) {
+            if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
+                $retorno = "rutacambiada";
+                $elerror = 1;
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..."
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($archivo, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "novalido";
+                    $elerror = 1;
+                }
+            }
+        }
+
+        //COMPROBAR SI EXISTE EL FICHERO
         if ($elerror == 0) {
 
             $getarchivo = pathinfo($archivo);
             $limpio = $getarchivo['basename'];
             $limpio .= ".zip";
 
-            $elzip = $_SESSION['RUTACTUAL'] . "/" .$limpio;
+            $elzip = $_SESSION['RUTACTUAL'] . "/" . $limpio;
 
             if (file_exists($elzip)) {
                 $retorno = "carpyaexiste";
