@@ -152,6 +152,8 @@ $(document).ready(function() {
                     document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no existe.</div>";
                 } else if (data == "nolectura") {
                     document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no se puede leer.</div>";
+                } else if (data == "novalidoname") {
+                    document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no valido.</div>";
                 } else if (data == "noejecutable") {
                     document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecucion.</div>";
                 }

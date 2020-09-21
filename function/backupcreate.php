@@ -43,6 +43,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         $retorno = "";
         $reccarpmine = CONFIGDIRECTORIO;
+        $elerror = 0;
+        $test = 0;
 
         $archivo = test_input($_POST['action']);
 
@@ -51,46 +53,64 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             exit;
         }
 
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($archivo, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "novalidoname";
+                    $elerror = 1;
+                }
+            }
+        }
+
         $dirconfig = "";
         $dirconfig = dirname(getcwd()) . PHP_EOL;
         $dirconfig = trim($dirconfig);
         $dirconfig .= "/backups";
 
-        if (file_exists($dirconfig)) {
-            //COMPROVAR SI SE PUEDE ESCRIVIR
-            if (is_writable($dirconfig)) {
-                $rutaarchivo = dirname(getcwd()) . PHP_EOL;
-                $rutaarchivo = trim($rutaarchivo);
-                $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
-                if (is_readable($rutaminelimpia)) {
-                    $rutaarchivo .= "/" . $reccarpmine . "/ .";
-                    $dirconfig = $dirconfig . "/" . $archivo . "-";
-                    $t = time();
-                    $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
-                    if (is_executable($rutaminelimpia)) {
-                        exec($elcomando, $out, $oky);
+        if ($elerror == 0) {
+            if (file_exists($dirconfig)) {
+                //COMPROVAR SI SE PUEDE ESCRIVIR
+                if (is_writable($dirconfig)) {
+                    $rutaarchivo = dirname(getcwd()) . PHP_EOL;
+                    $rutaarchivo = trim($rutaarchivo);
+                    $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
+                    if (is_readable($rutaminelimpia)) {
+                        $rutaarchivo .= "/" . $reccarpmine . "/ .";
+                        $dirconfig = $dirconfig . "/" . $archivo . "-";
+                        //$t = time();
+                        $t = date("Y-m-d-G:i:s");
+                        $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
+                        if (is_executable($rutaminelimpia)) {
+                            exec($elcomando, $out, $oky);
 
-                        if (!$oky) {
-                            $retorno = "okbackup";
-                        } else {
-                            $retorno = "nobackup";
-                            //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
-                            $borrarerror = $dirconfig . $t . ".tar.gz";
-                            if (file_exists($borrarerror)) {
-                                unlink($borrarerror);
+                            if (!$oky) {
+                                $retorno = "okbackup";
+                            } else {
+                                $retorno = "nobackup";
+                                //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
+                                $borrarerror = $dirconfig . $t . ".tar.gz";
+                                if (file_exists($borrarerror)) {
+                                    unlink($borrarerror);
+                                }
                             }
+                        } else {
+                            $retorno = "noejecutable";
                         }
                     } else {
-                        $retorno = "noejecutable";
+                        $retorno = "nolectura";
                     }
                 } else {
-                    $retorno = "nolectura";
+                    $retorno = "nowritable";
                 }
             } else {
-                $retorno = "nowritable";
+                $retorno = "noexiste";
             }
-        } else {
-            $retorno = "noexiste";
         }
     }
     echo $retorno;
