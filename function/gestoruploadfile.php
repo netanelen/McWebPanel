@@ -49,7 +49,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $target_file = "";
             $tmp = "";
             $archivo = "";
-            $test = "";
+            $test = 0;
 
             $fileName = "";
             $fileNameCmps = "";
