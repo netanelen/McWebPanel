@@ -60,7 +60,7 @@ $(document).ready(function() {
                         document.getElementById("gifloading").style.visibility = "hidden";
 
                         if (data == "nowriteraiz") {
-                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta raiz no tiene permisos de escritura.</div>";
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta raíz no tiene permisos de escritura.</div>";
                         } else if (data == "nominexiste") {
                             document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no existe.</div>";
                         } else if (data == "minenowrite") {
@@ -153,9 +153,9 @@ $(document).ready(function() {
                 } else if (data == "nolectura") {
                     document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no se puede leer.</div>";
                 } else if (data == "novalidoname") {
-                    document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no valido.</div>";
+                    document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no válido.</div>";
                 } else if (data == "noejecutable") {
-                    document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecucion.</div>";
+                    document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
                 }
             }
         });

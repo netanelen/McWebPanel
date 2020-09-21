@@ -55,9 +55,9 @@ $(document).ready(function() {
                 if (data == "nojar") {
                     alert("No es un archivo .jar");
                 } else if (data == "notipovalido") {
-                    alert("El archivo no es del tipo valido");
+                    alert("El archivo no es del tipo válido");
                 } else if (data == "nowriteraiz") {
-                    alert("El archivo raiz no tiene permisos de escritura");
+                    alert("El archivo raíz no tiene permisos de escritura");
                 } else if (data == "nocarpserver") {
                     alert("La carpeta servidor minecraft no existe");
                 } else if (data == "nowriteservmine") {
@@ -69,7 +69,7 @@ $(document).ready(function() {
                 } else if (data == "errprocess") {
                     alert("Error al procesar el archivo");
                 } else if (data == "novalidoname") {
-                    alert("Nombre no valido");
+                    alert("Nombre no válido");
                 } else if (data == "OK") {
                     alert("Subido con éxito");
                     location.reload();

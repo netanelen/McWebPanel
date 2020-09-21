@@ -32,7 +32,7 @@ $(document).ready(function() {
             } else if (data == "nocarpetaconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta conf no existe.</div>";
             } else if (data == "nowritehtaccess") {
-                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo .htaccess en la raiz, no tiene permisos de escritura.</div>";
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo .htaccess en la raíz, no tiene permisos de escritura.</div>";
             } else if (data == "saveconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
             }

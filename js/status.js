@@ -33,7 +33,7 @@ $(document).ready(function() {
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor iniciado correctamente.</div>";
                 } else if (data == "noexistecarpetaminecraft") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No existe carpeta minecraft.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta del servidor minecraft.</div>";
                 } else if (data == "noeula") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No has aceptado el eula de minecraft.</div>";
                 } else if (data == "noconfjar") {
@@ -41,17 +41,17 @@ $(document).ready(function() {
                 } else if (data == "noexistejar") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El servidor .jar seleccionado no existe.</div>";
                 } else if (data == "noescritura") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Carpeta Minecraft no tiene permisos de escritura.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Carpeta Servidor Minecraft no tiene permisos de escritura.</div>";
                 } else if (data == "puertoenuso") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Puerto en uso.</div>";
                 } else if (data == "fallofgets") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Hubo un error al escrivir las propiedades del servidor.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Hubo un error al escribir las propiedades del servidor.</div>";
                 } else if (data == "noserverpropertiestxt") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo de configuracion /config/serverproperties.txt no existe.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo de configuración /config/serverproperties.txt no existe.</div>";
                 } else if (data == "nolecturamine") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de lectura.</div>";
                 } else if (data == "noejecutable") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecucion.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
                 }
             },
             error: function(errorThrown) {

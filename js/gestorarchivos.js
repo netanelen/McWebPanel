@@ -96,7 +96,7 @@ $(document).ready(function() {
                         } else if (data == "nada") {
                             alert("No hay ruta a borrar");
                         } else if (data == "novalido") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "nowrite") {
                             alert("El archivo no tiene permisos de escritura");
                         }
@@ -130,9 +130,9 @@ $(document).ready(function() {
                         } else if (data == "nada") {
                             alert("No hay ruta");
                         } else if (data == "rutacambiada") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "novalido") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "noexiste") {
                             alert("La carpeta no existe");
                         } else if (data == "nowrite") {
@@ -169,15 +169,15 @@ $(document).ready(function() {
                         if (data == "1") {
                             location.reload();
                         } else if (data == "revacio") {
-                            alert("El renombre esta vacio");
+                            alert("El renombre esta vacío");
                         } else if (data == "archvacio") {
-                            alert("La ruta esta vacia");
+                            alert("La ruta esta vacía");
                         } else if (data == "rutacambiada") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "novalido") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "renomnovalido") {
-                            alert("Renombre no valido");
+                            alert("Renombre no válido");
                         } else if (data == "yaexiste") {
                             alert("Ya existe un archivo con ese nombre");
                         } else if (data == "nowrite") {
@@ -211,15 +211,15 @@ $(document).ready(function() {
                         if (data == "1") {
                             location.reload();
                         } else if (data == "revacio") {
-                            alert("El renombre esta vacio");
+                            alert("El renombre esta vacío");
                         } else if (data == "archvacio") {
-                            alert("La ruta esta vacia");
+                            alert("La ruta esta vacía");
                         } else if (data == "rutacambiada") {
                             alert("Ruta no valida");
                         } else if (data == "novalido") {
                             alert("Ruta no valida");
                         } else if (data == "renomnovalido") {
-                            alert("Renombre no valido");
+                            alert("Renombre no válido");
                         } else if (data == "yaexiste") {
                             alert("Ya existe una carpeta con ese nombre");
                         } else if (data == "nowrite") {
@@ -250,7 +250,7 @@ $(document).ready(function() {
                     if (data == "OK") {
                         location.href = "editararchivo.php";
                     } else if (data == "noruta") {
-                        alert("No se ha pasado ningun archivo a editar");
+                        alert("No se ha pasado ningún archivo a editar");
                     }
 
 
@@ -280,7 +280,7 @@ $(document).ready(function() {
                 success: function(data) {
 
                     if (data.eserror == "nada") {
-                        alert("No se ha pasado ningun archivo a descomprimir");
+                        alert("No se ha pasado ningún archivo a descomprimir");
                     } else if (data.eserror == "notargz") {
                         alert("El archivo no es .tag.gz");
                     } else if (data.eserror == "notarbz2") {
@@ -314,7 +314,7 @@ $(document).ready(function() {
                 success: function(data) {
 
                     if (data.eserror == "nada") {
-                        alert("No se ha pasado ningun archivo a descomprimir");
+                        alert("No se ha pasado ningún archivo a descomprimir");
                     } else if (data.eserror == "nozip") {
                         alert("El archivo no es .zip");
                     } else if (data.eserror == "carpyaexiste") {
@@ -343,7 +343,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(data) {
                     if (data.eserror == "nada") {
-                        alert("No se ha pasado ningun archivo a descomprimir");
+                        alert("No se ha pasado ningún archivo a descomprimir");
                     } else if (data.eserror == "carpyaexiste") {
                         alert("No se puede comprimir, la carpeta: " + data.carpeta + " ya existe");
                     } else if (data.eserror == "fallo") {
@@ -389,7 +389,7 @@ $(document).ready(function() {
                     } else if (data == "carpyaexiste") {
                         alert("La carpeta ya existe");
                     } else if (data == "novalido") {
-                        alert("Nombre no valido");
+                        alert("Nombre no válido");
                     } else if (data == "OK") {
                         location.reload();
                     }
@@ -469,7 +469,7 @@ $(document).ready(function() {
         if (arrayseleccion == "") {
             alert("No has seleccionado ningún elemento");
         } else {
-            var eleccion = confirm("¡ELIMINAR CONFIRMAR ACCION!\n\n¡Vas a eliminar las carpetas o archivos seleccionados!\n\n¿Seguro que quieres continuar?");
+            var eleccion = confirm("¡ELIMINAR CONFIRMAR ACCIÓN!\n\n¡Vas a eliminar las carpetas o archivos seleccionados!\n\n¿Seguro que quieres continuar?");
             if (eleccion == true) {
                 var tqxhr = $.ajax({
                     url: 'function/gestorborrarmultiple.php',
@@ -481,9 +481,9 @@ $(document).ready(function() {
                         if (data == "nocopy") {
                             alert("Nada que borrar");
                         } else if (data == "rutacambiada") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "novalido") {
-                            alert("Ruta no valida");
+                            alert("Ruta no válida");
                         } else if (data == "noexiste") {
                             alert("Hay archivos que no existen");
                         } else if (data == "nowrite") {
@@ -525,7 +525,7 @@ $(document).ready(function() {
                 } else if (data == "novaltipe") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se acepta ese tipo de archivo.</div>";
                 } else if (data == "novalidoname") {
-                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre archivo no valido.</div>";
+                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre archivo no válido.</div>";
                 } else if (data == "errprocess") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Errores en el proceso de subida del archivo.</div>";
                 } else if (data == "errorupload") {
