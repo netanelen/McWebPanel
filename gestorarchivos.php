@@ -136,7 +136,7 @@ function devolverdatos($losbytes, $opcion)
                                                     $rutaarchivo .= "/" . $reccarpmine;
 
                                                     //FORZAR .htaccess CARPETA SERVIDOR MINECRAFT
-                                                    $rutahta = $rutaarchivo ."/.htaccess";
+                                                    $rutahta = $rutaarchivo . "/.htaccess";
                                                     $file = fopen($rutahta, "w");
                                                     fwrite($file, "deny from all" . PHP_EOL);
                                                     fclose($file);
@@ -249,11 +249,15 @@ function devolverdatos($losbytes, $opcion)
                                                                     for ($i = 0; $i < count($a); $i++) {
                                                                         $rutfil = $rutaarchivo . "/" . $a[$i];
                                                                         if (is_dir($rutfil)) {
+                                                                            //Evitar mostrar .
                                                                             if ($a[$i] != ".") {
                                                                                 $fcarpetas[] = $a[$i];
                                                                             }
                                                                         } else {
-                                                                            $farchivos[] = $a[$i];
+                                                                            //Evitar mostrar .htaccess
+                                                                            if ($a[$i] != ".htaccess") {
+                                                                                $farchivos[] = $a[$i];
+                                                                            }
                                                                         }
                                                                     }
 
