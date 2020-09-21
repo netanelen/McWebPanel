@@ -49,6 +49,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $target_file = "";
             $tmp = "";
             $archivo = "";
+            $test = "";
+
+            $fileName = "";
+            $fileNameCmps = "";
+            $fileExtension = "";
 
             //GUARDAMOS LA RUTA DONDE SE SUBIRAN LOS ARCHIVOS
             $target_dir = $_SESSION['RUTACTUAL'];
@@ -56,10 +61,101 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //GUARDAMOS EL ARCHIVO TEMPORAL A SUBIR
             $tmp = $_FILES['uploadedFile']['tmp_name'];
 
+            //COMPROVAR SI ES UN ARCHIVO NO PERMITIDO
+            if ($elerror == 0) {
+                $fileName = $_FILES['uploadedFile']['name'];
+                $fileNameCmps = explode(".", $fileName);
+                $fileExtension = strtolower(end($fileNameCmps));
+
+
+                $verificar = array('phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'exe', 'pl', 'asp', 'aspx', 'shtml', 'shtm', 'fcgi', 'fpl', 'jsp', 'htm', 'html', 'wml', 'js', 'xhtml', 'xht', 'asa', 'cer', 'asax', 'swf', 'xap', 'css', 'sh', 'py', 'pdf');
+
+                for ($i = 0; $i < count($verificar); $i++) {
+
+                    if ($fileExtension == $verificar[$i]) {
+                        $retorno = "novalido";
+                        $elerror = 1;
+                    }
+                }
+            }
+
+            //COMPROBAR SI ES REALMENTE EL ARCHIVO QUE DICE SER
+            if ($elerror == 0) {
+                $eltipoapplication = mime_content_type($_FILES["uploadedFile"]["tmp_name"]);
+
+                switch ($eltipoapplication) {
+                    case "text/html":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "text/x-php":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "text/css":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/javascript":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/pkix-cert":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/xhtml+xml":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/x-shockwave-flash":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/x-silverlight-app":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "text/x-shellscript":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/pdf":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                    case "application/x-msdownload":
+                        $elerror = 1;
+                        $retorno = "novaltipe";
+                        break;
+                }
+
+            }
+
+            //COMPOBAR SI HAY ".." "..."
+            if ($elerror == 0) {
+
+                $fileName = $_FILES['uploadedFile']['name'];
+
+                $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&');
+
+                for ($i = 0; $i < count($verificar); $i++) {
+
+                    $test = substr_count($fileName, $verificar[$i]);
+
+                    if ($test >= 1) {
+                        $retorno = "novalidoname";
+                        $elerror = 1;
+                    }
+                }
+            }
+
             //COMPROVAR SI SE PUEDE ESCRIVIR LA RUTA
-            if (!is_writable($target_dir)) {
-                $retorno = "nowrite";
-                $elerror = 1;
+            if ($elerror == 0) {
+                if (!is_writable($target_dir)) {
+                    $retorno = "nowrite";
+                    $elerror = 1;
+                }
             }
 
             //COMPROVAR SI EXISTE UN ARCHIVO IGUAL

@@ -520,6 +520,12 @@ $(document).ready(function() {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta no tiene permisos de escritura.</div>";
                 } else if (data == "yaexiste") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo ya existe.</div>";
+                } else if (data == "novalido") {
+                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se acepta ese tipo de archivo.</div>";
+                } else if (data == "novaltipe") {
+                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se acepta ese tipo de archivo.</div>";
+                } else if (data == "novalidoname") {
+                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre archivo no valido.</div>";
                 } else if (data == "errprocess") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Errores en el proceso de subida del archivo.</div>";
                 } else if (data == "errorupload") {
