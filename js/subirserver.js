@@ -68,6 +68,8 @@ $(document).ready(function() {
                     alert("Error al subir el archivo");
                 } else if (data == "errprocess") {
                     alert("Error al procesar el archivo");
+                } else if (data == "novalidoname") {
+                    alert("Nombre no valido");
                 } else if (data == "OK") {
                     alert("Subido con éxito");
                     location.reload();

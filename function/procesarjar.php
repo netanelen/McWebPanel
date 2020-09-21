@@ -47,6 +47,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $target_file = "";
         $tmp = "";
         $archivo = "";
+        $test = 0;
+
+        $fileName = "";
+        $fileNameCmps = "";
+        $fileExtension = "";
 
         $tmp = $_FILES['uploadedFile']['tmp_name'];
 
@@ -78,6 +83,22 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if ($tipovalido == 0) {
                 $retorno = "notipovalido";
                 $elerror = 1;
+            }
+        }
+
+        //COMPOBAR SI HAY ".." "..."
+        if ($elerror == 0) {
+
+            $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&');
+
+            for ($i = 0; $i < count($verificar); $i++) {
+
+                $test = substr_count($fileName, $verificar[$i]);
+
+                if ($test >= 1) {
+                    $retorno = "novalidoname";
+                    $elerror = 1;
+                }
             }
         }
 
@@ -144,12 +165,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             if (move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $target_file)) {
                 $retorno = "OK";
-            }else{
+            } else {
                 $retorno = "errorsubir";
             }
         }
-
-
     } else {
 
         $retorno = "errprocess";
