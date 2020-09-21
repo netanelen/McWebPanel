@@ -20,6 +20,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
+require_once("../config/confopciones.php");
 
 $retorno = "";
 
@@ -46,7 +47,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $elerror = 0;
 
       $elnombreservidor = test_input($_POST["elnomserv"]);
-      $eldirectorio = test_input($_POST["eldirect"]);
+      $eldirectorio = CONFIGDIRECTORIO;
       $elpuerto = test_input($_POST["elport"]);
       $laram = test_input($_POST["elram"]);
       $eltiposerver = test_input($_POST["eltipserv"]);
