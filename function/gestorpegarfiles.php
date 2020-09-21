@@ -20,7 +20,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
-require_once("../config/confopciones.php");
 
 function test_input($data)
 {

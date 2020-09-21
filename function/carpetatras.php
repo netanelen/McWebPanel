@@ -68,7 +68,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPOBAR SI HAY ".." "..."
         if ($elerror == 0) {
 
-            $verificar = array('..', '...');
+            $verificar = array('..', '...', '/.', '~', '../', './', '&&');
 
             for ($i = 0; $i < count($verificar); $i++) {
 
