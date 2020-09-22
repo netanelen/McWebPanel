@@ -93,6 +93,10 @@ require_once("template/header.php");
                                                 //MIRAR SI EXISTE EL ARCHIVO
                                                 $elarchivo = $_SESSION['EDITARFILE'];
 
+                                                $rutboton = explode('/', $_SESSION['EDITARFILE']);
+                                                $rutboton = end($rutboton);
+                                                $rutboton = trim($rutboton);
+
                                                 //BORRAR SESSION
                                                 $_SESSION['EDITARFILE'] = "";
 
@@ -126,7 +130,7 @@ require_once("template/header.php");
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <button class="btn btn-primary btn-block btn-lg" id="guardarfile" type="button" value="<?php echo $elarchivo; ?>">Guardar</button>
+                                                <button class="btn btn-primary btn-block btn-lg" id="guardarfile" type="button" value="<?php echo $rutboton; ?>">Guardar</button>
                                             </div>
                                             <div class="col-md-6">
                                                 <button class="btn btn-secondary btn-block btn-lg" id="cancelar" type="button">Cancelar</button>

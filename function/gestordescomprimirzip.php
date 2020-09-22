@@ -58,6 +58,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //AÑADIR RUTA ACTUAL AL ARCHIVO
+        if ($elerror == 0) {
+            $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
+        }
+
         //obtener solo nombre fichero sin extension
         if ($elerror == 0) {
             $getarchivo = pathinfo($archivo);

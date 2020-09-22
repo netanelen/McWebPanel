@@ -74,6 +74,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //AÑADIR RUTA ACTUAL AL ARCHIVO
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($archivos); $a++) {
+                $archivos[$a] = $_SESSION['RUTACTUAL'] . "/" . $archivos[$a];
+            }
+        }
+
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
         if ($elerror == 0) {
             for ($a = 0; $a < count($archivos); $a++) {
@@ -83,6 +90,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
         }
+
 
         //COMPOBAR SI HAY ".." "..."
         if ($elerror == 0) {

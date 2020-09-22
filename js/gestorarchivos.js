@@ -95,6 +95,8 @@ $(document).ready(function() {
                             alert("El archivo no existe");
                         } else if (data == "nada") {
                             alert("No hay ruta a borrar");
+                        } else if (data == "rutacambiada") {
+                            alert("Ruta no válida");
                         } else if (data == "novalido") {
                             alert("Ruta no válida");
                         } else if (data == "nowrite") {
@@ -379,8 +381,7 @@ $(document).ready(function() {
             var tqxhr = $.ajax({
                 url: 'function/gestorcrearcarpeta.php',
                 data: {
-                    action: this.value,
-                    renombre: renombrado
+                    action: renombrado
                 },
                 type: 'POST',
                 success: function(data) {
@@ -388,6 +389,8 @@ $(document).ready(function() {
                         alert("No hay permisos de escritura");
                     } else if (data == "carpyaexiste") {
                         alert("La carpeta ya existe");
+                    } else if (data == "norenom") {
+                        alert("Renombre no válido");
                     } else if (data == "novalido") {
                         alert("Nombre no válido");
                     } else if (data == "OK") {

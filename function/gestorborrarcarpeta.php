@@ -74,6 +74,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //AÑADIR RUTA ACTUAL A CARPETA
+        if ($elerror == 0) {
+            $carpeta = $_SESSION['RUTACTUAL'] . "/" . $carpeta;
+        }
+
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
         if ($elerror == 0) {
             if ($_SESSION['RUTALIMITE'] != substr($carpeta, 0, strlen($_SESSION['RUTALIMITE']))) {

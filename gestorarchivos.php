@@ -194,7 +194,7 @@ function devolverdatos($losbytes, $opcion)
                                                         </ol>
                                                     </nav>
                                                     <button type="button" id="bnactualizar" class="btn btn-primary mr-1" title="Actualizar"><img src="img/botones/refresh.png" alt="Actualizar"></button>
-                                                    <button type="button" id="bnnuevacarpeta" class="btn btn-primary mr-1" value="<?php echo $_SESSION['RUTACTUAL']; ?>" title="Crear Carpeta"><img src="img/botones/new.png" alt="+"> Crear Carpeta</button>
+                                                    <button type="button" id="bnnuevacarpeta" class="btn btn-primary mr-1" title="Crear Carpeta"><img src="img/botones/new.png" alt="+"> Crear Carpeta</button>
                                                     <button type="button" id="bcopiar" class="btn btn-primary mr-1" title="Copiar"><img src="img/botones/copiar.png" alt="+"> Copiar</button>
                                                     <?php
                                                     if ($_SESSION['COPIARFILES'] != "0") {
@@ -274,7 +274,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         echo ('<th scope="row">');
 
                                                                         if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
-                                                                            echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $archivoconcreto . '">');
+                                                                            echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
                                                                         }
 
                                                                         $getinfofile = pathinfo($archivoconcreto);
@@ -345,25 +345,29 @@ function devolverdatos($losbytes, $opcion)
                                                                         //CREAR BOTONES ARCHIVOS Y CARPETAS
                                                                         if (!is_dir($archivoconcreto)) {
                                                                 ?>
-                                                                            <button type="button" class="descargarfile btn btn-primary mr-1" value="<?php echo $archivoconcreto; ?>" title="Descargar"><img src="img/botones/down.png" alt="Descargar"></button>
+                                                                            <button type="button" class="descargarfile btn btn-primary mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Descargar"><img src="img/botones/down.png" alt="Descargar"></button>
                                                                             <?php
                                                                             if ($tipoarchivo == ".gz" || $tipoarchivo == ".tar" || $tipoarchivo == ".bz2") {
-                                                                                echo ('<button type="button" class="descomprimirtar btn btn-primary mr-1" value="' . $archivoconcreto . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
+                                                                                echo ('<button type="button" class="descomprimirtar btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
                                                                             } elseif ($tipoarchivo == ".zip") {
-                                                                                echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $archivoconcreto . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
+                                                                                echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
                                                                             }
                                                                             ?>
-                                                                            <button type="button" class="editarfile btn btn-info text-white mr-1" value="<?php echo $archivoconcreto; ?>" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>
-                                                                            <button type="button" class="renamefile btn btn-warning text-white mr-1" id="<?php echo $fcarpetas[$i]; ?>" value="<?php echo $archivoconcreto; ?>" title="Renombrar"><img src="img/botones/rename.png" alt="Renombrar"></button>
-                                                                            <button type="button" class="borrarfile btn text-white btn-danger" id="<?php echo $fcarpetas[$i]; ?>" value="<?php echo $archivoconcreto; ?>" title="Borrar"><img src="img/botones/borrar.png" alt="Borrar"></button>
+                                                                            <button type="button" class="editarfile btn btn-info text-white mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>
+                                                                            <button type="button" class="renamefile btn btn-warning text-white mr-1" id="<?php echo $fcarpetas[$i]; ?>" value="<?php echo $fcarpetas[$i]; ?>" title="Renombrar"><img src="img/botones/rename.png" alt="Renombrar"></button>
+                                                                            <button type="button" class="borrarfile btn text-white btn-danger" id="<?php echo $fcarpetas[$i]; ?>" value="<?php echo $fcarpetas[$i]; ?>" title="Borrar"><img src="img/botones/borrar.png" alt="Borrar"></button>
 
                                                                             </td>
                                                                             </tr>
                                                                             <?php
                                                                         } else {
                                                                             if ($fcarpetas[$i] == "..") {
+                                                                                
+                                                                                $elatras = explode('/', $_SESSION['RUTACTUAL']);
+                                                                                $elatras = end($elatras);
+                                                                                $elatras = trim($elatras);
                                                                             ?>
-                                                                                <button type="button" class="atras btn btn-info text-white mr-1" value="<?php echo $getinfofile['dirname']; ?>" title="Atras"><img src="img/botones/atras.png" alt="Atras"> Atras</button>
+                                                                                <button type="button" class="atras btn btn-info text-white mr-1" value="<?php echo $elatras; ?>" title="Atras"><img src="img/botones/atras.png" alt="Atras"> Atras</button>
                                                                             <?php
                                                                             } elseif ($fcarpetas[$i] == ".") {
                                                                             ?>
@@ -371,10 +375,10 @@ function devolverdatos($losbytes, $opcion)
                                                                             <?php
                                                                             } else {
                                                                             ?>
-                                                                                <button type="button" class="entrar btn btn-info text-white mr-1" value="<?php echo $archivoconcreto ?>" title="Entrar"><img src="img/botones/entrar.png" alt="Entrar"></button>
-                                                                                <button type="button" class="comprimirzipfolder btn btn-warning text-white mr-1" value="<?php echo $archivoconcreto; ?>" title="Comprimir carpeta en Zip"><img src="img/botones/comprimir.png" alt="Comprimir carpeta en Zip"></button>
-                                                                                <button type="button" id="<?php echo $fcarpetas[$i] ?>" class="renamefolder btn btn-warning text-white mr-1" value="<?php echo $archivoconcreto; ?>" title="Renombrar"><img src="img/botones/rename.png" alt="Renombrar"></button>
-                                                                                <button type="button" id="<?php echo $fcarpetas[$i] ?>" class="borrarcarpeta btn text-white btn-danger" value="<?php echo $archivoconcreto ?>" title="Borrar"><img src="img/botones/borrar.png" alt="Borrar"></button>
+                                                                                <button type="button" class="entrar btn btn-info text-white mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Entrar"><img src="img/botones/entrar.png" alt="Entrar"></button>
+                                                                                <button type="button" class="comprimirzipfolder btn btn-warning text-white mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Comprimir carpeta en Zip"><img src="img/botones/comprimir.png" alt="Comprimir carpeta en Zip"></button>
+                                                                                <button type="button" id="<?php echo $fcarpetas[$i]; ?>" class="renamefolder btn btn-warning text-white mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Renombrar"><img src="img/botones/rename.png" alt="Renombrar"></button>
+                                                                                <button type="button" id="<?php echo $fcarpetas[$i]; ?>" class="borrarcarpeta btn text-white btn-danger" value="<?php echo $fcarpetas[$i]; ?>" title="Borrar"><img src="img/botones/borrar.png" alt="Borrar"></button>
                                                                 <?php
                                                                             }
                                                                         }

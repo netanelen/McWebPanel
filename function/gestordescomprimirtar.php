@@ -59,6 +59,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //AÑADIR RUTA ACTUAL AL ARCHIVO
+        if ($elerror == 0) {
+            $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
+        }
+
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
         if ($elerror == 0) {
             if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {

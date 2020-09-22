@@ -51,10 +51,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $archivo = test_input($_POST['action']);
         $renombre = test_input($_POST['renombre']);
 
-        $getinfofile = pathinfo($archivo);
-        $nuevofile = $getinfofile['dirname'];
-        $nuevofile .= "/" . $renombre;
-
         //COMPROVAR SI ESTA VACIO RENOMBRE
         if ($elerror == 0) {
             if ($renombre == "") {
@@ -69,6 +65,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $retorno = "archvacio";
                 $elerror = 1;
             }
+        }
+
+        //AÑADIR RUTAS
+        if ($elerror == 0) {
+            $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
+            $nuevofile = $_SESSION['RUTACTUAL'] . "/" . $renombre;
         }
 
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION

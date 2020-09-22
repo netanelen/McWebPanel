@@ -44,6 +44,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $retorno = "";
             $getinfofile = "";
+            $elerror = 0;
+            $test = 0;
 
             $dirconfig = test_input($_GET['action']);
 
@@ -52,10 +54,30 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 exit;
             }
 
+            //AÑADIR RUTA ACTUAL AL ARCHIVO
+            if ($elerror == 0) {
+                $dirconfig = $_SESSION['RUTACTUAL'] . "/" . $dirconfig;
+            }
+
+            //COMPOBAR SI HAY ".." "..."
+            if ($elerror == 0) {
+
+                $verificar = array('..', '...', '/.', '~', '../', './', '&&');
+
+                for ($i = 0; $i < count($verificar); $i++) {
+
+                    $test = substr_count($dirconfig, $verificar[$i]);
+
+                    if ($test >= 1) {
+                        exit;
+                    }
+                }
+            }
+
             $getinfofile = pathinfo($dirconfig);
 
             //COMPROVAR SI ESTAS DENTRO DE LA CARPETA DEL FICHERO QUE QUIERES DESCARGAR
-            if($getinfofile['dirname'] != $_SESSION['RUTACTUAL'] ){
+            if ($getinfofile['dirname'] != $_SESSION['RUTACTUAL']) {
                 exit;
             }
 

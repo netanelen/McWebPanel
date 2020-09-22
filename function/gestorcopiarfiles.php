@@ -57,6 +57,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //AÑADIR RUTA ACTUAL AL COPIADOS
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($copiados); $a++) {
+                $copiados[$a] = $_SESSION['RUTACTUAL'] . "/" . $copiados[$a];
+            }
+        }
+
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
         if ($elerror == 0) {
 

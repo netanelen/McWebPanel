@@ -46,29 +46,26 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elerror = 0;
         $test = 0;
 
-        $archivo = test_input($_POST['action']);
-        $elnombre .= $archivo . "/";
-        $elnombre .= test_input($_POST['renombre']);
+        $elnombre = test_input($_POST['action']);
 
-        //COMPROBAR SI ESTA VACIO ARCHRUTA
+        //COMPROBAR SI ESTA VACIO RENOMBRE
         if ($elerror == 0) {
-            if ($archivo == "") {
-                $retorno = "nada";
+            if ($elnombre == "") {
+                $retorno = "norenom";
                 $elerror = 1;
             }
         }
 
-        //COMPROBAR SI ESTA VACIO RENOMBRE
+        //AÑADIR RUTA ACTUAL AL ARCHIVO
         if ($elerror == 0) {
-            if ($archivo == "") {
-                $retorno = "nada";
-                $elerror = 1;
-            }
+            $archivo = $_SESSION['RUTACTUAL'];
+            $elimpio = $_SESSION['RUTACTUAL'];
+            $elnombre = $elimpio ."/" . $elnombre;
         }
 
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
         if ($elerror == 0) {
-            if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
+            if ($_SESSION['RUTALIMITE'] != substr($elnombre, 0, strlen($_SESSION['RUTALIMITE']))) {
                 $retorno = "rutacambiada";
                 $elerror = 1;
             }
