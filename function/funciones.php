@@ -81,6 +81,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 		$valor3 = "";
 		$laramconfig = "";
 		$arraypid = "";
+		$hora = date('H:i');
 
 		$letra = "";
 		$inicio = 0;
@@ -118,7 +119,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			$laramconfig = CONFIGRAM;
 		}
 
-		$elarray = array("cpu" => $lacpu, "memoria" => $laram, "ramconfig" => $laramconfig, "encendido" => $valor3);
+		$elarray = array("cpu" => $lacpu, "memoria" => $laram, "ramconfig" => $laramconfig, "encendido" => $valor3, "hora" => $hora);
 		echo json_encode($elarray);
 	}
 }
