@@ -42,6 +42,13 @@ require_once("template/header.php");
     //VALIDAMOS SESSION SINO ERROR
     if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
+        $receulaminecraft = CONFIGEULAMINECRAFT;
+
+        if($receulaminecraft == 1){
+            header("location:status.php");
+            exit;
+        }
+
     ?>
 
         <div class="py-5">
