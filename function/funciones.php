@@ -77,23 +77,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 		//DECLARAR VARIABLES
 		$lacpu = "";
 		$laram = "";
-		$laramtotal = "";
 		$valor3 = "";
 		$laramconfig = "";
-		$arraypid = "";
-		$hora = date('H:i');
-
-		$letra = "";
-		$inicio = 0;
-		$getcharss = "";
-		$contador = 0;
+		$lahora = date("H:i:s");
 
 		//OBTENER PID SABER SI ESTA EN EJECUCION
 		$elcomando = "";
 		$elnombrescreen = CONFIGDIRECTORIO;
 		$elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
 		$elpid = shell_exec($elcomando);
-		//$laram = $elpid;
 
 		if ($elpid == "") {
 			$valor3 = "Apagado";
@@ -107,19 +99,22 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			$lacpu = trim($lacpu);
 
 			//OBTENER MEMORIA USADA
-			//$elcomando = "ps aux | grep www-data | grep Ssl+ | grep " . $elnombrescreen . " | awk '{print $2}'";
-			//$elcomando = "ps aux | grep www-data | grep Ssl+ | grep " . $elnombrescreen;
 			$elcomando = "ps aux --sort -rss | grep www-data | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
 			$elpid = shell_exec($elcomando);
 			$laram = $elpid;
-			//$laram = strlen($elpid);
-			$laram = devolverdatos(trim(substr($elpid,0,(strlen($elpid)-4))),1);
+			$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
+
+			if (is_numeric($laram)) {
+				$laram = devolverdatos($laram, 1);
+			} else {
+				$laram = "";
+			}
 
 			//OBTENER MEMORIA TOTAL CONFIGURADA
 			$laramconfig = CONFIGRAM;
 		}
 
-		$elarray = array("cpu" => $lacpu, "memoria" => $laram, "ramconfig" => $laramconfig, "encendido" => $valor3, "hora" => $hora);
+		$elarray = array("cpu" => $lacpu, "memoria" => $laram, "ramconfig" => $laramconfig, "encendido" => $valor3, "hora" => $lahora);
 		echo json_encode($elarray);
 	}
 }

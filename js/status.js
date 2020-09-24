@@ -121,6 +121,7 @@ $(document).ready(function() {
             success: function(data) {
                 document.getElementById("textoservidor").innerHTML = "Servidor: " + data.encendido;
                 document.getElementById("horaserver").innerHTML = "Hora Servidor: " + data.hora;
+
                 if (data.encendido == "Apagado") {
                     document.getElementById("binicio").disabled = false;
                     document.getElementById("bparar").disabled = true;
