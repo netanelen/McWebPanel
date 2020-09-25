@@ -501,6 +501,20 @@ $(document).ready(function() {
         }
     });
 
+    $("#bselectall").click(function() {
+        var checkseleccionados = document.getElementsByClassName('laseleccion');
+        for (var i = 0; i < checkseleccionados.length; i++) {
+            checkseleccionados[i].checked = true;
+        }
+    });
+
+    $("#bunselectall").click(function() {
+        var checkseleccionados = document.getElementsByClassName('laseleccion');
+        for (var i = 0; i < checkseleccionados.length; i++) {
+            checkseleccionados[i].checked = false;
+        }
+    });
+
     $("#form").on('submit', (function(e) {
         document.getElementById("gifloading").style.visibility = "visible";
         e.preventDefault();

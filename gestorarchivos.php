@@ -201,6 +201,8 @@ function devolverdatos($losbytes, $opcion)
                                                         echo ('<button type="button" id="bpegar" class="btn btn-primary mr-1" title="Pegar"><img src="img/botones/pegar.png" alt="+"> Pegar</button>');
                                                     }
                                                     ?>
+                                                    <button type="button" id="bselectall" class="btn btn-primary mr-1" title="Seleccionar Todo"><img src="img/botones/checkselect.png" alt=""> Seleccionar Todo</button>
+                                                    <button type="button" id="bunselectall" class="btn btn-primary mr-1" title="Quitar Selección"><img src="img/botones/checkunselect.png" alt=""> Quitar Selección</button>
                                                     <button type="button" id="beliminarseleccion" class="btn btn-danger mr-1" title="Eliminar Seleccionados"><img src="img/botones/borrar.png" alt=""> Eliminar Seleccionados</button>
 
 
@@ -352,8 +354,12 @@ function devolverdatos($losbytes, $opcion)
                                                                             } elseif ($tipoarchivo == ".zip") {
                                                                                 echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
                                                                             }
+
+                                                                            if ($tipoarchivo == ".txt" || $tipoarchivo == ".json" || $tipoarchivo == ".yml" || $tipoarchivo == ".properties") {
+                                                                                echo ('<button type="button" class="editarfile btn btn-info text-white mr-1" value="' . $fcarpetas[$i] . '" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>');
+                                                                            }
                                                                             ?>
-                                                                            <button type="button" class="editarfile btn btn-info text-white mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>
+
                                                                             <button type="button" class="renamefile btn btn-warning text-white mr-1" id="<?php echo $fcarpetas[$i]; ?>" value="<?php echo $fcarpetas[$i]; ?>" title="Renombrar"><img src="img/botones/rename.png" alt="Renombrar"></button>
                                                                             <button type="button" class="borrarfile btn text-white btn-danger" id="<?php echo $fcarpetas[$i]; ?>" value="<?php echo $fcarpetas[$i]; ?>" title="Borrar"><img src="img/botones/borrar.png" alt="Borrar"></button>
 
@@ -362,7 +368,7 @@ function devolverdatos($losbytes, $opcion)
                                                                             <?php
                                                                         } else {
                                                                             if ($fcarpetas[$i] == "..") {
-                                                                                
+
                                                                                 $elatras = explode('/', $_SESSION['RUTACTUAL']);
                                                                                 $elatras = end($elatras);
                                                                                 $elatras = trim($elatras);
