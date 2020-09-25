@@ -86,7 +86,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //PEGAR
         if ($elerror == 0) {
             for ($b = 0; $b < count($copiados); $b++) {
-                $ejecucion = "cp -r " . $copiados[$b] . " " . $_SESSION['RUTACTUAL'];
+                $ejecucion = "cp -r '" . $copiados[$b] . "' " . $_SESSION['RUTACTUAL'];
                 shell_exec($ejecucion);
             }
 
