@@ -32,8 +32,8 @@ function test_input($data)
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
-	$_SESSION['VALIDADO'] = "NO";
-	$_SESSION['KEYSECRETA'] = "0";
+    $_SESSION['VALIDADO'] = "NO";
+    $_SESSION['KEYSECRETA'] = "0";
 }
 
 //VALIDAMOS SESSION
@@ -88,6 +88,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI LA RAIZ SE PUEDE ESCRIVIR
         if ($loserrores == 0) {
+            clearstatcache();
             if (!is_writable($rutaraiz)) {
                 $retorno = "nowriteraiz";
                 $loserrores = 1;
@@ -96,6 +97,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI EXISTE LA CARPETA SERVIDOR MINECRAFT
         if ($loserrores == 0) {
+            clearstatcache();
             if (!file_exists($dirmine)) {
                 $retorno = "nominexiste";
                 $loserrores = 1;
@@ -104,14 +106,17 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI SE PUEDE ESCRIBIR LA CARPETA SERVIDOR MINECRAFT
         if ($loserrores == 0) {
-            if (is_writable($dirmine)) {
+            clearstatcache();
+            if (!is_writable($dirmine)) {
                 $retorno = "minenowrite";
                 $loserrores = 1;
             }
         }
 
+
         //COMPROVAR SI EXISTE EL ARCHIVO TAR
         if ($loserrores == 0) {
+            clearstatcache();
             if (!file_exists($comproarchivo)) {
                 $retorno = "tarnoexiste";
                 $loserrores = 1;
@@ -120,6 +125,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI SE PUEDE ESCRIVIR EN ARCHIVO TAR
         if ($loserrores == 0) {
+            clearstatcache();
             if (!is_readable($comproarchivo)) {
                 $retorno = "tarnolectura";
                 $loserrores = 1;
@@ -142,7 +148,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             mkdir("$dirmine", 0700);
 
             //GUARDAR FICHERO .htaccess
-            $fileht = fopen($dirmine, "w");
+            $diraccess = $dirmine . "/.htaccess";
+            $fileht = fopen($diraccess, "w");
             fwrite($fileht, "deny from all" . PHP_EOL);
             fclose($fileht);
 
