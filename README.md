@@ -33,14 +33,47 @@ Apache Mod Rewrite  (Modulo Activado)
 
 Guia paso a paso para realizar la instalación
 
-Instalar Requisitos
+Instalar Paquetes Requisitos
 
 ```
-sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli
+sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli gawk unzip 
+```
+
+Instalar
+
+```
+Descargar:
+wget https://github.com/Konata400/McWebPanel/archive/master.zip
+
+Descomprimir:
+unzip master.zip
+
+Copiar a la carpeta Apache:
+sudo cp -r McWebPanel-master/. /var/www/html/
+
+Cambiar Usuario Archivos:
+sudo chown -R www-data:www-data /var/www/html/
 ```
 
 Activar MOD Rewrite
 
 ```
 sudo a2enmod rewrite
+```
+
+Configurar Directorio Apache (Obligatorio para proteger carpetas)
+
+
+```
+<Directory /var/www/html>
+Options -Indexes
+AllowOverride All
+Require all granted
+</Directory>
+```
+
+Reiniciar Apache
+
+```
+sudo systemctl restart apache2
 ```
