@@ -151,9 +151,16 @@ function devolverdatos($losbytes, $opcion)
                                                     }
 
                                                     //COMPROVAR SI EXISTE CARPETA SERVIDOR MINECRAF
+                                                    //CON DOBLE CONFIRMACION POR SI TE QUEDAS ATASCADO EN UNA CARPETA SUPERIOR Y UEGO SE ELIMINO POR CONSOLA O FTP
+                                                    clearstatcache();
                                                     if (!file_exists($rutaarchivo)) {
-                                                        echo "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta servidor minecraft.</div>";
-                                                        exit;
+                                                        $_SESSION['RUTACTUAL'] = $_SESSION['RUTALIMITE'];
+                                                        $rutaarchivo = $_SESSION['RUTALIMITE'];
+                                                        clearstatcache();
+                                                        if (!file_exists($rutaarchivo)) {
+                                                            echo "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta servidor minecraft.</div>";
+                                                            exit;
+                                                        }
                                                     }
 
                                                     clearstatcache();
