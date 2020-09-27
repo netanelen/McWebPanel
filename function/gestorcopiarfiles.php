@@ -95,6 +95,17 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($copiados); $a++) {
+                clearstatcache();
+                if (!file_exists($copiados[$a])) {
+                    $retorno = "noexiste";
+                    $elerror = 1;
+                }
+            }
+        }
+
         if ($elerror == 0) {
             $_SESSION['COPIARFILES'] = $copiados;
             $retorno = "OK";

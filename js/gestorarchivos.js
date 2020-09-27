@@ -431,6 +431,9 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data == "nocopy") {
                         alert("Nada que copiar");
+                    } else if (data == "noexiste") {
+                        alert("Hay archivos que no existen");
+                        location.reload();
                     } else if (data == "OK") {
                         location.reload();
                     }
@@ -496,6 +499,7 @@ $(document).ready(function() {
                             alert("Ruta no válida");
                         } else if (data == "noexiste") {
                             alert("Hay archivos que no existen");
+                            location.reload();
                         } else if (data == "nowrite") {
                             alert("Hay archivos sin permisos de escritura");
                         } else if (data == "OK") {
