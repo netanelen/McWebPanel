@@ -39,7 +39,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <hr class="sidebar-divider">
 
     <!-- Encabezado -->
-    <div class="sidebar-heading">Servidor</div>
+    <div class="sidebar-heading text-light">Servidor</div>
 
     <!-- Nav Item - Status -->
     <li class="nav-item menu-hover">
@@ -61,7 +61,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <hr class="sidebar-divider">
 
     <!-- Encabezado -->
-    <div class="sidebar-heading">Configuración</div>
+    <div class="sidebar-heading text-light">Configuración</div>
 
     <!-- Nav Item - Minecraft -->
     <li class="nav-item menu-hover">
@@ -83,7 +83,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <hr class="sidebar-divider">
 
     <!-- Encabezado -->
-    <div class="sidebar-heading">Sistema</div>
+    <div class="sidebar-heading text-light">Sistema</div>
 
     <!-- Nav Item - System Config -->
     <li class="nav-item menu-hover">
@@ -130,5 +130,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
     <!-- Linea Final -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    <p class ="text-light text-right pr-4 mini-ver">McWebAdmin<br>Ver 0.1 Develop</p>
 
 </ul>
