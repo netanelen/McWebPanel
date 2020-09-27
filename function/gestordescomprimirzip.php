@@ -63,19 +63,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
         }
 
-        //obtener solo nombre fichero sin extension
-        if ($elerror == 0) {
-            $getarchivo = pathinfo($archivo);
-            $limpio = "." . strtolower($getarchivo['extension']);
-
-            if ($limpio == ".zip") {
-                $limpio = rtrim($getarchivo['basename'], ".zip");
-            } else {
-                $retorno = "nozip";
-                $elerror = 1;
-            }
-        }
-
         //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
         if ($elerror == 0) {
             if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
@@ -100,10 +87,33 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            clearstatcache();
+            if (!file_exists($archivo)) {
+                $retorno = "noexiste";
+                $elerror = 1;
+            }
+        }
+
+        //obtener solo nombre fichero sin extension
+        if ($elerror == 0) {
+            $getarchivo = pathinfo($archivo);
+            $limpio = "." . strtolower($getarchivo['extension']);
+
+            if ($limpio == ".zip") {
+                $limpio = rtrim($getarchivo['basename'], ".zip");
+            } else {
+                $retorno = "nozip";
+                $elerror = 1;
+            }
+        }
+
         //comprovar si existe la carpeta
         if ($elerror == 0) {
             $lacarpeta = $getarchivo['dirname'] . "/" . $limpio;
 
+            clearstatcache();
             if (!file_exists($lacarpeta)) {
                 mkdir($lacarpeta, 0700);
             } else {

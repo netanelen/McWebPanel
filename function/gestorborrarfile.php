@@ -87,6 +87,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI ARCHIVO EXISTE
         if ($elerror == 0) {
+            clearstatcache();
             if (!file_exists($archivo)) {
                 $retorno = "noexiste";
                 $elerror = 1;
@@ -95,6 +96,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //SI ES WRITABLE LO BORRA SINO ERROR
         if ($elerror == 0) {
+            clearstatcache();
             if (is_writable($archivo)) {
                 $retorno = unlink($archivo);
             } else {

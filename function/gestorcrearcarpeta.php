@@ -89,23 +89,21 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //Comprovar si se puede escrivir
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_writable($archivo)) {
                 $retorno = "nowrite";
                 $elerror = 1;
             }
         }
 
-        clearstatcache();
-
         //Comprovar si existe el que se va a crear
         if ($elerror == 0) {
+            clearstatcache();
             if (file_exists($elnombre)) {
                 $retorno = "carpyaexiste";
                 $elerror = 1;
             }
         }
-
-        clearstatcache();
 
         //Crear Carpeta
         if ($elerror == 0) {

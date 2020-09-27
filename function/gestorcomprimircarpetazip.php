@@ -87,6 +87,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            clearstatcache();
+            if (!file_exists($archivo)) {
+                $retorno = "noexiste";
+                $elerror = 1;
+            }
+        }
+
         //COMPROBAR SI EXISTE EL FICHERO
         if ($elerror == 0) {
 
@@ -96,6 +105,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $elzip = $_SESSION['RUTACTUAL'] . "/" . $limpio;
 
+            clearstatcache();
             if (file_exists($elzip)) {
                 $retorno = "carpyaexiste";
                 $elerror = 1;

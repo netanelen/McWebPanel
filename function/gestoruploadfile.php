@@ -152,6 +152,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROVAR SI SE PUEDE ESCRIVIR LA RUTA
             if ($elerror == 0) {
+                clearstatcache();
                 if (!is_writable($target_dir)) {
                     $retorno = "nowrite";
                     $elerror = 1;
@@ -163,6 +164,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $archivo = $target_dir;
                 $archivo .= "/" . $_FILES['uploadedFile']['name'];
 
+                clearstatcache();
                 if (file_exists($archivo)) {
                     $retorno = "yaexiste";
                     $elerror = 1;

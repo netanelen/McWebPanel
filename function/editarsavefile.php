@@ -88,6 +88,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         if ($elerror == 0) {
+            clearstatcache();
             if (!file_exists($archivo)) {
                 $retorno = "noexiste";
                 $elerror = 1;
@@ -95,6 +96,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         if ($elerror == 0) {
+            clearstatcache();
             if (is_writable($archivo)) {
                 file_put_contents($archivo, $texto);
                 $retorno = "OK";

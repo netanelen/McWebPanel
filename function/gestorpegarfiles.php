@@ -73,10 +73,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
-        clearstatcache();
-
         //MIRAR SI LA CARPETA DONDE SE COPIARAN TIENE PERMISOS DE ESCRITURA
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_writable($_SESSION['RUTACTUAL'])) {
                 $retorno = "nowrite";
                 $elerror = 1;

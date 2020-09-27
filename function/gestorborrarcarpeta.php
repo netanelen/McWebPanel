@@ -105,6 +105,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI CARPETA EXISTE
         if ($elerror == 0) {
+            clearstatcache();
             if (!file_exists($carpeta)) {
                 $retorno = "noexiste";
                 $elerror = 1;
@@ -112,6 +113,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         if ($elerror == 0) {
+            clearstatcache();
             if (is_writable($carpeta)) {
                 $retorno = delete_directory($carpeta);
 

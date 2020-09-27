@@ -302,6 +302,9 @@ $(document).ready(function() {
                         alert("El archivo no es .tag.bz2");
                     } else if (data.eserror == "notar") {
                         alert("El archivo no es .tar");
+                    } else if (data.eserror == "noexiste") {
+                        alert("El archivo tar a descomprimir no existe");
+                        location.reload();
                     } else if (data.eserror == "carpyaexiste") {
                         alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
                     } else if (data.eserror == "no") {
@@ -330,6 +333,9 @@ $(document).ready(function() {
 
                     if (data.eserror == "nada") {
                         alert("No se ha pasado ningún archivo a descomprimir");
+                    } else if (data.eserror == "noexiste") {
+                        alert("El archivo a descomprimir no existe");
+                        location.reload();
                     } else if (data.eserror == "nozip") {
                         alert("El archivo no es .zip");
                     } else if (data.eserror == "carpyaexiste") {
@@ -359,6 +365,9 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data.eserror == "nada") {
                         alert("No se ha pasado ningún archivo a descomprimir");
+                    } else if (data.eserror == "noexiste") {
+                        alert("La carpeta a comprimir no existe");
+                        location.reload();
                     } else if (data.eserror == "carpyaexiste") {
                         alert("No se puede comprimir, la carpeta: " + data.carpeta + " ya existe");
                     } else if (data.eserror == "fallo") {

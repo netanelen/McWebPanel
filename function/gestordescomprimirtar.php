@@ -88,6 +88,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            clearstatcache();
+            if (!file_exists($archivo)) {
+                $retorno = "noexiste";
+                $elerror = 1;
+            }
+        }
+
         //obtener solo nombre fichero sin extension
         if ($elerror == 0) {
             $getarchivo = pathinfo($archivo);
@@ -123,6 +132,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //comprovar si existe la carpeta
         if ($elerror == 0) {
             $lacarpeta = $getarchivo['dirname'] . "/" . $limpio;
+            clearstatcache();
             if (!file_exists($lacarpeta)) {
                 mkdir($lacarpeta, 0700);
             } else {

@@ -83,8 +83,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
 
             //COMPROVAR SI EXISTE
+            clearstatcache();
             if (file_exists($dirconfig)) {
                 //COMPROVAR SI SE PUEDE LEER
+                clearstatcache();
                 if (is_readable($dirconfig)) {
                     header('Content-Description: File Transfer');
                     header('Content-Type: application/octet-stream');
