@@ -52,6 +52,13 @@ require_once("template/header.php");
         exit;
     }
 
+    //MIRAR SI EXISTE
+    if (!file_exists($_SESSION['EDITARFILE'])) {
+        $_SESSION['EDITARFILE'] == "";
+        header("location:gestorarchivos.php");
+        exit;
+    }
+
     //MIRAR SI SE PUEDE SOBREESCRIVIR
     if (!is_writable($_SESSION['EDITARFILE'])) {
         $_SESSION['EDITARFILE'] == "";
@@ -106,12 +113,6 @@ require_once("template/header.php");
 
                                                 //BORRAR SESSION
                                                 $_SESSION['EDITARFILE'] = "";
-
-                                                if (!file_exists($elarchivo)) {
-                                                    $elerror = 1;
-                                                    header("location:index.php");
-                                                    exit;
-                                                }
 
                                                 //LEER ARCHIVO
                                                 if ($elerror == 0) {
