@@ -84,6 +84,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            if (!file_exists($archivo)) {
+                $retorno = "noexiste";
+                $elerror = 1;
+            }
+        }
+
         //MIRAR SI SE PUEDE SOBREESCRIVIR
         if ($elerror == 0) {
             if (!is_writable($archivo)) {

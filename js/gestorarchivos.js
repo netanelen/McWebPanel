@@ -255,6 +255,9 @@ $(document).ready(function() {
                         alert("No se ha pasado ningún archivo a editar");
                     } else if (data == "nowrite") {
                         alert("El archivo no tiene permisos de escritura");
+                    } else if (data == "noexiste") {
+                        alert("El archivo no existe");
+                        location.reload();
                     }
 
 
