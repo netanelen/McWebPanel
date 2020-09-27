@@ -113,8 +113,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            clearstatcache();
+            if (!file_exists($archivo)) {
+                $retorno = "noexiste";
+                $elerror = 1;
+            }
+        }
+
         //COMPROVAR SI EL NUEVO A CREAR EXISTE
         if ($elerror == 0) {
+            clearstatcache();
             if (file_exists($nuevofile)) {
                 $retorno = "yaexiste";
                 $elerror = 1;
@@ -123,6 +133,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI SE PUEDE ESCRIVIR
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_writable($archivo)) {
                 $retorno = "nowrite";
                 $elerror = 1;
