@@ -182,6 +182,9 @@ $(document).ready(function() {
                             alert("Ruta no válida");
                         } else if (data == "renomnovalido") {
                             alert("Renombre no válido");
+                        } else if (data == "noexiste") {
+                            alert("El archivo no existe");
+                            location.reload();
                         } else if (data == "yaexiste") {
                             alert("Ya existe un archivo con ese nombre");
                         } else if (data == "nowrite") {

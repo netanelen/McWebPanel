@@ -51,10 +51,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $archivo = test_input($_POST['action']);
         $renombre = test_input($_POST['renombre']);
 
-        //$getinfofile = pathinfo($archivo);
-        //$nuevofile = $getinfofile['dirname'];
-        //$nuevofile .= "/" . $renombre;
-
         //COMPROVAR SI ESTA VACIO RENOMBRE
         if ($elerror == 0) {
             if ($renombre == "") {
@@ -104,7 +100,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPOBAR SI HAY ".." "..." EN RENOMBRE
         if ($elerror == 0) {
 
-            $verificar = array('..', '...');
+            $verificar = array('..', '...', '/.', '~', '../', './', '&&');
 
             for ($i = 0; $i < count($verificar); $i++) {
 
@@ -117,8 +113,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI EXISTE
+        if ($elerror == 0) {
+            clearstatcache();
+            if (!file_exists($archivo)) {
+                $retorno = "noexiste";
+                $elerror = 1;
+            }
+        }
+
         //COMPROVAR SI EL RENOMBRE NUEVO A CREAR EXISTE
         if ($elerror == 0) {
+            clearstatcache();
             if (file_exists($nuevofile)) {
                 $retorno = "yaexiste";
                 $elerror = 1;
@@ -127,6 +133,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROVAR SI SE PUEDE ESCRIVIR
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_writable($archivo)) {
                 $retorno = "nowrite";
                 $elerror = 1;

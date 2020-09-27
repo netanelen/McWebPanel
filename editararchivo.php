@@ -53,6 +53,7 @@ require_once("template/header.php");
     }
 
     //MIRAR SI EXISTE
+    clearstatcache();
     if (!file_exists($_SESSION['EDITARFILE'])) {
         $_SESSION['EDITARFILE'] == "";
         header("location:gestorarchivos.php");
@@ -60,6 +61,7 @@ require_once("template/header.php");
     }
 
     //MIRAR SI SE PUEDE SOBREESCRIVIR
+    clearstatcache();
     if (!is_writable($_SESSION['EDITARFILE'])) {
         $_SESSION['EDITARFILE'] == "";
         header("location:gestorarchivos.php");
