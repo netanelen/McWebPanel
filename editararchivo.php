@@ -52,6 +52,13 @@ require_once("template/header.php");
         exit;
     }
 
+    //MIRAR SI SE PUEDE SOBREESCRIVIR
+    if (!is_writable($_SESSION['EDITARFILE'])) {
+        $_SESSION['EDITARFILE'] == "";
+        header("location:gestorarchivos.php");
+        exit;
+    }
+
     //VALIDAMOS SESSION SINO ERROR
     if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     ?>
@@ -103,15 +110,7 @@ require_once("template/header.php");
                                                 if (!file_exists($elarchivo)) {
                                                     $elerror = 1;
                                                     header("location:index.php");
-                                                }
-
-
-                                                //MIRAR SI SE PUEDE SOBREESCRIVIR
-                                                if ($elerror == 0) {
-                                                    if (!is_writable($elarchivo)) {
-                                                        $elerror = 1;
-                                                        header("location:index.php");
-                                                    }
+                                                    exit;
                                                 }
 
                                                 //LEER ARCHIVO
