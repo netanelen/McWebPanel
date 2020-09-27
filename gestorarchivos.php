@@ -151,7 +151,7 @@ function devolverdatos($losbytes, $opcion)
                                                     }
 
                                                     //COMPROVAR SI EXISTE CARPETA SERVIDOR MINECRAF
-                                                    //CON DOBLE CONFIRMACION POR SI TE QUEDAS ATASCADO EN UNA CARPETA SUPERIOR Y UEGO SE ELIMINO POR CONSOLA O FTP
+                                                    //CON DOBLE CONFIRMACION POR SI TE QUEDAS ATASCADO EN UNA CARPETA SUPERIOR Y LUEGO SE ELIMINO POR CONSOLA O FTP
                                                     clearstatcache();
                                                     if (!file_exists($rutaarchivo)) {
                                                         $_SESSION['RUTACTUAL'] = $_SESSION['RUTALIMITE'];
@@ -291,7 +291,11 @@ function devolverdatos($losbytes, $opcion)
                                                                         if (is_dir($archivoconcreto)) {
                                                                             echo ('<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>');
                                                                         } else {
-                                                                            $tipoarchivo = "." . strtolower($getinfofile['extension']);
+
+                                                                            //FIX SI EL ARCHIVO NO TIENE EXTENSION
+                                                                            if(isset($getinfofile['extension'])){
+                                                                                $tipoarchivo = "." . strtolower($getinfofile['extension']);
+                                                                            }
 
                                                                             //VER TIPO Y AÑADIR ICONO
                                                                             if ($tipoarchivo == ".txt") {
