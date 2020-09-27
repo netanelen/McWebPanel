@@ -253,6 +253,8 @@ $(document).ready(function() {
                         location.href = "editararchivo.php";
                     } else if (data == "noruta") {
                         alert("No se ha pasado ningún archivo a editar");
+                    } else if (data == "nowrite") {
+                        alert("El archivo no tiene permisos de escritura");
                     }
 
 

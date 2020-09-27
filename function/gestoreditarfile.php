@@ -84,6 +84,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //MIRAR SI SE PUEDE SOBREESCRIVIR
+        if ($elerror == 0) {
+            if (!is_writable($archivo)) {
+                $retorno = "nowrite";
+                $elerror = 1;
+            }
+        }
+
         if ($elerror == 0) {
             if (!isset($_SESSION['EDITARFILE'])) {
                 $_SESSION['EDITARFILE'] = $archivo;
