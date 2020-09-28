@@ -252,8 +252,6 @@ require_once("template/header.php");
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
-        </div>
-        <!-- End of Page Wrapper -->
 
         <script src="js/backups.js"></script>
 
