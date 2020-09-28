@@ -156,9 +156,7 @@ require_once("template/header.php");
                                                             <p class="lead" id="textotarearetorno"></p>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -167,16 +165,8 @@ require_once("template/header.php");
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <!-- End of Footer -->
         </div>
-        <!-- End of Content Wrapper -->
-        </div>
-        <!-- End of Page Wrapper -->
 
         <script src="js/tareas.js"></script>
 
@@ -187,7 +177,6 @@ require_once("template/header.php");
         header("location:index.php");
     }
     ?>
-
 
 </body>
 
