@@ -35,6 +35,7 @@ $(document).ready(function() {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo .htaccess en la raíz, no tiene permisos de escritura.</div>";
             } else if (data == "saveconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
+                document.getElementById("guardaserver").disabled = true;
             }
         })
 
@@ -47,7 +48,7 @@ $(document).ready(function() {
 
     document.getElementById("guardaserver").disabled = true;
 
-    $("#elnomserv").change(function() {
+    $("#elnomserv").keyup(function(e) {
         document.getElementById("guardaserver").disabled = false;
         document.getElementById("result").innerHTML = "";
 

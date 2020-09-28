@@ -74,6 +74,7 @@ require_once("template/header.php");
 
                                                     //VARIABLES
                                                     $contadorarchivos = 0;
+                                                    $contadorsiexiste = 0;
 
                                                     $recpuerto = CONFIGPUERTO;
                                                     $recram = CONFIGRAM;
@@ -90,12 +91,14 @@ require_once("template/header.php");
                                                     $rutaarchivo .= "/" . $elnombredirectorio;
 
                                                     //COMPRUEVA SI LA CARPETA DEL SERVIDOR MINECRAFT EXISTE
+                                                    clearstatcache();
                                                     if (!file_exists($rutaarchivo)) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no existe.</div>";
                                                         exit;
                                                     }
 
                                                     //COMPRUEBA SI LA CARPETA DEL SERVIDOR MINECRAFT SE PUEDE LEER
+                                                    clearstatcache();
                                                     if (!is_readable($rutaarchivo)) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de lectura.</div>";
                                                         exit;
@@ -114,6 +117,10 @@ require_once("template/header.php");
                                                                         $fileNameCmps = explode(".", $file);
                                                                         $fileExtension = strtolower(end($fileNameCmps));
 
+                                                                        if ($file == $recarchivojar) {
+                                                                            $contadorsiexiste = 1;
+                                                                        }
+
                                                                         if ($fileExtension == "jar") {
                                                                             $contadorarchivos++;
                                                                         }
@@ -125,7 +132,7 @@ require_once("template/header.php");
                                                                     echo '<option selected disabled hidden>No hay subido ningún servidor .jar</option>';
                                                                 } else {
 
-                                                                    if ($recarchivojar == "") {
+                                                                    if ($recarchivojar == "" || $contadorsiexiste == 0) {
                                                                         echo '<option selected disabled hidden>No hay ningún servidor seleccionado</option>';
                                                                     }
 

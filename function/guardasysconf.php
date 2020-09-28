@@ -74,6 +74,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
       //COMPROVAR SI EXISTE CARPETA CONF
       if ($elerror == 0) {
+        clearstatcache();
         if (!file_exists($dirconfig)) {
           $retorno = "nocarpetaconf";
           $elerror = 1;
@@ -82,6 +83,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
       //COMPROVAR SI SE PUEDE ESCRIVIR CARPETA CONF
       if ($elerror == 0) {
+        clearstatcache();
         if (!is_writable($dirconfig)) {
           $retorno = "nowriteconf";
           $elerror = 1;
@@ -93,6 +95,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $rutaescrivir = $rutaraiz;
         $rutaescrivir .= "/.htaccess";
 
+        clearstatcache();
         if (!is_writable($rutaescrivir)) {
           $retorno = "nowritehtaccess";
           $elerror = 1;
