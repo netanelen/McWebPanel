@@ -126,15 +126,17 @@ function test_input($data)
 
                     </div>
                     <!-- End of Page Wrapper -->
+                </div>
+            </div>
+        </div>
+        <script src="js/status.js"></script>
 
-                    <script src="js/status.js"></script>
-
-                <?php
-                //FINAL VALIDAR SESSION
-            } else {
-                header("location:index.php");
-            }
-                ?>
+    <?php
+        //FINAL VALIDAR SESSION
+    } else {
+        header("location:index.php");
+    }
+    ?>
 </body>
 
 </html>
