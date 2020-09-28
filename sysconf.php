@@ -267,22 +267,18 @@ require_once("template/header.php");
                         <!-- /.container-fluid -->
                     </div>
                     <!-- End of Main Content -->
-
-                    <!-- Footer -->
-                    <!-- End of Footer -->
                 </div>
                 <!-- End of Content Wrapper -->
             </div>
             <!-- End of Page Wrapper -->
-
-            <script src="js/sysconf.js"></script>
-
-        <?php
+        </div>
+        <script src="js/sysconf.js"></script>
+    <?php
         //FINAL VALIDAR SESSION
     } else {
         header("location:index.php");
     }
-        ?>
+    ?>
 
 </body>
 
