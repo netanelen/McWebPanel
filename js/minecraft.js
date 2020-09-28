@@ -394,7 +394,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#form-resource-pack").change(function() {
+    $("#form-resource-pack").keyup(function() {
         $envioaction = "resource-pack";
         $enviovalor = document.getElementById("form-resource-pack").value;
         $.ajax({
@@ -414,7 +414,7 @@ $(document).ready(function() {
         document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
     });
 
-    $("#form-resource-pack-sha1").change(function() {
+    $("#form-resource-pack-sha1").keyup(function() {
         $envioaction = "resource-pack-sha1";
         $enviovalor = document.getElementById("form-resource-pack-sha1").value;
         $.ajax({
@@ -434,7 +434,7 @@ $(document).ready(function() {
         document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
     });
 
-    $("#form-level-name").change(function() {
+    $("#form-level-name").keyup(function() {
         $envioaction = "level-name";
         $enviovalor = document.getElementById("form-level-name").value;
         $enviovalor = $enviovalor.toLowerCase();
@@ -455,7 +455,7 @@ $(document).ready(function() {
         document.getElementById("label-level-name").innerHTML = "level-name=" + $enviovalor;
     });
 
-    $("#form-level-seed").change(function() {
+    $("#form-level-seed").keyup(function() {
         $envioaction = "level-seed";
         $enviovalor = document.getElementById("form-level-seed").value;
         $.ajax({
@@ -495,7 +495,7 @@ $(document).ready(function() {
         document.getElementById("label-level-type").innerHTML = "level-type=" + document.getElementById("form-level-type").value;
     });
 
-    $("#form-generator-settings").change(function() {
+    $("#form-generator-settings").keyup(function() {
         $envioaction = "generator-settings";
         $enviovalor = document.getElementById("form-generator-settings").value;
         $.ajax({
@@ -836,7 +836,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#form-rcon-password").change(function() {
+    $("#form-rcon-password").keyup(function() {
         $envioaction = "rcon.password";
         $enviovalor = document.getElementById("form-rcon-password").value;
         $.ajax({
@@ -896,7 +896,7 @@ $(document).ready(function() {
         document.getElementById("label-enforce-whitelist").innerHTML = "enforce-whitelist=" + document.getElementById("form-enforce-whitelist").value;
     });
 
-    $("#form-server-ip").change(function() {
+    $("#form-server-ip").keyup(function() {
         $envioaction = "server-ip";
         $enviovalor = document.getElementById("form-server-ip").value;
         $.ajax({
@@ -1241,7 +1241,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#form-motd").change(function() {
+    $("#form-motd").keyup(function() {
         $envioaction = "motd";
         $enviovalor = document.getElementById("form-motd").value;
         $.ajax({

@@ -50,6 +50,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $rutacarpetamine .= "/config/serverproperties.txt";
       $rutatemp .= "/config/serverproperties.tmp";
 
+      clearstatcache();
       if (file_exists($rutacarpetamine)) {
         $gestor = @fopen($rutacarpetamine, "r");
         $file = fopen($rutatemp, "w");

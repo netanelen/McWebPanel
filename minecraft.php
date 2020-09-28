@@ -48,6 +48,7 @@ require_once("template/header.php");
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/config/serverproperties.txt";
 
+            clearstatcache();
             if (file_exists($rutacarpetamine)) {
                 $gestor = @fopen($rutacarpetamine, "r");
 
@@ -106,16 +107,19 @@ require_once("template/header.php");
                                                     $rutacarpetamine = trim($rutacarpetamine);
                                                     $rutacarpetamine .= "/config/serverproperties.txt";
 
+                                                    clearstatcache();
                                                     if (!file_exists($rutacarpetamine)) {
                                                         echo '<div class="alert alert-danger" role="alert">Error: El archivo /config/serverproperties.txt no existe.</div>';
                                                         exit;
                                                     }
 
+                                                    clearstatcache();
                                                     if (!is_readable($rutacarpetamine)) {
                                                         echo '<div class="alert alert-danger" role="alert">Error: El archivo /config/serverproperties.txt no tiene permisos de lectura.</div>';
                                                         exit;
                                                     }
 
+                                                    clearstatcache();
                                                     if (!is_writable($rutacarpetamine)) {
                                                         echo '<div class="alert alert-danger" role="alert">Error: El archivo /config/serverproperties.txt no tiene permisos de escritura.</div>';
                                                         exit;
