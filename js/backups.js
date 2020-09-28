@@ -117,13 +117,13 @@ $(document).ready(function() {
         })
     }
 
-    $("#inputbackup").change(function() {
+
+    $("#inputbackup").keyup(function(e) {
         if (document.getElementById("inputbackup").value == "") {
             document.getElementById("crearbackup").disabled = true;
         } else {
             document.getElementById("crearbackup").disabled = false;
         }
-
     });
 
     $("#crearbackup").click(function() {
