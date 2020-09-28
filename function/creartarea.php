@@ -183,6 +183,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROVAR SI EXISTE CARPETA CONFIG
             if ($elerror == 0) {
+                clearstatcache();
                 if (!file_exists($rutaarchivo)) {
                     $retorno = "errarchnoconfig";
                     $elerror = 1;
@@ -191,6 +192,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROVAR SI CONFIG TIENE PERMISOS DE LECTURA
             if ($elerror == 0) {
+                clearstatcache();
                 if (!is_readable($rutaarchivo)) {
                     $retorno = "errconfignoread";
                     $elerror = 1;
@@ -199,6 +201,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //COMPROVAR SI CONFIG TIENE PERMISOS DE ESCRITURA
             if ($elerror == 0) {
+                clearstatcache();
                 if (!is_writable($rutaarchivo)) {
                     $retorno = "errconfignowrite";
                     $elerror = 1;
@@ -236,10 +239,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     file_put_contents($elarchivo, $serialized);
                     $retorno = "OK";
                 } else {
-                    clearstatcache();
 
                     //COMPROVAR SI SE PUEDE LEER EL JSON
                     if ($elerror == 0) {
+                        clearstatcache();
                         if (!is_readable($elarchivo)) {
                             $retorno = "errjsonnoread";
                             $elerror = 1;
@@ -248,6 +251,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                     //COMPROVAR SI SE PUEDE ESCRIVIR EL JSON
                     if ($elerror == 0) {
+                        clearstatcache();
                         if (!is_writable($elarchivo)) {
                             $retorno = "errjsonnowrite";
                             $elerror = 1;

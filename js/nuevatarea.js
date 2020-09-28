@@ -39,7 +39,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#elcomando").change(function(e) {
+    $("#elcomando").keyup(function(e) {
         if (document.getElementById("elcomando").value == "") {
             document.getElementById("creatarea").disabled = true;
         } else {
@@ -48,7 +48,7 @@ $(document).ready(function() {
 
     });
 
-    $("#nombretarea").change(function(e) {
+    $("#nombretarea").keyup(function(e) {
         if (document.getElementById("nombretarea").value == "") {
             document.getElementById("creatarea").disabled = true;
         } else {
