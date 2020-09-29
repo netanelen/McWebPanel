@@ -125,6 +125,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if (!file_exists($rutacarpetamine)) {
                 //SI NO EXISTE, CREARLA
                 mkdir("$rutacarpetamine", 0700);
+
+                //PERFMISOS FTP
+                $permcomando = "chmod -R 775 " . $rutacarpetamine;
+                exec($permcomando);
+
             }
 
             clearstatcache();
