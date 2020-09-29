@@ -155,6 +155,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             exec($elcomando, $out, $oky);
 
             if (!$oky) {
+
+                //PERFMISOS FTP
+                $permcomando = "chmod -R 775 " . $lacarpeta;
+                exec($permcomando);
+                
                 $retorno = "ok";
             } else {
                 $retorno = "no";
