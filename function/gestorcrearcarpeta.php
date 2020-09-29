@@ -108,6 +108,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //Crear Carpeta
         if ($elerror == 0) {
             mkdir($elnombre, 0700);
+            $permcomando = "chmod 775 " .$elnombre;
+            exec($permcomando);
             $retorno = "OK";
         }
 
