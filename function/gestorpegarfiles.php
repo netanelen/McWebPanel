@@ -89,6 +89,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 shell_exec($ejecucion);
             }
 
+            //PERFMISOS FTP
+            $permcomando = "chmod -R 775 " . $_SESSION['RUTACTUAL'];
+            exec($permcomando);
+
             $retorno = "OK";
         }
 
