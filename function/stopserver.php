@@ -45,6 +45,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $retorno = "";
         $elerror = 0;
 
+        $dirconfig = "";
+
         //OBTENER PID SABER SI ESTA EN EJECUCION
         $elcomando = "";
         $elnombrescreen = CONFIGDIRECTORIO;
@@ -56,6 +58,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $paraejecutar = "stop";
             $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
             shell_exec($laejecucion);
+
+            //PERFMISOS FTP
+            $dirconfig = dirname(getcwd()) . PHP_EOL;
+            $dirconfig = trim($dirconfig);
+            $dirconfig .= "/" .$elnombrescreen;
+            $permcomando = "chmod -R 775 " . $dirconfig;
+            exec($permcomando);
+
             $retorno = "ok";
         }
         echo $retorno;

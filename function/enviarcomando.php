@@ -32,8 +32,8 @@ function test_input($data)
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
-	$_SESSION['VALIDADO'] = "NO";
-	$_SESSION['KEYSECRETA'] = "0";
+  $_SESSION['VALIDADO'] = "NO";
+  $_SESSION['KEYSECRETA'] = "0";
 }
 
 //VALIDAMOS SESSION
@@ -41,10 +41,16 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
   if (isset($_POST['action']) && !empty($_POST['action'])) {
 
+    $elcomando = "";
+    $dirconfig = "";
+    $elnombrescreen = "";
+    $elpid = "";
+    $laejecucion = "";
+    $paraejecutar = "";
+
     $paraejecutar = test_input($_POST['action']);
 
     //OBTENER PID SABER SI ESTA EN EJECUCION
-    $elcomando = "";
     $elnombrescreen = CONFIGDIRECTORIO;
     $elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
     $elpid = shell_exec($elcomando);
@@ -53,6 +59,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (!$elpid == "") {
       $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
       shell_exec($laejecucion);
+
+      //PERFMISOS FTP
+      if (strtolower($paraejecutar) == "stop") {
+        $dirconfig = dirname(getcwd()) . PHP_EOL;
+        $dirconfig = trim($dirconfig);
+        $dirconfig .= "/" . $elnombrescreen;
+        $permcomando = "chmod -R 775 " . $dirconfig;
+        exec($permcomando);
+      }
     }
 
     echo "ok";
