@@ -129,6 +129,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if ($zip->open($archivo) === TRUE) {
                 $zip->extractTo($lacarpeta);
                 $zip->close();
+
+                //PERFMISOS FTP
+                $permcomando = "chmod -R 775 " . $lacarpeta;
+                exec($permcomando);
+
                 $retorno = 'ok';
             } else {
                 $retorno = 'fallo';
