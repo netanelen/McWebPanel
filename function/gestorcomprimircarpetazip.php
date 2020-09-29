@@ -134,6 +134,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     }
                 }
                 $zip->close();
+
+                //PERFMISOS FTP
+                $permcomando = "chmod -R 775 " . $elzip;
+                exec($permcomando);
+
                 $retorno = "ok";
             } else {
                 $retorno = 'fallo';
