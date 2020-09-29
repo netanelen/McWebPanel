@@ -131,6 +131,7 @@ require_once("../template/errorreport.php");
         $dircarpserver .= "/" . $eldirectorio;
 
         //SI HAY PERMISOS ESCRITURA EN RAIZ
+        clearstatcache();
         if (!is_writable($rutaraiz)) {
             echo "La carpeta raiz no tiene permisos de escritura";
             exit;
@@ -143,18 +144,23 @@ require_once("../template/errorreport.php");
         }
 
         //CREAR CARPETA CONFIG
+        clearstatcache();
         if (!file_exists($dirconfig)) {
             mkdir($dirconfig, 0700);
         }
 
         //CREAR CARPETA BACKUP
+        clearstatcache();
         if (!file_exists($dirbackups)) {
             mkdir($dirbackups, 0700);
         }
 
         //CREAR CARPETA SERVER MINECRAFT
+        clearstatcache();
         if (!file_exists($dircarpserver)) {
             mkdir($dircarpserver, 0700);
+            $permcomando = "chmod 775 " .$dircarpserver;
+            exec($permcomando);
         }
 
         //GENERAR TAREA CRONTAB
