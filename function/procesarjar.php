@@ -107,6 +107,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $rutaraiz = dirname(getcwd()) . PHP_EOL;
             $rutaraiz = trim($rutaraiz);
 
+            clearstatcache();
             if (!is_writable($rutaraiz)) {
                 $retorno = "nowriteraiz";
                 $elerror = 1;
@@ -120,11 +121,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/" . $elnombredirectorio;
 
+            clearstatcache();
             if (!file_exists($rutacarpetamine)) {
                 //SI NO EXISTE, CREARLA
                 mkdir("$rutacarpetamine", 0700);
             }
 
+            clearstatcache();
             if (!file_exists($rutacarpetamine)) {
                 $retorno = "nocarpserver";
                 $elerror = 1;
@@ -133,6 +136,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //COMPROBAR PERMISOS ESCRITURA SERVER MINECRAFT
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_writable($rutacarpetamine)) {
                 $retorno = "nowriteservmine";
                 $elerror = 1;
@@ -151,6 +155,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPROVAR SI EXISTE EL ARCHIVO A SUBIR EN LA CARPETA MINECRAFT
         if ($elerror == 0) {
             $rutacarpetamine .= "/" . $_FILES['uploadedFile']['name'];
+            clearstatcache();
             if (file_exists($rutacarpetamine)) {
                 $retorno = "jarexiste";
                 $elerror = 1;
@@ -164,6 +169,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $target_file = $target_dir . basename($_FILES["uploadedFile"]["name"]);
 
             if (move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $target_file)) {
+
+                //PERFMISOS FTP
+                $permcomando = "chmod -R 775 " . $target_file;
+                exec($permcomando);
+
                 $retorno = "OK";
             } else {
                 $retorno = "errorsubir";
