@@ -129,7 +129,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         $retorno = "novaltipe";
                         break;
                 }
-
             }
 
             //COMPOBAR SI HAY ".." "..."
@@ -177,6 +176,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $target_file = $target_dir . "/" . basename($_FILES["uploadedFile"]["name"]);
 
                 if (move_uploaded_file($tmp, $target_file)) {
+
+                    //PERFMISOS FTP
+                    $permcomando = "chmod -R 775 " . $target_file;
+                    exec($permcomando);
+
                     $retorno = "subidook";
                 } else {
                     $retorno = "errorupload";
