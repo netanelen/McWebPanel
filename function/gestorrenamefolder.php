@@ -84,7 +84,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPOBAR SI HAY ".." "..." EN RUTA
         if ($elerror == 0) {
 
-            $verificar = array('..', '...', '/.', '~', '../', './', '&&');
+            $verificar = array('..', '...', '~', '../', './', '&&');
 
             for ($i = 0; $i < count($verificar); $i++) {
 
@@ -100,7 +100,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPOBAR SI HAY ".." "..." EN RENOMBRE
         if ($elerror == 0) {
 
-            $verificar = array('..', '...');
+            $verificar = array('..', '...', '~', '../', './', '&&');
 
             for ($i = 0; $i < count($verificar); $i++) {
 
