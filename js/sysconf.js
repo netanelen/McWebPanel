@@ -28,7 +28,7 @@ $(document).ready(function() {
             }
 
             if (data == "nowriteconf") {
-                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo de configuración no tiene permisos de escritura.</div>";
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta config no tiene permisos de escritura.</div>";
             } else if (data == "nocarpetaconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta conf no existe.</div>";
             } else if (data == "nowritehtaccess") {
