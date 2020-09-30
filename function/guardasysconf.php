@@ -96,9 +96,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $rutaescrivir .= "/.htaccess";
 
         clearstatcache();
-        if (!is_writable($rutaescrivir)) {
-          $retorno = "nowritehtaccess";
-          $elerror = 1;
+        if (file_exists($rutaescrivir)) {
+          clearstatcache();
+          if (!is_writable($rutaescrivir)) {
+            $retorno = "nowritehtaccess";
+            $elerror = 1;
+          }
         }
       }
 
