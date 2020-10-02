@@ -17,7 +17,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     You should have received a copy of the GNU General Public License
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
-
+require_once("verificar.php");
 require_once("template/session.php");
 require_once("template/errorreport.php");
 require_once("template/header.php");
@@ -29,6 +29,7 @@ if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 
 if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
   header("location:status.php");
+  exit;
 }
 ?>
 
@@ -54,6 +55,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     $rutaarchivo = trim($rutaarchivo);
     $rutaarchivo .= "/config/confuser.json";
 
+    clearstatcache();
     if (file_exists($rutaarchivo)) {
       $sumaconfig++;
     }
@@ -62,6 +64,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     $rutaarchivo = trim($rutaarchivo);
     $rutaarchivo .= "/config/confopciones.php";
 
+    clearstatcache();
     if (file_exists($rutaarchivo)) {
       $sumaconfig++;
     }
@@ -71,6 +74,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     $rutainstall = trim($rutainstall);
     $rutainstall .= "/install";
 
+    clearstatcache();
     if (file_exists($rutainstall)) {
       $sumainstall++;
     }
