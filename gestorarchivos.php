@@ -366,7 +366,7 @@ function devolverdatos($losbytes, $opcion)
                                                                                 echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
                                                                             }
 
-                                                                            if ($tipoarchivo == ".txt" || $tipoarchivo == ".json" || $tipoarchivo == ".yml" || $tipoarchivo == ".properties") {
+                                                                            if ($tipoarchivo == ".txt" || $tipoarchivo == ".json" || $tipoarchivo == ".log" || $tipoarchivo == ".yml" || $tipoarchivo == ".properties") {
                                                                                 echo ('<button type="button" class="editarfile btn btn-info text-white mr-1" value="' . $fcarpetas[$i] . '" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>');
                                                                             }
                                                                             ?>
