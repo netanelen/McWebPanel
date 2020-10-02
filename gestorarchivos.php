@@ -287,7 +287,12 @@ function devolverdatos($losbytes, $opcion)
                                                                         echo ('<th scope="row">');
 
                                                                         if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
-                                                                            echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
+                                                                            clearstatcache();
+                                                                            if (is_executable($archivoconcreto)) {
+                                                                                echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
+                                                                            } else {
+                                                                                echo ('<input class="laseleccion mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" value="' . $fcarpetas[$i] . '" disabled>');
+                                                                            }
                                                                         }
 
                                                                         $getinfofile = pathinfo($archivoconcreto);
