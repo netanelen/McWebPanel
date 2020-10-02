@@ -143,6 +143,8 @@ $(document).ready(function() {
                             location.reload();
                         } else if (data == "nowrite") {
                             alert("La carpeta no tiene permisos de escritura");
+                        } else if (data == "nopermenter") {
+                            alert("No tienes permiso de ejecucion/enter en la carpeta");
                         } else if (data == "noborrado") {
                             alert("Error: La carpeta no se pudo borrar");
                         }
