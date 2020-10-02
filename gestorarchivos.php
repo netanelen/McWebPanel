@@ -291,7 +291,7 @@ function devolverdatos($losbytes, $opcion)
                                                                             if (is_executable($archivoconcreto)) {
                                                                                 echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
                                                                             } else {
-                                                                                echo ('<input class="laseleccion mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" value="' . $fcarpetas[$i] . '" disabled>');
+                                                                                echo ('<input class="mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled>');
                                                                             }
                                                                         }
 
