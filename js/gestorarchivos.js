@@ -374,6 +374,8 @@ $(document).ready(function() {
                         alert("No se puede comprimir, la carpeta: " + data.carpeta + " ya existe");
                     } else if (data.eserror == "fallo") {
                         alert("Error al comprimir");
+                    } else if (data.eserror == "nopermenter") {
+                        alert("No tienes permiso de ejecucion/enter en la carpeta");
                     } else if (data.eserror == "ok") {
                         alert("Zip comprimido en archivo: " + data.carpeta);
                         location.reload();
