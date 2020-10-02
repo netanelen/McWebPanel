@@ -135,12 +135,6 @@ function devolverdatos($losbytes, $opcion)
                                                     $rutaarchivo = trim($rutaarchivo);
                                                     $rutaarchivo .= "/" . $reccarpmine;
 
-                                                    //FORZAR .htaccess CARPETA SERVIDOR MINECRAFT
-                                                    $rutahta = $rutaarchivo . "/.htaccess";
-                                                    $file = fopen($rutahta, "w");
-                                                    fwrite($file, "deny from all" . PHP_EOL);
-                                                    fclose($file);
-
                                                     //INICIALIZAR SESSION RUTACTUAL Y RUTALIMITE
                                                     if (!isset($_SESSION['RUTACTUAL'])) {
                                                         $_SESSION['RUTACTUAL'] = $rutaarchivo;
@@ -163,21 +157,32 @@ function devolverdatos($losbytes, $opcion)
                                                         }
                                                     }
 
-                                                    clearstatcache();
-
                                                     //COMPROVAR SI SE PUEDE LEER CARPETA
+                                                    clearstatcache();
                                                     if (!is_readable($rutaarchivo)) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta servidor minecraft no tiene permisos de lectura.</div>";
                                                         exit;
                                                     }
 
-                                                    clearstatcache();
-
                                                     //COMPROVAR SI SE PUEDE ESCRIVIR EN CARPETA
+                                                    clearstatcache();
                                                     if (!is_writable($rutaarchivo)) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta servidor minecraft no tiene permisos de escritura.</div>";
                                                         exit;
                                                     }
+
+                                                    //COMPROVAR SI SE PUEDE EJECUTAR EN CARPETA
+                                                    clearstatcache();
+                                                    if (!is_executable($rutaarchivo)) {
+                                                        echo "<div class='alert alert-danger' role='alert'>Error: La carpeta servidor minecraft no tiene permisos de ejecucion.</div>";
+                                                        exit;
+                                                    }
+
+                                                    //FORZAR .htaccess CARPETA SERVIDOR MINECRAFT
+                                                    $rutahta = $rutaarchivo . "/.htaccess";
+                                                    $file = fopen($rutahta, "w");
+                                                    fwrite($file, "deny from all" . PHP_EOL);
+                                                    fclose($file);
 
                                                     //SEPARAR RUTA EN ARRAY
                                                     $getrutalimpia = explode("/", $_SESSION['RUTACTUAL']);
@@ -226,8 +231,6 @@ function devolverdatos($losbytes, $opcion)
                                                             <tbody>
                                                                 <?php
 
-                                                                clearstatcache();
-
                                                                 //CONTAR CUANTOS ARCHIVOS TIENE LA CARPETA
                                                                 $files = array();
                                                                 if ($handle = opendir($rutaarchivo)) {
@@ -257,6 +260,7 @@ function devolverdatos($losbytes, $opcion)
                                                                     //SEPARAR CARPETAS Y DIRECTORIOS
                                                                     for ($i = 0; $i < count($a); $i++) {
                                                                         $rutfil = $rutaarchivo . "/" . $a[$i];
+                                                                        clearstatcache();
                                                                         if (is_dir($rutfil)) {
                                                                             //Evitar mostrar .
                                                                             if ($a[$i] != ".") {
@@ -288,12 +292,13 @@ function devolverdatos($losbytes, $opcion)
 
                                                                         $getinfofile = pathinfo($archivoconcreto);
 
+                                                                        clearstatcache();
                                                                         if (is_dir($archivoconcreto)) {
                                                                             echo ('<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>');
                                                                         } else {
 
                                                                             //FIX SI EL ARCHIVO NO TIENE EXTENSION
-                                                                            if(isset($getinfofile['extension'])){
+                                                                            if (isset($getinfofile['extension'])) {
                                                                                 $tipoarchivo = "." . strtolower($getinfofile['extension']);
                                                                             }
 
@@ -340,6 +345,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         }
 
                                                                         //AÑADIR FECHA ARCHIVO/CARPETA
+                                                                        clearstatcache();
                                                                         if (!is_dir($archivoconcreto)) {
                                                                             echo ('<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>');
                                                                         } else {
@@ -347,6 +353,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         }
 
                                                                         //AÑADIR TAMAÑO ARCHIVO
+                                                                        clearstatcache();
                                                                         if (!is_dir($archivoconcreto)) {
                                                                             $eltamano = devolverdatos(filesize($archivoconcreto), 1);
                                                                         } else {
@@ -356,6 +363,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         echo ('<td>');
 
                                                                         //CREAR BOTONES ARCHIVOS Y CARPETAS
+                                                                        clearstatcache();
                                                                         if (!is_dir($archivoconcreto)) {
                                                                 ?>
                                                                             <button type="button" class="descargarfile btn btn-primary mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Descargar"><img src="img/botones/down.png" alt="Descargar"></button>
@@ -366,7 +374,7 @@ function devolverdatos($losbytes, $opcion)
                                                                                 echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
                                                                             }
 
-                                                                            if ($tipoarchivo == ".txt" || $tipoarchivo == ".json" || $tipoarchivo == ".log" || $tipoarchivo == ".yml" || $tipoarchivo == ".properties") {
+                                                                            if ($tipoarchivo == ".txt" || $tipoarchivo == ".json" || $tipoarchivo == ".log" || $tipoarchivo == ".mcmeta" || $tipoarchivo == ".yml" || $tipoarchivo == ".properties") {
                                                                                 echo ('<button type="button" class="editarfile btn btn-info text-white mr-1" value="' . $fcarpetas[$i] . '" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>');
                                                                             }
                                                                             ?>
