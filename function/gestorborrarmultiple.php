@@ -132,6 +132,20 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //COMPROVAR SI SE PUEDEN ENTER/EJECUTAR
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($archivos); $a++) {
+                clearstatcache();
+                if (is_dir($archivos[$a])) {
+                    clearstatcache();
+                    if (!is_executable($archivos[$a])) {
+                        $retorno = "nopermenter";
+                        $elerror = 1;
+                    }
+                }
+            }
+        }
+
         //ELIMINAR ARCHIVOS Y CARPETAS
         if ($elerror == 0) {
             for ($a = 0; $a < count($archivos); $a++) {

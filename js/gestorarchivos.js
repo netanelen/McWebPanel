@@ -523,6 +523,8 @@ $(document).ready(function() {
                             location.reload();
                         } else if (data == "nowrite") {
                             alert("Hay archivos sin permisos de escritura");
+                        } else if (data == "nopermenter") {
+                            alert("Hay carpetas sin permiso de ejecucion/enter en la carpeta");
                         } else if (data == "OK") {
                             location.reload();
                         }
