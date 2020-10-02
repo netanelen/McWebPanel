@@ -83,6 +83,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //COMPROBAR SI SE PUEDE EJECUTAR/ENTRAR A LA CARPETA
+        if ($elerror == 0) {
+            clearstatcache();
+            if (!is_executable($archivo)) {
+                $retorno = "nopermenter";
+                $elerror = 1;
+            }
+        }
+
         if ($elerror == 0) {
             $_SESSION['RUTACTUAL'] = $archivo;
             $retorno = "OK";

@@ -35,6 +35,8 @@ $(document).ready(function() {
 
                     if (data == "OK") {
                         location.reload();
+                    } else if (data == "nopermenter") {
+                        alert("No tienes permiso de ejecucion/enter en la carpeta");
                     }
 
 
