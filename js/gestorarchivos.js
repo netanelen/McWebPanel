@@ -455,6 +455,8 @@ $(document).ready(function() {
                     } else if (data == "noexiste") {
                         alert("Hay archivos que no existen");
                         location.reload();
+                    } else if (data == "nopermenter") {
+                        alert("Hay carpetas que no tienen permiso de ejecucion/enter");
                     } else if (data == "OK") {
                         location.reload();
                     }

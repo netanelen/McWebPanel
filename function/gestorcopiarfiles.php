@@ -106,6 +106,20 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
         }
 
+        //COMPROVAR SI SE PUEDEN ENTER/EJECUTAR
+        if ($elerror == 0) {
+            for ($a = 0; $a < count($copiados); $a++) {
+                clearstatcache();
+                if (is_dir($copiados[$a])) {
+                    clearstatcache();
+                    if (!is_executable($copiados[$a])) {
+                        $retorno = "nopermenter";
+                        $elerror = 1;
+                    }
+                }
+            }
+        }
+
         if ($elerror == 0) {
             $_SESSION['COPIARFILES'] = $copiados;
             $retorno = "OK";
