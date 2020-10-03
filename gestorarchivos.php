@@ -179,7 +179,7 @@ function devolverdatos($losbytes, $opcion)
                                                     }
 
                                                     //FORZAR .htaccess CARPETA SERVIDOR MINECRAFT
-                                                    $rutahta = $rutaarchivo . "/.htaccess";
+                                                    $rutahta = $_SESSION['RUTALIMITE'] . "/.htaccess";
                                                     $file = fopen($rutahta, "w");
                                                     fwrite($file, "deny from all" . PHP_EOL);
                                                     fclose($file);
