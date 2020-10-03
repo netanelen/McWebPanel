@@ -288,10 +288,14 @@ function devolverdatos($losbytes, $opcion)
 
                                                                         if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
                                                                             clearstatcache();
-                                                                            if (is_executable($archivoconcreto)) {
-                                                                                echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
+                                                                            if (is_dir($archivoconcreto)) {
+                                                                                if (is_executable($archivoconcreto)) {
+                                                                                    echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
+                                                                                } else {
+                                                                                    echo ('<input class="mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled>');
+                                                                                }
                                                                             } else {
-                                                                                echo ('<input class="mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled>');
+                                                                                echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
                                                                             }
                                                                         }
 
