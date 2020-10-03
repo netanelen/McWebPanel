@@ -289,6 +289,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
                                                                             clearstatcache();
                                                                             if (is_dir($archivoconcreto)) {
+                                                                                clearstatcache();
                                                                                 if (is_executable($archivoconcreto)) {
                                                                                     echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
                                                                                 } else {
