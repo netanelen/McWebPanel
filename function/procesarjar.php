@@ -127,9 +127,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 mkdir("$rutacarpetamine", 0700);
 
                 //PERFMISOS FTP
-                $permcomando = "chmod -R 775 " . $rutacarpetamine;
+                $permcomando = "chmod 775 '" . $rutacarpetamine . "'";
                 exec($permcomando);
-
             }
 
             clearstatcache();
@@ -176,7 +175,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if (move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $target_file)) {
 
                 //PERFMISOS FTP
-                $permcomando = "chmod -R 775 " . $target_file;
+                $permcomando = "chmod 664 '" . $target_file . "'";
                 exec($permcomando);
 
                 $retorno = "OK";

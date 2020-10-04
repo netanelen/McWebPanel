@@ -178,7 +178,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 if (move_uploaded_file($tmp, $target_file)) {
 
                     //PERFMISOS FTP
-                    $permcomando = "chmod -R 775 " . $target_file;
+                    $permcomando = "chmod 664 '" . $target_file . "'";
                     exec($permcomando);
 
                     $retorno = "subidook";

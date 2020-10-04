@@ -65,7 +65,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $dirconfig = dirname(getcwd()) . PHP_EOL;
         $dirconfig = trim($dirconfig);
         $dirconfig .= "/" . $elnombrescreen;
-        $permcomando = "chmod -R 775 " . $dirconfig;
+
+        $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
+        exec($permcomando);
+        $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
         exec($permcomando);
       }
     }

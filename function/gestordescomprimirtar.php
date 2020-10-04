@@ -157,9 +157,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if (!$oky) {
 
                 //PERFMISOS FTP
-                $permcomando = "chmod -R 775 " . $lacarpeta;
+                $permcomando = "cd '" . $lacarpeta . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
                 exec($permcomando);
-                
+                $permcomando = "cd '" . $lacarpeta . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
+                exec($permcomando);
+
                 $retorno = "ok";
             } else {
                 $retorno = "no";
