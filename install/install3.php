@@ -159,7 +159,9 @@ require_once("../template/errorreport.php");
         clearstatcache();
         if (!file_exists($dircarpserver)) {
             mkdir($dircarpserver, 0700);
-            $permcomando = "chmod 775 " .$dircarpserver;
+
+            //PERFMISOS FTP
+            $permcomando = "chmod 775 '" . $dircarpserver . "'";
             exec($permcomando);
         }
 
