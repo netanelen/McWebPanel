@@ -230,6 +230,7 @@ require_once("../template/errorreport.php");
         $arrayadmin[0]['usuario'] = $elusuario;
         $arrayadmin[0]['hash'] = $hashed;
         $arrayadmin[0]['rango'] = 1;
+        $arrayadmin[0]['estado'] = "activado";
 
         $serialized = serialize($arrayadmin);
         file_put_contents($rutaescrivir, $serialized);
