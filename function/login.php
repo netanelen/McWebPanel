@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //INICIAR VARIABLES
     $retorno = "";
     $elerror = 0;
+    $noencontrouser = 0;
     $getconfuser = "";
     $getconfpass = "";
     $elusuario = "";
@@ -106,6 +107,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //SI EL USUARIO CONCUERTDA
             if ($elusuario == $getconfuser && $hashed == $getconfpass) {
 
+                $noencontrouser = 1;
+
                 //REGENERAR SESSION
                 session_regenerate_id();
 
@@ -125,9 +128,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } else {
                     $retorno = "gotostatus";
                 }
-            } else {
-                $retorno = "novaliduser";
             }
+        }
+
+        if($noencontrouser == 0){
+            $retorno = "novaliduser";
         }
     }
 
