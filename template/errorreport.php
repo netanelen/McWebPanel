@@ -19,5 +19,4 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-$DEBUGWEB = 1;
 ?>
