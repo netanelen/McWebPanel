@@ -42,9 +42,11 @@ require_once("template/header.php");
         exit;
     }
 
-    //COMPROVAR SI ES EL SUPERADMIN O ADMIN O USER CON PERMISOS
-    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('psubirservidor', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psubirservidor'] == 1) {
-        $expulsar = 1;
+    //COMPROVAR SI ES EL SUPERADMIN O ADMIN
+    if (array_key_exists('rango', $_SESSION['CONFIGUSER'])) {
+        if ($_SESSION['CONFIGUSER']['rango'] == 1) {
+            $expulsar = 1;
+        }
     }
 
     if ($expulsar != 1) {
@@ -78,27 +80,42 @@ require_once("template/header.php");
                                 <div class="card-body">
                                     <div class="py-1">
                                         <div class="container">
-                                            <h1 class="mb-5">Subir Servidor Minecraft</h1>
+                                            <h1 class="mb-5">Crear Administrador</h1>
                                             <div class="row">
                                                 <div class="col-md-12">
 
-                                                    <p>El servidor.jar se alojará en la carpeta Minecraft correspondiente.</p>
-                                                    <p>Archivo .jar:</p>
-                                                    <p>(Limite Subida: <?php echo ini_get("upload_max_filesize"); ?>B)</p>
+                                                    <form action="function/gestusercrearadmin.php" method="POST" id="form-createuser">
+                                                        <div class="py-1">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label for="eluser" class="">Nombre Usuario</label>
+                                                                            <input type="text" class="form-control" id="eluser" name="eluser" required="required">
+                                                                        </div>
+                                                                    </div>
 
-                                                    <form id="form" method="post" action="function/procesarjar.php" enctype="multipart/form-data">
+                                                                    <div class="col-md-6">
+                                                                        <label for="elpass">Contraseña</label>
+                                                                        <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" required="required">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="elrepass">Confirmar Contraseña</label>
+                                                                        <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" required="required">
+                                                                    </div>
 
-                                                        <div class="custom-file mb-3">
-                                                            <input type="file" class="custom-file-input" id="fileName" name="uploadedFile" accept=".jar">
-                                                            <label class="custom-file-label" for="fileName">Elija el archivo</label>
+                                                                    <div class="col-md-12">
+                                                                        <p class="lead" id="textoretorno"></p>
+                                                                    </div>
+
+                                                                    
+                                                                    <div class="col-md-12">
+                                                                        <br>
+                                                                        <button class="btn btn-lg btn-primary btn-block" id="btcrearusuario" name="btcrearusuario" type="submit">Crear Administrador</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-
-                                                        <div class="mt-3">
-                                                            <button class="btn btn-primary" id="botonsubir" type="submit" value="Upload">Subir Archivo</button>
-                                                            <img class="" src="img/loading.gif" id="gifloading" alt="loading" width="147" height="72">
-
-                                                        </div>
-
                                                     </form>
 
                                                 </div>
@@ -119,7 +136,8 @@ require_once("template/header.php");
             </div>
             <!-- End of Page Wrapper -->
 
-            <script src="js/subirserver.js"></script>
+           <script src="js/gestadmincreate.js"></script>
+
         </div>
     <?php
         //FINAL VALIDAR SESSION

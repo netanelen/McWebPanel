@@ -34,15 +34,28 @@ require_once("template/header.php");
 
     <?php
 
+    $expulsar = 0;
+
     //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
-    if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])){
+    if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
         $_SESSION['VALIDADO'] = "NO";
         $_SESSION['KEYSECRETA'] = "0";
         header("location:index.php");
+        exit;
+    }
+
+    //COMPROVAR SI ES EL SUPERADMIN O ADMIN O USER CON PERMISOS
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconsolaread', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconsolaread'] == 1) {
+        $expulsar = 1;
+    }
+
+    if ($expulsar != 1) {
+        header("location:index.php");
+        exit;
     }
 
     //VALIDAMOS SESSION SINO ERROR
-    if($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']){
+    if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     ?>
 
         <!-- Page Wrapper -->
@@ -102,7 +115,7 @@ require_once("template/header.php");
         </div>
         <!-- End of Page Wrapper -->
 
-        <script src="js/consola.js"></script> 
+        <script src="js/consola.js"></script>
 
     <?php
         //FINAL VALIDAR SESSION
