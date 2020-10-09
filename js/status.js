@@ -110,9 +110,17 @@ $(document).ready(function() {
         });
     });
 
-    document.getElementById("binicio").disabled = true;
-    document.getElementById("bparar").disabled = true;
-    document.getElementById("bkill").disabled = true;
+    if (document.getElementById('binicio') != null) {
+        document.getElementById("binicio").disabled = true;
+    }
+
+    if (document.getElementById('bparar') != null) {
+        document.getElementById("bparar").disabled = true;
+    }
+
+    if (document.getElementById('bkill') != null) {
+        document.getElementById("bkill").disabled = true;
+    }
 
     var myVar = setInterval(myTimer, 1000);
 
@@ -129,17 +137,36 @@ $(document).ready(function() {
                 document.getElementById("horaserver").innerHTML = "Hora Servidor: " + data.hora;
 
                 if (data.encendido == "Apagado") {
-                    document.getElementById("binicio").disabled = false;
-                    document.getElementById("bparar").disabled = true;
-                    document.getElementById("bkill").disabled = true;
+
+                    if (document.getElementById('binicio') != null) {
+                        document.getElementById("binicio").disabled = false;
+                    }
+
+                    if (document.getElementById('bparar') != null) {
+                        document.getElementById("bparar").disabled = true;
+                    }
+
+                    if (document.getElementById('bkill') != null) {
+                        document.getElementById("bkill").disabled = true;
+                    }
+
                     document.getElementById("textocpu").innerHTML = "Cpu:";
                     document.getElementById("textoram").innerHTML = "Ram:";
                 } else if (data.encendido == "Encendido") {
                     document.getElementById("textocpu").innerHTML = "Cpu: " + data.cpu + "%";
                     document.getElementById("textoram").innerHTML = "Ram: " + data.memoria + " / Total: " + data.ramconfig + " GB";
-                    document.getElementById("binicio").disabled = true;
-                    document.getElementById("bparar").disabled = false;
-                    document.getElementById("bkill").disabled = false;
+
+                    if (document.getElementById('binicio') != null) {
+                        document.getElementById("binicio").disabled = true;
+                    }
+
+                    if (document.getElementById('bparar') != null) {
+                        document.getElementById("bparar").disabled = false;
+                    }
+
+                    if (document.getElementById('bkill') != null) {
+                        document.getElementById("bkill").disabled = false;
+                    }
                 }
             }
         });
