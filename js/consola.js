@@ -64,15 +64,19 @@ $(document).ready(function() {
         }
     }
 
-    $("#botonconsola").click(function() {
-        enviarcomando();
-    });
-
-    $("#elcomando").keypress(function(e) {
-        if (e.keyCode == 13) {
+    if (document.getElementById('botonconsola') != null) {
+        $("#botonconsola").click(function() {
             enviarcomando();
-        }
-    });
+        });
+    }
+
+    if (document.getElementById('elcomando') != null) {
+        $("#elcomando").keypress(function(e) {
+            if (e.keyCode == 13) {
+                enviarcomando();
+            }
+        });
+    }
 
     var mySessionTimer = setInterval(sessionTimer, 1000);
 

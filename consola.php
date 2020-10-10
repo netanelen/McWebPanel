@@ -89,6 +89,9 @@ require_once("template/header.php");
 
                         </div>
                         <hr>
+                        <?php
+                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconsolaenviar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconsolaenviar'] == 1) {
+                        ?>
                         <div class="py-0">
 
                             <div class="row">
@@ -101,6 +104,9 @@ require_once("template/header.php");
                             </div>
 
                         </div>
+                        <?php
+                        }
+                        ?>
 
 
                     </div>
