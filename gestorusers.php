@@ -135,7 +135,7 @@ require_once("template/header.php");
                                                                                 if ($_SESSION['CONFIGUSER']['rango'] == 1) {
                                                                                     for ($i = 0; $i < count($arrayobtenido); $i++) {
 
-                                                                                        echo '<tr>';
+                                                                                        echo '<tr class = "menu-hover">';
                                                                                         echo '<th scope="row">' . $arrayobtenido[$i]['usuario'] . '</th>';
                                                                                         echo '<td>';
 
@@ -167,7 +167,7 @@ require_once("template/header.php");
                                                                                 if ($_SESSION['CONFIGUSER']['rango'] == 2) {
                                                                                     for ($i = 1; $i < count($arrayobtenido); $i++) {
                                                                                         if ($arrayobtenido[$i]['rango'] == 3) {
-                                                                                            echo '<tr>';
+                                                                                            echo '<tr class = "menu-hover">';
                                                                                             echo '<th scope="row">' . $arrayobtenido[$i]['usuario'] . '</th>';
                                                                                             echo '<td>';
 
