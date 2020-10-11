@@ -174,91 +174,141 @@ require_once("template/header.php");
 
                                                         <div class="form-row">
 
-                                                            <div class="form-group col-md-6">
-                                                                <label for="elport">Puerto</label>
-                                                                <input type="number" value="<?php echo $recpuerto; ?>" class="form-control" id="elport" name="elport" required="required" min="1025" max="65535">
-                                                            </div>
+                                                            <?php
+                                                            //PUERTO
+                                                            if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfpuerto', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfpuerto'] == 1) {
+                                                            ?>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="elport">Puerto</label>
+                                                                    <input type="number" value="<?php echo $recpuerto; ?>" class="form-control" id="elport" name="elport" required="required" min="1025" max="65535">
+                                                                </div>
 
-                                                            <div class="form-group col-md-6">
-                                                                <label for="elram" class="">Memoria Ram Limite</label>
-                                                                <select id="elram" name="elram" class="form-control" required="required">
-                                                                    <?php
+                                                            <?php
+                                                            }
+                                                            ?>
 
-                                                                    $salida = shell_exec('free -h | grep Mem');
-                                                                    $totalram = substr($salida, 14, 4);
-                                                                    $totalram = preg_replace('/\s+/', '', $totalram);
-                                                                    $totalram = trim($totalram);
+                                                            <?php
+                                                            //PUERTO
+                                                            if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfmemoria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfmemoria'] == 1) {
+                                                            ?>
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="elram" class="">Memoria Ram Limite</label>
+                                                                    <select id="elram" name="elram" class="form-control" required="required">
+                                                                        <?php
 
-                                                                    for ($i = 1;; $i++) {
-                                                                        if ($i > $totalram) {
-                                                                            break;
+                                                                        $salida = shell_exec('free -h | grep Mem');
+                                                                        $totalram = substr($salida, 14, 4);
+                                                                        $totalram = preg_replace('/\s+/', '', $totalram);
+                                                                        $totalram = trim($totalram);
+
+                                                                        for ($i = 1;; $i++) {
+                                                                            if ($i > $totalram) {
+                                                                                break;
+                                                                            }
+
+                                                                            if ($recram == $i) {
+                                                                                echo '<option selected value="' . $i . '">' . $i . ' GB</option>';
+                                                                            } else {
+                                                                                echo '<option value="' . $i . '">' . $i . ' GB</option>';
+                                                                            }
                                                                         }
 
-                                                                        if ($recram == $i) {
-                                                                            echo '<option selected value="' . $i . '">' . $i . ' GB</option>';
-                                                                        } else {
-                                                                            echo '<option value="' . $i . '">' . $i . ' GB</option>';
-                                                                        }
-                                                                    }
-
-                                                                    ?>
-                                                                </select>
-                                                            </div>
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </div>
 
                                                         <div class="form-row">
 
-                                                            <div class="form-group col-md-6">
-                                                                <label for="eltipserv">Tipo Servidor</label>
-                                                                <select id="eltipserv" name="eltipserv" class="form-control" required="required">
-                                                                    <?php
-                                                                    $opcionesserver = array('vanilla', 'spigot', 'paper', 'otros');
+                                                            <?php
+                                                            //TIPO SERVIDOR
+                                                            if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconftipo', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconftipo'] == 1) {
+                                                            ?>
 
-                                                                    for ($i = 0; $i < count($opcionesserver); $i++) {
 
-                                                                        if ($rectiposerv == $opcionesserver[$i]) {
-                                                                            echo '<option selected value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . '</option>';
-                                                                        } else {
-                                                                            echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . '</option>';
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="eltipserv">Tipo Servidor</label>
+                                                                    <select id="eltipserv" name="eltipserv" class="form-control" required="required">
+                                                                        <?php
+                                                                        $opcionesserver = array('vanilla', 'spigot', 'paper', 'otros');
+
+                                                                        for ($i = 0; $i < count($opcionesserver); $i++) {
+
+                                                                            if ($rectiposerv == $opcionesserver[$i]) {
+                                                                                echo '<option selected value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . '</option>';
+                                                                            } else {
+                                                                                echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . '</option>';
+                                                                            }
                                                                         }
-                                                                    }
 
-                                                                    ?>
+                                                                        ?>
 
-                                                                </select>
-                                                            </div>
+                                                                    </select>
+                                                                </div>
 
-                                                            <div class="form-group col-md-6">
-                                                                <label for="elmaxupload">Subida Fichero Máximo (MB)</label>
-                                                                <select id="elmaxupload" name="elmaxupload" class="form-control" required="required">
-                                                                    <?php
+                                                            <?php
+                                                            }
+                                                            ?>
 
-                                                                    $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024');
+                                                            <?php
+                                                            //TIPO SERVIDOR
+                                                            if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
+                                                            ?>
 
-                                                                    for ($i = 0; $i < count($opcionesserver); $i++) {
+                                                                <div class="form-group col-md-6">
+                                                                    <label for="elmaxupload">Subida Fichero Máximo (MB)</label>
+                                                                    <select id="elmaxupload" name="elmaxupload" class="form-control" required="required">
+                                                                        <?php
 
-                                                                        if ($recmaxupload == $opcionesserver[$i]) {
-                                                                            echo '<option selected value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
-                                                                        } else {
-                                                                            echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
+                                                                        $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024');
+
+                                                                        for ($i = 0; $i < count($opcionesserver); $i++) {
+
+                                                                            if ($recmaxupload == $opcionesserver[$i]) {
+                                                                                echo '<option selected value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
+                                                                            } else {
+                                                                                echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
+                                                                            }
                                                                         }
-                                                                    }
 
-                                                                    ?>
+                                                                        ?>
 
-                                                                </select>
-                                                            </div>
+                                                                    </select>
+                                                                </div>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="elnomserv">Nombre Servidor</label>
-                                                            <input type="text" class="form-control" id="elnomserv" name="elnomserv" required="required" value="<?php echo $recnombreserv; ?>">
-                                                        </div>
+                                                        <?php
+                                                        //NOMBRE SERVIDOR
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfnombre', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfnombre'] == 1) {
+                                                        ?>
+
+                                                            <div class="form-group">
+                                                                <label for="elnomserv">Nombre Servidor</label>
+                                                                <input type="text" class="form-control" id="elnomserv" name="elnomserv" required="required" value="<?php echo $recnombreserv; ?>">
+                                                            </div>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                        <?php
+                                                        //NOMBRE SERVIDOR
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
+                                                        ?>
                                                         <div class="form-group">
                                                             <label for="eldirect">Nombre carpeta del servidor Minecraft</label>
                                                             <input readonly type="text" data-toggle="tooltip" data-placement="top" title="No se puede modificar la carpeta" class="form-control" id="eldirect" name="eldirect" required="required" value="<?php echo $reccarpmine; ?>">
                                                         </div>
-                                                        <input id="minecrafteula" name="minecrafteula" type="hidden" value="<?php echo $receulaminecraft; ?>">
+
+                                                        <?php
+                                                        }
+                                                        ?>
 
                                                         <div class="form-group">
                                                             <span id="result"></span>

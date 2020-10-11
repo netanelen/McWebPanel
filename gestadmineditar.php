@@ -54,7 +54,7 @@ require_once("template/header.php");
         exit;
     }
 
-    
+
     if (!isset($_SESSION['EDITARSUPER'])) {
         header("location:gestorusers.php");
         exit;
@@ -94,10 +94,21 @@ require_once("template/header.php");
                                             <?php
                                             if ($_SESSION['EDITARSUPER']['rango'] == 1) {
                                                 echo ('<h1 class="mb-5">Editar Superusuario</h1>');
-                                            }elseif($_SESSION['EDITARSUPER']['rango'] == 2) {
+                                            } elseif ($_SESSION['EDITARSUPER']['rango'] == 2) {
                                                 echo ('<h1 class="mb-5">Editar Administrador</h1>');
                                             }
+
                                             ?>
+
+                                            <?php
+                                            if ($_SESSION['EDITARSUPER']['rango'] == 1) {
+                                                echo (' required="required"');
+                                            }
+                                            ?>
+
+
+
+
                                             <div class="row">
                                                 <div class="col-md-12">
 
@@ -119,27 +130,111 @@ require_once("template/header.php");
 
                                                                     <div class="col-md-6">
                                                                         <label for="elpass">Cambiar Contraseña</label>
-                                                                        <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" required="required">
+                                                                        <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" <?php
+                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['rango'] == 1) {
+                                                                                                                                                                        echo ('required="required"');
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label for="elrepass">Confirmar</label>
-                                                                        <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" required="required">
+                                                                        <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" <?php
+                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['rango'] == 1) {
+                                                                                                                                                                            echo ('required="required"');
+                                                                                                                                                                        }
+                                                                                                                                                                        ?>>
                                                                     </div>
 
                                                                     <div class="col-md-12">
                                                                         <p class="lead" id="textoretorno"></p>
                                                                     </div>
-                                                                    
+
                                                                     <?php
-
-                                                                    $_SESSION['SEGEDITARSUPER'] = $_SESSION['EDITARSUPER'];
-                                                                    $_SESSION['EDITARSUPER'] = 0;
-
-
+                                                                    //SOLO MUESTRA LAS OPCIONES SI EDITAS UN ADMIN
+                                                                    if ($_SESSION['EDITARSUPER']['rango'] == 2) {
                                                                     ?>
+
+                                                                        <div class="col-md-12">
+                                                                            <br>
+                                                                            <label>Asignar Permisos:</label>
+                                                                            <br><br>
+
+                                                                            <!-- SYSTEM CONFIG -->
+                                                                            <div class="card-header text-white bg-primary">Pagina System Config</div>
+                                                                            <div class="card-body border">
+
+                                                                                <input id="psystemconfpuerto" name="psystemconfpuerto" type="checkbox" value="1" <?php
+
+                                                                                                                                                                    if (array_key_exists('psystemconfpuerto', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfpuerto'] == 1) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+
+                                                                                <label class="mr-2" for="psystemconfpuerto">Puerto</label>
+
+                                                                                <input id="psystemconfmemoria" name="psystemconfmemoria" type="checkbox" value="1" <?php
+
+                                                                                                                                                                    if (array_key_exists('psystemconfmemoria', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfmemoria'] == 1) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+
+                                                                                <label class="mr-2" for="psystemconfmemoria">Memoria</label>
+
+                                                                                <input id="psystemconftipo" name="psystemconftipo" type="checkbox" value="1" <?php
+
+                                                                                                                                                                if (array_key_exists('psystemconftipo', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconftipo'] == 1) {
+                                                                                                                                                                        echo "checked";
+                                                                                                                                                                    }
+                                                                                                                                                                }
+                                                                                                                                                                ?>>
+
+                                                                                <label class="mr-2" for="psystemconftipo">Tipo Servidor</label>
+
+                                                                                <input id="psystemconfsubida" name="psystemconfsubida" type="checkbox" value="1" <?php
+
+                                                                                                                                                                    if (array_key_exists('psystemconfsubida', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfsubida'] == 1) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+
+                                                                                <label class="mr-2" for="psystemconfsubida">Limite Subida Archivos</label>
+
+                                                                                <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1" <?php
+
+                                                                                                                                                                    if (array_key_exists('psystemconfnombre', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfnombre'] == 1) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+
+                                                                                <label class="mr-2" for="psystemconfnombre">Nombre Servidor</label>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+
                                                                     <div class="col-md-12">
                                                                         <br>
-                                                                        <button class="btn btn-lg btn-primary btn-block" id="btcrearusuario" name="btcrearusuario" type="submit">Editar Usuario</button>
+                                                                        <button class="btn btn-lg btn-primary btn-block" id="btcrearusuario" name="btcrearusuario" type="submit"><?php
+                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['rango'] == 1) {
+                                                                                                                                                                                        echo ('Editar Superusuario');
+                                                                                                                                                                                    } elseif ($_SESSION['EDITARSUPER']['rango'] == 2) {
+                                                                                                                                                                                        echo ('Editar Administrador');
+                                                                                                                                                                                    }
+                                                                                                                                                                                    ?></button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -148,6 +243,10 @@ require_once("template/header.php");
 
                                                 </div>
                                             </div>
+                                            <?php
+                                            $_SESSION['SEGEDITARSUPER'] = $_SESSION['EDITARSUPER'];
+                                            $_SESSION['EDITARSUPER'] = 0;
+                                            ?>
                                         </div>
                                     </div>
                                 </div>

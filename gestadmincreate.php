@@ -108,6 +108,34 @@ require_once("template/header.php");
                                                                         <p class="lead" id="textoretorno"></p>
                                                                     </div>
 
+                                                                    <div class="col-md-12">
+                                                                        <br>
+                                                                        <label>Asignar Permisos:</label>
+                                                                        <br><br>
+
+                                                                        <!-- SYSTEM CONFIG -->
+                                                                        <div class="card-header text-white bg-primary">Pagina System Config</div>
+                                                                        <div class="card-body border">
+
+                                                                            <input id="psystemconfpuerto" name="psystemconfpuerto" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="psystemconfpuerto">Puerto</label>
+
+                                                                            <input id="psystemconfmemoria" name="psystemconfmemoria" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="psystemconfmemoria">Memoria</label>
+
+                                                                            <input id="psystemconftipo" name="psystemconftipo" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="psystemconftipo">Tipo Servidor</label>
+
+                                                                            <input id="psystemconfsubida" name="psystemconfsubida" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="psystemconfsubida">Limite Subida Archivos</label>
+
+                                                                            <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="psystemconfnombre">Nombre Servidor</label>
+
+                                                                        </div>
+
+                                                                    </div>
+
                                                                     
                                                                     <div class="col-md-12">
                                                                         <br>

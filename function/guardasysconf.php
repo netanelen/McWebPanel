@@ -46,21 +46,52 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
       $elerror = 0;
 
-      $elnombreservidor = test_input($_POST["elnomserv"]);
-      $eldirectorio = CONFIGDIRECTORIO;
-      $elpuerto = test_input($_POST["elport"]);
-      $laram = test_input($_POST["elram"]);
-      $eltiposerver = test_input($_POST["eltipserv"]);
-      $eluploadmax = test_input($_POST["elmaxupload"]);
-      $elpostmax = "";
 
+      //INPUT LISTADO JARS
       if (isset($_POST["listadojars"])) {
         $ellistadojars = test_input($_POST["listadojars"]);
       } else {
         $ellistadojars = "";
       }
 
-      $eleulaminecraft = test_input($_POST["minecrafteula"]);
+      //INPUT PUERTO
+      if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfpuerto', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfpuerto'] == 1) {
+        $elpuerto = test_input($_POST["elport"]);
+      }else{
+        $elpuerto = CONFIGPUERTO;
+      }
+
+      //INPUT RAM
+      if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfmemoria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfmemoria'] == 1) {
+        $laram = test_input($_POST["elram"]);
+      }else{
+        $laram = CONFIGRAM;
+      }
+
+      //INPUT TIPO SERVIDOR
+      if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconftipo', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconftipo'] == 1) {
+        $eltiposerver = test_input($_POST["eltipserv"]);
+      }else{
+        $eltiposerver = CONFIGTIPOSERVER;
+      }
+
+      //INPUT SUBIDA MAXIMA FICHEROS
+      if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
+        $eluploadmax = test_input($_POST["elmaxupload"]);
+      }else{
+        $eluploadmax = CONFIGMAXUPLOAD;
+      }
+
+      //INPUT NOMBRE SERVIDOR
+      if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
+        $elnombreservidor = test_input($_POST["elnomserv"]);
+      }else{
+        $elnombreservidor = CONFIGNOMBRESERVER;
+      }
+
+      $eldirectorio = CONFIGDIRECTORIO;
+      $elpostmax = "";
+      $eleulaminecraft = CONFIGEULAMINECRAFT;
 
       //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
       $dirconfig = "";
