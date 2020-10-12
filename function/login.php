@@ -106,32 +106,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //SI EL USUARIO CONCUERTDA
             if ($elusuario == $getconfuser && $hashed == $getconfpass) {
-
                 $noencontrouser = 1;
 
-                //REGENERAR SESSION
-                session_regenerate_id();
-
-                $lakey = generarkey($lakey);
-
-                $_SESSION['KEYSECRETA'] = $lakey;
-                $_SESSION['VALIDADO'] = $lakey;
-
-                $_SESSION['CONFIGUSER'] = $arrayobtenido[$i];
-
-                unset($lakey);
-
-                $receulaminecraft = CONFIGEULAMINECRAFT;
-
-                if ($receulaminecraft == "") {
-                    $retorno = "gotoeula";
+                if ($arrayobtenido[$i]['estado'] == "desactivado") {
+                    $retorno = "userdesactivado";
                 } else {
-                    $retorno = "gotostatus";
+
+                    //REGENERAR SESSION
+                    session_regenerate_id();
+
+                    $lakey = generarkey($lakey);
+
+                    $_SESSION['KEYSECRETA'] = $lakey;
+                    $_SESSION['VALIDADO'] = $lakey;
+
+                    $_SESSION['CONFIGUSER'] = $arrayobtenido[$i];
+
+                    unset($lakey);
+
+                    $receulaminecraft = CONFIGEULAMINECRAFT;
+
+                    if ($receulaminecraft == "") {
+                        $retorno = "gotoeula";
+                    } else {
+                        $retorno = "gotostatus";
+                    }
                 }
             }
         }
 
-        if($noencontrouser == 0){
+        if ($noencontrouser == 0) {
             $retorno = "novaliduser";
         }
     }
