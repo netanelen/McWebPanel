@@ -23,7 +23,7 @@ if (PHP_VERSION_ID < 70300) {
     session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], true, true);
   } else {
     //SI ES HTTP
-    session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], false, false);
+    session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], false, true);
   }
 } else {
   //version mas moderna soporte samesite
