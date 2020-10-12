@@ -97,18 +97,7 @@ require_once("template/header.php");
                                             } elseif ($_SESSION['EDITARSUPER']['rango'] == 2) {
                                                 echo ('<h1 class="mb-5">Editar Administrador</h1>');
                                             }
-
                                             ?>
-
-                                            <?php
-                                            if ($_SESSION['EDITARSUPER']['rango'] == 1) {
-                                                echo (' required="required"');
-                                            }
-                                            ?>
-
-
-
-
                                             <div class="row">
                                                 <div class="col-md-12">
 
