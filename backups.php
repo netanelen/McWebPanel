@@ -85,6 +85,7 @@ require_once("template/header.php");
                                                 <div class="col-md-12">
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
+                                                            <caption>Listado Backups</caption>
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Nombre</th>
@@ -185,9 +186,9 @@ require_once("template/header.php");
 
                                                                 //SI NO HAY ARCHIVOS GZ MOSTRAR INFORMACION
                                                                 if ($contadorarchivos == 0) {
-                                                                    echo ('<tr>');
-                                                                    echo ('<th scope="row">Actualmente no hay ningún backup.</th><td></td><td></td><td></td>');
-                                                                    echo ('</tr>');
+                                                                    echo '<tr>';
+                                                                    echo '<th scope="row">Actualmente no hay ningún backup.</th><td></td><td></td><td></td>';
+                                                                    echo '</tr>';
                                                                 } else {
 
                                                                     //MONSTRAR LOS ARCHIVOS GZ DE LA CARPETA BACKUPS ORDENADOS
@@ -211,12 +212,12 @@ require_once("template/header.php");
                                                                     for ($i = 0; $i < count($files); $i++) {
                                                                         $archivoconcreto = $rutaarchivo;
                                                                         $archivoconcreto .= "/" . $files[$i];
-                                                                        echo ('<tr id="' . $files[$i] . '">');
-                                                                        echo ('<th scope="row">' . $files[$i] . '</th>');
-                                                                        echo ('<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>');
+                                                                        echo '<tr class="menu-hover" id="' . $files[$i] . '">';
+                                                                        echo '<th scope="row">' . $files[$i] . '</th>';
+                                                                        echo '<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                         $eltamano = devolverdatos(filesize($archivoconcreto), 1);
-                                                                        echo ('<td>' . $eltamano . '</td>');
-                                                                        echo ('<td>');
+                                                                        echo '<td>' . $eltamano . '</td>';
+                                                                        echo '<td>';
                                                                 ?>
                                                                         <button type="button" class="descargar btn btn-info text-white mr-1" value="<?php echo $files[$i] ?>">Descargar</button>
                                                                         <button type="button" class="restaurar btn btn-warning text-white mr-1" value="<?php echo $files[$i] ?>">Restaurar</button>

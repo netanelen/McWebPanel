@@ -223,7 +223,7 @@ function devolverdatos($losbytes, $opcion)
                                                     <button type="button" id="bcopiar" class="btn btn-primary mr-1" title="Copiar"><img src="img/botones/copiar.png" alt="+"> Copiar</button>
                                                     <?php
                                                     if ($_SESSION['COPIARFILES'] != "0") {
-                                                        echo ('<button type="button" id="bpegar" class="btn btn-primary mr-1" title="Pegar"><img src="img/botones/pegar.png" alt="+"> Pegar</button>');
+                                                        echo '<button type="button" id="bpegar" class="btn btn-primary mr-1" title="Pegar"><img src="img/botones/pegar.png" alt="+"> Pegar</button>';
                                                     }
                                                     ?>
                                                     <button type="button" id="bselectall" class="btn btn-primary mr-1" title="Seleccionar Todo"><img src="img/botones/checkselect.png" alt=""> Seleccionar Todo</button>
@@ -233,6 +233,7 @@ function devolverdatos($losbytes, $opcion)
 
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
+                                                        <caption>Gestor Archivos</caption>
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Nombre</th>
@@ -257,9 +258,9 @@ function devolverdatos($losbytes, $opcion)
 
                                                                 //SI NO HAY ARCHIVOS MOSTRAR INFORMACION
                                                                 if ($contadorarchivos == 0) {
-                                                                    echo ('<tr>');
-                                                                    echo ('<th scope="row">Actualmente no hay archivos servidor minecraft.</th><td></td><td></td><td></td>');
-                                                                    echo ('</tr>');
+                                                                    echo '<tr>';
+                                                                    echo '<th scope="row">Actualmente no hay archivos servidor minecraft.</th><td></td><td></td><td></td>';
+                                                                    echo '</tr>';
                                                                 } else {
 
                                                                     //CARGAR ARRAYS
@@ -295,21 +296,21 @@ function devolverdatos($losbytes, $opcion)
                                                                     //RECORRER ARRAY Y AÑADIR LAS PROPIEDADES Y LOS BOTONES
                                                                     for ($i = 0; $i < count($fcarpetas); $i++) {
                                                                         $archivoconcreto = $rutaarchivo . "/" . $fcarpetas[$i];
-                                                                        echo ('<tr class = "menu-hover">');
+                                                                        echo '<tr class = "menu-hover">';
 
-                                                                        echo ('<th scope="row">');
+                                                                        echo '<th scope="row">';
 
                                                                         if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
                                                                             clearstatcache();
                                                                             if (is_dir($archivoconcreto)) {
                                                                                 clearstatcache();
                                                                                 if (is_executable($archivoconcreto)) {
-                                                                                    echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
+                                                                                    echo '<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">';
                                                                                 } else {
-                                                                                    echo ('<input class="mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled>');
+                                                                                    echo '<input class="mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled>';
                                                                                 }
                                                                             } else {
-                                                                                echo ('<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">');
+                                                                                echo '<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">';
                                                                             }
                                                                         }
 
@@ -317,7 +318,7 @@ function devolverdatos($losbytes, $opcion)
 
                                                                         clearstatcache();
                                                                         if (is_dir($archivoconcreto)) {
-                                                                            echo ('<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>');
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>';
                                                                         } else {
 
                                                                             //FIX SI EL ARCHIVO NO TIENE EXTENSION
@@ -327,52 +328,52 @@ function devolverdatos($losbytes, $opcion)
 
                                                                             //VER TIPO Y AÑADIR ICONO
                                                                             if ($tipoarchivo == ".txt") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/txt.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/txt.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".jar") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/java.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/java.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".yml") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/yml.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/yml.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".json") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/json.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/json.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".htaccess") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/htaccess.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/htaccess.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".properties") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/mine.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/mine.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".bmp") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".dib") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".jpg") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".jpeg") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".jpe") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".jfif") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".gif") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".tiff") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".png") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".heic") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".zip") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/zip.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/zip.png">' . $fcarpetas[$i] . '</th>';
                                                                             } elseif ($tipoarchivo == ".gz" || $tipoarchivo == ".tar" || $tipoarchivo == ".bz2") {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/tar.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/tar.png">' . $fcarpetas[$i] . '</th>';
                                                                             } else {
-                                                                                echo ('<img class="mr-2" src="img/gestorarchivos/void.png">' . $fcarpetas[$i] . '</th>');
+                                                                                echo '<img class="mr-2" src="img/gestorarchivos/void.png">' . $fcarpetas[$i] . '</th>';
                                                                             }
                                                                         }
 
                                                                         //AÑADIR FECHA ARCHIVO/CARPETA
                                                                         clearstatcache();
                                                                         if (!is_dir($archivoconcreto)) {
-                                                                            echo ('<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>');
+                                                                            echo '<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                         } else {
-                                                                            echo ('<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>');
+                                                                            echo '<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                         }
 
                                                                         //AÑADIR TAMAÑO ARCHIVO
@@ -382,8 +383,8 @@ function devolverdatos($losbytes, $opcion)
                                                                         } else {
                                                                             $eltamano = ".";
                                                                         }
-                                                                        echo ('<td>' . $eltamano . '</td>');
-                                                                        echo ('<td>');
+                                                                        echo '<td>' . $eltamano . '</td>';
+                                                                        echo '<td>';
 
                                                                         //CREAR BOTONES ARCHIVOS Y CARPETAS
                                                                         clearstatcache();
@@ -392,13 +393,13 @@ function devolverdatos($losbytes, $opcion)
                                                                             <button type="button" class="descargarfile btn btn-primary mr-1" value="<?php echo $fcarpetas[$i]; ?>" title="Descargar"><img src="img/botones/down.png" alt="Descargar"></button>
                                                                             <?php
                                                                             if ($tipoarchivo == ".gz" || $tipoarchivo == ".tar" || $tipoarchivo == ".bz2") {
-                                                                                echo ('<button type="button" class="descomprimirtar btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
+                                                                                echo '<button type="button" class="descomprimirtar btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>';
                                                                             } elseif ($tipoarchivo == ".zip") {
-                                                                                echo ('<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>');
+                                                                                echo '<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>';
                                                                             }
 
                                                                             if ($tipoarchivo == ".txt" || $tipoarchivo == ".json" || $tipoarchivo == ".log" || $tipoarchivo == ".mcmeta" || $tipoarchivo == ".yml" || $tipoarchivo == ".properties") {
-                                                                                echo ('<button type="button" class="editarfile btn btn-info text-white mr-1" value="' . $fcarpetas[$i] . '" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>');
+                                                                                echo '<button type="button" class="editarfile btn btn-info text-white mr-1" value="' . $fcarpetas[$i] . '" title="Editar"><img src="img/botones/editar.png" alt="Editar"></button>';
                                                                             }
                                                                             ?>
 

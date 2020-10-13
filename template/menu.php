@@ -22,9 +22,9 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="status.php">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class=""><img class="" src="img/icons/favicon-32x32.png" alt="mineminiicon" width="40" height="40"></i>
+            <img class="d-block mr-2" src="img/icons/favicon-32x32.png" alt="mineminiicon" width="40" height="40">
         </div>
-        <div class="sidebar-brand-text mx-3">
+        <div class="sidebar-brand-text">
             <?php
             $NAMESERVERMENU = CONFIGNOMBRESERVER;
             echo $NAMESERVERMENU;

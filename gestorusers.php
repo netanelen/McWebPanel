@@ -87,7 +87,7 @@ require_once("template/header.php");
                                                     <div class="col-md-4">
                                                         <?php
                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1) {
-                                                            echo ('<button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearadmin">Crear Administrador</button>');
+                                                            echo '<button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearadmin">Crear Administrador</button>';
                                                         }
                                                         ?>
                                                         <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearuser">Crear Nuevo Usuario</button>
@@ -116,6 +116,7 @@ require_once("template/header.php");
                                                                     <p class="lead">Listado Usuarios</p>
                                                                     <div class="table-responsive">
                                                                         <table class="table table-striped table-borderless">
+                                                                        <caption>Listado Usuarios</caption>
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th scope="col">Usuario</th>
