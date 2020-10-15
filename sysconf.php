@@ -312,21 +312,21 @@ require_once("template/header.php");
                                                                     <br>
                                                                     <label>Garbage collector - Recolector de basura</label>
                                                                     <div>
-                                                                        <input type="radio" id="basura0" name="recbasura" value="0"<?php if ($recgarbagecolector == "0") {
+                                                                        <input type="radio" id="basura0" name="recbasura" value="0" <?php if ($recgarbagecolector == "0") {
                                                                                                                                         echo "checked";
                                                                                                                                     } ?>>
                                                                         <label for="basura0">Ninguno</label>
                                                                     </div>
 
                                                                     <div>
-                                                                        <input type="radio" id="basura1" name="recbasura" value="1"<?php if ($recgarbagecolector == "1") {
+                                                                        <input type="radio" id="basura1" name="recbasura" value="1" <?php if ($recgarbagecolector == "1") {
                                                                                                                                         echo "checked";
                                                                                                                                     } ?>>
                                                                         <label for="basura1">Usar ConcMarkSweepGC (Solo Java 8)</label>
                                                                     </div>
 
                                                                     <div>
-                                                                        <input type="radio" id="basura2" name="recbasura" value="2"<?php if ($recgarbagecolector == "2") {
+                                                                        <input type="radio" id="basura2" name="recbasura" value="2" <?php if ($recgarbagecolector == "2") {
                                                                                                                                         echo "checked";
                                                                                                                                     } ?>>
                                                                         <label for="basura2">Usar G1GC (Java 8/11 o superior)</label>
