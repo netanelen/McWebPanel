@@ -116,7 +116,6 @@ require_once("template/header.php");
                                                                     <p class="lead">Listado Usuarios</p>
                                                                     <div class="table-responsive">
                                                                         <table class="table table-striped table-borderless">
-                                                                        <caption>Listado Usuarios</caption>
                                                                             <thead>
                                                                                 <tr>
                                                                                     <th scope="col">Usuario</th>

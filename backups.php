@@ -85,7 +85,6 @@ require_once("template/header.php");
                                                 <div class="col-md-12">
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
-                                                            <caption>Listado Backups</caption>
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Nombre</th>

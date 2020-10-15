@@ -233,7 +233,6 @@ function devolverdatos($losbytes, $opcion)
 
                                                     <div class="table-responsive">
                                                         <table class="table table-striped table-borderless">
-                                                        <caption>Gestor Archivos</caption>
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Nombre</th>

@@ -95,7 +95,6 @@ $estamodulo = "";
           <h4 class="mb-4 text-left">Requisitos del sistema</h4>
           <div class="table-responsive">
             <table class="table table-borderless table-striped">
-            <caption>Requisitos del sistema</caption>
               <thead>
                 <tr>
                 </tr>
