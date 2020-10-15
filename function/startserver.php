@@ -51,6 +51,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $receulaminecraft = CONFIGEULAMINECRAFT;
         $recpuerto = CONFIGPUERTO;
 
+        $recgarbagecolector = CONFIGOPTIONGARBAGE;
+        $recforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+        $recerasecache = CONFIGOPTIONERASECACHE;
+
         $rutacarpetamine = "";
 
         //VARIABLE RUTA SERVIDOR MINECRAFT
@@ -253,17 +257,35 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
 
+            $inigc = "";
+            $iniforceupg = "";
+            $inieracecache = "";
+
+            if ($recgarbagecolector == "1") {
+                $inigc = "-XX:+UseConcMarkSweepGC";
+            } elseif ($recgarbagecolector == "2") {
+                $inigc = "-XX:+UseG1GC";
+            }
+
+            if ($recforseupgrade == "1") {
+                $iniforceupg = "--forceUpgrade";
+            }
+
+            if ($recerasecache == "1") {
+                $inieracecache = "--eraseCache";
+            }
+
             if ($rectiposerv == "vanilla") {
-                //java -jar minecraft_server.jar nogui
-                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
             } elseif ($rectiposerv == "spigot") {
                 //shell_exec('cd minecraft1 && screen -dmS minecraft1 java -Xms1G -Xmx8G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar /var/www/mineadmin/minecraft1/server.jar nogui -nojline --log-strip-color');
-                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui -nojline --log-strip-color";
             } elseif ($rectiposerv == "paper") {
-                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
             } elseif ($rectiposerv == "otros") {
-                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
             }
+
 
             $elpid = shell_exec($comandoserver);
             $retorno = "ok";

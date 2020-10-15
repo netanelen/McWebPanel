@@ -98,6 +98,10 @@ require_once("template/header.php");
                                                     $receulaminecraft = CONFIGEULAMINECRAFT;
                                                     $recmaxupload = CONFIGMAXUPLOAD;
 
+                                                    $recgarbagecolector = CONFIGOPTIONGARBAGE;
+                                                    $recforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+                                                    $recerasecache = CONFIGOPTIONERASECACHE;
+
                                                     $elnombredirectorio = $reccarpmine;
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
@@ -298,13 +302,72 @@ require_once("template/header.php");
                                                         ?>
 
                                                         <?php
-                                                        //NOMBRE SERVIDOR
-                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
+                                                        //PARAMETROS AVANZADOS
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
                                                         ?>
                                                         <div class="form-group">
-                                                            <label for="eldirect">Nombre carpeta del servidor Minecraft</label>
-                                                            <input readonly type="text" data-toggle="tooltip" data-placement="top" title="No se puede modificar la carpeta" class="form-control" id="eldirect" name="eldirect" required="required" value="<?php echo $reccarpmine; ?>">
+                                                            <label>Parametros Avanzados:</label>
+                                                            <div class="form-row">
+                                                                <div class="form-group col-md-6">
+                                                                    <br>
+                                                                    <label>Garbage collector - Recolector de basura</label>
+                                                                    <div>
+                                                                        <input type="radio" id="basura0" name="recbasura" value="0"<?php if ($recgarbagecolector == "0") {
+                                                                                                                                        echo "checked";
+                                                                                                                                    } ?>>
+                                                                        <label for="basura0">Ninguno</label>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <input type="radio" id="basura1" name="recbasura" value="1"<?php if ($recgarbagecolector == "1") {
+                                                                                                                                        echo "checked";
+                                                                                                                                    } ?>>
+                                                                        <label for="basura1">Usar ConcMarkSweepGC (Solo Java 8)</label>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <input type="radio" id="basura2" name="recbasura" value="2"<?php if ($recgarbagecolector == "2") {
+                                                                                                                                        echo "checked";
+                                                                                                                                    } ?>>
+                                                                        <label for="basura2">Usar G1GC (Java 8/11 o superior)</label>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="form-group col-md-6">
+                                                                    <br>
+                                                                    <label>Conversion Mapa ¡PRECAUCIÓN!</label>
+                                                                    <div>
+                                                                        <input id="opforceupgrade" name="opforceupgrade" type="checkbox" value="1"<?php if ($recforseupgrade == "1") {
+                                                                                                                                        echo "checked";
+                                                                                                                                    } ?>>
+                                                                        <label for="opforceupgrade">Usar --forceUpgrade (Requiere Versión: 1.13 o superior)</label>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <input id="operasecache" name="operasecache" type="checkbox" value="1"<?php if ($recerasecache == "1") {
+                                                                                                                                        echo "checked";
+                                                                                                                                    } ?>>
+                                                                        <label for="operasecache">Usar --eraseCache (Requiere Versión: 1.14 o superior)</label>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
                                                         </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+
+
+                                                        <?php
+                                                        //NOMBRE CARPETA
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
+                                                        ?>
+                                                            <div class="form-group">
+                                                                <label for="eldirect">Nombre carpeta del servidor Minecraft</label>
+                                                                <input readonly type="text" data-toggle="tooltip" data-placement="top" title="No se puede modificar la carpeta" class="form-control" id="eldirect" name="eldirect" required="required" value="<?php echo $reccarpmine; ?>">
+                                                            </div>
 
                                                         <?php
                                                         }

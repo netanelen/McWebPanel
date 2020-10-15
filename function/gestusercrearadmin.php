@@ -215,6 +215,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['psystemconfnombre'] = 1;
                 }
 
+                //SYSTEM CONFIG PARAMETROS AVANZADOS
+                if (isset($_POST['psystemconfavanzados'])) {
+                    $arrayobtenido[$elindice]['psystemconfavanzados'] = 1;
+                }
+
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($arrayobtenido);
                 file_put_contents($elarchivo, $serialized);

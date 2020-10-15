@@ -88,6 +88,41 @@ $(document).ready(function() {
         });
     }
 
+    if (document.getElementById('basura0') != null) {
+        $("#basura0").change(function() {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('basura1') != null) {
+        $("#basura1").change(function() {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('basura2') != null) {
+        $("#basura2").change(function() {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('opforceupgrade') != null) {
+        $("#opforceupgrade").change(function() {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('operasecache') != null) {
+        $("#operasecache").change(function() {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
     if (document.getElementById('elport') != null) {
         $("#elport").change(function() {
             var elnumero = document.getElementById("elport").value;
@@ -98,7 +133,6 @@ $(document).ready(function() {
             } else {
                 document.getElementById("guardaserver").disabled = false;
             }
-
         });
     }
 

@@ -205,7 +205,18 @@ require_once("template/header.php");
                                                                                                                                                                     }
                                                                                                                                                                     ?>>
 
-                                                                                <label class="mr-2" for="psystemconfnombre">Nombre Servidor</label>
+                                                                                <label class="mr-2" for="psystemconfavanzados">Nombre Servidor</label>
+
+                                                                                <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1" <?php
+
+                                                                                                                                                                    if (array_key_exists('psystemconfavanzados', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfavanzados'] == 1) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+
+                                                                                <label class="mr-2" for="psystemconfavanzados">Parametros Avanzados</label>
 
                                                                             </div>
 

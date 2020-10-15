@@ -219,6 +219,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             } else {
                                 $arrayobtenido[$i]['psystemconfnombre'] = 0;
                             }
+
+                            //SYSTEM CONFIG PARAMETROS AVANZADOS
+                            if (isset($_POST['psystemconfavanzados'])) {
+                                $arrayobtenido[$i]['psystemconfavanzados'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['psystemconfavanzados'] = 0;
+                            }
                         }
 
                         $nuevoarray[] = $arrayobtenido[$i];

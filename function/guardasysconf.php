@@ -57,36 +57,54 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       //INPUT PUERTO
       if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfpuerto', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfpuerto'] == 1) {
         $elpuerto = test_input($_POST["elport"]);
-      }else{
+      } else {
         $elpuerto = CONFIGPUERTO;
       }
 
       //INPUT RAM
       if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfmemoria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfmemoria'] == 1) {
         $laram = test_input($_POST["elram"]);
-      }else{
+      } else {
         $laram = CONFIGRAM;
       }
 
       //INPUT TIPO SERVIDOR
       if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconftipo', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconftipo'] == 1) {
         $eltiposerver = test_input($_POST["eltipserv"]);
-      }else{
+      } else {
         $eltiposerver = CONFIGTIPOSERVER;
       }
 
       //INPUT SUBIDA MAXIMA FICHEROS
       if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
         $eluploadmax = test_input($_POST["elmaxupload"]);
-      }else{
+      } else {
         $eluploadmax = CONFIGMAXUPLOAD;
       }
 
       //INPUT NOMBRE SERVIDOR
       if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
         $elnombreservidor = test_input($_POST["elnomserv"]);
-      }else{
+      } else {
         $elnombreservidor = CONFIGNOMBRESERVER;
+      }
+
+      if (isset($_POST['recbasura'])) {
+        $elgarbagecolector = test_input($_POST["recbasura"]);
+      } else {
+        $elgarbagecolector = CONFIGOPTIONGARBAGE;
+      }
+
+      if (isset($_POST['opforceupgrade'])) {
+        $elforseupgrade = test_input($_POST["opforceupgrade"]);
+      } else {
+        $elforseupgrade = "0";
+      }
+
+      if (isset($_POST['operasecache'])) {
+        $elerasecache = test_input($_POST["operasecache"]);
+      } else {
+        $elerasecache = "0";
       }
 
       $eldirectorio = CONFIGDIRECTORIO;
@@ -161,6 +179,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         fwrite($file, 'define("CONFIGARCHIVOJAR", "' . $ellistadojars . '");' . PHP_EOL);
         fwrite($file, 'define("CONFIGEULAMINECRAFT", "' . $eleulaminecraft . '");' . PHP_EOL);
         fwrite($file, 'define("CONFIGMAXUPLOAD", "' . $eluploadmax . '");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGOPTIONGARBAGE", "' . $elgarbagecolector . '");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGOPTIONFORCEUPGRADE", "' . $elforseupgrade . '");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGOPTIONERASECACHE", "' . $elerasecache . '");' . PHP_EOL);
         fwrite($file, "?>" . PHP_EOL);
         fclose($file);
 

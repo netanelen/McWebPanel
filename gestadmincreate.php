@@ -132,6 +132,9 @@ require_once("template/header.php");
                                                                             <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1">
                                                                             <label class="mr-2" for="psystemconfnombre">Nombre Servidor</label>
 
+                                                                            <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="psystemconfavanzados">Parametros Avanzados</label>
+
                                                                         </div>
 
                                                                     </div>

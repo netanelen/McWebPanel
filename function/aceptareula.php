@@ -32,8 +32,8 @@ function test_input($data)
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
-	$_SESSION['VALIDADO'] = "NO";
-	$_SESSION['KEYSECRETA'] = "0";
+    $_SESSION['VALIDADO'] = "NO";
+    $_SESSION['KEYSECRETA'] = "0";
 }
 
 //VALIDAMOS SESSION
@@ -51,6 +51,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $ellistadojars = CONFIGARCHIVOJAR;
         $eleulaminecraft = 1;
         $elmaxupload = CONFIGMAXUPLOAD;
+        $elgarbagecolector = CONFIGOPTIONGARBAGE;
+        $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+        $elerasecache = CONFIGOPTIONERASECACHE;
 
         //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
         $dirconfig = "";
@@ -86,6 +89,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, 'define("CONFIGARCHIVOJAR", "' . $ellistadojars . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGEULAMINECRAFT", "' . $eleulaminecraft . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGMAXUPLOAD", "' . $elmaxupload . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGOPTIONGARBAGE", "' . $elgarbagecolector . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGOPTIONFORCEUPGRADE", "' . $elforseupgrade . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGOPTIONERASECACHE", "' . $elerasecache . '");' . PHP_EOL);
                 fwrite($file, "?>" . PHP_EOL);
                 fclose($file);
 
