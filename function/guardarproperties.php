@@ -33,54 +33,57 @@ function test_input($data)
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
-	$_SESSION['VALIDADO'] = "NO";
-	$_SESSION['KEYSECRETA'] = "0";
+  $_SESSION['VALIDADO'] = "NO";
+  $_SESSION['KEYSECRETA'] = "0";
 }
 
 if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
-  if (isset($_POST['action']) && !empty($_POST['action'])) {
-    $retorno = "";
+  if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconfmine', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconfmine'] == 1) {
 
-    function escribir($lakey, $elvalor)
-    {
-      $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
-      $rutacarpetamine = trim($rutacarpetamine);
-      $rutatemp = $rutacarpetamine;
-      $rutacarpetamine .= "/config/serverproperties.txt";
-      $rutatemp .= "/config/serverproperties.tmp";
+    if (isset($_POST['action']) && !empty($_POST['action'])) {
+      $retorno = "";
 
-      clearstatcache();
-      if (file_exists($rutacarpetamine)) {
-        $gestor = @fopen($rutacarpetamine, "r");
-        $file = fopen($rutatemp, "w");
+      function escribir($lakey, $elvalor)
+      {
+        $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
+        $rutacarpetamine = trim($rutacarpetamine);
+        $rutatemp = $rutacarpetamine;
+        $rutacarpetamine .= "/config/serverproperties.txt";
+        $rutatemp .= "/config/serverproperties.tmp";
 
-        while (($búfer = fgets($gestor, 4096)) !== false) {
-          $str = $búfer;
-          $array = explode("=", $str);
-          if ($array[0] == $lakey) {
-            $elvalor = trim($elvalor);
-            fwrite($file, $lakey . '=' . $elvalor . PHP_EOL);
-          } else {
-            fwrite($file, $búfer);
+        clearstatcache();
+        if (file_exists($rutacarpetamine)) {
+          $gestor = @fopen($rutacarpetamine, "r");
+          $file = fopen($rutatemp, "w");
+
+          while (($búfer = fgets($gestor, 4096)) !== false) {
+            $str = $búfer;
+            $array = explode("=", $str);
+            if ($array[0] == $lakey) {
+              $elvalor = trim($elvalor);
+              fwrite($file, $lakey . '=' . $elvalor . PHP_EOL);
+            } else {
+              fwrite($file, $búfer);
+            }
           }
-        }
 
-        if (!feof($gestor)) {
-          echo "Error: fallo inesperado de fgets()\n";
+          if (!feof($gestor)) {
+            echo "Error: fallo inesperado de fgets()\n";
+          }
+          fclose($gestor);
+          fclose($file);
+          unlink($rutacarpetamine);
+          rename($rutatemp, $rutacarpetamine);
         }
-        fclose($gestor);
-        fclose($file);
-        unlink($rutacarpetamine);
-        rename($rutatemp, $rutacarpetamine);
       }
+
+      $elaction = test_input($_POST['action']);
+      $elresultado = test_input($_POST['valor']);
+
+      $retorno = escribir($elaction, $elresultado);
     }
 
-    $elaction = test_input($_POST['action']);
-    $elresultado = test_input($_POST['valor']);
-
-    $retorno = escribir($elaction, $elresultado);
+    echo $retorno;
   }
-
-  echo $retorno;
 }

@@ -146,8 +146,23 @@ require_once("template/header.php");
                                                                         echo ('<td>' . $arrayobtenido[$i]["estado"] . '</td>');
                                                                         echo ('<td>');
                                                                 ?>
-                                                                        <button type="button" class="actdes btn btn-info text-white mr-1" value="<?php echo $i ?>">Activar/Desactivar</button>
+
+                                                                        <?php
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasactdes', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasactdes'] == 1) {
+                                                                        ?>
+                                                                            <button type="button" class="actdes btn btn-info text-white mr-1" value="<?php echo $i ?>">Activar/Desactivar</button>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+
+                                                                        <?php
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasborrar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasborrar'] == 1) {
+                                                                        ?>
                                                                         <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $i ?>">Borrar</button>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                        
                                                                         </td>
                                                                         </tr>
                                                                 <?php
@@ -160,15 +175,22 @@ require_once("template/header.php");
 
                                                     </div>
                                                     <hr>
-                                                    <h1 class="">Crear Tarea</h1>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="anadirtarea">Añadir Nueva Tarea</button>
+                                                    <?php
+                                                    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareascrear', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareascrear'] == 1) {
+                                                    ?>
+
+                                                        <h1 class="">Crear Tarea</h1>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="anadirtarea">Añadir Nueva Tarea</button>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <p class="lead" id="textotarearetorno"></p>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-8">
-                                                            <p class="lead" id="textotarearetorno"></p>
-                                                        </div>
-                                                    </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>

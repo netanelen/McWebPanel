@@ -211,7 +211,34 @@ require_once("template/header.php");
                                                                                                                                                         }
                                                                                                                                                     }
                                                                                                                                                     ?>>
-                                                                            <label class="mr-2" for="pprogtareas">Acceder y Configurar</label>
+                                                                            <label class="mr-2" for="pprogtareas">Acceder</label>
+
+                                                                            <input id="pprogtareascrear" name="pprogtareascrear" type="checkbox" value="1" <?php
+                                                                                                                                                    if (array_key_exists('pprogtareascrear', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                        if ($_SESSION['EDITARUSUARIO']['pprogtareascrear'] == 1) {
+                                                                                                                                                            echo "checked";
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                    ?>>
+                                                                            <label class="mr-2" for="pprogtareascrear">Crear Tareas</label>
+
+                                                                            <input id="pprogtareasactdes" name="pprogtareasactdes" type="checkbox" value="1" <?php
+                                                                                                                                                    if (array_key_exists('pprogtareasactdes', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                        if ($_SESSION['EDITARUSUARIO']['pprogtareasactdes'] == 1) {
+                                                                                                                                                            echo "checked";
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                    ?>>
+                                                                            <label class="mr-2" for="pprogtareasactdes">Activar / Desactivar Tareas</label>
+
+                                                                            <input id="pprogtareasborrar" name="pprogtareasborrar" type="checkbox" value="1" <?php
+                                                                                                                                                    if (array_key_exists('pprogtareasborrar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                        if ($_SESSION['EDITARUSUARIO']['pprogtareasborrar'] == 1) {
+                                                                                                                                                            echo "checked";
+                                                                                                                                                        }
+                                                                                                                                                    }
+                                                                                                                                                    ?>>
+                                                                            <label class="mr-2" for="pprogtareasborrar">Borrar Tareas</label>
 
                                                                         </div>
 

@@ -154,7 +154,16 @@ require_once("template/header.php");
                                                                         <div class="card-body border">
 
                                                                             <input id="pprogtareas" name="pprogtareas" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="pprogtareas">Acceder y Configurar</label>
+                                                                            <label class="mr-2" for="pprogtareas">Acceder</label>
+
+                                                                            <input id="pprogtareascrear" name="pprogtareascrear" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pprogtareascrear">Crear Tareas</label>
+
+                                                                            <input id="pprogtareasactdes" name="pprogtareasactdes" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pprogtareasactdes">Activar / Desactivar Tareas</label>
+
+                                                                            <input id="pprogtareasborrar" name="pprogtareasborrar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pprogtareasborrar">Borrar Tareas</label>
 
                                                                         </div>
 

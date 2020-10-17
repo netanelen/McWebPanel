@@ -230,6 +230,24 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pprogtareas'] = 0;
                             }
 
+                            if (isset($_POST['pprogtareascrear'])) {
+                                $arrayobtenido[$i]['pprogtareascrear'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pprogtareascrear'] = 0;
+                            }
+
+                            if (isset($_POST['pprogtareasactdes'])) {
+                                $arrayobtenido[$i]['pprogtareasactdes'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pprogtareasactdes'] = 0;
+                            }
+
+                            if (isset($_POST['pprogtareasborrar'])) {
+                                $arrayobtenido[$i]['pprogtareasborrar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pprogtareasborrar'] = 0;
+                            }
+
                             //SYSTEM CONFIG
                             if (isset($_POST['psystemconf'])) {
                                 $arrayobtenido[$i]['psystemconf'] = 1;

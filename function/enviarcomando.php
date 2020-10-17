@@ -39,40 +39,43 @@ if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 //VALIDAMOS SESSION
 if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
-  if (isset($_POST['action']) && !empty($_POST['action'])) {
+  if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconsolaenviar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconsolaenviar'] == 1) {
 
-    $elcomando = "";
-    $dirconfig = "";
-    $elnombrescreen = "";
-    $elpid = "";
-    $laejecucion = "";
-    $paraejecutar = "";
+    if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-    $paraejecutar = test_input($_POST['action']);
+      $elcomando = "";
+      $dirconfig = "";
+      $elnombrescreen = "";
+      $elpid = "";
+      $laejecucion = "";
+      $paraejecutar = "";
 
-    //OBTENER PID SABER SI ESTA EN EJECUCION
-    $elnombrescreen = CONFIGDIRECTORIO;
-    $elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
-    $elpid = shell_exec($elcomando);
+      $paraejecutar = test_input($_POST['action']);
 
-    //SI ESTA EN EJECUCION ENVIAR COMANDO
-    if (!$elpid == "") {
-      $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
-      shell_exec($laejecucion);
+      //OBTENER PID SABER SI ESTA EN EJECUCION
+      $elnombrescreen = CONFIGDIRECTORIO;
+      $elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
+      $elpid = shell_exec($elcomando);
 
-      //PERFMISOS FTP
-      if (strtolower($paraejecutar) == "stop") {
-        $dirconfig = dirname(getcwd()) . PHP_EOL;
-        $dirconfig = trim($dirconfig);
-        $dirconfig .= "/" . $elnombrescreen;
+      //SI ESTA EN EJECUCION ENVIAR COMANDO
+      if (!$elpid == "") {
+        $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
+        shell_exec($laejecucion);
 
-        $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
-        exec($permcomando);
-        $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
-        exec($permcomando);
+        //PERFMISOS FTP
+        if (strtolower($paraejecutar) == "stop") {
+          $dirconfig = dirname(getcwd()) . PHP_EOL;
+          $dirconfig = trim($dirconfig);
+          $dirconfig .= "/" . $elnombrescreen;
+
+          $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
+          exec($permcomando);
+          $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
+          exec($permcomando);
+        }
       }
-    }
 
-    echo "ok";
+      echo "ok";
+    }
   }
 }
