@@ -282,6 +282,22 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['pbackups'] = 1;
                 }
 
+                if (isset($_POST['pbackupscrear'])) {
+                    $arrayobtenido[$elindice]['pbackupscrear'] = 1;
+                }
+
+                if (isset($_POST['pbackupsdescargar'])) {
+                    $arrayobtenido[$elindice]['pbackupsdescargar'] = 1;
+                }
+
+                if (isset($_POST['pbackupsrestaurar'])) {
+                    $arrayobtenido[$elindice]['pbackupsrestaurar'] = 1;
+                }
+
+                if (isset($_POST['pbackupsborrar'])) {
+                    $arrayobtenido[$elindice]['pbackupsborrar'] = 1;
+                }
+
                 //Gestor Archivos
                 if (isset($_POST['pgestorarchivos'])) {
                     $arrayobtenido[$elindice]['pgestorarchivos'] = 1;

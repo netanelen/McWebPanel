@@ -304,6 +304,30 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pbackups'] = 0;
                             }
 
+                            if (isset($_POST['pbackupscrear'])) {
+                                $arrayobtenido[$i]['pbackupscrear'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pbackupscrear'] = 0;
+                            }
+
+                            if (isset($_POST['pbackupsdescargar'])) {
+                                $arrayobtenido[$i]['pbackupsdescargar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pbackupsdescargar'] = 0;
+                            }
+
+                            if (isset($_POST['pbackupsrestaurar'])) {
+                                $arrayobtenido[$i]['pbackupsrestaurar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pbackupsrestaurar'] = 0;
+                            }
+
+                            if (isset($_POST['pbackupsborrar'])) {
+                                $arrayobtenido[$i]['pbackupsborrar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pbackupsborrar'] = 0;
+                            }
+
                             //Gestor Archivos
                             if (isset($_POST['pgestorarchivos'])) {
                                 $arrayobtenido[$i]['pgestorarchivos'] = 1;

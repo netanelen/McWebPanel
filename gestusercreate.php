@@ -190,7 +190,19 @@ require_once("template/header.php");
                                                                         <div class="card-body border">
 
                                                                             <input id="pbackups" name="pbackups" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="pbackups">Acceder y Configurar</label>
+                                                                            <label class="mr-2" for="pbackups">Acceder</label>
+
+                                                                            <input id="pbackupscrear" name="pbackupscrear" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pbackupscrear">Crear Backups</label>
+
+                                                                            <input id="pbackupsdescargar" name="pbackupsdescargar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pbackupsdescargar">Descargar Backups</label>
+
+                                                                            <input id="pbackupsrestaurar" name="pbackupsrestaurar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pbackupsrestaurar">Restaurar Backups</label>
+
+                                                                            <input id="pbackupsborrar" name="pbackupsborrar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pbackupsborrar">Borrar Backups</label>
 
                                                                         </div>
 
