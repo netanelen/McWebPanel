@@ -65,11 +65,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $usuario = $_SESSION['SEGEDITARSUPER']['usuario'];
             }
 
-            if (!isset($_POST['elpass'])) {
+            if (test_input($_POST['elpass']) == "") {
                 $sinpass = 1;
             }
 
-            if (!isset($_POST['elrepass'])) {
+            if (test_input($_POST['elrepass']) == "") {
                 $sinrepass = 1;
             }
 
@@ -87,6 +87,40 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     if (test_input($_POST['elpass']) != test_input($_POST['elrepass'])) {
                         $retorno = "passwordsdiferentes";
                         $elerror = 1;
+                    }
+                }
+            }
+
+            //COMPROVAR REQUISITOS DEL PASSWORD
+            if ($elerror == 0) {
+                if ($sinpass == 0 || $sinrepass == 0) {
+                    $pwd = test_input($_POST['elpass']);
+
+                    if (strlen($pwd) < 16) {
+                        $retorno = "nocumplereq";
+                        $elerror = 1;
+                    }
+
+                    if (!preg_match("#[0-9]+#", $pwd)) {
+                        $retorno = "nocumplereq";
+                        $elerror = 1;
+                    }
+
+                    if (!preg_match("#[a-z]+#", $pwd)) {
+                        $retorno = "nocumplereq";
+                        $elerror = 1;
+                    }
+
+                    if (!preg_match("#[A-Z]+#", $pwd)) {
+                        $retorno = "nocumplereq";
+                        $elerror = 1;
+                    }
+
+                    if (!preg_match("#\W+#", $pwd)) {
+                        if (!preg_match('#_+#', $pwd)) {
+                            $retorno = "nocumplereq";
+                            $elerror = 1;
+                        }
                     }
                 }
             }

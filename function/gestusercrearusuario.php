@@ -98,6 +98,39 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //COMPROVAR REQUISITOS DEL PASSWORD
+            if ($elerror == 0) {
+
+                $pwd = test_input($_POST['elpass']);
+
+                if (strlen($pwd) < 16) {
+                    $retorno = "nocumplereq";
+                    $elerror = 1;
+                }
+
+                if (!preg_match("#[0-9]+#", $pwd)) {
+                    $retorno = "nocumplereq";
+                    $elerror = 1;
+                }
+
+                if (!preg_match("#[a-z]+#", $pwd)) {
+                    $retorno = "nocumplereq";
+                    $elerror = 1;
+                }
+
+                if (!preg_match("#[A-Z]+#", $pwd)) {
+                    $retorno = "nocumplereq";
+                    $elerror = 1;
+                }
+
+                if (!preg_match("#\W+#", $pwd)) {
+                    if (!preg_match('#_+#', $pwd)) {
+                        $retorno = "nocumplereq";
+                        $elerror = 1;
+                    }
+                }
+            }
+
             //RUTAS AL ARCHIVO
             if ($elerror == 0) {
                 $rutaarchivo = dirname(getcwd()) . PHP_EOL;

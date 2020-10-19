@@ -33,8 +33,10 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data.error == 1) {
                         document.getElementById("textoretorno").innerHTML = data.texto;
+                        document.getElementById("btcrearusuario").disabled = true;
                     } else {
                         document.getElementById("textoretorno").innerHTML = "";
+                        document.getElementById("btcrearusuario").disabled = false;
                     }
                 }
             });
@@ -57,13 +59,15 @@ $(document).ready(function() {
                 }
 
                 if (data == "nohayusuario") {
-                    alert("No has introducido ningun usuario");
+                    alert("No has introducido ningún usuario");
                 } else if (data == "nohaypassword") {
-                    alert("No has introducido ningun password");
+                    alert("No has introducido ninguna contraseña");
                 } else if (data == "nohayrepass") {
-                    alert("No has introducido el confirmar password");
+                    alert("No has introducido el confirmar contraseña");
                 } else if (data == "passwordsdiferentes") {
-                    alert("Los passwords introducidos son diferentes");
+                    alert("Las contraseñas introducidas son diferentes");
+                } else if (data == "nocumplereq") {
+                    alert("La contraseña no cumple los requisitos");
                 } else if (data == "errarchnoconfig") {
                     alert("Carpeta Config no existe");
                 } else if (data == "errconfignoread") {

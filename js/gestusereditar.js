@@ -33,8 +33,10 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data.error == 1) {
                         document.getElementById("textoretorno").innerHTML = data.texto;
+                        document.getElementById("btcrearusuario").disabled = true;
                     } else {
                         document.getElementById("textoretorno").innerHTML = "";
+                        document.getElementById("btcrearusuario").disabled = false;
                     }
                 }
             });
@@ -57,9 +59,11 @@ $(document).ready(function() {
                 }
 
                 if (data == "nohayusuario") {
-                    alert("No se ha revicivo ningun usuario");
+                    alert("No se ha recibido ningún usuario");
                 } else if (data == "passwordsdiferentes") {
-                    alert("Los passwords introducidos son diferentes");
+                    alert("Las contraseñas introducidas son diferentes");
+                } else if (data == "nocumplereq") {
+                    alert("La contraseña no cumple los requisitos");
                 } else if (data == "errarchnoconfig") {
                     alert("Carpeta Config no existe");
                 } else if (data == "errconfignoread") {
@@ -73,7 +77,7 @@ $(document).ready(function() {
                 } else if (data == "errjsonnowrite") {
                     alert("El archivo de usuarios no tiene permisos de escritura");
                 } else if (data == "OK") {
-                    alert("Para que se apliquen los cambios el usuario editado tiene que salir y volver a entrar")
+                    alert("Para que se apliquen los cambios el usuario editado tiene que cerrar sesión")
                     location.href = "gestorusers.php";
                 }
 
