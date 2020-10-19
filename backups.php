@@ -218,9 +218,28 @@ require_once("template/header.php");
                                                                         echo '<td>' . $eltamano . '</td>';
                                                                         echo '<td>';
                                                                 ?>
-                                                                        <button type="button" class="descargar btn btn-info text-white mr-1" value="<?php echo $files[$i] ?>">Descargar</button>
-                                                                        <button type="button" class="restaurar btn btn-warning text-white mr-1" value="<?php echo $files[$i] ?>">Restaurar</button>
-                                                                        <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $files[$i] ?>">Borrar</button>
+
+                                                                        <?php
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackupsdescargar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackupsdescargar'] == 1) {
+                                                                        ?>
+                                                                            <button type="button" class="descargar btn btn-info text-white mr-1" value="<?php echo $files[$i] ?>">Descargar</button>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                        <?php
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackupsrestaurar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackupsrestaurar'] == 1) {
+                                                                        ?>
+                                                                            <button type="button" class="restaurar btn btn-warning text-white mr-1" value="<?php echo $files[$i] ?>">Restaurar</button>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
+                                                                        <?php
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackupsborrar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackupsborrar'] == 1) {
+                                                                        ?>
+                                                                            <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $files[$i] ?>">Borrar</button>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
                                                                         </td>
                                                                         </tr>
                                                                 <?php
@@ -233,20 +252,26 @@ require_once("template/header.php");
                                                         <p class="lead" id="textoretorno"></p>
                                                     </div>
                                                     <hr>
-                                                    <h1 class="">Crear Backup</h1>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <p class="lead">Nombre Backup</p>
-                                                            <input class="form-control" id="inputbackup" type="text" maxlength="100">
-                                                            <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearbackup">Crear Backup</button>
+                                                    <?php
+                                                    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackupscrear', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackupscrear'] == 1) {
+                                                    ?>
+                                                        <h1 class="">Crear Backup</h1>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <p class="lead">Nombre Backup</p>
+                                                                <input class="form-control" id="inputbackup" type="text" maxlength="100">
+                                                                <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearbackup">Crear Backup</button>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <img class="" src="img/loading.gif" id="gifloading" alt="loading">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <p class="lead" id="textobackupretorno"></p>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            <img class="" src="img/loading.gif" id="gifloading" alt="loading">
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <p class="lead" id="textobackupretorno"></p>
-                                                        </div>
-                                                    </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
