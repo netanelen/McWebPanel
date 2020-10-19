@@ -66,7 +66,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
     <?php
     //MOSTRAR O OCULTAR EL TEXTO DE LA SECCION CONFIGURACION
-    if (array_key_exists('pconfmine', $_SESSION['CONFIGUSER']) || array_key_exists('pprogtareas', $_SESSION['CONFIGUSER']) || $_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconfmine', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconfmine'] == 1 || array_key_exists('pprogtareas', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareas'] == 1) {
         //<!-- Linea -->
         echo ('<hr class="sidebar-divider">');
         //<!-- Encabezado -->
@@ -107,7 +107,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
     <?php
     //MOSTRAR O OCULTAR EL TEXTO DE LA SECCION SISTEMA
-    if (array_key_exists('psystemconf', $_SESSION['CONFIGUSER']) || array_key_exists('psubirservidor', $_SESSION['CONFIGUSER']) || array_key_exists('pbackups', $_SESSION['CONFIGUSER']) || array_key_exists('pgestorarchivos', $_SESSION['CONFIGUSER']) || $_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('psystemconf', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconf'] == 1 || array_key_exists('psubirservidor', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psubirservidor'] == 1 || array_key_exists('pbackups', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackups'] == 1 || array_key_exists('pgestorarchivos', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivos'] == 1) {
         //<!-- Linea -->
         echo ('<hr class="sidebar-divider">');
         //<!-- Encabezado -->
