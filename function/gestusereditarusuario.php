@@ -335,6 +335,60 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pgestorarchivos'] = 0;
                             }
 
+                            if (isset($_POST['pgestorarchivoscrearcarpeta'])) {
+                                $arrayobtenido[$i]['pgestorarchivoscrearcarpeta'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivoscrearcarpeta'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivoscopiar'])) {
+                                $arrayobtenido[$i]['pgestorarchivoscopiar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivoscopiar'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivosborrar'])) {
+                                $arrayobtenido[$i]['pgestorarchivosborrar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivosborrar'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivosdescomprimir'])) {
+                                $arrayobtenido[$i]['pgestorarchivosdescomprimir'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivosdescomprimir'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivoscomprimir'])) {
+                                $arrayobtenido[$i]['pgestorarchivoscomprimir'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivoscomprimir'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivosdescargar'])) {
+                                $arrayobtenido[$i]['pgestorarchivosdescargar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivosdescargar'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivoseditar'])) {
+                                $arrayobtenido[$i]['pgestorarchivoseditar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivoseditar'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivosrenombrar'])) {
+                                $arrayobtenido[$i]['pgestorarchivosrenombrar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivosrenombrar'] = 0;
+                            }
+
+                            if (isset($_POST['pgestorarchivossubir'])) {
+                                $arrayobtenido[$i]['pgestorarchivossubir'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivossubir'] = 0;
+                            }
+
                             $nuevoarray[] = $arrayobtenido[$i];
                         }
                     }

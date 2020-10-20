@@ -334,7 +334,88 @@ require_once("template/header.php");
                                                                                                                                                                 }
                                                                                                                                                             }
                                                                                                                                                             ?>>
-                                                                            <label class="mr-2" for="pgestorarchivos">Acceder y Configurar</label>
+                                                                            <label class="mr-2" for="pgestorarchivos">Acceder</label>
+
+                                                                            <input id="pgestorarchivoscrearcarpeta" name="pgestorarchivoscrearcarpeta" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivoscrearcarpeta', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivoscrearcarpeta'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivoscrearcarpeta">Crear Carpetas</label>
+
+                                                                            <input id="pgestorarchivoscopiar" name="pgestorarchivoscopiar" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivoscopiar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivoscopiar'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivoscopiar">Copiar / Pegar</label>
+
+                                                                            <input id="pgestorarchivosborrar" name="pgestorarchivosborrar" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivosborrar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivosborrar'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivosborrar">Eliminar</label>
+
+                                                                            <input id="pgestorarchivosdescomprimir" name="pgestorarchivosdescomprimir" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivosdescomprimir', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivosdescomprimir'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivosdescomprimir">Descomprimir</label>
+
+                                                                            <input id="pgestorarchivoscomprimir" name="pgestorarchivoscomprimir" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivoscomprimir', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivoscomprimir'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivoscomprimir">Comprimir</label>
+
+                                                                            <input id="pgestorarchivosdescargar" name="pgestorarchivosdescargar" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivosdescargar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivosdescargar'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivosdescargar">Descargar</label>
+
+                                                                            <input id="pgestorarchivoseditar" name="pgestorarchivoseditar" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivoseditar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivoseditar'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivoseditar">Editar Archivos</label>
+
+                                                                            <input id="pgestorarchivosrenombrar" name="pgestorarchivosrenombrar" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivosrenombrar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivosrenombrar'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivosrenombrar">Renombrar</label>
+
+                                                                            <input id="pgestorarchivossubir" name="pgestorarchivossubir" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pgestorarchivossubir', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivossubir'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                            <label class="mr-2" for="pgestorarchivossubir">Subir Archivo</label>
 
                                                                         </div>
 

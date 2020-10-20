@@ -303,6 +303,41 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['pgestorarchivos'] = 1;
                 }
 
+                if (isset($_POST['pgestorarchivoscrearcarpeta'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivoscrearcarpeta'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivoscopiar'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivoscopiar'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivosborrar'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivosborrar'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivosdescomprimir'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivosdescomprimir'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivoscomprimir'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivoscomprimir'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivosdescargar'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivosdescargar'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivoseditar'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivoseditar'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivosrenombrar'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivosrenombrar'] = 1;
+                }
+
+                if (isset($_POST['pgestorarchivossubir'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivossubir'] = 1;
+                }
 
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($arrayobtenido);

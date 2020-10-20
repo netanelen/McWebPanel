@@ -211,7 +211,34 @@ require_once("template/header.php");
                                                                         <div class="card-body border">
 
                                                                             <input id="pgestorarchivos" name="pgestorarchivos" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="pgestorarchivos">Acceder y Configurar</label>
+                                                                            <label class="mr-2" for="pgestorarchivos">Acceder</label>
+
+                                                                            <input id="pgestorarchivoscrearcarpeta" name="pgestorarchivoscrearcarpeta" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivoscrearcarpeta">Crear Carpetas</label>
+
+                                                                            <input id="pgestorarchivoscopiar" name="pgestorarchivoscopiar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivoscopiar">Copiar / Pegar</label>
+
+                                                                            <input id="pgestorarchivosborrar" name="pgestorarchivosborrar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivosborrar">Eliminar</label>
+
+                                                                            <input id="pgestorarchivosdescomprimir" name="pgestorarchivosdescomprimir" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivosdescomprimir">Descomprimir</label>
+
+                                                                            <input id="pgestorarchivoscomprimir" name="pgestorarchivoscomprimir" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivoscomprimir">Comprimir</label>
+
+                                                                            <input id="pgestorarchivosdescargar" name="pgestorarchivosdescargar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivosdescargar">Descargar</label>
+
+                                                                            <input id="pgestorarchivoseditar" name="pgestorarchivoseditar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivoseditar">Editar Archivos</label>
+
+                                                                            <input id="pgestorarchivosrenombrar" name="pgestorarchivosrenombrar" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivosrenombrar">Renombrar</label>
+
+                                                                            <input id="pgestorarchivossubir" name="pgestorarchivossubir" type="checkbox" value="1">
+                                                                            <label class="mr-2" for="pgestorarchivossubir">Subir Archivo</label>
 
                                                                         </div>
 
