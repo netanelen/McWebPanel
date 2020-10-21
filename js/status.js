@@ -154,7 +154,9 @@ $(document).ready(function() {
                     document.getElementById("textoram").innerHTML = "Ram:";
                 } else if (data.encendido == "Encendido") {
                     document.getElementById("textocpu").innerHTML = "Cpu: " + data.cpu + "%";
-                    document.getElementById("textoram").innerHTML = "Ram: " + data.memoria + " / Total: " + data.ramconfig + " GB";
+                    if (data.memoria != "") {
+                        document.getElementById("textoram").innerHTML = "Ram: " + data.memoria + " / Total: " + data.ramconfig + " GB";
+                    }
 
                     if (document.getElementById('binicio') != null) {
                         document.getElementById("binicio").disabled = true;
