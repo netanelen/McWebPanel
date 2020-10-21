@@ -107,7 +107,7 @@ require_once("template/header.php");
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <label>Nombre Usuario</label>
+                                                                            <label class="negrita">Nombre Usuario</label>
                                                                             <br>
                                                                             <h4>
                                                                                 <?php
@@ -118,7 +118,7 @@ require_once("template/header.php");
                                                                     </div>
 
                                                                     <div class="col-md-6">
-                                                                        <label for="elpass">Cambiar Contraseña</label>
+                                                                        <label class="negrita" for="elpass">Cambiar Contraseña</label>
                                                                         <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" <?php
                                                                                                                                                                     if ($_SESSION['EDITARSUPER']['rango'] == 1) {
                                                                                                                                                                         echo ('required="required"');
@@ -126,7 +126,7 @@ require_once("template/header.php");
                                                                                                                                                                     ?>>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label for="elrepass">Confirmar</label>
+                                                                        <label class="negrita" for="elrepass">Confirmar</label>
                                                                         <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" <?php
                                                                                                                                                                         if ($_SESSION['EDITARSUPER']['rango'] == 1) {
                                                                                                                                                                             echo ('required="required"');
@@ -145,78 +145,108 @@ require_once("template/header.php");
 
                                                                         <div class="col-md-12">
                                                                             <br>
-                                                                            <label>Asignar Permisos:</label>
+                                                                            <label class="negrita">Asignar Permisos:</label>
                                                                             <br><br>
 
                                                                             <!-- SYSTEM CONFIG -->
-                                                                            <div class="card-header text-white bg-primary">Pagina System Config</div>
+                                                                            <div class="negrita card-header text-white bg-primary">Página System Config</div>
                                                                             <div class="card-body border">
 
-                                                                                <input id="psystemconfpuerto" name="psystemconfpuerto" type="checkbox" value="1" <?php
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconfpuerto" name="psystemconfpuerto" type="checkbox" value="1" <?php
 
-                                                                                                                                                                    if (array_key_exists('psystemconfpuerto', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfpuerto'] == 1) {
-                                                                                                                                                                            echo "checked";
+                                                                                                                                                                            if (array_key_exists('psystemconfpuerto', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                if ($_SESSION['EDITARSUPER']['psystemconfpuerto'] == 1) {
+                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            ?>>
+
+                                                                                        <label class="negrita mr-2" for="psystemconfpuerto">Puerto</label>
+                                                                                    </div>
+                                                                                    <p>Permite cambiar el puerto del servidor de minecraft.</p>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconfmemoria" name="psystemconfmemoria" type="checkbox" value="1" <?php
+
+                                                                                                                                                                            if (array_key_exists('psystemconfmemoria', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                if ($_SESSION['EDITARSUPER']['psystemconfmemoria'] == 1) {
+                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            ?>>
+
+                                                                                        <label class="negrita mr-2" for="psystemconfmemoria">Memoria</label>
+                                                                                    </div>
+                                                                                    <p>Permite cambiar la memoria máxima del servidor.</p>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconftipo" name="psystemconftipo" type="checkbox" value="1" <?php
+
+                                                                                                                                                                        if (array_key_exists('psystemconftipo', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                            if ($_SESSION['EDITARSUPER']['psystemconftipo'] == 1) {
+                                                                                                                                                                                echo "checked";
+                                                                                                                                                                            }
                                                                                                                                                                         }
-                                                                                                                                                                    }
-                                                                                                                                                                    ?>>
+                                                                                                                                                                        ?>>
 
-                                                                                <label class="mr-2" for="psystemconfpuerto">Puerto</label>
+                                                                                        <label class="negrita mr-2" for="psystemconftipo">Tipo Servidor</label>
+                                                                                    </div>
+                                                                                    <p>Permite cambiar el tipo de servidor.</p>
+                                                                                </div>
 
-                                                                                <input id="psystemconfmemoria" name="psystemconfmemoria" type="checkbox" value="1" <?php
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconfsubida" name="psystemconfsubida" type="checkbox" value="1" <?php
 
-                                                                                                                                                                    if (array_key_exists('psystemconfmemoria', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfmemoria'] == 1) {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        }
-                                                                                                                                                                    }
-                                                                                                                                                                    ?>>
+                                                                                                                                                                            if (array_key_exists('psystemconfsubida', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                if ($_SESSION['EDITARSUPER']['psystemconfsubida'] == 1) {
+                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            ?>>
 
-                                                                                <label class="mr-2" for="psystemconfmemoria">Memoria</label>
+                                                                                        <label class="negrita mr-2" for="psystemconfsubida">Limite Subida Archivos</label>
+                                                                                    </div>
+                                                                                    <p>Permite cambiar el tamaño máximo de subida de archivos.</p>
+                                                                                </div>
 
-                                                                                <input id="psystemconftipo" name="psystemconftipo" type="checkbox" value="1" <?php
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1" <?php
 
-                                                                                                                                                                if (array_key_exists('psystemconftipo', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconftipo'] == 1) {
-                                                                                                                                                                        echo "checked";
-                                                                                                                                                                    }
-                                                                                                                                                                }
-                                                                                                                                                                ?>>
+                                                                                                                                                                            if (array_key_exists('psystemconfnombre', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                if ($_SESSION['EDITARSUPER']['psystemconfnombre'] == 1) {
+                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            ?>>
 
-                                                                                <label class="mr-2" for="psystemconftipo">Tipo Servidor</label>
+                                                                                        <label class="negrita mr-2" for="psystemconfavanzados">Nombre Servidor</label>
+                                                                                    </div>
+                                                                                    <p>Permite cambiar el nombre del servidor.</p>
+                                                                                </div>
 
-                                                                                <input id="psystemconfsubida" name="psystemconfsubida" type="checkbox" value="1" <?php
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1" <?php
 
-                                                                                                                                                                    if (array_key_exists('psystemconfsubida', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfsubida'] == 1) {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        }
-                                                                                                                                                                    }
-                                                                                                                                                                    ?>>
+                                                                                                                                                                                if (array_key_exists('psystemconfavanzados', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconfavanzados'] == 1) {
+                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                                ?>>
 
-                                                                                <label class="mr-2" for="psystemconfsubida">Limite Subida Archivos</label>
-
-                                                                                <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1" <?php
-
-                                                                                                                                                                    if (array_key_exists('psystemconfnombre', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfnombre'] == 1) {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        }
-                                                                                                                                                                    }
-                                                                                                                                                                    ?>>
-
-                                                                                <label class="mr-2" for="psystemconfavanzados">Nombre Servidor</label>
-
-                                                                                <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1" <?php
-
-                                                                                                                                                                    if (array_key_exists('psystemconfavanzados', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfavanzados'] == 1) {
-                                                                                                                                                                            echo "checked";
-                                                                                                                                                                        }
-                                                                                                                                                                    }
-                                                                                                                                                                    ?>>
-
-                                                                                <label class="mr-2" for="psystemconfavanzados">Parametros Avanzados</label>
+                                                                                        <label class="negrita mr-2" for="psystemconfavanzados">Parametros Avanzados</label>
+                                                                                    </div>
+                                                                                    <p>Permite administrar las opciones de lanzamiento del servidor minecraft.</p>
+                                                                                </div>
 
                                                                             </div>
 

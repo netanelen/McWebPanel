@@ -90,17 +90,17 @@ require_once("template/header.php");
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <label for="eluser" class="">Nombre Usuario</label>
+                                                                            <label class="negrita" for="eluser">Nombre Usuario</label>
                                                                             <input type="text" class="form-control" id="eluser" name="eluser" required="required">
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="col-md-6">
-                                                                        <label for="elpass">Contraseña</label>
+                                                                        <label class="negrita" for="elpass">Contraseña</label>
                                                                         <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" required="required">
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label for="elrepass">Confirmar Contraseña</label>
+                                                                        <label class="negrita" for="elrepass">Confirmar Contraseña</label>
                                                                         <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" required="required">
                                                                     </div>
 
@@ -110,36 +110,66 @@ require_once("template/header.php");
 
                                                                     <div class="col-md-12">
                                                                         <br>
-                                                                        <label>Asignar Permisos:</label>
+                                                                        <label class="negrita">Asignar Permisos:</label>
                                                                         <br><br>
 
                                                                         <!-- SYSTEM CONFIG -->
-                                                                        <div class="card-header text-white bg-primary">Pagina System Config</div>
+                                                                        <div class="negrita card-header text-white bg-primary">Página System Config</div>
                                                                         <div class="card-body border">
 
-                                                                            <input id="psystemconfpuerto" name="psystemconfpuerto" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="psystemconfpuerto">Puerto</label>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconfpuerto" name="psystemconfpuerto" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfpuerto">Puerto</label>
+                                                                                </div>
+                                                                                <p>Permite cambiar el puerto del servidor de minecraft.</p>
+                                                                            </div>
 
-                                                                            <input id="psystemconfmemoria" name="psystemconfmemoria" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="psystemconfmemoria">Memoria</label>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconfmemoria" name="psystemconfmemoria" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfmemoria">Memoria</label>
+                                                                                </div>
+                                                                                <p>Permite cambiar la memoria máxima del servidor.</p>
+                                                                            </div>
 
-                                                                            <input id="psystemconftipo" name="psystemconftipo" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="psystemconftipo">Tipo Servidor</label>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconftipo" name="psystemconftipo" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconftipo">Tipo Servidor</label>
+                                                                                </div>
+                                                                                <p>Permite cambiar el tipo de servidor.</p>
+                                                                            </div>
 
-                                                                            <input id="psystemconfsubida" name="psystemconfsubida" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="psystemconfsubida">Limite Subida Archivos</label>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconfsubida" name="psystemconfsubida" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfsubida">Limite Subida Archivos</label>
+                                                                                </div>
+                                                                                <p>Permite cambiar el tamaño máximo de subida de archivos.</p>
+                                                                            </div>
 
-                                                                            <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="psystemconfnombre">Nombre Servidor</label>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconfnombre" name="psystemconfnombre" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfnombre">Nombre Servidor</label>
+                                                                                </div>
+                                                                                <p>Permite cambiar el nombre del servidor.</p>
+                                                                            </div>
 
-                                                                            <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1">
-                                                                            <label class="mr-2" for="psystemconfavanzados">Parametros Avanzados</label>
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconfavanzados" name="psystemconfavanzados" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfavanzados">Parámetros Avanzados</label>
+                                                                                </div>
+                                                                                <p>Permite administrar las opciones de lanzamiento del servidor minecraft.</p>
+                                                                            </div>
 
                                                                         </div>
 
                                                                     </div>
 
-                                                                    
+
                                                                     <div class="col-md-12">
                                                                         <br>
                                                                         <button class="btn btn-lg btn-primary btn-block" id="btcrearusuario" name="btcrearusuario" type="submit">Crear Administrador</button>
@@ -167,7 +197,7 @@ require_once("template/header.php");
             </div>
             <!-- End of Page Wrapper -->
 
-           <script src="js/gestadmincreate.js"></script>
+            <script src="js/gestadmincreate.js"></script>
 
         </div>
     <?php
