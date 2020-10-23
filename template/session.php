@@ -16,24 +16,34 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     You should have received a copy of the GNU General Public License
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
+
+//EN CASO DE TENER UN DOMINIO O SUBDOMINIO CAMBIAR LA VARIABLE $dominio
+//EJEMPLOS
+
+//$dominio = ".eldominio.com"
+
+//$dominio = ".subdominio.eldominio.com"
+
+$dominio = "";
+
 if (PHP_VERSION_ID < 70300) {
   //VERSION ANTIGUA A 7.3
   if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
     //SI ES HTTPS
-    session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], true, true);
+    session_set_cookie_params(3600, '/', $dominio, true, true);
   } else {
     //SI ES HTTP
-    session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], false, true);
+    session_set_cookie_params(3600, '/', $dominio, false, true);
   }
 } else {
   //version mas moderna soporte samesite
   if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
     //SI ES HTTPS
-    session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], true, true);
+    session_set_cookie_params(3600, '/', $dominio, true, true);
     ini_set('session.cookie_samesite', "Strict");
   } else {
     //SI ES HTTP
-    session_set_cookie_params(3600, '/', $_SERVER['HTTP_HOST'], false, true);
+    session_set_cookie_params(3600, '/', $dominio, false, true);
     ini_set('session.cookie_samesite', "Strict");
   }
 }
