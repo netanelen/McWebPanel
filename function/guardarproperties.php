@@ -31,6 +31,13 @@ function test_input($data)
   return $data;
 }
 
+function test_motd($data)
+{
+  $data = trim($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
   $_SESSION['VALIDADO'] = "NO";
@@ -79,8 +86,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       }
 
       $elaction = test_input($_POST['action']);
-      $elresultado = test_input($_POST['valor']);
 
+      if ($elaction == "motd") {
+        $elresultado = test_motd($_POST['valor']);
+      } else {
+        $elresultado = test_input($_POST['valor']);
+      }
       $retorno = escribir($elaction, $elresultado);
     }
 

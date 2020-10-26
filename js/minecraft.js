@@ -1241,7 +1241,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#form-motd").keyup(function() {
+    $("#form-motd").keyup(function(e) {
         $envioaction = "motd";
         $enviovalor = document.getElementById("form-motd").value;
         $.ajax({
@@ -1259,6 +1259,26 @@ $(document).ready(function() {
             }
         });
         document.getElementById("label-motd").innerHTML = "motd=" + document.getElementById("form-motd").value;
+    });
+
+    document.getElementById("form-motd").addEventListener('paste', function(event) {
+        $envioaction = "motd";
+        $enviovalor = event.clipboardData.getData('text');
+        $.ajax({
+            type: "POST",
+            url: "function/guardarproperties.php",
+            data: {
+                action: $envioaction,
+                valor: $enviovalor
+            },
+            success: function(data) {
+                var getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+            }
+        });
+        document.getElementById("label-motd").innerHTML = "motd=" + $enviovalor;
     });
 
     var mySessionTimer = setInterval(sessionTimer, 1000);
