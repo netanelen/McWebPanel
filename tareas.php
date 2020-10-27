@@ -110,6 +110,14 @@ require_once("template/header.php");
                                                                     }
                                                                 }
 
+                                                                function test_input($data)
+                                                                {
+                                                                    $data = trim($data);
+                                                                    $data = stripslashes($data);
+                                                                    $data = htmlspecialchars($data);
+                                                                    return $data;
+                                                                }
+
                                                                 //INICIAR VARIABLES
                                                                 $contadorarchivos = 0;
                                                                 $eltamano = "";
@@ -139,10 +147,10 @@ require_once("template/header.php");
 
                                                                     //RECORRER ARRAY Y AÑADIR LAS PROPIEDADES Y LOS BOTONES
                                                                     for ($i = 0; $i < count($arrayobtenido); $i++) {
-                                                                        echo ('<tr id="' . $i . '">');
+                                                                        echo ('<tr class="menu-hover" id="' . $i . '">');
                                                                         echo ('<th scope="row">' . $arrayobtenido[$i]["nombre"] . '</th>');
                                                                         echo ('<td>' . devolver_accion($arrayobtenido[$i]["accion"]) . '</td>');
-                                                                        echo ('<td>' . $arrayobtenido[$i]["comando"] . '</td>');
+                                                                        echo ('<td>' . test_input(addslashes($arrayobtenido[$i]["comando"])) . '</td>');
                                                                         echo ('<td>' . $arrayobtenido[$i]["estado"] . '</td>');
                                                                         echo ('<td>');
                                                                 ?>
@@ -158,11 +166,11 @@ require_once("template/header.php");
                                                                         <?php
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasborrar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasborrar'] == 1) {
                                                                         ?>
-                                                                        <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $i ?>">Borrar</button>
+                                                                            <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $i ?>">Borrar</button>
                                                                         <?php
                                                                         }
                                                                         ?>
-                                                                        
+
                                                                         </td>
                                                                         </tr>
                                                                 <?php
