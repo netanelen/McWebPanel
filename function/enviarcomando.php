@@ -74,8 +74,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           exec($permcomando);
         }
       }
-        echo $laejecucion;
-      //echo "ok";
+      echo "ok";
     }
   }
 }
