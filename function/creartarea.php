@@ -83,7 +83,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $retorno = "nocomando";
                             $elerror = 1;
                         } else {
-                            $getcommando = test_input($_POST["elcomando"]);
+                            $getcommando = $_POST["elcomando"];
                         }
                     } else {
                         $getcommando = "";

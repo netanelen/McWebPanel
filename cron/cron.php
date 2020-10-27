@@ -422,7 +422,7 @@ if ($elerror == 0) {
                                                         case "acc4":
                                                             //ENVIAR COMANDO
 
-                                                            $paraejecutar = $arrayobtenido[$i]['comando'];
+                                                            $paraejecutar = addslashes($arrayobtenido[$i]['comando']);
 
                                                             //OBTENER PID SABER SI ESTA EN EJECUCION
                                                             $elcomando = "";
@@ -432,7 +432,8 @@ if ($elerror == 0) {
 
                                                             //SI ESTA EN EJECUCION ENVIAR COMANDO
                                                             if (!$elpid == "") {
-                                                                $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
+                                                                $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
+
                                                                 shell_exec($laejecucion);
 
                                                                 //PERFMISOS FTP

@@ -50,7 +50,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $laejecucion = "";
       $paraejecutar = "";
 
-      $paraejecutar = test_input($_POST['action']);
+      $paraejecutar = addslashes($_POST['action']);
 
       //OBTENER PID SABER SI ESTA EN EJECUCION
       $elnombrescreen = CONFIGDIRECTORIO;
@@ -59,7 +59,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
       //SI ESTA EN EJECUCION ENVIAR COMANDO
       if (!$elpid == "") {
-        $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
+        $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
         shell_exec($laejecucion);
 
         //PERFMISOS FTP
@@ -74,8 +74,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           exec($permcomando);
         }
       }
-
-      echo "ok";
+        echo $laejecucion;
+      //echo "ok";
     }
   }
 }
