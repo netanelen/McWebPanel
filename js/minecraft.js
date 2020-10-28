@@ -1264,6 +1264,25 @@ $(document).ready(function() {
     document.getElementById("form-motd").addEventListener('paste', function(event) {
         $envioaction = "motd";
         $enviovalor = event.clipboardData.getData('text');
+
+        var eltext = "";
+        var textini = "";
+        var textfinal = "";
+        var enviar = "";
+
+        var text = document.getElementById("form-motd");
+
+        var startPosition = text.selectionStart;
+        var endPosition = text.selectionEnd;
+        var longitud = text.leng;
+
+        var eltext = document.getElementById("form-motd").value;
+        var textini = eltext.substring(0, startPosition);
+        var textfinal = eltext.substring(endPosition, longitud);
+
+        var enviar = textini + event.clipboardData.getData('text') + textfinal;
+        $enviovalor = enviar;
+
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
