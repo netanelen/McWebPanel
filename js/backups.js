@@ -138,6 +138,10 @@ $(document).ready(function() {
                 document.getElementById("crearbackup").disabled = false;
             }
         });
+
+        document.getElementById("inputbackup").addEventListener('paste', function(event) {
+            document.getElementById("crearbackup").disabled = false;
+        });
     }
 
     if (document.getElementById('crearbackup') != null) {

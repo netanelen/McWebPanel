@@ -31,6 +31,7 @@ $(document).ready(function() {
             }
         } else {
             document.getElementById("elcomando").disabled = true;
+            document.getElementById("elcomando").value = "";
             if (document.getElementById("nombretarea").value == "") {
                 document.getElementById("creatarea").disabled = true;
             } else {
@@ -46,6 +47,10 @@ $(document).ready(function() {
             document.getElementById("creatarea").disabled = false;
         }
 
+    });
+
+    document.getElementById("elcomando-motd").addEventListener('paste', function(event) {
+        document.getElementById("creatarea").disabled = false;
     });
 
     $("#nombretarea").keyup(function(e) {

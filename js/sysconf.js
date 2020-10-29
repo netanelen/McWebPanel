@@ -58,6 +58,10 @@ $(document).ready(function() {
             }
 
         });
+
+        document.getElementById("elnomserv").addEventListener('paste', function(event) {
+            document.getElementById("guardaserver").disabled = false;
+        });
     }
 
     if (document.getElementById('eltipserv') != null) {
