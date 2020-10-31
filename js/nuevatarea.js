@@ -49,7 +49,7 @@ $(document).ready(function() {
 
     });
 
-    document.getElementById("elcomando-motd").addEventListener('paste', function(event) {
+    document.getElementById("elcomando").addEventListener('paste', function(event) {
         document.getElementById("creatarea").disabled = false;
     });
 
@@ -66,7 +66,7 @@ $(document).ready(function() {
         var eldata = $("#formtarea :input").serializeArray();
 
         $.post($("#formtarea").attr("action"), eldata, function(data) {
-            var getdebug = 0;
+            var getdebug = 1;
             if (getdebug == 1) {
                 alert(data);
             }
