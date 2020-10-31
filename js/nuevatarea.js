@@ -66,7 +66,7 @@ $(document).ready(function() {
         var eldata = $("#formtarea :input").serializeArray();
 
         $.post($("#formtarea").attr("action"), eldata, function(data) {
-            var getdebug = 1;
+            var getdebug = 0;
             if (getdebug == 1) {
                 alert(data);
             }
