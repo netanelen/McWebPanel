@@ -20,17 +20,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 //require_once("template/session.php");
 require_once("template/errorreport.php");
 require_once("template/header.php");
-/*
-if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
-  $_SESSION['VALIDADO'] = "NO";
-  $_SESSION['KEYSECRETA'] = "0";
-}
-
-if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
-  header("location:status.php");
-  exit;
-}
-*/
 ?>
 
 <!-- Estilo CSS -->
@@ -47,6 +36,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
     $elerror = 0;
     $yainstall = 0;
+    $showerrors = "";
 
     $iniverificarpraiz = getcwd();
     $iniverificarpraiz = trim($iniverificarpraiz);
@@ -74,36 +64,36 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     //VERIFICAR CARPETA RAIZ
     clearstatcache();
     if (!is_readable($iniverificarpraiz)) {
-      echo 'Error: No tienes permisos de lectura en la carpeta raiz, revisa los permisos de linux.<br>';
+      $showerrors .= 'Error: No tienes permisos de lectura en la carpeta raiz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
     if (!is_writable($iniverificarpraiz)) {
-      echo 'Error: No tienes permisos de escritura en la carpeta raiz, revisa los permisos de linux.<br>';
+      $showerrors .= 'Error: No tienes permisos de escritura en la carpeta raiz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
     if (!is_executable($iniverifirutatemplate)) {
-      echo 'Error: No tienes permisos de ejecucion en la carpeta raiz, revisa los permisos de linux.<br>';
+      $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta raiz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
     //VERIFICAR TEMPLATE
     clearstatcache();
     if (!is_readable($iniverifirutatemplate)) {
-      echo 'Error: No tienes permisos de lectura en la carpeta template, revisa los permisos de linux.<br>';
+      $showerrors .= 'Error: No tienes permisos de lectura en la carpeta template, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
     clearstatcache();
     if (!is_writable($iniverifirutatemplate)) {
-      echo 'Error: No tienes permisos de escritura en la carpeta template, revisa los permisos de linux.<br>';
+      $showerrors .= 'Error: No tienes permisos de escritura en la carpeta template, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
     clearstatcache();
     if (!is_executable($iniverifirutatemplate)) {
-      echo 'Error: No tienes permisos de ejecucion en la carpeta template, revisa los permisos de linux.<br>';
+      $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta template, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
@@ -112,7 +102,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverifirutaconfig)) {
       clearstatcache();
       if (!is_readable($iniverifirutaconfig)) {
-        echo 'Error: No tienes permisos de lectura en la carpeta config, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tienes permisos de lectura en la carpeta config, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -124,7 +114,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverifirutaconfig)) {
       clearstatcache();
       if (!is_writable($iniverifirutaconfig)) {
-        echo 'Error: No tienes permisos de escritura en la carpeta config, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tienes permisos de escritura en la carpeta config, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -136,7 +126,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverifirutaconfig)) {
       clearstatcache();
       if (!is_executable($iniverifirutaconfig)) {
-        echo 'Error: No tienes permisos de ejecucion en la carpeta config, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta config, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -149,7 +139,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverificonfuserjson)) {
       clearstatcache();
       if (!is_readable($iniverificonfuserjson)) {
-        echo 'Error: No tiene permisos de lectura en el archivo /config/confuser.json, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tiene permisos de lectura en el archivo /config/confuser.json, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -161,7 +151,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverificonfuserjson)) {
       clearstatcache();
       if (!is_writable($iniverificonfuserjson)) {
-        echo 'Error: No tiene permisos de escritura en el archivo /config/confuser.json, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tiene permisos de escritura en el archivo /config/confuser.json, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -174,7 +164,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverificonfopcionesphp)) {
       clearstatcache();
       if (!is_readable($iniverificonfopcionesphp)) {
-        echo 'Error: No tienes permisos de lectura en el archivo /config/confopciones.php, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tienes permisos de lectura en el archivo /config/confopciones.php, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -186,7 +176,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (file_exists($iniverificonfopcionesphp)) {
       clearstatcache();
       if (!is_writable($iniverificonfopcionesphp)) {
-        echo 'Error: No tienes permisos de escritura en el archivo /config/confopciones.php, revisa los permisos de linux.<br>';
+        $showerrors .= 'Error: No tienes permisos de escritura en el archivo /config/confopciones.php, revisa los permisos de linux.<br><br>';
         $elerror = 1;
         $yainstall = 1;
       }
@@ -200,25 +190,26 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       //VERIFICAR /config/serverproperties.txt";
       clearstatcache();
       if (!file_exists($iniverificonfserverpropertiestxt)) {
-        echo 'Error: El archivo serverproperties.txt no existe , vuelve a realizar el install.<br>';
+        $showerrors .= 'Error: El archivo serverproperties.txt no existe , vuelve a realizar el install.<br><br>';
         $elerror = 1;
       } else {
 
         clearstatcache();
         if (!is_readable($iniverificonfserverpropertiestxt)) {
-          echo 'Error: No tienes permisos de lectura en el archivo /config/serverproperties.txt, revisa los permisos de linux.<br>';
+          $showerrors .= 'Error: No tienes permisos de lectura en el archivo /config/serverproperties.txt, revisa los permisos de linux.<br><br>';
           $elerror = 1;
         }
 
         clearstatcache();
         if (!is_writable($iniverificonfserverpropertiestxt)) {
-          echo 'Error: No tienes permisos de escritura en el archivo /config/serverproperties.txt, revisa los permisos de linux.<br>';
+          $showerrors .= 'Error: No tienes permisos de escritura en el archivo /config/serverproperties.txt, revisa los permisos de linux.<br><br>';
           $elerror = 1;
         }
       }
     }
 
     if ($elerror == 1) {
+      echo '<div class="alert alert-danger" role="alert">' .$showerrors .'</div>';
       exit;
     }
 
