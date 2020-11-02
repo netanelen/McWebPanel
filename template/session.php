@@ -24,7 +24,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 //$dominio = ".subdominio.eldominio.com"
 
-$dominio = ".mineadmin.konata.es";
+$dominio = "";
 
 if (PHP_VERSION_ID < 70300) {
   //VERSION ANTIGUA A 7.3
@@ -70,7 +70,7 @@ if (isset($_SESSION['IDENTIFICARSESSION'])) {
   $getconflakey = CONFIGSESSIONKEY;
 
   if ($getconflakey != $_SESSION['IDENTIFICARSESSION']) {
-    echo "Tu sesión no pertenece a este panel, elimina la sesión y vuelve a intentar";
+    echo '<div class="alert alert-danger" role="alert">Tu sesión no pertenece a este panel, elimina la sesión y vuelve a intentar</div>';
     exit;
   }
 }
