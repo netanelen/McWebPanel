@@ -65,6 +65,20 @@ require_once("../template/errorreport.php");
         return $data;
     }
 
+    function generarkey()
+    {
+        $secretkey = "";
+        $gethash = "";
+
+        for ($a = 1; $a <= 32; $a++) {
+            $secretkey .= strval(random_int(0, 9));
+        }
+
+        $gethash = hash("sha3-512", $secretkey);
+
+        return $gethash;
+    }
+
     // No se aceptan metodos que no sean post
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -78,6 +92,7 @@ require_once("../template/errorreport.php");
         $laram = "";
         $eltiposerver = "";
         $loserrores = 0;
+        $lakey = "";
 
         //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
         $dirconfig = "";
@@ -239,8 +254,12 @@ require_once("../template/errorreport.php");
         $rutaescrivir = $dirconfig;
         $rutaescrivir .= "/confopciones.php";
 
+        $lakey = generarkey($lakey);
+        $lakey .= $t;
+
         $file = fopen($rutaescrivir, "w");
         fwrite($file, "<?php " . PHP_EOL);
+        fwrite($file, 'define("CONFIGSESSIONKEY", "' . $lakey . '");' . PHP_EOL);
         fwrite($file, 'define("CONFIGNOMBRESERVER", "' . $elnombreservidor . '");' . PHP_EOL);
         fwrite($file, 'define("CONFIGDIRECTORIO", "' . $eldirectorio . '");' . PHP_EOL);
         fwrite($file, 'define("CONFIGPUERTO", "' . $elpuerto . '");' . PHP_EOL);

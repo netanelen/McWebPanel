@@ -109,6 +109,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $elerasecache = "0";
         }
 
+        $lakey = CONFIGSESSIONKEY;
         $eldirectorio = CONFIGDIRECTORIO;
         $elpostmax = "";
         $eleulaminecraft = CONFIGEULAMINECRAFT;
@@ -173,6 +174,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           //GUARDAR FICHERO CONFOPCIONES.PHP
           $file = fopen($rutaescrivir, "w");
           fwrite($file, "<?php " . PHP_EOL);
+          fwrite($file, 'define("CONFIGSESSIONKEY", "' . $lakey . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGNOMBRESERVER", "' . $elnombreservidor . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGDIRECTORIO", "' . $eldirectorio . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGPUERTO", "' . $elpuerto . '");' . PHP_EOL);

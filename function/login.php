@@ -114,12 +114,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     //REGENERAR SESSION
                     session_regenerate_id();
+                    $getconflakey = CONFIGSESSIONKEY;
 
                     $lakey = generarkey($lakey);
 
                     $_SESSION['KEYSECRETA'] = $lakey;
                     $_SESSION['VALIDADO'] = $lakey;
-
+                    $_SESSION['IDENTIFICARSESSION'] = $getconflakey;
                     $_SESSION['CONFIGUSER'] = $arrayobtenido[$i];
 
                     unset($lakey);

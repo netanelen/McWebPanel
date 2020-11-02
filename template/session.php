@@ -24,7 +24,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 //$dominio = ".subdominio.eldominio.com"
 
-$dominio = "";
+$dominio = ".mineadmin.konata.es";
 
 if (PHP_VERSION_ID < 70300) {
   //VERSION ANTIGUA A 7.3
@@ -47,5 +47,33 @@ if (PHP_VERSION_ID < 70300) {
     ini_set('session.cookie_samesite', "Strict");
   }
 }
+
 session_start();
-?>
+
+if (isset($_SESSION['IDENTIFICARSESSION'])) {
+  $rutanofunction = getcwd();
+  $rutanofunction = trim($rutanofunction);
+  $rutanofunction .= "/config/confopciones.php";
+
+  $rutasifunction = dirname(getcwd()) . PHP_EOL;
+  $rutasifunction = trim($rutasifunction);
+  $rutasifunction .= "/config/confopciones.php";
+
+  if (file_exists($rutanofunction)) {
+    require_once("config/confopciones.php");
+  }else{
+    if (file_exists($rutasifunction)) {
+      require_once("../config/confopciones.php");
+    }
+  }
+
+  $getconflakey = CONFIGSESSIONKEY;
+
+  if ($getconflakey != $_SESSION['IDENTIFICARSESSION']) {
+    echo "Tu sesión no pertenece a este panel, elimina la sesión y vuelve a intentar";
+    exit;
+  }
+}
+
+unset($dominio);
+unset($getconflakey);
