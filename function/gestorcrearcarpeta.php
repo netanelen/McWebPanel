@@ -56,13 +56,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $retorno = "norenom";
                     $elerror = 1;
                 }
-
             }
 
             //BUSCAR CARACTERES PROHIBIDOS
             if ($elerror == 0) {
 
-                $verificar = array('#', '<', '$', '+', '%', '>','!','`','&','*','|','{','?','=','}','/',':','@',"'",'"',"'\'");
+                $verificar = array('#', '<', '$', '+', '%', '>', '!', '`', '&', '*', '|', '{', '?', '=', '}', '/', ':', '@', "'", '"', "'\'");
 
                 for ($i = 0; $i < count($verificar); $i++) {
 
@@ -72,9 +71,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         $retorno = "novalido";
                         $elerror = 1;
                     }
-
                 }
-
             }
 
             //AÑADIR RUTA ACTUAL AL ARCHIVO
