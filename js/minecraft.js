@@ -1241,6 +1241,24 @@ $(document).ready(function() {
         }
     });
 
+    function updatemotd(textomotd) {
+        $.ajax({
+            type: "POST",
+            url: "function/visormotd.php",
+            data: {
+                action: textomotd
+            },
+            success: function(data) {
+                var getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+
+                document.getElementById("visormotd").innerHTML = data;
+            }
+        });
+    }
+
     $("#form-motd").keyup(function(e) {
         $envioaction = "motd";
         $enviovalor = document.getElementById("form-motd").value;
@@ -1259,6 +1277,7 @@ $(document).ready(function() {
             }
         });
         document.getElementById("label-motd").innerHTML = "motd=" + document.getElementById("form-motd").value;
+        updatemotd(document.getElementById("form-motd").value);
     });
 
     document.getElementById("form-motd").addEventListener('paste', function(event) {
@@ -1298,6 +1317,7 @@ $(document).ready(function() {
             }
         });
         document.getElementById("label-motd").innerHTML = "motd=" + $enviovalor;
+        updatemotd($enviovalor);
     });
 
     var mySessionTimer = setInterval(sessionTimer, 1000);
