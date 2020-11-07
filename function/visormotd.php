@@ -117,6 +117,40 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $texto = str_replace("\u00fa", "ú", $texto);
                 $texto = str_replace("\u00da", "Ú", $texto);
 
+                //à
+                $texto = str_replace("\u00e0", "à", $texto);
+                $texto = str_replace("\u00c0", "À", $texto);
+                //è
+                $texto = str_replace("\u00e8", "è", $texto);
+                $texto = str_replace("\u00c8", "È", $texto);
+                //ì
+                $texto = str_replace("\u00ec", "ì", $texto);
+                $texto = str_replace("\u00cc", "Ì", $texto);
+                //ò
+                $texto = str_replace("\u00f2", "ò", $texto);
+                $texto = str_replace("\u00d2", "Ò", $texto);
+                //ù
+                $texto = str_replace("\u00f9", "ù", $texto);
+                $texto = str_replace("\u00d9", "Ù", $texto);
+
+                //ç
+                $texto = str_replace("\u00e7", "ç", $texto);
+                $texto = str_replace("\u00c7", "Ç", $texto);
+
+                //ü
+                $texto = str_replace("\u00fc", "ü", $texto);
+                $texto = str_replace("\u00dc", "Ü", $texto);
+
+                //ï
+                $texto = str_replace("\u00ef", "ï", $texto);
+                $texto = str_replace("\u00cf", "Ï", $texto);
+
+                //¨
+                $texto = str_replace("\u00a8", "¨", $texto);
+
+                //¿
+                $texto = str_replace("\u00bf", "¿", $texto);
+
                 //ñ
                 $texto = str_replace("\u00f1", "ñ", $texto);
                 $texto = str_replace("\u00d1", "Ñ", $texto);
