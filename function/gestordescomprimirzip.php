@@ -141,6 +141,23 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $retorno = 'ok';
                 } else {
                     $retorno = 'fallo';
+
+                    //PARCHE POR SI ES ZIP64
+                    $permcomando = "unzip " . $archivo . " -d " . $lacarpeta;
+                    $retorno = exec($permcomando);
+
+                    if ($retorno == trim("Archive:  " . $archivo)) {
+                        $permcomando = "rm -R " . $lacarpeta;
+                        exec($permcomando);
+                        $retorno = "fallo";
+                    } else {
+                        //PERFMISOS FTP
+                        $permcomando = "cd '" . $lacarpeta . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
+                        exec($permcomando);
+                        $permcomando = "cd '" . $lacarpeta . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
+                        exec($permcomando);
+                        $retorno = "ok";
+                    }
                 }
             }
 
