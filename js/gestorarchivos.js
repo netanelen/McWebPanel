@@ -306,6 +306,9 @@ $(document).ready(function() {
         var descomprimirtarbuttons = document.getElementsByClassName('descomprimirtar');
         for (var i = 0; i < descomprimirtarbuttons.length; i++) {
             descomprimirtarbuttons[i].addEventListener("click", function() {
+                if (document.getElementById('gifloading') != null) {
+                    document.getElementById("gifloading").style.visibility = "visible";
+                }
                 var tqxhr = $.ajax({
                     url: 'function/gestordescomprimirtar.php',
                     data: {
@@ -314,6 +317,9 @@ $(document).ready(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
+                        if (document.getElementById('gifloading') != null) {
+                            document.getElementById("gifloading").style.visibility = "hidden";
+                        }
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -345,6 +351,9 @@ $(document).ready(function() {
         var descomprimirzipbuttons = document.getElementsByClassName('descomprimirzip');
         for (var i = 0; i < descomprimirzipbuttons.length; i++) {
             descomprimirzipbuttons[i].addEventListener("click", function() {
+                if (document.getElementById('gifloading') != null) {
+                    document.getElementById("gifloading").style.visibility = "visible";
+                }
                 var tqxhr = $.ajax({
                     url: 'function/gestordescomprimirzip.php',
                     data: {
@@ -353,6 +362,9 @@ $(document).ready(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
+                        if (document.getElementById('gifloading') != null) {
+                            document.getElementById("gifloading").style.visibility = "hidden";
+                        }
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -380,6 +392,9 @@ $(document).ready(function() {
         var comprimircarpetazipbuttons = document.getElementsByClassName('comprimirzipfolder');
         for (var i = 0; i < comprimircarpetazipbuttons.length; i++) {
             comprimircarpetazipbuttons[i].addEventListener("click", function() {
+                if (document.getElementById('gifloading') != null) {
+                    document.getElementById("gifloading").style.visibility = "visible";
+                }
                 var tqxhr = $.ajax({
                     url: 'function/gestorcomprimircarpetazip.php',
                     data: {
@@ -388,6 +403,10 @@ $(document).ready(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
+                        if (document.getElementById('gifloading') != null) {
+                            document.getElementById("gifloading").style.visibility = "hidden";
+                        }
+
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
                         } else if (data.eserror == "noexiste") {
@@ -505,6 +524,9 @@ $(document).ready(function() {
         $("#bpegar").click(function() {
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nEn caso de existir un archivo con el mismo nombre se sobrescribirá.\n\n¿Seguro que quieres continuar?");
             if (eleccion == true) {
+                if (document.getElementById('gifloading') != null) {
+                    document.getElementById("gifloading").style.visibility = "visible";
+                }
                 var tqxhr = $.ajax({
                     url: 'function/gestorpegarfiles.php',
                     data: {
@@ -512,6 +534,10 @@ $(document).ready(function() {
                     },
                     type: 'POST',
                     success: function(data) {
+                        if (document.getElementById('gifloading') != null) {
+                            document.getElementById("gifloading").style.visibility = "hidden";
+                        }
+
                         if (data == "nocopy") {
                             alert("Nada que pegar");
                         } else if (data == "noexiste") {
