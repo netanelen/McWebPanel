@@ -61,13 +61,17 @@ if (isset($_SESSION['IDENTIFICARSESSION'])) {
 
   if (file_exists($rutanofunction)) {
     require_once("config/confopciones.php");
-  }else{
+  } else {
     if (file_exists($rutasifunction)) {
       require_once("../config/confopciones.php");
     }
   }
 
-  $getconflakey = CONFIGSESSIONKEY;
+  $getconflakey = "";
+
+  if (defined('CONFIGSESSIONKEY')) {
+    $getconflakey = CONFIGSESSIONKEY;
+  }
 
   if ($getconflakey != $_SESSION['IDENTIFICARSESSION']) {
     echo '<div class="alert alert-danger" role="alert">Tu sesión no pertenece a este panel, elimina la sesión y vuelve a intentar</div>';
