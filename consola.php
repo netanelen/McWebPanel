@@ -83,7 +83,7 @@ require_once("template/header.php");
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <textarea readonly class="form-control textoconsola mb-1" id="laconsola" name="laconsola" rows="24" cols="100"></textarea>
+                                    <textarea readonly class="form-control textoconsola mb-1" id="laconsola" name="laconsola"></textarea>
                                 </div>
                             </div>
 
@@ -92,18 +92,18 @@ require_once("template/header.php");
                         <?php
                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconsolaenviar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconsolaenviar'] == 1) {
                         ?>
-                        <div class="py-0">
+                            <div class="py-0">
 
-                            <div class="row">
-                                <div class="col-md-11">
-                                    <input type="text" class="form-control mb-2" id="elcomando" name="elcomando" placeholder="Comando">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <input type="text" class="form-control mb-2" id="elcomando" name="elcomando" placeholder="Comando">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-primary mb-2" id="botonconsola" type="button">Enviar</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <button class="btn btn-primary mb-2" id="botonconsola" type="button">Enviar</button>
-                                </div>
+
                             </div>
-
-                        </div>
                         <?php
                         }
                         ?>

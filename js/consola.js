@@ -18,6 +18,16 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(document).ready(function() {
 
+    function redimensionar() {
+        var tamano = window.innerHeight;
+        tamano = tamano - 150;
+        document.getElementById("laconsola").style.height = tamano + "px";
+    }
+
+    redimensionar();
+
+    window.addEventListener("resize", redimensionar);
+
     var myVar = setInterval(myTimer, 500);
 
     function myTimer() {
