@@ -61,6 +61,22 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //EVITAR CIERTAS EXTENSIONES
+            if ($elerror == 0) {
+
+                $verificar = array('phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'exe', 'pl', 'asp', 'aspx', 'shtml', 'shtm', 'fcgi', 'fpl', 'jsp', 'htm', 'html', 'wml', 'js', 'xhtml', 'xht', 'asa', 'cer', 'asax', 'swf', 'xap', 'css', 'sh', 'ksh', 'bash', 'zsh', 'py', 'pdf');
+
+                for ($i = 0; $i < count($verificar); $i++) {
+
+                    $test = substr_count(strtolower($renombre), $verificar[$i]);
+
+                    if ($test >= 1) {
+                        $retorno = "renomnovalido";
+                        $elerror = 1;
+                    }
+                }
+            }
+
             //COMPROVAR SI ESTA VACIO ARCHIVO
             if ($elerror == 0) {
                 if ($archivo == "") {
