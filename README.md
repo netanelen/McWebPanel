@@ -104,3 +104,17 @@ Abre el navegador y entra en el panel
 ```
 http://la-ip-del-servidor
 ```
+
+## Construido con 🛠️
+
+* [Bootstrap](https://getbootstrap.com/) - Bootstrap
+* [jQuery](https://jquery.com/) - jQuery
+* [PHP](https://www.php.net/) - PHP
+
+## Colaboradores ✒️
+
+* **Bluewolf** - *Tester Oficial* - [BluewolfYT](https://github.com/BluewolfYT)
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (GPLv3) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
