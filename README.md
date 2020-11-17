@@ -117,4 +117,4 @@ http://la-ip-del-servidor
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (GPLv3) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia (GPLv3) - mira el archivo [LICENSE](LICENSE) para detalles
