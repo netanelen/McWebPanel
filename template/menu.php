@@ -81,7 +81,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
         <li class="nav-item menu-hover">
             <a class="nav-link" href="minecraft.php">
                 <img class="d-block float-left mr-2" src="img/menu/config.png" alt="confmine">
-                <h6 class="text-light">Config Minecraft</h6>
+                <h6 class="text-light">Config minecraft</h6>
             </a>
         </li>
 
@@ -96,7 +96,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
         <li class="nav-item menu-hover">
             <a class="nav-link" href="tareas.php">
                 <img class="d-block float-left mr-2" src="img/menu/tarea.png" alt="tarea">
-                <h6 class="text-light">Prog Tareas</h6>
+                <h6 class="text-light">Prog tareas</h6>
             </a>
         </li>
 
@@ -122,7 +122,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
         <li class="nav-item menu-hover">
             <a class="nav-link" href="sysconf.php">
                 <img class="d-block float-left mr-2" src="img/menu/sysconf.png" alt="sysconf">
-                <h6 class="text-light">System Config</h6>
+                <h6 class="text-light">System config</h6>
             </a>
         </li>
     <?php
@@ -136,7 +136,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
         <li class="nav-item menu-hover">
             <a class="nav-link" href="subirserver.php">
                 <img class="d-block float-left mr-2" src="img/menu/subida.png" alt="subida">
-                <h6 class="text-light">Subir Servidor</h6>
+                <h6 class="text-light">Subir servidor</h6>
             </a>
         </li>
     <?php
@@ -164,7 +164,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
         <li class="nav-item menu-hover">
             <a class="nav-link" href="gestorarchivos.php">
                 <img class="d-block float-left mr-2" src="img/menu/carpeta.png" alt="gestarch">
-                <h6 class="text-light">Gestor Archivos</h6>
+                <h6 class="text-light">Gestor archivos</h6>
             </a>
         </li>
     <?php
@@ -180,7 +180,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
             <li class="nav-item menu-hover">
                 <a class="nav-link" href="gestorusers.php">
                     <img class="d-block float-left mr-2" src="img/menu/users.png" alt="gestusers">
-                    <h6 class="text-light">Gestor Usuarios</h6>
+                    <h6 class="text-light">Gestor usuarios</h6>
                 </a>
             </li>
 
@@ -196,7 +196,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <li class="nav-item menu-hover">
         <a class="nav-link" href="salir.php">
             <img class="d-block float-left mr-2" src="img/menu/salir.png" alt="salir">
-            <h6 class="text-light">Salir</h6>
+            <h6 class="text-light">Cerrar sessión</h6>
         </a>
     </li>
 
