@@ -43,6 +43,27 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         if (isset($_POST['action']) && !empty($_POST['action'])) {
 
+            function guardareinicio($rutaelsh, $elcom)
+            {
+                $rutaelsh .= "/start.sh";
+
+                clearstatcache();
+                if (file_exists($rutaelsh)) {
+                    clearstatcache();
+                    if (is_writable($rutaelsh)) {
+                        $file = fopen($rutaelsh, "w");
+                        fwrite($file, "#!/bin/sh" . PHP_EOL);
+                        fwrite($file, $elcom . PHP_EOL);
+                        fclose($file);
+                    }
+                } else {
+                    $file = fopen($rutaelsh, "w");
+                    fwrite($file, "#!/bin/sh" . PHP_EOL);
+                    fwrite($file, $elcom . PHP_EOL);
+                    fclose($file);
+                }
+            }
+
             $retorno = "";
             $elerror = 0;
 
@@ -151,7 +172,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     clearstatcache();
                     if (file_exists($rutaescrivir)) {
                         clearstatcache();
-                        if (is_writable($rutaconfigproperties)) {
+                        if (is_writable($rutaescrivir)) {
                             $file = fopen($rutaescrivir, "w");
                             fwrite($file, "eula=true" . PHP_EOL);
                             fclose($file);
@@ -177,10 +198,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //VERIFICAR SI EXISTE REALMENTE
             if ($elerror == 0) {
-                $rutajar = $rutacarpetamine . "/" . $reccarpmine . "/" . $recarchivojar;
+                $rutajar = $rutacarpetamine . "/" . $recarchivojar;
 
                 clearstatcache();
-                if (!file_exists($rutacarpetamine)) {
+                if (!file_exists($rutajar)) {
                     $elerror = 1;
                     $retorno = "noexistejar";
                 }
@@ -254,14 +275,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //INICIAR SERVIDOR
             if ($elerror == 0) {
                 $comandoserver = "";
+                $larutash = "";
 
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
                 $rutacarpetamine = trim($rutacarpetamine);
+                $larutash = $rutacarpetamine . "/" . $reccarpmine;
                 $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
 
                 $inigc = "";
                 $iniforceupg = "";
                 $inieracecache = "";
+
+                $cominiciostart = "";
 
                 if ($recgarbagecolector == "1") {
                     $inigc = "-XX:+UseConcMarkSweepGC";
@@ -282,12 +307,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 } elseif ($rectiposerv == "spigot") {
                     //shell_exec('cd minecraft1 && screen -dmS minecraft1 java -Xms1G -Xmx8G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar /var/www/mineadmin/minecraft1/server.jar nogui -nojline --log-strip-color');
                     $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui -nojline --log-strip-color";
+                    $cominiciostart = "screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui -nojline --log-strip-color";
+                    guardareinicio($larutash, $cominiciostart);
                 } elseif ($rectiposerv == "paper") {
                     $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
+                    $cominiciostart = "screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";;
+                    guardareinicio($larutash, $cominiciostart);
                 } elseif ($rectiposerv == "otros") {
                     $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
                 }
-
 
                 $elpid = shell_exec($comandoserver);
                 $retorno = "ok";
