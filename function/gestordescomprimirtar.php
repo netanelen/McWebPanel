@@ -20,6 +20,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
+require_once("../config/confopciones.php");
 
 function test_input($data)
 {
@@ -50,6 +51,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $lacarpeta = "";
             $tipodecompress = "";
             $test = 0;
+
+            $permcomando = "";
+            $dirconfig = "";
+            $elnombrescreen = CONFIGDIRECTORIO;
 
             $archivo = test_input($_POST['action']);
 
@@ -163,6 +168,17 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     exec($permcomando);
                     $permcomando = "cd '" . $lacarpeta . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
                     exec($permcomando);
+
+                    //PROTECCION SH
+                    $dirconfig = dirname(getcwd()) . PHP_EOL;
+                    $dirconfig = trim($dirconfig);
+                    $dirconfig .= "/" . $elnombrescreen;
+
+                    $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
+                    clearstatcache();
+                    if (file_exists($permcomando)) {
+                        exec($permcomando);
+                    }
 
                     $retorno = "ok";
                 } else {

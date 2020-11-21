@@ -49,6 +49,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $elpid = "";
       $laejecucion = "";
       $paraejecutar = "";
+      $permcomando = "";
 
       $paraejecutar = addslashes($_POST['action']);
 
@@ -72,6 +73,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           exec($permcomando);
           $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
           exec($permcomando);
+
+          //PROTECCION SH
+          $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
+          clearstatcache();
+          if (file_exists($permcomando)) {
+            exec($permcomando);
+          }
         }
       }
       echo "ok";

@@ -302,7 +302,12 @@ function devolverdatos($losbytes, $opcion)
                                                                             }
                                                                         } else {
                                                                             //Evitar mostrar .htaccess
-                                                                            if ($a[$i] != ".htaccess") {
+                                                                            $archivoconcreto = $rutaarchivo . "/" . $a[$i];
+                                                                            $getinfofile = pathinfo($archivoconcreto);
+                                                                            $tipoarchivo = "." . strtolower($getinfofile['extension']);
+                                                                            $tipoarchivo = trim($tipoarchivo);
+ 
+                                                                            if ($tipoarchivo != ".htaccess" && $tipoarchivo != ".sh") {
                                                                                 $farchivos[] = $a[$i];
                                                                             }
                                                                         }

@@ -124,6 +124,13 @@ if ($elerror == 0) {
                                                                 exec($permcomando);
                                                                 $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
                                                                 exec($permcomando);
+
+                                                                //PROTECCION SH
+                                                                $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
+                                                                clearstatcache();
+                                                                if (file_exists($permcomando)) {
+                                                                    exec($permcomando);
+                                                                }
                                                             }
 
                                                             break;
@@ -446,6 +453,13 @@ if ($elerror == 0) {
                                                                     exec($permcomando);
                                                                     $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
                                                                     exec($permcomando);
+
+                                                                    //PROTECCION SH
+                                                                    $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
+                                                                    clearstatcache();
+                                                                    if (file_exists($permcomando)) {
+                                                                        exec($permcomando);
+                                                                    }
                                                                 }
                                                             }
 
