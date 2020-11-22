@@ -67,6 +67,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $loserrores = 0;
             $verificarex = "";
 
+            $permcomando = "";
+            $dirconfig = "";
+
             $archivo = test_input($_POST['action']);
 
             //Evitar poder ir a una ruta hacia atras
@@ -149,6 +152,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //CREAR CARPETA
                 mkdir("$dirmine", 0700);
 
+                //PERFMISOS FTP
+                $permcomando = "chmod 775 '" . $dirmine . "'";
+                exec($permcomando);
+
                 //GUARDAR FICHERO .htaccess
                 $diraccess = $dirmine . "/.htaccess";
                 $fileht = fopen($diraccess, "w");
@@ -163,6 +170,24 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 exec($elcomando, $out, $oky);
 
                 if (!$oky) {
+
+                    //PERFMISOS FTP
+                    $dirconfig = dirname(getcwd()) . PHP_EOL;
+                    $dirconfig = trim($dirconfig);
+                    $dirconfig .= "/" . $reccarpmine;
+
+                    $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
+                    exec($permcomando);
+                    $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
+                    exec($permcomando);
+
+                    //PROTECCION SH
+                    $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
+                    clearstatcache();
+                    if (file_exists($dirconfig . "/start.sh")) {
+                        exec($permcomando);
+                    }
+                    
                     $retorno = "okrestore";
                 } else {
                     $retorno = "norestore";
