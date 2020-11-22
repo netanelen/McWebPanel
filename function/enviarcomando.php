@@ -77,7 +77,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           //PROTECCION SH
           $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
           clearstatcache();
-          if (file_exists($permcomando)) {
+          if (file_exists($dirconfig . "/start.sh")) {
             exec($permcomando);
           }
         }
