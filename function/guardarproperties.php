@@ -34,7 +34,6 @@ function test_input($data)
 function test_motd($data)
 {
   $data = trim($data);
-  $data = htmlspecialchars($data);
   return $data;
 }
 
