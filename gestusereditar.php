@@ -148,6 +148,20 @@ require_once("template/header.php");
 
                                                                             <div class="form-group">
                                                                                 <div>
+                                                                                    <input id="pstatusrestartserver" name="pstatusrestartserver" type="checkbox" value="1" <?php
+                                                                                                                                                                        if (array_key_exists('pstatusrestartserver', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                            if ($_SESSION['EDITARUSUARIO']['pstatusrestartserver'] == 1) {
+                                                                                                                                                                                echo "checked";
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                        ?>>
+                                                                                    <label class="negrita mr-2" for="pstatusrestartserver">Reiniciar Servidor</label>
+                                                                                </div>
+                                                                                <p>Permite al usuario reiniciar el servidor.</p>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <div>
                                                                                     <input id="pstatusstopserver" name="pstatusstopserver" type="checkbox" value="1" <?php
                                                                                                                                                                         if (array_key_exists('pstatusstopserver', $_SESSION['EDITARUSUARIO'])) {
                                                                                                                                                                             if ($_SESSION['EDITARUSUARIO']['pstatusstopserver'] == 1) {

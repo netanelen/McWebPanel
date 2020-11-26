@@ -66,6 +66,28 @@ $(document).ready(function() {
         });
     });
 
+    $("#breiniciar").click(function() {
+        var jqxhr = $.ajax({
+            url: 'function/restartserver.php',
+            data: {
+                action: 'eltexto'
+            },
+            type: 'POST',
+            success: function(data) {
+                var getdebug = 0;
+                if (getdebug == 1) {
+                    alert(data);
+                }
+                if (data == "ok") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Reiniciando Servidor.</div>";
+                }
+            },
+            error: function(errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    });
+
     $("#bparar").click(function() {
         var jqxhr = $.ajax({
             url: 'function/stopserver.php',
@@ -114,6 +136,10 @@ $(document).ready(function() {
         document.getElementById("binicio").disabled = true;
     }
 
+    if (document.getElementById('breiniciar') != null) {
+        document.getElementById("breiniciar").disabled = true;
+    }
+
     if (document.getElementById('bparar') != null) {
         document.getElementById("bparar").disabled = true;
     }
@@ -142,6 +168,10 @@ $(document).ready(function() {
                         document.getElementById("binicio").disabled = false;
                     }
 
+                    if (document.getElementById('breiniciar') != null) {
+                        document.getElementById("breiniciar").disabled = true;
+                    }
+
                     if (document.getElementById('bparar') != null) {
                         document.getElementById("bparar").disabled = true;
                     }
@@ -160,6 +190,10 @@ $(document).ready(function() {
 
                     if (document.getElementById('binicio') != null) {
                         document.getElementById("binicio").disabled = true;
+                    }
+
+                    if (document.getElementById('breiniciar') != null) {
+                        document.getElementById("breiniciar").disabled = false;
                     }
 
                     if (document.getElementById('bparar') != null) {

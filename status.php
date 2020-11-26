@@ -40,7 +40,6 @@ function test_input($data)
 <body id="page-top">
 
     <?php
-
     //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
     if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
         $_SESSION['VALIDADO'] = "NO";
@@ -98,16 +97,26 @@ function test_input($data)
                                                         <div class="card-body">
 
                                                             <?php
+
+                                                            $rectiposerv = CONFIGTIPOSERVER;
+
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusstarserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusstarserver'] == 1) {
-                                                                echo ('<button class="btn btn-primary mx-1" id="binicio" name="binicio" value="binicio" type="button">Iniciar Servidor</button>');
+                                                                echo '<button class="btn btn-primary mx-1" id="binicio" name="binicio" value="binicio" type="button">Iniciar Servidor</button>';
+                                                            }
+
+                                                            if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusrestartserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusrestartserver'] == 1) {
+
+                                                                if ($rectiposerv == "spigot" || $rectiposerv == "paper") {
+                                                                    echo '<button class="btn btn-warning mx-1" id="breiniciar" name="breiniciar" value="breiniciar" type="button">Reiniciar Servidor</button>';
+                                                                }
                                                             }
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusstopserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusstopserver'] == 1) {
-                                                                echo ('<button class="btn btn-primary mx-1" id="bparar" name="bparar" value="bparar" type="button">Apagar Servidor</button>');
+                                                                echo '<button class="btn btn-primary mx-1" id="bparar" name="bparar" value="bparar" type="button">Apagar Servidor</button>';
                                                             }
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatuskillserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatuskillserver'] == 1) {
-                                                            echo ('<button class="btn btn-danger mx-1" id="bkill" name="bkill" value="bkill" type="button">Matar Servidor</button>');
+                                                                echo '<button class="btn btn-danger mx-1" id="bkill" name="bkill" value="bkill" type="button">Matar Servidor</button>';
                                                             }
                                                             ?>
 

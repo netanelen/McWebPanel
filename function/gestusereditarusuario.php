@@ -226,6 +226,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pstatusstarserver'] = 0;
                             }
 
+                            if (isset($_POST['pstatusrestartserver'])) {
+                                $arrayobtenido[$i]['pstatusrestartserver'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pstatusrestartserver'] = 0;
+                            }
+
                             if (isset($_POST['pstatusstopserver'])) {
                                 $arrayobtenido[$i]['pstatusstopserver'] = 1;
                             } else {
