@@ -18,14 +18,23 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 Estos son los requisitos para que McWebPanel funcione
 
 ```
-Ubuntu Server 18/20 (Sistema Operativo)
-Apache2             (Servidor Web)
-Php 7.2 o superior  (Paginas PHP)
+Sistemas Operativos:
+Debian 10.5 | 10.6
+Ubuntu Server 18.04 | 20.04
+
+Servidor Web:
+Apache2
+
+Versiones PHP compatibles:
+PHP 7.2 | PHP 7.3 | PHP 7.4 | PHP 8.0
+
 OpenJDK             (Maquina Virtual Java)
 screen              (GNU Screen)
 php-mbstring        (Libreria strings php)
 php-zip             (Libreria Zip php)
 php-cli             (Libreria cli php)
+unzip               (De-archiver)
+gawk                (GNU awk)
 Apache Mod Rewrite  (Modulo Activado)
 ```
 
