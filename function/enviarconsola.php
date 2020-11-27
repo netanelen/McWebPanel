@@ -42,7 +42,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
   if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconsolaread', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconsolaread'] == 1) {
 
     if (isset($_POST['action']) && !empty($_POST['action'])) {
-      $devolucion = utf8_decode("");
+      $devolucion = "";
       $rutaarchivo = "";
 
       //OBTENER RUTA LOG MINECRAFT
@@ -57,7 +57,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         if (is_readable($rutaarchivo)) {
           $devolucion = file_get_contents($rutaarchivo);
         } else {
-          $devolucion = "No se puede leer el archvio";
+          $devolucion = "No se puede leer el archivo";
         }
       } else {
         $devolucion = "";
