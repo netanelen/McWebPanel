@@ -16,20 +16,17 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     $("#binicio").click(function() {
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/startserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
+
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor iniciado correctamente.</div>";
                 } else if (data == "noexistecarpetaminecraft") {
@@ -59,99 +56,76 @@ $(document).ready(function() {
                 } else if (data == "eulanowrite") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo eula.txt del servidor minecraft no tiene permisos de escritura.</div>";
                 }
-            },
-            error: function(errorThrown) {
-                alert(errorThrown);
             }
         });
     });
 
     $("#breiniciar").click(function() {
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/restartserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
+
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Reiniciando Servidor.</div>";
                 }
-            },
-            error: function(errorThrown) {
-                alert(errorThrown);
             }
         });
     });
 
     $("#bparar").click(function() {
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/stopserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
+
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor apagado correctamente.</div>";
                 }
-            },
-            error: function(errorThrown) {
-                alert(errorThrown);
             }
         });
     });
 
     $("#bkill").click(function() {
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/killserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
+
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>El servidor fue matado correctamente.</div>";
                 }
-            },
-            error: function(errorThrown) {
-                alert(errorThrown);
             }
         });
     });
 
-    if (document.getElementById('binicio') != null) {
+    if (document.getElementById('binicio') !== 'null') {
         document.getElementById("binicio").disabled = true;
     }
 
-    if (document.getElementById('breiniciar') != null) {
+    if (document.getElementById('breiniciar') !== 'null') {
         document.getElementById("breiniciar").disabled = true;
     }
 
-    if (document.getElementById('bparar') != null) {
+    if (document.getElementById('bparar') !== 'null') {
         document.getElementById("bparar").disabled = true;
     }
 
-    if (document.getElementById('bkill') != null) {
+    if (document.getElementById('bkill') !== 'null') {
         document.getElementById("bkill").disabled = true;
     }
 
-    var myVar = setInterval(myTimer, 1000);
-
     function myTimer() {
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/funciones.php',
             data: {
                 action: 'status'
@@ -159,48 +133,52 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             success: function(data) {
-                document.getElementById("textoservidor").innerHTML = "Servidor: " + data.encendido;
-                document.getElementById("horaserver").innerHTML = "Hora Servidor: " + data.hora;
+
+                document.getElementById("textoservidor").innerHTML = "Servidor: " + String(data.encendido);
+                document.getElementById("horaserver").innerHTML = "Hora Servidor: " + String(data.hora);
 
                 if (data.encendido == "Apagado") {
 
-                    if (document.getElementById('binicio') != null) {
+                    if (document.getElementById('binicio') !== 'null') {
                         document.getElementById("binicio").disabled = false;
                     }
 
-                    if (document.getElementById('breiniciar') != null) {
+                    if (document.getElementById('breiniciar') !== 'null') {
                         document.getElementById("breiniciar").disabled = true;
                     }
 
-                    if (document.getElementById('bparar') != null) {
+                    if (document.getElementById('bparar') !== 'null') {
                         document.getElementById("bparar").disabled = true;
                     }
 
-                    if (document.getElementById('bkill') != null) {
+                    if (document.getElementById('bkill') !== 'null') {
                         document.getElementById("bkill").disabled = true;
                     }
 
                     document.getElementById("textocpu").innerHTML = "Cpu:";
                     document.getElementById("textoram").innerHTML = "Ram:";
+
                 } else if (data.encendido == "Encendido") {
-                    document.getElementById("textocpu").innerHTML = "Cpu: " + data.cpu + "%";
-                    if (data.memoria != "") {
-                        document.getElementById("textoram").innerHTML = "Ram: " + data.memoria + " / Total: " + data.ramconfig + " GB";
+
+                    document.getElementById("textocpu").innerHTML = "Cpu: " + String(data.cpu) + "%";
+
+                    if (data.memoria !== "null") {
+                        document.getElementById("textoram").innerHTML = "Ram: " + String(data.memoria) + " / Total: " + String(data.ramconfig) + " GB";
                     }
 
-                    if (document.getElementById('binicio') != null) {
+                    if (document.getElementById('binicio') !== 'null') {
                         document.getElementById("binicio").disabled = true;
                     }
 
-                    if (document.getElementById('breiniciar') != null) {
+                    if (document.getElementById('breiniciar') !== 'null') {
                         document.getElementById("breiniciar").disabled = false;
                     }
 
-                    if (document.getElementById('bparar') != null) {
+                    if (document.getElementById('bparar') !== 'null') {
                         document.getElementById("bparar").disabled = false;
                     }
 
-                    if (document.getElementById('bkill') != null) {
+                    if (document.getElementById('bkill') !== 'null') {
                         document.getElementById("bkill").disabled = false;
                     }
                 }
@@ -208,11 +186,11 @@ $(document).ready(function() {
         });
     }
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
+    setInterval(myTimer, 1000);
 
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -228,6 +206,6 @@ $(document).ready(function() {
         });
     }
 
-
+    setInterval(sessionTimer, 1000);
 
 });
