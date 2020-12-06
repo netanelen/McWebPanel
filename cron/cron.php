@@ -145,6 +145,27 @@ if ($elerror == 0) {
 
                                                             if ($elpid == "") {
 
+                                                                function guardareinicio($rutaelsh, $elcom)
+                                                                {
+                                                                    $rutaelsh .= "/start.sh";
+
+                                                                    clearstatcache();
+                                                                    if (file_exists($rutaelsh)) {
+                                                                        clearstatcache();
+                                                                        if (is_writable($rutaelsh)) {
+                                                                            $file = fopen($rutaelsh, "w");
+                                                                            fwrite($file, "#!/bin/sh" . PHP_EOL);
+                                                                            fwrite($file, $elcom . PHP_EOL);
+                                                                            fclose($file);
+                                                                        }
+                                                                    } else {
+                                                                        $file = fopen($rutaelsh, "w");
+                                                                        fwrite($file, "#!/bin/sh" . PHP_EOL);
+                                                                        fwrite($file, $elcom . PHP_EOL);
+                                                                        fclose($file);
+                                                                    }
+                                                                }
+
                                                                 $retorno = "";
                                                                 $elerror = 0;
 
@@ -154,6 +175,8 @@ if ($elerror == 0) {
                                                                 $rectiposerv = CONFIGTIPOSERVER;
                                                                 $receulaminecraft = CONFIGEULAMINECRAFT;
                                                                 $recpuerto = CONFIGPUERTO;
+
+                                                                $recgarbagecolector = CONFIGOPTIONGARBAGE;
 
                                                                 $rutacarpetamine = "";
 
@@ -366,17 +389,31 @@ if ($elerror == 0) {
                                                                 if ($elerror == 0) {
 
                                                                     $comandoserver = "";
+                                                                    $cominiciostart = "";
+                                                                    $larutash = "";
+                                                                    $inigc = "";
+
+                                                                    if ($recgarbagecolector == "1") {
+                                                                        $inigc = "-XX:+UseConcMarkSweepGC";
+                                                                    } elseif ($recgarbagecolector == "2") {
+                                                                        $inigc = "-XX:+UseG1GC";
+                                                                    }
 
                                                                     $rutacarpetamine = $RUTAPRINCIPAL;
                                                                     $rutacarpetamine = trim($rutacarpetamine);
+                                                                    $larutash = $rutacarpetamine . "/" . $reccarpmine;
                                                                     $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
 
                                                                     if ($rectiposerv == "vanilla") {
                                                                         $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     } elseif ($rectiposerv == "spigot") {
                                                                         $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        guardareinicio($larutash, $cominiciostart);
                                                                     } elseif ($rectiposerv == "paper") {
                                                                         $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
+                                                                        guardareinicio($larutash, $cominiciostart);
                                                                     } elseif ($rectiposerv == "otros") {
                                                                         $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     }
