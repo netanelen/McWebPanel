@@ -16,16 +16,12 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     $("#guardaserver").click(function() {
         var eldata = $("#formconf :input").serializeArray();
 
         $.post($("#formconf").attr("action"), eldata, function(data) {
-            var getdebug = 0;
-            if (getdebug == 1) {
-                alert(data);
-            }
 
             if (data == "nowriteconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta config no tiene permisos de escritura.</div>";
@@ -37,7 +33,7 @@ $(document).ready(function() {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
                 document.getElementById("guardaserver").disabled = true;
             }
-        })
+        });
 
     });
 
@@ -48,86 +44,86 @@ $(document).ready(function() {
 
     document.getElementById("guardaserver").disabled = true;
 
-    if (document.getElementById('elnomserv') != null) {
-        $("#elnomserv").keyup(function(e) {
+    if (document.getElementById('elnomserv') !== 'null') {
+        $("#elnomserv").keyup(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
 
-            if (this.value == "") {
+            if (this.value === "") {
                 document.getElementById("guardaserver").disabled = true;
             }
 
         });
 
-        document.getElementById("elnomserv").addEventListener('paste', function(event) {
+        document.getElementById("elnomserv").addEventListener('paste', function() {
             document.getElementById("guardaserver").disabled = false;
         });
     }
 
-    if (document.getElementById('eltipserv') != null) {
+    if (document.getElementById('eltipserv') !== 'null') {
         $("#eltipserv").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('elmaxupload') != null) {
+    if (document.getElementById('elmaxupload') !== 'null') {
         $("#elmaxupload").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('elram') != null) {
+    if (document.getElementById('elram') !== 'null') {
         $("#elram").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('listadojars') != null) {
+    if (document.getElementById('listadojars') !== 'null') {
         $("#listadojars").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('basura0') != null) {
+    if (document.getElementById('basura0') !== 'null') {
         $("#basura0").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('basura1') != null) {
+    if (document.getElementById('basura1') !== 'null') {
         $("#basura1").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('basura2') != null) {
+    if (document.getElementById('basura2') !== 'null') {
         $("#basura2").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('opforceupgrade') != null) {
+    if (document.getElementById('opforceupgrade') !== 'null') {
         $("#opforceupgrade").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('operasecache') != null) {
+    if (document.getElementById('operasecache') !== 'null') {
         $("#operasecache").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('elport') != null) {
+    if (document.getElementById('elport') !== 'null') {
         $("#elport").change(function() {
             var elnumero = document.getElementById("elport").value;
             document.getElementById("result").innerHTML = "";
@@ -140,7 +136,7 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementById('elport') != null) {
+    if (document.getElementById('elport') !== 'null') {
         $("#elport").keypress(function(e) {
             if (e.keyCode < 48 || e.keyCode > 57) {
                 return false;
@@ -150,11 +146,9 @@ $(document).ready(function() {
         });
     }
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -169,5 +163,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

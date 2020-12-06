@@ -16,9 +16,9 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
-    if (document.getElementsByClassName('entrar') != null) {
+    if (document.getElementsByClassName('entrar') !== 'null') {
         var entrarbuttons = document.getElementsByClassName('entrar');
         for (var i = 0; i < entrarbuttons.length; i++) {
             entrarbuttons[i].addEventListener("click", function() {
@@ -29,10 +29,6 @@ $(document).ready(function() {
                         action: this.value
                     },
                     success: function(data) {
-                        var getdebug = 0;
-                        if (getdebug == 1) {
-                            alert(data);
-                        }
 
                         if (data == "OK") {
                             location.reload();
@@ -44,11 +40,11 @@ $(document).ready(function() {
                     }
                 });
 
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('atras') != null) {
+    if (document.getElementsByClassName('atras') !== 'null') {
         var atrasbuttons = document.getElementsByClassName('atras');
         for (var i = 0; i < atrasbuttons.length; i++) {
             atrasbuttons[i].addEventListener("click", function() {
@@ -59,10 +55,6 @@ $(document).ready(function() {
                         action: this.value
                     },
                     success: function(data) {
-                        var getdebug = 0;
-                        if (getdebug == 1) {
-                            alert(data);
-                        }
 
                         if (data == "OK") {
                             location.reload();
@@ -74,16 +66,16 @@ $(document).ready(function() {
                     }
                 });
 
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('borrarfile') != null) {
+    if (document.getElementsByClassName('borrarfile') !== 'null') {
         var borrarfilebuttons = document.getElementsByClassName('borrarfile');
         for (var i = 0; i < borrarfilebuttons.length; i++) {
             borrarfilebuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el archivo: " + this.id + " ?");
-                if (eleccion == true) {
+                if (eleccion === true) {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorborrarfile.php",
@@ -91,10 +83,6 @@ $(document).ready(function() {
                             action: this.value
                         },
                         success: function(data) {
-                            var getdebug = 0;
-                            if (getdebug == 1) {
-                                alert(data);
-                            }
 
                             if (data == "1") {
                                 location.reload();
@@ -115,16 +103,16 @@ $(document).ready(function() {
                         }
                     });
                 }
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('borrarcarpeta') != null) {
+    if (document.getElementsByClassName('borrarcarpeta') !== 'null') {
         var borrarcarpetabuttons = document.getElementsByClassName('borrarcarpeta');
         for (var i = 0; i < borrarcarpetabuttons.length; i++) {
             borrarcarpetabuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar la carpeta: " + this.id + " ?");
-                if (eleccion == true) {
+                if (eleccion === true) {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorborrarcarpeta.php",
@@ -132,10 +120,6 @@ $(document).ready(function() {
                             action: this.value
                         },
                         success: function(data) {
-                            var getdebug = 0;
-                            if (getdebug == 1) {
-                                alert(data);
-                            }
 
                             if (data == "1") {
                                 location.reload();
@@ -160,16 +144,16 @@ $(document).ready(function() {
                         }
                     });
                 }
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('renamefile') != null) {
+    if (document.getElementsByClassName('renamefile') !== 'null') {
         var renamefilebuttons = document.getElementsByClassName('renamefile');
         for (var i = 0; i < renamefilebuttons.length; i++) {
             renamefilebuttons[i].addEventListener("click", function() {
                 var renombrado = prompt("Renombrar fichero:", this.id);
-                if (renombrado != null) {
+                if (renombrado !== 'null') {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorenamefile.php",
@@ -178,10 +162,6 @@ $(document).ready(function() {
                             renombre: renombrado
                         },
                         success: function(data) {
-                            var getdebug = 0;
-                            if (getdebug == 1) {
-                                alert(data);
-                            }
 
                             if (data == "1") {
                                 location.reload();
@@ -207,16 +187,16 @@ $(document).ready(function() {
                         }
                     });
                 }
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('renamefolder') != null) {
+    if (document.getElementsByClassName('renamefolder') !== 'null') {
         var renamefolderbuttons = document.getElementsByClassName('renamefolder');
         for (var i = 0; i < renamefolderbuttons.length; i++) {
             renamefolderbuttons[i].addEventListener("click", function() {
                 var renombrado = prompt("Renombrar carpeta:", this.id);
-                if (renombrado != null) {
+                if (renombrado !== 'null') {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorrenamefolder.php",
@@ -225,10 +205,6 @@ $(document).ready(function() {
                             renombre: renombrado
                         },
                         success: function(data) {
-                            var getdebug = 0;
-                            if (getdebug == 1) {
-                                alert(data);
-                            }
 
                             if (data == "1") {
                                 location.reload();
@@ -254,11 +230,11 @@ $(document).ready(function() {
                         }
                     });
                 }
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('editarfile') != null) {
+    if (document.getElementsByClassName('editarfile') !== 'null') {
         var editarbuttons = document.getElementsByClassName('editarfile');
         for (var i = 0; i < editarbuttons.length; i++) {
             editarbuttons[i].addEventListener("click", function() {
@@ -269,10 +245,6 @@ $(document).ready(function() {
                         action: this.value
                     },
                     success: function(data) {
-                        var getdebug = 0;
-                        if (getdebug == 1) {
-                            alert(data);
-                        }
 
                         if (data == "OK") {
                             location.href = "editararchivo.php";
@@ -289,27 +261,27 @@ $(document).ready(function() {
                     }
                 });
 
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('descargarfile') != null) {
+    if (document.getElementsByClassName('descargarfile') !== 'null') {
         var descargarbuttons = document.getElementsByClassName('descargarfile');
         for (var i = 0; i < descargarbuttons.length; i++) {
             descargarbuttons[i].addEventListener("click", function() {
                 window.open('function/gestordownfile.php?action=' + this.value, '_blank', 'noopener noreferrer', "toolbar=no,scrollbars=yes,resizable=yes,top=400,left=500,width=400,height=100");
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('descomprimirtar') != null) {
+    if (document.getElementsByClassName('descomprimirtar') !== 'null') {
         var descomprimirtarbuttons = document.getElementsByClassName('descomprimirtar');
         for (var i = 0; i < descomprimirtarbuttons.length; i++) {
             descomprimirtarbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') != null) {
+                if (document.getElementById('gifloading') !== 'null') {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
-                var tqxhr = $.ajax({
+                $.ajax({
                     url: 'function/gestordescomprimirtar.php',
                     data: {
                         action: this.value
@@ -317,7 +289,7 @@ $(document).ready(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') != null) {
+                        if (document.getElementById('gifloading') !== 'null') {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -343,18 +315,18 @@ $(document).ready(function() {
 
                     }
                 });
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('descomprimirzip') != null) {
+    if (document.getElementsByClassName('descomprimirzip') !== 'null') {
         var descomprimirzipbuttons = document.getElementsByClassName('descomprimirzip');
         for (var i = 0; i < descomprimirzipbuttons.length; i++) {
             descomprimirzipbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') != null) {
+                if (document.getElementById('gifloading') !== 'null') {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
-                var tqxhr = $.ajax({
+                $.ajax({
                     url: 'function/gestordescomprimirzip.php',
                     data: {
                         action: this.value
@@ -362,7 +334,7 @@ $(document).ready(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') != null) {
+                        if (document.getElementById('gifloading') !== 'null') {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -384,18 +356,18 @@ $(document).ready(function() {
 
                     }
                 });
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('comprimirzipfolder') != null) {
+    if (document.getElementsByClassName('comprimirzipfolder') !== 'null') {
         var comprimircarpetazipbuttons = document.getElementsByClassName('comprimirzipfolder');
         for (var i = 0; i < comprimircarpetazipbuttons.length; i++) {
             comprimircarpetazipbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') != null) {
+                if (document.getElementById('gifloading') !== 'null') {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
-                var tqxhr = $.ajax({
+                $.ajax({
                     url: 'function/gestorcomprimircarpetazip.php',
                     data: {
                         action: this.value
@@ -403,7 +375,7 @@ $(document).ready(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') != null) {
+                        if (document.getElementById('gifloading') !== 'null') {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -425,15 +397,15 @@ $(document).ready(function() {
 
                     }
                 });
-            })
+            });
         }
     }
 
-    if (document.getElementById('botonsubir') != null) {
+    if (document.getElementById('botonsubir') !== 'null') {
         document.getElementById("botonsubir").disabled = true;
     }
 
-    if (document.getElementById('gifloading') != null) {
+    if (document.getElementById('gifloading') !== 'null') {
         document.getElementById("gifloading").style.visibility = "hidden";
     }
 
@@ -441,23 +413,23 @@ $(document).ready(function() {
         var fileName = $(this).val().split("\\").pop();
 
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        if (document.getElementById('botonsubir') != null) {
+        if (document.getElementById('botonsubir') !== 'null') {
             document.getElementById("botonsubir").disabled = false;
         }
 
     });
 
-    if (document.getElementById('bnactualizar') != null) {
+    if (document.getElementById('bnactualizar') !== 'null') {
         $("#bnactualizar").click(function() {
             location.reload();
         });
     }
 
-    if (document.getElementById('bnnuevacarpeta') != null) {
+    if (document.getElementById('bnnuevacarpeta') !== 'null') {
         $("#bnnuevacarpeta").click(function() {
             var renombrado = prompt("Nombre nueva carpeta:");
-            if (renombrado != null) {
-                var tqxhr = $.ajax({
+            if (renombrado !== 'null') {
+                $.ajax({
                     url: 'function/gestorcrearcarpeta.php',
                     data: {
                         action: renombrado
@@ -481,22 +453,22 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementById('bcopiar') != null) {
+    if (document.getElementById('bcopiar') !== 'null') {
         $("#bcopiar").click(function() {
-            var arrayseleccion = new Array();
+            var arrayseleccion = [];
             var elindice = 0;
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
-                if (checkseleccionados[i].checked == true) {
+                if (checkseleccionados[i].checked === true) {
                     arrayseleccion[elindice] = checkseleccionados[i].value;
                     elindice = elindice + 1;
                 }
             }
 
-            if (arrayseleccion == "") {
+            if (arrayseleccion === "") {
                 alert("No has seleccionado ningún elemento");
             } else {
-                var tqxhr = $.ajax({
+                $.ajax({
                     url: 'function/gestorcopiarfiles.php',
                     data: {
                         action: arrayseleccion
@@ -520,21 +492,21 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementById('bpegar') != null) {
+    if (document.getElementById('bpegar') !== 'null') {
         $("#bpegar").click(function() {
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nEn caso de existir un archivo con el mismo nombre se sobrescribirá.\n\n¿Seguro que quieres continuar?");
-            if (eleccion == true) {
-                if (document.getElementById('gifloading') != null) {
+            if (eleccion === true) {
+                if (document.getElementById('gifloading') !== 'null') {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
-                var tqxhr = $.ajax({
+                $.ajax({
                     url: 'function/gestorpegarfiles.php',
                     data: {
                         action: 'ok'
                     },
                     type: 'POST',
                     success: function(data) {
-                        if (document.getElementById('gifloading') != null) {
+                        if (document.getElementById('gifloading') !== 'null') {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -553,25 +525,25 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementById('beliminarseleccion') != null) {
+    if (document.getElementById('beliminarseleccion') !== 'null') {
         $("#beliminarseleccion").click(function() {
-            var arrayseleccion = new Array();
+            var arrayseleccion = [];
             var elindice = 0;
             var checkseleccionados = document.getElementsByClassName('laseleccion');
 
             for (var i = 0; i < checkseleccionados.length; i++) {
-                if (checkseleccionados[i].checked == true) {
+                if (checkseleccionados[i].checked === true) {
                     arrayseleccion[elindice] = checkseleccionados[i].value;
                     elindice = elindice + 1;
                 }
             }
 
-            if (arrayseleccion == "") {
+            if (arrayseleccion === "") {
                 alert("No has seleccionado ningún elemento");
             } else {
                 var eleccion = confirm("¡ELIMINAR CONFIRMAR ACCIÓN!\n\n¡Vas a eliminar las carpetas o archivos seleccionados!\n\n¿Seguro que quieres continuar?");
-                if (eleccion == true) {
-                    var tqxhr = $.ajax({
+                if (eleccion === true) {
+                    $.ajax({
                         url: 'function/gestorborrarmultiple.php',
                         data: {
                             action: arrayseleccion
@@ -602,7 +574,7 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementById('bselectall') != null) {
+    if (document.getElementById('bselectall') !== 'null') {
         $("#bselectall").click(function() {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
@@ -611,7 +583,7 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementById('bunselectall') != null) {
+    if (document.getElementById('bunselectall') !== 'null') {
         $("#bunselectall").click(function() {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
@@ -621,7 +593,7 @@ $(document).ready(function() {
     }
 
     $("#form").on('submit', (function(e) {
-        if (document.getElementById('gifloading') != null) {
+        if (document.getElementById('gifloading') !== 'null') {
             document.getElementById("gifloading").style.visibility = "visible";
         }
         e.preventDefault();
@@ -633,12 +605,8 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
 
-                if (document.getElementById('gifloading') != null) {
+                if (document.getElementById('gifloading') !== 'null') {
                     document.getElementById("gifloading").style.visibility = "hidden";
                 }
 
@@ -661,17 +629,15 @@ $(document).ready(function() {
                 }
 
             },
-            error: function(e) {
-                alert("error");
+            error: function(errorThrown) {
+                alert(errorThrown);
             }
         });
     }));
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -686,5 +652,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

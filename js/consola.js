@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     function redimensionar() {
         var tamano = window.innerHeight;
@@ -28,22 +28,20 @@ $(document).ready(function() {
 
     window.addEventListener("resize", redimensionar);
 
-    var myVar = setInterval(myTimer, 500);
-
     function myTimer() {
 
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/enviarconsola.php',
             data: {
                 action: 'status'
             },
             type: 'POST',
             success: function(data) {
-                var textoantiguo = document.getElementById("laconsola").value
+                var textoantiguo = document.getElementById("laconsola").value;
 
                 document.getElementById("laconsola").value = data;
 
-                if (data != textoantiguo) {
+                if (data !== textoantiguo) {
                     document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
                 }
 
@@ -51,14 +49,16 @@ $(document).ready(function() {
         });
     }
 
+    setInterval(myTimer, 500);
+
     function enviarcomando() {
         var eltexto = "";
 
-        if (document.getElementById("elcomando").value != "") {
+        if (document.getElementById("elcomando").value !== 'null') {
 
             eltexto = document.getElementById("elcomando").value;
 
-            var jqxhr = $.ajax({
+            $.ajax({
                 url: 'function/enviarcomando.php',
                 data: {
                     action: eltexto
@@ -66,21 +66,18 @@ $(document).ready(function() {
                 type: 'POST',
                 success: function(data) {
                     document.getElementById("elcomando").value = "";
-                },
-                error: function(errorThrown) {
-                    alert(errorThrown);
                 }
             });
         }
     }
 
-    if (document.getElementById('botonconsola') != null) {
+    if (document.getElementById('botonconsola') !== 'null') {
         $("#botonconsola").click(function() {
             enviarcomando();
         });
     }
 
-    if (document.getElementById('elcomando') != null) {
+    if (document.getElementById('elcomando') !== 'null') {
         $("#elcomando").keypress(function(e) {
             if (e.keyCode == 13) {
                 enviarcomando();
@@ -88,11 +85,9 @@ $(document).ready(function() {
         });
     }
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -107,5 +102,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

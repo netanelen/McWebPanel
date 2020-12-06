@@ -16,17 +16,17 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
-    if (document.getElementById('crearbackup') != null) {
+    if (document.getElementById('crearbackup') !== 'null') {
         document.getElementById("crearbackup").disabled = true;
     }
 
-    if (document.getElementById('gifloading') != null) {
+    if (document.getElementById('gifloading') !== 'null') {
         document.getElementById("gifloading").style.visibility = "hidden";
     }
 
-    if (document.getElementById('inputbackup') != null) {
+    if (document.getElementById('inputbackup') !== 'null') {
         $("#inputbackup").keypress(function(e) {
             if (e.keyCode == 32) {
                 return false;
@@ -40,21 +40,21 @@ $(document).ready(function() {
         });
     }
 
-    if (document.getElementsByClassName('descargar') != null) {
+    if (document.getElementsByClassName('descargar') !== 'null') {
         var descargarbuttons = document.getElementsByClassName('descargar');
         for (var i = 0; i < descargarbuttons.length; i++) {
             descargarbuttons[i].addEventListener("click", function() {
                 window.open('function/backupdownfile.php?action=' + this.value, '_blank', 'noopener noreferrer', "toolbar=no,scrollbars=yes,resizable=yes,top=400,left=500,width=400,height=100");
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('restaurar') != null) {
+    if (document.getElementsByClassName('restaurar') !== 'null') {
         var restaurarbuttons = document.getElementsByClassName('restaurar');
         for (var i = 0; i < restaurarbuttons.length; i++) {
             restaurarbuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\nAl Restaurar se borrarán todos los archivos del servidor minecraft.\n\n¿Seguro que quieres continuar?");
-                if (eleccion == true) {
+                if (eleccion === true) {
                     document.getElementById("gifloading").style.visibility = "visible";
                     $.ajax({
                         type: "POST",
@@ -63,10 +63,7 @@ $(document).ready(function() {
                             action: this.value
                         },
                         success: function(data) {
-                            var getdebug = 0;
-                            if (getdebug == 1) {
-                                alert(data);
-                            }
+
                             document.getElementById("gifloading").style.visibility = "hidden";
 
                             if (data == "nowriteraiz") {
@@ -89,16 +86,16 @@ $(document).ready(function() {
                         }
                     });
                 }
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('borrar') != null) {
+    if (document.getElementsByClassName('borrar') !== 'null') {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el backup: " + this.value + " ?");
-                if (eleccion == true) {
+                if (eleccion === true) {
                     var guardanombre = this.value;
                     document.getElementById("gifloading").style.visibility = "visible";
                     $.ajax({
@@ -109,11 +106,6 @@ $(document).ready(function() {
                         },
                         success: function(data) {
                             document.getElementById("gifloading").style.visibility = "hidden";
-
-                            var getdebug = 0;
-                            if (getdebug == 1) {
-                                alert(data);
-                            }
 
                             if (data == "1") {
                                 document.getElementById(guardanombre).closest("tr").remove();
@@ -126,25 +118,25 @@ $(document).ready(function() {
                         }
                     });
                 }
-            })
+            });
         }
     }
 
-    if (document.getElementById('inputbackup') != null) {
-        $("#inputbackup").keyup(function(e) {
-            if (document.getElementById("inputbackup").value == "") {
+    if (document.getElementById('inputbackup') !== 'null') {
+        $("#inputbackup").keyup(function() {
+            if (document.getElementById("inputbackup").value === "") {
                 document.getElementById("crearbackup").disabled = true;
             } else {
                 document.getElementById("crearbackup").disabled = false;
             }
         });
 
-        document.getElementById("inputbackup").addEventListener('paste', function(event) {
+        document.getElementById("inputbackup").addEventListener('paste', function() {
             document.getElementById("crearbackup").disabled = false;
         });
     }
 
-    if (document.getElementById('crearbackup') != null) {
+    if (document.getElementById('crearbackup') !== 'null') {
         $("#crearbackup").click(function() {
             document.getElementById("gifloading").style.visibility = "visible";
             var eltexto = document.getElementById("inputbackup").value;
@@ -155,10 +147,7 @@ $(document).ready(function() {
                     action: eltexto
                 },
                 success: function(data) {
-                    var getdebug = 0;
-                    if (getdebug == 1) {
-                        alert(data);
-                    }
+
                     document.getElementById("gifloading").style.visibility = "hidden";
 
                     if (data == "okbackup") {
@@ -181,11 +170,9 @@ $(document).ready(function() {
         });
     }
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -200,6 +187,8 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 
 });

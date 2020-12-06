@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     $("#crearadmin").click(function() {
         location.href = "gestadmincreate.php";
@@ -30,17 +30,13 @@ $(document).ready(function() {
     for (var i = 0; i < actdesuserbuttons.length; i++) {
         actdesuserbuttons[i].addEventListener("click", function() {
             var indexarray = String(this.value);
-            var jqxhr = $.ajax({
+            $.ajax({
                 url: 'function/gestuseractdesusuario.php',
                 data: {
                     action: indexarray
                 },
                 type: 'POST',
                 success: function(data) {
-                    var getdebug = 0;
-                    if (getdebug == 1) {
-                        alert(data);
-                    }
 
                     if (data == "nohayusuario") {
                         alert("No has introducido ningun usuario");
@@ -66,24 +62,20 @@ $(document).ready(function() {
                     alert(errorThrown);
                 }
             });
-        })
+        });
     }
 
     var edituserbuttons = document.getElementsByClassName('edituser');
     for (var i = 0; i < edituserbuttons.length; i++) {
         edituserbuttons[i].addEventListener("click", function() {
             var indexarray = String(this.value);
-            var jqxhr = $.ajax({
+            $.ajax({
                 url: 'function/gestusercalleditaruser.php',
                 data: {
                     action: indexarray
                 },
                 type: 'POST',
                 success: function(data) {
-                    var getdebug = 0;
-                    if (getdebug == 1) {
-                        alert(data);
-                    }
 
                     if (data == "nohayusuario") {
                         alert("No has introducido ningun usuario");
@@ -113,24 +105,20 @@ $(document).ready(function() {
                     alert(errorThrown);
                 }
             });
-        })
+        });
     }
 
     var deluserbuttons = document.getElementsByClassName('deluser');
     for (var i = 0; i < deluserbuttons.length; i++) {
         deluserbuttons[i].addEventListener("click", function() {
             var indexarray = String(this.value);
-            var jqxhr = $.ajax({
+            $.ajax({
                 url: 'function/gestusereliminarusuario.php',
                 data: {
                     action: indexarray
                 },
                 type: 'POST',
                 success: function(data) {
-                    var getdebug = 0;
-                    if (getdebug == 1) {
-                        alert(data);
-                    }
 
                     if (data == "nohayusuario") {
                         alert("No has introducido ningun usuario");
@@ -156,14 +144,12 @@ $(document).ready(function() {
                     alert(errorThrown);
                 }
             });
-        })
+        });
     }
-
-    var mySessionTimer = setInterval(sessionTimer, 1000);
 
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -178,5 +164,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

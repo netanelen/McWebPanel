@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     $("#form-player-idle-timeout").keypress(function(e) {
         if (e.keyCode < 48 || e.keyCode > 57) {
@@ -188,14 +188,14 @@ $(document).ready(function() {
     document.getElementById("label-motd").innerHTML = "motd=" + document.getElementById("form-motd").value;
 
     $("#form-gamemode").change(function() {
-        $envioaction = "gamemode";
-        $enviovalor = document.getElementById("form-gamemode").value;
+        var envioaction = "gamemode";
+        var enviovalor = document.getElementById("form-gamemode").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -208,14 +208,14 @@ $(document).ready(function() {
     });
 
     $("#form-force-gamemode").change(function() {
-        $envioaction = "force-gamemode";
-        $enviovalor = document.getElementById("form-force-gamemode").value;
+        var envioaction = "force-gamemode";
+        var enviovalor = document.getElementById("form-force-gamemode").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -228,14 +228,14 @@ $(document).ready(function() {
     });
 
     $("#form-difficulty").change(function() {
-        $envioaction = "difficulty";
-        $enviovalor = document.getElementById("form-difficulty").value;
+        var envioaction = "difficulty";
+        var enviovalor = document.getElementById("form-difficulty").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -248,14 +248,14 @@ $(document).ready(function() {
     });
 
     $("#form-hardcore").change(function() {
-        $envioaction = "hardcore";
-        $enviovalor = document.getElementById("form-hardcore").value;
+        var envioaction = "hardcore";
+        var enviovalor = document.getElementById("form-hardcore").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -268,14 +268,14 @@ $(document).ready(function() {
     });
 
     $("#form-pvp").change(function() {
-        $envioaction = "pvp";
-        $enviovalor = document.getElementById("form-pvp").value;
+        var envioaction = "pvp";
+        var enviovalor = document.getElementById("form-pvp").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -288,14 +288,14 @@ $(document).ready(function() {
     });
 
     $("#form-spawn-npcs").change(function() {
-        $envioaction = "spawn-npcs";
-        $enviovalor = document.getElementById("form-spawn-npcs").value;
+        var envioaction = "spawn-npcs";
+        var enviovalor = document.getElementById("form-spawn-npcs").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -308,14 +308,14 @@ $(document).ready(function() {
     });
 
     $("#form-spawn-animals").change(function() {
-        $envioaction = "spawn-animals";
-        $enviovalor = document.getElementById("form-spawn-animals").value;
+        var envioaction = "spawn-animals";
+        var enviovalor = document.getElementById("form-spawn-animals").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -328,14 +328,14 @@ $(document).ready(function() {
     });
 
     $("#form-spawn-monsters").change(function() {
-        $envioaction = "spawn-monsters";
-        $enviovalor = document.getElementById("form-spawn-monsters").value;
+        var envioaction = "spawn-monsters";
+        var enviovalor = document.getElementById("form-spawn-monsters").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -348,14 +348,14 @@ $(document).ready(function() {
     });
 
     $("#form-allow-flight").change(function() {
-        $envioaction = "allow-flight";
-        $enviovalor = document.getElementById("form-allow-flight").value;
+        var envioaction = "allow-flight";
+        var enviovalor = document.getElementById("form-allow-flight").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -368,20 +368,20 @@ $(document).ready(function() {
     });
 
     $("#form-player-idle-timeout").change(function() {
-        $errores = 0;
-        $envioaction = "player-idle-timeout";
-        $enviovalor = document.getElementById("form-player-idle-timeout").value;
-        if ($enviovalor > 2147483647) {
-            $errores = 1;
+        var errores = 0;
+        var envioaction = "player-idle-timeout";
+        var enviovalor = document.getElementById("form-player-idle-timeout").value;
+        if (enviovalor > 2147483647) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -395,14 +395,14 @@ $(document).ready(function() {
     });
 
     $("#form-resource-pack").keyup(function() {
-        $envioaction = "resource-pack";
-        $enviovalor = document.getElementById("form-resource-pack").value;
+        var envioaction = "resource-pack";
+        var enviovalor = document.getElementById("form-resource-pack").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -415,14 +415,14 @@ $(document).ready(function() {
     });
 
     $("#form-resource-pack-sha1").keyup(function() {
-        $envioaction = "resource-pack-sha1";
-        $enviovalor = document.getElementById("form-resource-pack-sha1").value;
+        var envioaction = "resource-pack-sha1";
+        var enviovalor = document.getElementById("form-resource-pack-sha1").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -435,15 +435,15 @@ $(document).ready(function() {
     });
 
     $("#form-level-name").keyup(function() {
-        $envioaction = "level-name";
-        $enviovalor = document.getElementById("form-level-name").value;
-        $enviovalor = $enviovalor.toLowerCase();
+        var envioaction = "level-name";
+        var enviovalor = document.getElementById("form-level-name").value;
+        enviovalor = enviovalor.toLowerCase();
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -452,18 +452,18 @@ $(document).ready(function() {
                 }
             }
         });
-        document.getElementById("label-level-name").innerHTML = "level-name=" + $enviovalor;
+        document.getElementById("label-level-name").innerHTML = "level-name=" + enviovalor;
     });
 
     $("#form-level-seed").keyup(function() {
-        $envioaction = "level-seed";
-        $enviovalor = document.getElementById("form-level-seed").value;
+        var envioaction = "level-seed";
+        var enviovalor = document.getElementById("form-level-seed").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -476,14 +476,14 @@ $(document).ready(function() {
     });
 
     $("#form-level-type").change(function() {
-        $envioaction = "level-type";
-        $enviovalor = document.getElementById("form-level-type").value;
+        var envioaction = "level-type";
+        var enviovalor = document.getElementById("form-level-type").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -496,14 +496,14 @@ $(document).ready(function() {
     });
 
     $("#form-generator-settings").keyup(function() {
-        $envioaction = "generator-settings";
-        $enviovalor = document.getElementById("form-generator-settings").value;
+        var envioaction = "generator-settings";
+        var enviovalor = document.getElementById("form-generator-settings").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -516,20 +516,20 @@ $(document).ready(function() {
     });
 
     $("#form-max-build-height").change(function() {
-        $errores = 0;
-        $envioaction = "max-build-height";
-        $enviovalor = document.getElementById("form-max-build-height").value;
-        if ($enviovalor > 256 || $enviovalor < 8) {
-            $errores = 1;
+        var errores = 0;
+        var envioaction = "max-build-height";
+        var enviovalor = document.getElementById("form-max-build-height").value;
+        if (enviovalor > 256 || enviovalor < 8) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -543,14 +543,14 @@ $(document).ready(function() {
     });
 
     $("#form-generate-structures").change(function() {
-        $envioaction = "generate-structures";
-        $enviovalor = document.getElementById("form-generate-structures").value;
+        var envioaction = "generate-structures";
+        var enviovalor = document.getElementById("form-generate-structures").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -563,14 +563,14 @@ $(document).ready(function() {
     });
 
     $("#form-allow-nether").change(function() {
-        $envioaction = "allow-nether";
-        $enviovalor = document.getElementById("form-allow-nether").value;
+        var envioaction = "allow-nether";
+        var enviovalor = document.getElementById("form-allow-nether").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -583,22 +583,22 @@ $(document).ready(function() {
     });
 
     $("#form-entity-broadcast-range-percentage").change(function() {
-        $errores = 0;
-        $envioaction = "entity-broadcast-range-percentage";
-        $enviovalor = document.getElementById("form-entity-broadcast-range-percentage").value;
+        var errores = 0;
+        var envioaction = "entity-broadcast-range-percentage";
+        var enviovalor = document.getElementById("form-entity-broadcast-range-percentage").value;
 
-        if ($enviovalor > 500 || $enviovalor < 0) {
-            $errores = 1;
+        if (enviovalor > 500 || enviovalor < 0) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -612,22 +612,22 @@ $(document).ready(function() {
     });
 
     $("#form-spawn-protection").change(function() {
-        $errores = 0;
-        $envioaction = "spawn-protection";
-        $enviovalor = document.getElementById("form-spawn-protection").value;
+        var errores = 0;
+        var envioaction = "spawn-protection";
+        var enviovalor = document.getElementById("form-spawn-protection").value;
 
-        if ($enviovalor > 16 || $enviovalor < 0) {
-            $errores = 1;
+        if (enviovalor > 16 || enviovalor < 0) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -641,22 +641,22 @@ $(document).ready(function() {
     });
 
     $("#form-max-world-size").change(function() {
-        $errores = 0;
-        $envioaction = "max-world-size";
-        $enviovalor = document.getElementById("form-max-world-size").value;
+        var errores = 0;
+        var envioaction = "max-world-size";
+        var enviovalor = document.getElementById("form-max-world-size").value;
 
-        if ($enviovalor > 29999984 || $enviovalor < 1) {
-            $errores = 1;
+        if (enviovalor > 29999984 || enviovalor < 1) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -670,14 +670,14 @@ $(document).ready(function() {
     });
 
     $("#form-online-mode").change(function() {
-        $envioaction = "online-mode";
-        $enviovalor = document.getElementById("form-online-mode").value;
+        var envioaction = "online-mode";
+        var enviovalor = document.getElementById("form-online-mode").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -690,22 +690,22 @@ $(document).ready(function() {
     });
 
     $("#form-max-players").change(function() {
-        $errores = 0;
-        $envioaction = "max-players";
-        $enviovalor = document.getElementById("form-max-players").value;
+        var errores = 0;
+        var envioaction = "max-players";
+        var enviovalor = document.getElementById("form-max-players").value;
 
-        if ($enviovalor > 2147483647 || $enviovalor < 1) {
-            $errores = 1;
+        if (enviovalor > 2147483647 || enviovalor < 1) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -719,14 +719,14 @@ $(document).ready(function() {
     });
 
     $("#form-enable-command-block").change(function() {
-        $envioaction = "enable-command-block";
-        $enviovalor = document.getElementById("form-enable-command-block").value;
+        var envioaction = "enable-command-block";
+        var enviovalor = document.getElementById("form-enable-command-block").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -739,14 +739,14 @@ $(document).ready(function() {
     });
 
     $("#form-enable-query").change(function() {
-        $envioaction = "enable-query";
-        $enviovalor = document.getElementById("form-enable-query").value;
+        var envioaction = "enable-query";
+        var enviovalor = document.getElementById("form-enable-query").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -759,22 +759,22 @@ $(document).ready(function() {
     });
 
     $("#form-query-port").change(function() {
-        $errores = 0;
-        $envioaction = "query.port";
-        $enviovalor = document.getElementById("form-query-port").value;
+        var errores = 0;
+        var envioaction = "query.port";
+        var enviovalor = document.getElementById("form-query-port").value;
 
-        if ($enviovalor > 65535 || $enviovalor < 1025) {
-            $errores = 1;
+        if (enviovalor > 65535 || enviovalor < 1025) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -788,14 +788,14 @@ $(document).ready(function() {
     });
 
     $("#form-enable-rcon").change(function() {
-        $envioaction = "enable-rcon";
-        $enviovalor = document.getElementById("form-enable-rcon").value;
+        var envioaction = "enable-rcon";
+        var enviovalor = document.getElementById("form-enable-rcon").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -808,22 +808,22 @@ $(document).ready(function() {
     });
 
     $("#form-rconport").change(function() {
-        $errores = 0;
-        $envioaction = "rcon.port";
-        $enviovalor = document.getElementById("form-rconport").value;
+        var errores = 0;
+        var envioaction = "rcon.port";
+        var enviovalor = document.getElementById("form-rconport").value;
 
-        if ($enviovalor > 65535 || $enviovalor < 1025) {
-            $errores = 1;
+        if (enviovalor > 65535 || enviovalor < 1025) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -837,14 +837,14 @@ $(document).ready(function() {
     });
 
     $("#form-rcon-password").keyup(function() {
-        $envioaction = "rcon.password";
-        $enviovalor = document.getElementById("form-rcon-password").value;
+        var envioaction = "rcon.password";
+        var enviovalor = document.getElementById("form-rcon-password").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -857,14 +857,14 @@ $(document).ready(function() {
     });
 
     $("#form-white-list").change(function() {
-        $envioaction = "white-list";
-        $enviovalor = document.getElementById("form-white-list").value;
+        var envioaction = "white-list";
+        var enviovalor = document.getElementById("form-white-list").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -877,14 +877,14 @@ $(document).ready(function() {
     });
 
     $("#form-enforce-whitelist").change(function() {
-        $envioaction = "enforce-whitelist";
-        $enviovalor = document.getElementById("form-enforce-whitelist").value;
+        var envioaction = "enforce-whitelist";
+        var enviovalor = document.getElementById("form-enforce-whitelist").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -897,14 +897,14 @@ $(document).ready(function() {
     });
 
     $("#form-server-ip").keyup(function() {
-        $envioaction = "server-ip";
-        $enviovalor = document.getElementById("form-server-ip").value;
+        var envioaction = "server-ip";
+        var enviovalor = document.getElementById("form-server-ip").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -917,14 +917,14 @@ $(document).ready(function() {
     });
 
     $("#form-enable-status").change(function() {
-        $envioaction = "enable-status";
-        $enviovalor = document.getElementById("form-enable-status").value;
+        var envioaction = "enable-status";
+        var enviovalor = document.getElementById("form-enable-status").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -937,14 +937,14 @@ $(document).ready(function() {
     });
 
     $("#form-broadcast-console-to-ops").change(function() {
-        $envioaction = "broadcast-console-to-ops";
-        $enviovalor = document.getElementById("form-broadcast-console-to-ops").value;
+        var envioaction = "broadcast-console-to-ops";
+        var enviovalor = document.getElementById("form-broadcast-console-to-ops").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -957,14 +957,14 @@ $(document).ready(function() {
     });
 
     $("#form-broadcast-rcon-to-ops").change(function() {
-        $envioaction = "broadcast-rcon-to-ops";
-        $enviovalor = document.getElementById("form-broadcast-rcon-to-ops").value;
+        var envioaction = "broadcast-rcon-to-ops";
+        var enviovalor = document.getElementById("form-broadcast-rcon-to-ops").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -977,14 +977,14 @@ $(document).ready(function() {
     });
 
     $("#form-use-native-transport").change(function() {
-        $envioaction = "use-native-transport";
-        $enviovalor = document.getElementById("form-use-native-transport").value;
+        var envioaction = "use-native-transport";
+        var enviovalor = document.getElementById("form-use-native-transport").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -997,14 +997,14 @@ $(document).ready(function() {
     });
 
     $("#form-prevent-proxy-connections").change(function() {
-        $envioaction = "prevent-proxy-connections";
-        $enviovalor = document.getElementById("form-prevent-proxy-connections").value;
+        var envioaction = "prevent-proxy-connections";
+        var enviovalor = document.getElementById("form-prevent-proxy-connections").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1017,14 +1017,14 @@ $(document).ready(function() {
     });
 
     $("#form-enable-jmx-monitoring").change(function() {
-        $envioaction = "enable-jmx-monitoring";
-        $enviovalor = document.getElementById("form-enable-jmx-monitoring").value;
+        var envioaction = "enable-jmx-monitoring";
+        var enviovalor = document.getElementById("form-enable-jmx-monitoring").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1037,14 +1037,14 @@ $(document).ready(function() {
     });
 
     $("#form-snooper-enabled").change(function() {
-        $envioaction = "snooper-enabled";
-        $enviovalor = document.getElementById("form-snooper-enabled").value;
+        var envioaction = "snooper-enabled";
+        var enviovalor = document.getElementById("form-snooper-enabled").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1057,14 +1057,14 @@ $(document).ready(function() {
     });
 
     $("#form-sync-chunk-writes").change(function() {
-        $envioaction = "sync-chunk-writes";
-        $enviovalor = document.getElementById("form-sync-chunk-writes").value;
+        var envioaction = "sync-chunk-writes";
+        var enviovalor = document.getElementById("form-sync-chunk-writes").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1077,22 +1077,22 @@ $(document).ready(function() {
     });
 
     $("#form-max-tick-time").change(function() {
-        $errores = 0;
-        $envioaction = "max-tick-time";
-        $enviovalor = document.getElementById("form-max-tick-time").value;
+        var errores = 0;
+        var envioaction = "max-tick-time";
+        var enviovalor = document.getElementById("form-max-tick-time").value;
 
-        if ($enviovalor > 60000 || $enviovalor < 1000) {
-            $errores = 1;
+        if (enviovalor > 60000 || enviovalor < 1000) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -1106,22 +1106,22 @@ $(document).ready(function() {
     });
 
     $("#form-op-permission-level").change(function() {
-        $errores = 0;
-        $envioaction = "op-permission-level";
-        $enviovalor = document.getElementById("form-op-permission-level").value;
+        var errores = 0;
+        var envioaction = "op-permission-level";
+        var enviovalor = document.getElementById("form-op-permission-level").value;
 
-        if ($enviovalor > 4 || $enviovalor < 1) {
-            $errores = 1;
+        if (enviovalor > 4 || enviovalor < 1) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -1135,22 +1135,22 @@ $(document).ready(function() {
     });
 
     $("#form-function-permission-level").change(function() {
-        $errores = 0;
-        $envioaction = "function-permission-level";
-        $enviovalor = document.getElementById("form-function-permission-level").value;
+        var errores = 0;
+        var envioaction = "function-permission-level";
+        var enviovalor = document.getElementById("form-function-permission-level").value;
 
-        if ($enviovalor > 4 || $enviovalor < 1) {
-            $errores = 1;
+        if (enviovalor > 4 || enviovalor < 1) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -1164,14 +1164,14 @@ $(document).ready(function() {
     });
 
     $("#form-rate-limit").change(function() {
-        $envioaction = "rate-limit";
-        $enviovalor = document.getElementById("form-rate-limit").value;
+        var envioaction = "rate-limit";
+        var enviovalor = document.getElementById("form-rate-limit").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1184,22 +1184,22 @@ $(document).ready(function() {
     });
 
     $("#form-network-compression-threshold").change(function() {
-        $errores = 0;
-        $envioaction = "network-compression-threshold";
-        $enviovalor = document.getElementById("form-network-compression-threshold").value;
+        var errores = 0;
+        var envioaction = "network-compression-threshold";
+        var enviovalor = document.getElementById("form-network-compression-threshold").value;
 
-        if ($enviovalor > 256 || $enviovalor < 64) {
-            $errores = 1;
+        if (enviovalor > 256 || enviovalor < 64) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -1213,22 +1213,22 @@ $(document).ready(function() {
     });
 
     $("#form-view-distance").change(function() {
-        $errores = 0;
-        $envioaction = "view-distance";
-        $enviovalor = document.getElementById("form-view-distance").value;
+        var errores = 0;
+        var envioaction = "view-distance";
+        var enviovalor = document.getElementById("form-view-distance").value;
 
-        if ($enviovalor > 32 || $enviovalor < 3) {
-            $errores = 1;
+        if (enviovalor > 32 || enviovalor < 3) {
+            errores = 1;
         }
 
-        if ($errores == 0) {
+        if (errores === 0) {
 
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
                 data: {
-                    action: $envioaction,
-                    valor: $enviovalor
+                    action: envioaction,
+                    valor: enviovalor
                 },
                 success: function(data) {
                     var getdebug = 0;
@@ -1259,15 +1259,15 @@ $(document).ready(function() {
         });
     }
 
-    $("#form-motd").keyup(function(e) {
-        $envioaction = "motd";
-        $enviovalor = document.getElementById("form-motd").value;
+    $("#form-motd").keyup(function() {
+        var envioaction = "motd";
+        var enviovalor = document.getElementById("form-motd").value;
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1281,8 +1281,8 @@ $(document).ready(function() {
     });
 
     document.getElementById("form-motd").addEventListener('paste', function(event) {
-        $envioaction = "motd";
-        $enviovalor = event.clipboardData.getData('text');
+        var envioaction = "motd";
+        var enviovalor = event.clipboardData.getData('text');
 
         var eltext = "";
         var textini = "";
@@ -1295,19 +1295,19 @@ $(document).ready(function() {
         var endPosition = text.selectionEnd;
         var longitud = text.leng;
 
-        var eltext = document.getElementById("form-motd").value;
-        var textini = eltext.substring(0, startPosition);
-        var textfinal = eltext.substring(endPosition, longitud);
+        eltext = document.getElementById("form-motd").value;
+        textini = eltext.substring(0, startPosition);
+        textfinal = eltext.substring(endPosition, longitud);
 
-        var enviar = textini + event.clipboardData.getData('text') + textfinal;
-        $enviovalor = enviar;
+        enviar = textini + event.clipboardData.getData('text') + textfinal;
+        enviovalor = enviar;
 
         $.ajax({
             type: "POST",
             url: "function/guardarproperties.php",
             data: {
-                action: $envioaction,
-                valor: $enviovalor
+                action: envioaction,
+                valor: enviovalor
             },
             success: function(data) {
                 var getdebug = 0;
@@ -1316,15 +1316,13 @@ $(document).ready(function() {
                 }
             }
         });
-        document.getElementById("label-motd").innerHTML = "motd=" + $enviovalor;
-        updatemotd($enviovalor);
+        document.getElementById("label-motd").innerHTML = "motd=" + enviovalor;
+        updatemotd(enviovalor);
     });
-
-    var mySessionTimer = setInterval(sessionTimer, 1000);
 
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -1339,5 +1337,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

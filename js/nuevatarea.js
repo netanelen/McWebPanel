@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     document.getElementById("elcomando").disabled = true;
     document.getElementById("creatarea").disabled = true;
@@ -24,7 +24,7 @@ $(document).ready(function() {
     $("#laaccion").change(function() {
         if (document.getElementById("laaccion").value == "acc4") {
             document.getElementById("elcomando").disabled = false;
-            if (document.getElementById("elcomando").value == "") {
+            if (document.getElementById("elcomando").value === "") {
                 document.getElementById("creatarea").disabled = true;
             } else {
                 document.getElementById("creatarea").disabled = false;
@@ -32,7 +32,7 @@ $(document).ready(function() {
         } else {
             document.getElementById("elcomando").disabled = true;
             document.getElementById("elcomando").value = "";
-            if (document.getElementById("nombretarea").value == "") {
+            if (document.getElementById("nombretarea").value === "") {
                 document.getElementById("creatarea").disabled = true;
             } else {
                 document.getElementById("creatarea").disabled = false;
@@ -40,8 +40,8 @@ $(document).ready(function() {
         }
     });
 
-    $("#elcomando").keyup(function(e) {
-        if (document.getElementById("elcomando").value == "") {
+    $("#elcomando").keyup(function() {
+        if (document.getElementById("elcomando").value === "") {
             document.getElementById("creatarea").disabled = true;
         } else {
             document.getElementById("creatarea").disabled = false;
@@ -49,12 +49,12 @@ $(document).ready(function() {
 
     });
 
-    document.getElementById("elcomando").addEventListener('paste', function(event) {
+    document.getElementById("elcomando").addEventListener('paste', function() {
         document.getElementById("creatarea").disabled = false;
     });
 
-    $("#nombretarea").keyup(function(e) {
-        if (document.getElementById("nombretarea").value == "") {
+    $("#nombretarea").keyup(function() {
+        if (document.getElementById("nombretarea").value === "") {
             document.getElementById("creatarea").disabled = true;
         } else {
             document.getElementById("creatarea").disabled = false;
@@ -66,10 +66,7 @@ $(document).ready(function() {
         var eldata = $("#formtarea :input").serializeArray();
 
         $.post($("#formtarea").attr("action"), eldata, function(data) {
-            var getdebug = 0;
-            if (getdebug == 1) {
-                alert(data);
-            }
+
             if (data == "errmes") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Tienes que seleccionar como mínimo un mes.</div>";
             } else if (data == "errsemana") {
@@ -93,7 +90,7 @@ $(document).ready(function() {
             } else if (data == "OK") {
                 location.href = "tareas.php";
             }
-        })
+        });
 
     });
 
@@ -102,11 +99,9 @@ $(document).ready(function() {
 
     });
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -121,5 +116,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

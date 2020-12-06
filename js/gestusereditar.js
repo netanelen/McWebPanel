@@ -16,14 +16,14 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
-    $("#elpass").keyup(function(e) {
+    $("#elpass").keyup(function() {
         var getpass = document.getElementById("elpass").value;
-        if (getpass == "") {
+        if (getpass === "") {
             document.getElementById("textoretorno").innerHTML = "";
         } else {
-            var tqxhr = $.ajax({
+            $.ajax({
                 url: 'function/compass.php',
                 data: {
                     action: getpass
@@ -53,10 +53,6 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
 
                 if (data == "nohayusuario") {
                     alert("No se ha recibido ningún usuario");
@@ -77,24 +73,20 @@ $(document).ready(function() {
                 } else if (data == "errjsonnowrite") {
                     alert("El archivo de usuarios no tiene permisos de escritura");
                 } else if (data == "OK") {
-                    alert("Para que se apliquen los cambios el usuario editado tiene que cerrar sesión")
+                    alert("Para que se apliquen los cambios el usuario editado tiene que cerrar sesión");
                     location.href = "gestorusers.php";
                 }
 
-
-
             },
-            error: function(e) {
+            error: function() {
                 alert("error");
             }
         });
     }));
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -109,5 +101,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     $("#login-form").on('submit', (function(e) {
         e.preventDefault();
@@ -28,10 +28,6 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
 
                 if (data == "maxintentos") {
                     document.getElementById("textologincount").innerHTML = "<div class='alert alert-danger' role='alert'>Has superado el número de intentos no válidos.</div>";
@@ -49,7 +45,7 @@ $(document).ready(function() {
                 }
 
             },
-            error: function(e) {
+            error: function() {
                 alert("error");
             }
         });

@@ -16,14 +16,14 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
-    $("#elpass").keyup(function(e) {
+    $("#elpass").keyup(function() {
         var getpass = document.getElementById("elpass").value;
-        if (getpass == "") {
+        if (getpass === "") {
             document.getElementById("textoretorno").innerHTML = "";
         } else {
-            var tqxhr = $.ajax({
+            $.ajax({
                 url: 'function/compass.php',
                 data: {
                     action: getpass
@@ -53,10 +53,6 @@ $(document).ready(function() {
             cache: false,
             processData: false,
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
 
                 if (data == "nohayusuario") {
                     alert("No has introducido ningún usuario");
@@ -87,17 +83,15 @@ $(document).ready(function() {
                 }
 
             },
-            error: function(e) {
+            error: function() {
                 alert("error");
             }
         });
     }));
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -112,5 +106,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

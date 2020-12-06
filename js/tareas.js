@@ -16,17 +16,17 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
-    if (document.getElementsByClassName('actdes') != null) {
+    if (document.getElementsByClassName('actdes') !== 'null') {
         var actdesbuttons = document.getElementsByClassName('actdes');
         for (var i = 0; i < actdesbuttons.length; i++) {
             actdesbuttons[i].addEventListener("click", function() {
                 var indexarray = String(this.value);
-                if (indexarray == 0) {
+                if (indexarray === 0) {
                     indexarray = 'CERO';
                 }
-                var jqxhr = $.ajax({
+                $.ajax({
                     url: 'function/tareaactdes.php',
                     data: {
                         action: indexarray
@@ -56,19 +56,19 @@ $(document).ready(function() {
                         alert(errorThrown);
                     }
                 });
-            })
+            });
         }
     }
 
-    if (document.getElementsByClassName('borrar') != null) {
+    if (document.getElementsByClassName('borrar') !== 'null') {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function() {
                 var indexarray = String(this.value);
-                if (indexarray == 0) {
+                if (indexarray === 0) {
                     indexarray = 'CERO';
                 }
-                var jqxhr = $.ajax({
+                $.ajax({
                     url: 'function/tareaborrar.php',
                     data: {
                         action: indexarray
@@ -98,21 +98,19 @@ $(document).ready(function() {
                         alert(errorThrown);
                     }
                 });
-            })
+            });
         }
     }
 
-    if (document.getElementById('anadirtarea') != null) {
+    if (document.getElementById('anadirtarea') !== 'null') {
         $("#anadirtarea").click(function() {
             location.href = "nuevatarea.php";
         });
     }
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -127,5 +125,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });

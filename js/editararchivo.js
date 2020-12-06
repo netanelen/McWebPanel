@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     var observe;
     if (window.attachEvent) {
@@ -55,7 +55,7 @@ $(document).ready(function() {
     });
 
     $("#guardarfile").click(function() {
-        var jqxhr = $.ajax({
+        $.ajax({
             url: 'function/editarsavefile.php',
             data: {
                 action: this.value,
@@ -63,10 +63,7 @@ $(document).ready(function() {
             },
             type: 'POST',
             success: function(data) {
-                var getdebug = 0;
-                if (getdebug == 1) {
-                    alert(data);
-                }
+
                 if (data == "OK") {
                     location.href = "gestorarchivos.php";
                 } else if (data == "noexiste") {
@@ -85,11 +82,9 @@ $(document).ready(function() {
         location.href = "gestorarchivos.php";
     });
 
-    var mySessionTimer = setInterval(sessionTimer, 1000);
-
     function sessionTimer() {
 
-        var tqxhr = $.ajax({
+        $.ajax({
             url: 'function/salirsession.php',
             data: {
                 action: 'status'
@@ -104,5 +99,7 @@ $(document).ready(function() {
             }
         });
     }
+
+    setInterval(sessionTimer, 1000);
 
 });
