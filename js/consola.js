@@ -54,7 +54,7 @@ $(function() {
     function enviarcomando() {
         var eltexto = "";
 
-        if (document.getElementById("elcomando").value !== 'null') {
+        if (document.getElementById("elcomando").value !== null) {
 
             eltexto = document.getElementById("elcomando").value;
 
@@ -71,13 +71,13 @@ $(function() {
         }
     }
 
-    if (document.getElementById('botonconsola') !== 'null') {
+    if (document.getElementById('botonconsola') !== null) {
         $("#botonconsola").click(function() {
             enviarcomando();
         });
     }
 
-    if (document.getElementById('elcomando') !== 'null') {
+    if (document.getElementById('elcomando') !== null) {
         $("#elcomando").keypress(function(e) {
             if (e.keyCode == 13) {
                 enviarcomando();

@@ -18,7 +18,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function() {
 
-    if (document.getElementsByClassName('actdes') !== 'null') {
+    if (document.getElementsByClassName('actdes') !== null) {
         var actdesbuttons = document.getElementsByClassName('actdes');
         for (var i = 0; i < actdesbuttons.length; i++) {
             actdesbuttons[i].addEventListener("click", function() {
@@ -60,7 +60,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('borrar') !== 'null') {
+    if (document.getElementsByClassName('borrar') !== null) {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function() {
@@ -102,7 +102,7 @@ $(function() {
         }
     }
 
-    if (document.getElementById('anadirtarea') !== 'null') {
+    if (document.getElementById('anadirtarea') !== null) {
         $("#anadirtarea").click(function() {
             location.href = "nuevatarea.php";
         });

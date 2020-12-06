@@ -18,15 +18,15 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function() {
 
-    if (document.getElementById('crearbackup') !== 'null') {
+    if (document.getElementById('crearbackup') !== null) {
         document.getElementById("crearbackup").disabled = true;
     }
 
-    if (document.getElementById('gifloading') !== 'null') {
+    if (document.getElementById('gifloading') !== null) {
         document.getElementById("gifloading").style.visibility = "hidden";
     }
 
-    if (document.getElementById('inputbackup') !== 'null') {
+    if (document.getElementById('inputbackup') !== null) {
         $("#inputbackup").keypress(function(e) {
             if (e.keyCode == 32) {
                 return false;
@@ -40,7 +40,7 @@ $(function() {
         });
     }
 
-    if (document.getElementsByClassName('descargar') !== 'null') {
+    if (document.getElementsByClassName('descargar') !== null) {
         var descargarbuttons = document.getElementsByClassName('descargar');
         for (var i = 0; i < descargarbuttons.length; i++) {
             descargarbuttons[i].addEventListener("click", function() {
@@ -49,7 +49,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('restaurar') !== 'null') {
+    if (document.getElementsByClassName('restaurar') !== null) {
         var restaurarbuttons = document.getElementsByClassName('restaurar');
         for (var i = 0; i < restaurarbuttons.length; i++) {
             restaurarbuttons[i].addEventListener("click", function() {
@@ -90,7 +90,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('borrar') !== 'null') {
+    if (document.getElementsByClassName('borrar') !== null) {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function() {
@@ -122,7 +122,7 @@ $(function() {
         }
     }
 
-    if (document.getElementById('inputbackup') !== 'null') {
+    if (document.getElementById('inputbackup') !== null) {
         $("#inputbackup").keyup(function() {
             if (document.getElementById("inputbackup").value === "") {
                 document.getElementById("crearbackup").disabled = true;
@@ -136,7 +136,7 @@ $(function() {
         });
     }
 
-    if (document.getElementById('crearbackup') !== 'null') {
+    if (document.getElementById('crearbackup') !== null) {
         $("#crearbackup").click(function() {
             document.getElementById("gifloading").style.visibility = "visible";
             var eltexto = document.getElementById("inputbackup").value;

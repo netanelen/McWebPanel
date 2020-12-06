@@ -108,19 +108,19 @@ $(function() {
         });
     });
 
-    if (document.getElementById('binicio') !== 'null') {
+    if (document.getElementById('binicio') !== null) {
         document.getElementById("binicio").disabled = true;
     }
 
-    if (document.getElementById('breiniciar') !== 'null') {
+    if (document.getElementById('breiniciar') !== null) {
         document.getElementById("breiniciar").disabled = true;
     }
 
-    if (document.getElementById('bparar') !== 'null') {
+    if (document.getElementById('bparar') !== null) {
         document.getElementById("bparar").disabled = true;
     }
 
-    if (document.getElementById('bkill') !== 'null') {
+    if (document.getElementById('bkill') !== null) {
         document.getElementById("bkill").disabled = true;
     }
 
@@ -139,19 +139,19 @@ $(function() {
 
                 if (data.encendido == "Apagado") {
 
-                    if (document.getElementById('binicio') !== 'null') {
+                    if (document.getElementById('binicio') !== null) {
                         document.getElementById("binicio").disabled = false;
                     }
 
-                    if (document.getElementById('breiniciar') !== 'null') {
+                    if (document.getElementById('breiniciar') !== null) {
                         document.getElementById("breiniciar").disabled = true;
                     }
 
-                    if (document.getElementById('bparar') !== 'null') {
+                    if (document.getElementById('bparar') !== null) {
                         document.getElementById("bparar").disabled = true;
                     }
 
-                    if (document.getElementById('bkill') !== 'null') {
+                    if (document.getElementById('bkill') !== null) {
                         document.getElementById("bkill").disabled = true;
                     }
 
@@ -162,23 +162,24 @@ $(function() {
 
                     document.getElementById("textocpu").innerHTML = "Cpu: " + String(data.cpu) + "%";
 
-                    if (data.memoria !== "null") {
+                    if (data.memoria !== "") {
                         document.getElementById("textoram").innerHTML = "Ram: " + String(data.memoria) + " / Total: " + String(data.ramconfig) + " GB";
+
                     }
 
-                    if (document.getElementById('binicio') !== 'null') {
+                    if (document.getElementById('binicio') !== null) {
                         document.getElementById("binicio").disabled = true;
                     }
 
-                    if (document.getElementById('breiniciar') !== 'null') {
+                    if (document.getElementById('breiniciar') !== null) {
                         document.getElementById("breiniciar").disabled = false;
                     }
 
-                    if (document.getElementById('bparar') !== 'null') {
+                    if (document.getElementById('bparar') !== null) {
                         document.getElementById("bparar").disabled = false;
                     }
 
-                    if (document.getElementById('bkill') !== 'null') {
+                    if (document.getElementById('bkill') !== null) {
                         document.getElementById("bkill").disabled = false;
                     }
                 }

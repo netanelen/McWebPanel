@@ -18,7 +18,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function() {
 
-    if (document.getElementsByClassName('entrar') !== 'null') {
+    if (document.getElementsByClassName('entrar') !== null) {
         var entrarbuttons = document.getElementsByClassName('entrar');
         for (var i = 0; i < entrarbuttons.length; i++) {
             entrarbuttons[i].addEventListener("click", function() {
@@ -44,7 +44,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('atras') !== 'null') {
+    if (document.getElementsByClassName('atras') !== null) {
         var atrasbuttons = document.getElementsByClassName('atras');
         for (var i = 0; i < atrasbuttons.length; i++) {
             atrasbuttons[i].addEventListener("click", function() {
@@ -70,7 +70,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('borrarfile') !== 'null') {
+    if (document.getElementsByClassName('borrarfile') !== null) {
         var borrarfilebuttons = document.getElementsByClassName('borrarfile');
         for (var i = 0; i < borrarfilebuttons.length; i++) {
             borrarfilebuttons[i].addEventListener("click", function() {
@@ -107,7 +107,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('borrarcarpeta') !== 'null') {
+    if (document.getElementsByClassName('borrarcarpeta') !== null) {
         var borrarcarpetabuttons = document.getElementsByClassName('borrarcarpeta');
         for (var i = 0; i < borrarcarpetabuttons.length; i++) {
             borrarcarpetabuttons[i].addEventListener("click", function() {
@@ -148,12 +148,12 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('renamefile') !== 'null') {
+    if (document.getElementsByClassName('renamefile') !== null) {
         var renamefilebuttons = document.getElementsByClassName('renamefile');
         for (var i = 0; i < renamefilebuttons.length; i++) {
             renamefilebuttons[i].addEventListener("click", function() {
                 var renombrado = prompt("Renombrar fichero:", this.id);
-                if (renombrado !== 'null') {
+                if (renombrado !== null) {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorenamefile.php",
@@ -191,12 +191,12 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('renamefolder') !== 'null') {
+    if (document.getElementsByClassName('renamefolder') !== null) {
         var renamefolderbuttons = document.getElementsByClassName('renamefolder');
         for (var i = 0; i < renamefolderbuttons.length; i++) {
             renamefolderbuttons[i].addEventListener("click", function() {
                 var renombrado = prompt("Renombrar carpeta:", this.id);
-                if (renombrado !== 'null') {
+                if (renombrado !== null) {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorrenamefolder.php",
@@ -234,7 +234,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('editarfile') !== 'null') {
+    if (document.getElementsByClassName('editarfile') !== null) {
         var editarbuttons = document.getElementsByClassName('editarfile');
         for (var i = 0; i < editarbuttons.length; i++) {
             editarbuttons[i].addEventListener("click", function() {
@@ -265,7 +265,7 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('descargarfile') !== 'null') {
+    if (document.getElementsByClassName('descargarfile') !== null) {
         var descargarbuttons = document.getElementsByClassName('descargarfile');
         for (var i = 0; i < descargarbuttons.length; i++) {
             descargarbuttons[i].addEventListener("click", function() {
@@ -274,11 +274,11 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('descomprimirtar') !== 'null') {
+    if (document.getElementsByClassName('descomprimirtar') !== null) {
         var descomprimirtarbuttons = document.getElementsByClassName('descomprimirtar');
         for (var i = 0; i < descomprimirtarbuttons.length; i++) {
             descomprimirtarbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') !== 'null') {
+                if (document.getElementById('gifloading') !== null) {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
                 $.ajax({
@@ -289,7 +289,7 @@ $(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== 'null') {
+                        if (document.getElementById('gifloading') !== null) {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -319,11 +319,11 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('descomprimirzip') !== 'null') {
+    if (document.getElementsByClassName('descomprimirzip') !== null) {
         var descomprimirzipbuttons = document.getElementsByClassName('descomprimirzip');
         for (var i = 0; i < descomprimirzipbuttons.length; i++) {
             descomprimirzipbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') !== 'null') {
+                if (document.getElementById('gifloading') !== null) {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
                 $.ajax({
@@ -334,7 +334,7 @@ $(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== 'null') {
+                        if (document.getElementById('gifloading') !== null) {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -360,11 +360,11 @@ $(function() {
         }
     }
 
-    if (document.getElementsByClassName('comprimirzipfolder') !== 'null') {
+    if (document.getElementsByClassName('comprimirzipfolder') !== null) {
         var comprimircarpetazipbuttons = document.getElementsByClassName('comprimirzipfolder');
         for (var i = 0; i < comprimircarpetazipbuttons.length; i++) {
             comprimircarpetazipbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') !== 'null') {
+                if (document.getElementById('gifloading') !== null) {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
                 $.ajax({
@@ -375,7 +375,7 @@ $(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== 'null') {
+                        if (document.getElementById('gifloading') !== null) {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -401,11 +401,11 @@ $(function() {
         }
     }
 
-    if (document.getElementById('botonsubir') !== 'null') {
+    if (document.getElementById('botonsubir') !== null) {
         document.getElementById("botonsubir").disabled = true;
     }
 
-    if (document.getElementById('gifloading') !== 'null') {
+    if (document.getElementById('gifloading') !== null) {
         document.getElementById("gifloading").style.visibility = "hidden";
     }
 
@@ -413,22 +413,22 @@ $(function() {
         var fileName = $(this).val().split("\\").pop();
 
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        if (document.getElementById('botonsubir') !== 'null') {
+        if (document.getElementById('botonsubir') !== null) {
             document.getElementById("botonsubir").disabled = false;
         }
 
     });
 
-    if (document.getElementById('bnactualizar') !== 'null') {
+    if (document.getElementById('bnactualizar') !== null) {
         $("#bnactualizar").click(function() {
             location.reload();
         });
     }
 
-    if (document.getElementById('bnnuevacarpeta') !== 'null') {
+    if (document.getElementById('bnnuevacarpeta') !== null) {
         $("#bnnuevacarpeta").click(function() {
             var renombrado = prompt("Nombre nueva carpeta:");
-            if (renombrado !== 'null') {
+            if (renombrado !== null) {
                 $.ajax({
                     url: 'function/gestorcrearcarpeta.php',
                     data: {
@@ -453,7 +453,7 @@ $(function() {
         });
     }
 
-    if (document.getElementById('bcopiar') !== 'null') {
+    if (document.getElementById('bcopiar') !== null) {
         $("#bcopiar").click(function() {
             var arrayseleccion = [];
             var elindice = 0;
@@ -492,11 +492,11 @@ $(function() {
         });
     }
 
-    if (document.getElementById('bpegar') !== 'null') {
+    if (document.getElementById('bpegar') !== null) {
         $("#bpegar").click(function() {
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nEn caso de existir un archivo con el mismo nombre se sobrescribirá.\n\n¿Seguro que quieres continuar?");
             if (eleccion === true) {
-                if (document.getElementById('gifloading') !== 'null') {
+                if (document.getElementById('gifloading') !== null) {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
                 $.ajax({
@@ -506,7 +506,7 @@ $(function() {
                     },
                     type: 'POST',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== 'null') {
+                        if (document.getElementById('gifloading') !== null) {
                             document.getElementById("gifloading").style.visibility = "hidden";
                         }
 
@@ -525,7 +525,7 @@ $(function() {
         });
     }
 
-    if (document.getElementById('beliminarseleccion') !== 'null') {
+    if (document.getElementById('beliminarseleccion') !== null) {
         $("#beliminarseleccion").click(function() {
             var arrayseleccion = [];
             var elindice = 0;
@@ -574,7 +574,7 @@ $(function() {
         });
     }
 
-    if (document.getElementById('bselectall') !== 'null') {
+    if (document.getElementById('bselectall') !== null) {
         $("#bselectall").click(function() {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
@@ -583,7 +583,7 @@ $(function() {
         });
     }
 
-    if (document.getElementById('bunselectall') !== 'null') {
+    if (document.getElementById('bunselectall') !== null) {
         $("#bunselectall").click(function() {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
@@ -593,7 +593,7 @@ $(function() {
     }
 
     $("#form").on('submit', (function(e) {
-        if (document.getElementById('gifloading') !== 'null') {
+        if (document.getElementById('gifloading') !== null) {
             document.getElementById("gifloading").style.visibility = "visible";
         }
         e.preventDefault();
@@ -606,7 +606,7 @@ $(function() {
             processData: false,
             success: function(data) {
 
-                if (document.getElementById('gifloading') !== 'null') {
+                if (document.getElementById('gifloading') !== null) {
                     document.getElementById("gifloading").style.visibility = "hidden";
                 }
 

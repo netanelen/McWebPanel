@@ -44,7 +44,7 @@ $(function() {
 
     document.getElementById("guardaserver").disabled = true;
 
-    if (document.getElementById('elnomserv') !== 'null') {
+    if (document.getElementById('elnomserv') !== null) {
         $("#elnomserv").keyup(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
@@ -60,70 +60,70 @@ $(function() {
         });
     }
 
-    if (document.getElementById('eltipserv') !== 'null') {
+    if (document.getElementById('eltipserv') !== null) {
         $("#eltipserv").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('elmaxupload') !== 'null') {
+    if (document.getElementById('elmaxupload') !== null) {
         $("#elmaxupload").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('elram') !== 'null') {
+    if (document.getElementById('elram') !== null) {
         $("#elram").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('listadojars') !== 'null') {
+    if (document.getElementById('listadojars') !== null) {
         $("#listadojars").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('basura0') !== 'null') {
+    if (document.getElementById('basura0') !== null) {
         $("#basura0").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('basura1') !== 'null') {
+    if (document.getElementById('basura1') !== null) {
         $("#basura1").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('basura2') !== 'null') {
+    if (document.getElementById('basura2') !== null) {
         $("#basura2").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('opforceupgrade') !== 'null') {
+    if (document.getElementById('opforceupgrade') !== null) {
         $("#opforceupgrade").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('operasecache') !== 'null') {
+    if (document.getElementById('operasecache') !== null) {
         $("#operasecache").change(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
         });
     }
 
-    if (document.getElementById('elport') !== 'null') {
+    if (document.getElementById('elport') !== null) {
         $("#elport").change(function() {
             var elnumero = document.getElementById("elport").value;
             document.getElementById("result").innerHTML = "";
@@ -136,7 +136,7 @@ $(function() {
         });
     }
 
-    if (document.getElementById('elport') !== 'null') {
+    if (document.getElementById('elport') !== null) {
         $("#elport").keypress(function(e) {
             if (e.keyCode < 48 || e.keyCode > 57) {
                 return false;
