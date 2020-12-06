@@ -186,6 +186,7 @@ $(function() {
     document.getElementById("label-network-compression-threshold").innerHTML = "network-compression-threshold=" + document.getElementById("form-network-compression-threshold").value;
     document.getElementById("label-view-distance").innerHTML = "view-distance=" + document.getElementById("form-view-distance").value;
     document.getElementById("label-motd").innerHTML = "motd=" + document.getElementById("form-motd").value;
+    updatemotd(document.getElementById("form-motd").value);
 
     $("#form-gamemode").change(function() {
         var envioaction = "gamemode";
