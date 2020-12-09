@@ -52,23 +52,32 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 $texto = "<span class='colreset'>" . $texto;
 
+                //OFUSCADO
+                $texto = str_replace("\u00a7k", "", $texto);
+                $texto = str_replace("\u00A7k", "", $texto);
+
                 //SALTO
-                $texto = str_replace("\\n", "</span><br>", $texto);
+                $texto = str_replace("\\n", "<br>", $texto);
 
                 //NEGRITA
                 $texto = str_replace("\u00a7l", "<strong>", $texto);
+                $texto = str_replace("\u00A7l", "<strong>", $texto);
 
                 //CURSIVA
                 $texto = str_replace("\u00a7o", "<i>", $texto);
+                $texto = str_replace("\u00A7o", "<i>", $texto);
 
                 //SUBRAYADO
                 $texto = str_replace("\u00a7n", "<u>", $texto);
+                $texto = str_replace("\u00A7n", "<u>", $texto);
 
                 //TACHADO
                 $texto = str_replace("\u00a7m", "<s>", $texto);
+                $texto = str_replace("\u00A7m", "<s>", $texto);
 
                 //RESET
                 $texto = str_replace("\u00a7r", "</strong></i></u></s><span class='colreset'>", $texto);
+                $texto = str_replace("\u00A7r", "</strong></i></u></s><span class='colreset'>", $texto);
 
                 //COLORES MAYUSCULA
                 $texto = str_replace("\u00A70", "<span class='col01'>", $texto);
