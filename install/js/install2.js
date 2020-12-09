@@ -16,16 +16,16 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(document).ready(function() {
+$(function() {
 
     document.getElementById("binstalar").disabled = false;
 
-    $("#elpass").change(function(e) {
+    $("#elpass").change(function() {
         var getpass = document.getElementById("elpass").value;
-        if (getpass == "") {
+        if (getpass === "") {
             document.getElementById("textoretorno").innerHTML = "";
         } else {
-            var tqxhr = $.ajax({
+            $.ajax({
                 url: 'function/compass.php',
                 data: {
                     action: getpass
@@ -66,19 +66,19 @@ $(document).ready(function() {
         var elerror = 0;
         var eltexto = "<div class='alert alert-danger' role='alert'>";
 
-        if (document.getElementById("eluser").value == "") {
+        if (document.getElementById("eluser").value === "") {
             eltexto = eltexto + "No has introducido ningún nombre de usuario";
             eltexto = eltexto + "<br>";
             elerror = 1;
         }
 
-        if (document.getElementById("elnomserv").value == "") {
+        if (document.getElementById("elnomserv").value === "") {
             eltexto = eltexto + "No has introducido ningún nombre al servidor";
             eltexto = eltexto + "<br>";
             elerror = 1;
         }
 
-        if (document.getElementById("elport").value == "") {
+        if (document.getElementById("elport").value === "") {
             eltexto = eltexto + "No has introducido ningún puerto";
             eltexto = eltexto + "<br>";
             elerror = 1;
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
         eltexto = eltexto + "</div>";
 
-        if (elerror == 0) {
+        if (elerror === 0) {
             return true;
         } else {
             document.getElementById("errorsubmit").innerHTML = eltexto;

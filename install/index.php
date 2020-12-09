@@ -21,22 +21,9 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 header("Content-Security-Policy: default-src 'self'; script-src 'self'; child-src 'none'; object-src 'none'; frame-ancestors 'none'");
 header('X-Content-Type-Options: nosniff');
 header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
+header("X-XSS-Protection: 1; mode=block");
 
 require_once("../template/errorreport.php");
-
-function buscarmodulo($modulo)
-{
-  $getmodules = "";
-  $getmodules = Apache_get_modules();
-
-  for ($a = 0; $a < count($getmodules); $a++) {
-
-    if ($getmodules[$a] == $modulo) {
-      return true;
-    }
-  }
-  return false;
-}
 
 ?>
 
@@ -203,26 +190,6 @@ $estamodulo = "";
                     echo '<td class="text-danger">Instalado - NO</td>';
                   } elseif ($comreq == "yes") {
                     echo '<td class="text-success">Instalado - SI</td>';
-                  }
-
-                  ?>
-
-                </tr>
-
-                <tr>
-                  <td class="text-center">Apache mod_rewrite</td>
-                  <td></td>
-
-                  <?php
-
-                  //REQUISITO MOD_REWRITE
-                  $estamodulo = buscarmodulo("mod_rewrite");
-
-                  if ($estamodulo == 1) {
-                    echo '<td class="text-success">Activado - SI</td>';
-                  } else {
-                    echo '<td class="text-danger">No activado - NO</td>';
-                    $losrequisitos = 1;
                   }
 
                   ?>
