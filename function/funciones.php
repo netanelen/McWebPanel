@@ -79,6 +79,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 		$laram = "";
 		$valor3 = "";
 		$laramconfig = "";
+		$tipserver = "";
 		$lahora = date("H:i:s");
 
 		//OBTENER PID SABER SI ESTA EN EJECUCION
@@ -99,10 +100,19 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			$lacpu = trim($lacpu);
 
 			//OBTENER MEMORIA USADA
-			$elcomando = "ps aux --sort -rss | grep www-data | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
-			$elpid = shell_exec($elcomando);
-			$laram = $elpid;
-			$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
+			$tipserver = trim(exec('whoami'));
+
+			if ($tipserver == "www-data") {
+				$elcomando = "ps aux --sort -rss | grep www-data | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+				$elpid = shell_exec($elcomando);
+				$laram = $elpid;
+				$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
+			} elseif ($tipserver == "apache") {
+				$elcomando = "ps aux --sort -rss | grep apache | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+				$elpid = shell_exec($elcomando);
+				$laram = $elpid;
+				$laram = trim(substr($elpid, 0, (strlen($elpid) - 5)));
+			}
 
 			if (is_numeric($laram)) {
 				$laram = devolverdatos($laram, 1);
