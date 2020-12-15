@@ -75,6 +75,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 	if (isset($_POST['action']) && !empty($_POST['action'])) {
 
 		//DECLARAR VARIABLES
+		$elpid = "";
 		$lacpu = "";
 		$laram = "";
 		$valor3 = "";
@@ -102,15 +103,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			//OBTENER MEMORIA USADA
 			$tipserver = trim(exec('whoami'));
 
+			$elcomando = "ps aux --sort -rss | grep '" . $tipserver . "' | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+			$elpid = shell_exec($elcomando);
+			$laram = $elpid;
+
 			if ($tipserver == "www-data") {
-				$elcomando = "ps aux --sort -rss | grep www-data | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
-				$elpid = shell_exec($elcomando);
-				$laram = $elpid;
 				$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
 			} elseif ($tipserver == "apache") {
-				$elcomando = "ps aux --sort -rss | grep apache | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
-				$elpid = shell_exec($elcomando);
-				$laram = $elpid;
 				$laram = trim(substr($elpid, 0, (strlen($elpid) - 5)));
 			}
 
