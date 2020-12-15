@@ -35,12 +35,18 @@ php-zip             (Libreria Zip php)
 php-cli             (Libreria cli php)
 unzip               (De-archiver)
 gawk                (GNU awk)
-Apache Mod Rewrite  (Modulo Activado)
 ```
 
 ### Instalación 🔧
 
 Guía paso a paso para realizar la instalación
+
+Actualizar Servidor
+
+```
+sudo apt update
+sudo apt upgrade
+```
 
 Instalar Paquetes Requisitos
 
@@ -65,12 +71,6 @@ sudo cp -r McWebPanel-master/. /var/www/html/
 
 Cambiar Usuario Archivos:
 sudo chown -R www-data:www-data /var/www/html/
-```
-
-Activar MOD Rewrite
-
-```
-sudo a2enmod rewrite
 ```
 
 Configurar Directorio Apache
