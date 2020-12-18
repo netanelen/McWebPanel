@@ -142,55 +142,299 @@ $(function() {
         }
     });
 
-    document.getElementById("label-gamemode").innerHTML = "gamemode=" + document.getElementById("form-gamemode").value;
-    document.getElementById("label-force-gamemode").innerHTML = "force-gamemode=" + document.getElementById("form-force-gamemode").value;
-    document.getElementById("label-difficulty").innerHTML = "difficulty=" + document.getElementById("form-difficulty").value;
-    document.getElementById("label-hardcore").innerHTML = "hardcore=" + document.getElementById("form-hardcore").value;
-    document.getElementById("label-pvp").innerHTML = "pvp=" + document.getElementById("form-pvp").value;
-    document.getElementById("label-spawn-npcs").innerHTML = "spawn-npcs=" + document.getElementById("form-spawn-npcs").value;
-    document.getElementById("label-spawn-animals").innerHTML = "spawn-animals=" + document.getElementById("form-spawn-animals").value;
-    document.getElementById("label-spawn-monsters").innerHTML = "spawn-monsters=" + document.getElementById("form-spawn-monsters").value;
-    document.getElementById("label-allow-flight").innerHTML = "allow-flight=" + document.getElementById("form-allow-flight").value;
-    document.getElementById("label-player-idle-timeout").innerHTML = "player-idle-timeout=" + document.getElementById("form-player-idle-timeout").value;
-    document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
-    document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
-    document.getElementById("label-level-name").innerHTML = "level-name=" + document.getElementById("form-level-name").value;
-    document.getElementById("label-level-seed").innerHTML = "level-seed=" + document.getElementById("form-level-seed").value;
-    document.getElementById("label-level-type").innerHTML = "level-type=" + document.getElementById("form-level-type").value;
-    document.getElementById("label-generator-settings").innerHTML = "generator-settings=" + document.getElementById("form-generator-settings").value;
-    document.getElementById("label-max-build-height").innerHTML = "max-build-height=" + document.getElementById("form-max-build-height").value;
-    document.getElementById("label-generate-structures").innerHTML = "generate-structures=" + document.getElementById("form-generate-structures").value;
-    document.getElementById("label-allow-nether").innerHTML = "allow-nether=" + document.getElementById("form-allow-nether").value;
-    document.getElementById("label-entity-broadcast-range-percentage").innerHTML = "entity-broadcast-range-percentage=" + document.getElementById("form-entity-broadcast-range-percentage").value;
-    document.getElementById("label-spawn-protection").innerHTML = "spawn-protection=" + document.getElementById("form-spawn-protection").value;
-    document.getElementById("label-max-world-size").innerHTML = "max-world-size=" + document.getElementById("form-max-world-size").value;
-    document.getElementById("label-online-mode").innerHTML = "online-mode=" + document.getElementById("form-online-mode").value;
-    document.getElementById("label-max-players").innerHTML = "max-players=" + document.getElementById("form-max-players").value;
-    document.getElementById("label-enable-command-block").innerHTML = "enable-command-block=" + document.getElementById("form-enable-command-block").value;
-    document.getElementById("label-enable-query").innerHTML = "enable-query=" + document.getElementById("form-enable-query").value;
-    document.getElementById("label-query-port").innerHTML = "query.port=" + document.getElementById("form-query-port").value;
-    document.getElementById("label-enable-rcon").innerHTML = "enable-rcon=" + document.getElementById("form-enable-rcon").value;
-    document.getElementById("label-rconport").innerHTML = "rcon.port=" + document.getElementById("form-rconport").value;
-    document.getElementById("label-rcon-password").innerHTML = "rcon.password=" + document.getElementById("form-rcon-password").value;
-    document.getElementById("label-white-list").innerHTML = "white-list=" + document.getElementById("form-white-list").value;
-    document.getElementById("label-enforce-whitelist").innerHTML = "enforce-whitelist=" + document.getElementById("form-enforce-whitelist").value;
-    document.getElementById("label-server-ip").innerHTML = "server-ip=" + document.getElementById("form-server-ip").value;
-    document.getElementById("label-enable-status").innerHTML = "enable-status=" + document.getElementById("form-enable-status").value;
-    document.getElementById("label-broadcast-console-to-ops").innerHTML = "broadcast-console-to-ops=" + document.getElementById("form-broadcast-console-to-ops").value;
-    document.getElementById("label-broadcast-rcon-to-ops").innerHTML = "broadcast-rcon-to-ops=" + document.getElementById("form-broadcast-rcon-to-ops").value;
-    document.getElementById("label-use-native-transport").innerHTML = "use-native-transport=" + document.getElementById("form-use-native-transport").value;
-    document.getElementById("label-prevent-proxy-connections").innerHTML = "prevent-proxy-connections=" + document.getElementById("form-prevent-proxy-connections").value;
-    document.getElementById("label-enable-jmx-monitoring").innerHTML = "enable-jmx-monitoring=" + document.getElementById("form-enable-jmx-monitoring").value;
-    document.getElementById("label-snooper-enabled").innerHTML = "snooper-enabled=" + document.getElementById("form-snooper-enabled").value;
-    document.getElementById("label-sync-chunk-writes").innerHTML = "sync-chunk-writes=" + document.getElementById("form-sync-chunk-writes").value;
-    document.getElementById("label-max-tick-time").innerHTML = "max-tick-time=" + document.getElementById("form-max-tick-time").value;
-    document.getElementById("label-op-permission-level").innerHTML = "op-permission-level=" + document.getElementById("form-op-permission-level").value;
-    document.getElementById("label-function-permission-level").innerHTML = "function-permission-level=" + document.getElementById("form-function-permission-level").value;
-    document.getElementById("label-rate-limit").innerHTML = "rate-limit=" + document.getElementById("form-rate-limit").value;
-    document.getElementById("label-network-compression-threshold").innerHTML = "network-compression-threshold=" + document.getElementById("form-network-compression-threshold").value;
-    document.getElementById("label-view-distance").innerHTML = "view-distance=" + document.getElementById("form-view-distance").value;
-    document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(document.getElementById("form-motd").value);
-    updatemotd(document.getElementById("form-motd").value);
+    if (document.getElementById("label-gamemode") !== null) {
+        if (document.getElementById("form-gamemode") !== null) {
+            document.getElementById("label-gamemode").innerHTML = "gamemode=" + document.getElementById("form-gamemode").value;
+        }
+    }
+
+    if (document.getElementById("label-force-gamemode") !== null) {
+        if (document.getElementById("form-force-gamemode") !== null) {
+            document.getElementById("label-force-gamemode").innerHTML = "force-gamemode=" + document.getElementById("form-force-gamemode").value;
+        }
+    }
+
+    if (document.getElementById("label-difficulty") !== null) {
+        if (document.getElementById("form-difficulty") !== null) {
+            document.getElementById("label-difficulty").innerHTML = "difficulty=" + document.getElementById("form-difficulty").value;
+        }
+    }
+
+    if (document.getElementById("label-hardcore") !== null) {
+        if (document.getElementById("form-hardcore") !== null) {
+            document.getElementById("label-hardcore").innerHTML = "hardcore=" + document.getElementById("form-hardcore").value;
+        }
+    }
+
+    if (document.getElementById("label-pvp") !== null) {
+        if (document.getElementById("form-pvp") !== null) {
+            document.getElementById("label-pvp").innerHTML = "pvp=" + document.getElementById("form-pvp").value;
+        }
+    }
+
+    if (document.getElementById("label-spawn-npcs") !== null) {
+        if (document.getElementById("form-spawn-npcs") !== null) {
+            document.getElementById("label-spawn-npcs").innerHTML = "spawn-npcs=" + document.getElementById("form-spawn-npcs").value;
+        }
+    }
+
+    if (document.getElementById("label-spawn-animals") !== null) {
+        if (document.getElementById("form-spawn-animals") !== null) {
+            document.getElementById("label-spawn-animals").innerHTML = "spawn-animals=" + document.getElementById("form-spawn-animals").value;
+        }
+    }
+
+    if (document.getElementById("label-spawn-monsters") !== null) {
+        if (document.getElementById("form-spawn-monsters") !== null) {
+            document.getElementById("label-spawn-monsters").innerHTML = "spawn-monsters=" + document.getElementById("form-spawn-monsters").value;
+        }
+    }
+
+    if (document.getElementById("label-allow-flight") !== null) {
+        if (document.getElementById("form-allow-flight") !== null) {
+            document.getElementById("label-allow-flight").innerHTML = "allow-flight=" + document.getElementById("form-allow-flight").value;
+        }
+    }
+
+    if (document.getElementById("label-player-idle-timeout") !== null) {
+        if (document.getElementById("form-player-idle-timeout") !== null) {
+            document.getElementById("label-player-idle-timeout").innerHTML = "player-idle-timeout=" + document.getElementById("form-player-idle-timeout").value;
+        }
+    }
+
+    if (document.getElementById("label-resource-pack") !== null) {
+        if (document.getElementById("form-resource-pack") !== null) {
+            document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
+        }
+    }
+
+    if (document.getElementById("label-resource-pack-sha1") !== null) {
+        if (document.getElementById("form-resource-pack-sha1") !== null) {
+            document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
+        }
+    }
+
+    if (document.getElementById("label-level-name") !== null) {
+        if (document.getElementById("form-level-name") !== null) {
+            document.getElementById("label-level-name").innerHTML = "level-name=" + document.getElementById("form-level-name").value;
+        }
+    }
+
+    if (document.getElementById("label-level-seed") !== null) {
+        if (document.getElementById("form-level-seed") !== null) {
+            document.getElementById("label-level-seed").innerHTML = "level-seed=" + document.getElementById("form-level-seed").value;
+        }
+    }
+
+    if (document.getElementById("label-level-type") !== null) {
+        if (document.getElementById("form-level-type") !== null) {
+            document.getElementById("label-level-type").innerHTML = "level-type=" + document.getElementById("form-level-type").value;
+        }
+    }
+
+    if (document.getElementById("label-generator-settings") !== null) {
+        if (document.getElementById("form-generator-settings") !== null) {
+            document.getElementById("label-generator-settings").innerHTML = "generator-settings=" + document.getElementById("form-generator-settings").value;
+        }
+    }
+
+    if (document.getElementById("label-max-build-height") !== null) {
+        if (document.getElementById("form-max-build-height") !== null) {
+            document.getElementById("label-max-build-height").innerHTML = "max-build-height=" + document.getElementById("form-max-build-height").value;
+        }
+    }
+
+    if (document.getElementById("label-generate-structures") !== null) {
+        if (document.getElementById("form-generate-structures") !== null) {
+            document.getElementById("label-generate-structures").innerHTML = "generate-structures=" + document.getElementById("form-generate-structures").value;
+        }
+    }
+
+    if (document.getElementById("label-allow-nether") !== null) {
+        if (document.getElementById("form-allow-nether") !== null) {
+            document.getElementById("label-allow-nether").innerHTML = "allow-nether=" + document.getElementById("form-allow-nether").value;
+        }
+    }
+
+    if (document.getElementById("label-entity-broadcast-range-percentage") !== null) {
+        if (document.getElementById("form-entity-broadcast-range-percentage") !== null) {
+            document.getElementById("label-entity-broadcast-range-percentage").innerHTML = "entity-broadcast-range-percentage=" + document.getElementById("form-entity-broadcast-range-percentage").value;
+        }
+    }
+
+    if (document.getElementById("label-spawn-protection") !== null) {
+        if (document.getElementById("form-spawn-protection") !== null) {
+            document.getElementById("label-spawn-protection").innerHTML = "spawn-protection=" + document.getElementById("form-spawn-protection").value;
+        }
+    }
+
+    if (document.getElementById("label-max-world-size") !== null) {
+        if (document.getElementById("form-max-world-size") !== null) {
+            document.getElementById("label-max-world-size").innerHTML = "max-world-size=" + document.getElementById("form-max-world-size").value;
+        }
+    }
+
+    if (document.getElementById("label-online-mode") !== null) {
+        if (document.getElementById("form-online-mode") !== null) {
+            document.getElementById("label-online-mode").innerHTML = "online-mode=" + document.getElementById("form-online-mode").value;
+        }
+    }
+
+    if (document.getElementById("label-max-players") !== null) {
+        if (document.getElementById("form-max-players") !== null) {
+            document.getElementById("label-max-players").innerHTML = "max-players=" + document.getElementById("form-max-players").value;
+        }
+    }
+
+    if (document.getElementById("label-enable-command-block") !== null) {
+        if (document.getElementById("form-enable-command-block") !== null) {
+            document.getElementById("label-enable-command-block").innerHTML = "enable-command-block=" + document.getElementById("form-enable-command-block").value;
+        }
+    }
+
+    if (document.getElementById("label-enable-query") !== null) {
+        if (document.getElementById("form-enable-query") !== null) {
+            document.getElementById("label-enable-query").innerHTML = "enable-query=" + document.getElementById("form-enable-query").value;
+        }
+    }
+
+    if (document.getElementById("label-query-port") !== null) {
+        if (document.getElementById("form-query-port") !== null) {
+            document.getElementById("label-query-port").innerHTML = "query.port=" + document.getElementById("form-query-port").value;
+        }
+    }
+
+    if (document.getElementById("label-enable-rcon") !== null) {
+        if (document.getElementById("form-enable-rcon") !== null) {
+            document.getElementById("label-enable-rcon").innerHTML = "enable-rcon=" + document.getElementById("form-enable-rcon").value;
+        }
+    }
+
+    if (document.getElementById("label-rconport") !== null) {
+        if (document.getElementById("form-rconport") !== null) {
+            document.getElementById("label-rconport").innerHTML = "rcon.port=" + document.getElementById("form-rconport").value;
+        }
+    }
+
+    if (document.getElementById("label-rcon-password") !== null) {
+        if (document.getElementById("form-rcon-password") !== null) {
+            document.getElementById("label-rcon-password").innerHTML = "rcon.password=" + document.getElementById("form-rcon-password").value;
+        }
+    }
+
+    if (document.getElementById("label-white-list") !== null) {
+        if (document.getElementById("form-white-list") !== null) {
+            document.getElementById("label-white-list").innerHTML = "white-list=" + document.getElementById("form-white-list").value;
+        }
+    }
+
+    if (document.getElementById("label-enforce-whitelist") !== null) {
+        if (document.getElementById("form-enforce-whitelist") !== null) {
+            document.getElementById("label-enforce-whitelist").innerHTML = "enforce-whitelist=" + document.getElementById("form-enforce-whitelist").value;
+        }
+    }
+
+    if (document.getElementById("label-server-ip") !== null) {
+        if (document.getElementById("form-server-ip") !== null) {
+            document.getElementById("label-server-ip").innerHTML = "server-ip=" + document.getElementById("form-server-ip").value;
+        }
+    }
+
+    if (document.getElementById("label-enable-status") !== null) {
+        if (document.getElementById("form-enable-status") !== null) {
+            document.getElementById("label-enable-status").innerHTML = "enable-status=" + document.getElementById("form-enable-status").value;
+        }
+    }
+
+    if (document.getElementById("label-broadcast-console-to-ops") !== null) {
+        if (document.getElementById("form-broadcast-console-to-ops") !== null) {
+            document.getElementById("label-broadcast-console-to-ops").innerHTML = "broadcast-console-to-ops=" + document.getElementById("form-broadcast-console-to-ops").value;
+        }
+    }
+
+    if (document.getElementById("label-broadcast-rcon-to-ops") !== null) {
+        if (document.getElementById("form-broadcast-rcon-to-ops") !== null) {
+            document.getElementById("label-broadcast-rcon-to-ops").innerHTML = "broadcast-rcon-to-ops=" + document.getElementById("form-broadcast-rcon-to-ops").value;
+        }
+    }
+
+    if (document.getElementById("label-use-native-transport") !== null) {
+        if (document.getElementById("form-use-native-transport") !== null) {
+            document.getElementById("label-use-native-transport").innerHTML = "use-native-transport=" + document.getElementById("form-use-native-transport").value;
+        }
+    }
+
+    if (document.getElementById("label-prevent-proxy-connections") !== null) {
+        if (document.getElementById("form-prevent-proxy-connections") !== null) {
+            document.getElementById("label-prevent-proxy-connections").innerHTML = "prevent-proxy-connections=" + document.getElementById("form-prevent-proxy-connections").value;
+        }
+    }
+
+    if (document.getElementById("label-enable-jmx-monitoring") !== null) {
+        if (document.getElementById("form-enable-jmx-monitoring") !== null) {
+            document.getElementById("label-enable-jmx-monitoring").innerHTML = "enable-jmx-monitoring=" + document.getElementById("form-enable-jmx-monitoring").value;
+        }
+    }
+
+    if (document.getElementById("label-snooper-enabled") !== null) {
+        if (document.getElementById("form-snooper-enabled") !== null) {
+            document.getElementById("label-snooper-enabled").innerHTML = "snooper-enabled=" + document.getElementById("form-snooper-enabled").value;
+        }
+    }
+
+    if (document.getElementById("label-sync-chunk-writes") !== null) {
+        if (document.getElementById("form-sync-chunk-writes") !== null) {
+            document.getElementById("label-sync-chunk-writes").innerHTML = "sync-chunk-writes=" + document.getElementById("form-sync-chunk-writes").value;
+        }
+    }
+
+    if (document.getElementById("label-max-tick-time") !== null) {
+        if (document.getElementById("form-max-tick-time") !== null) {
+            document.getElementById("label-max-tick-time").innerHTML = "max-tick-time=" + document.getElementById("form-max-tick-time").value;
+        }
+    }
+
+    if (document.getElementById("label-op-permission-level") !== null) {
+        if (document.getElementById("form-op-permission-level") !== null) {
+            document.getElementById("label-op-permission-level").innerHTML = "op-permission-level=" + document.getElementById("form-op-permission-level").value;
+        }
+    }
+
+    if (document.getElementById("label-function-permission-level") !== null) {
+        if (document.getElementById("form-function-permission-level") !== null) {
+            document.getElementById("label-function-permission-level").innerHTML = "function-permission-level=" + document.getElementById("form-function-permission-level").value;
+        }
+    }
+
+    if (document.getElementById("label-rate-limit") !== null) {
+        if (document.getElementById("form-rate-limit") !== null) {
+            document.getElementById("label-rate-limit").innerHTML = "rate-limit=" + document.getElementById("form-rate-limit").value;
+        }
+    }
+
+    if (document.getElementById("label-network-compression-threshold") !== null) {
+        if (document.getElementById("form-network-compression-threshold") !== null) {
+            document.getElementById("label-network-compression-threshold").innerHTML = "network-compression-threshold=" + document.getElementById("form-network-compression-threshold").value;
+        }
+    }
+
+    if (document.getElementById("label-view-distance") !== null) {
+        if (document.getElementById("form-view-distance") !== null) {
+            document.getElementById("label-view-distance").innerHTML = "view-distance=" + document.getElementById("form-view-distance").value;
+        }
+    }
+
+    if (document.getElementById("label-motd") !== null) {
+        if (document.getElementById("form-motd") !== null) {
+            document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(document.getElementById("form-motd").value);
+        }
+    }
+
+    if (document.getElementById("form-motd") !== null) {
+        if (document.getElementById("visormotd") !== null) {
+            updatemotd(document.getElementById("form-motd").value);
+        }
+    }
 
     $("#form-gamemode").change(function() {
         var envioaction = "gamemode";
@@ -209,7 +453,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-gamemode").innerHTML = "gamemode=" + document.getElementById("form-gamemode").value;
+
+        if (document.getElementById("label-gamemode") !== null) {
+            document.getElementById("label-gamemode").innerHTML = "gamemode=" + document.getElementById("form-gamemode").value;
+        }
+
     });
 
     $("#form-force-gamemode").change(function() {
@@ -229,7 +477,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-force-gamemode").innerHTML = "force-gamemode=" + document.getElementById("form-force-gamemode").value;
+
+        if (document.getElementById("label-force-gamemode") !== null) {
+            document.getElementById("label-force-gamemode").innerHTML = "force-gamemode=" + document.getElementById("form-force-gamemode").value;
+        }
+
     });
 
     $("#form-difficulty").change(function() {
@@ -249,7 +501,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-difficulty").innerHTML = "difficulty=" + document.getElementById("form-difficulty").value;
+
+        if (document.getElementById("label-difficulty") !== null) {
+            document.getElementById("label-difficulty").innerHTML = "difficulty=" + document.getElementById("form-difficulty").value;
+        }
+
     });
 
     $("#form-hardcore").change(function() {
@@ -269,7 +525,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-hardcore").innerHTML = "hardcore=" + document.getElementById("form-hardcore").value;
+
+        if (document.getElementById("label-hardcore") !== null) {
+            document.getElementById("label-hardcore").innerHTML = "hardcore=" + document.getElementById("form-hardcore").value;
+        }
+
     });
 
     $("#form-pvp").change(function() {
@@ -289,7 +549,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-pvp").innerHTML = "pvp=" + document.getElementById("form-pvp").value;
+
+        if (document.getElementById("label-pvp") !== null) {
+            document.getElementById("label-pvp").innerHTML = "pvp=" + document.getElementById("form-pvp").value;
+        }
+
     });
 
     $("#form-spawn-npcs").change(function() {
@@ -309,7 +573,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-spawn-npcs").innerHTML = "spawn-npcs=" + document.getElementById("form-spawn-npcs").value;
+
+        if (document.getElementById("label-spawn-npcs") !== null) {
+            document.getElementById("label-spawn-npcs").innerHTML = "spawn-npcs=" + document.getElementById("form-spawn-npcs").value;
+        }
+
     });
 
     $("#form-spawn-animals").change(function() {
@@ -329,7 +597,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-spawn-animals").innerHTML = "spawn-animals=" + document.getElementById("form-spawn-animals").value;
+
+        if (document.getElementById("label-spawn-animals") !== null) {
+            document.getElementById("label-spawn-animals").innerHTML = "spawn-animals=" + document.getElementById("form-spawn-animals").value;
+        }
+
     });
 
     $("#form-spawn-monsters").change(function() {
@@ -349,7 +621,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-spawn-monsters").innerHTML = "spawn-monsters=" + document.getElementById("form-spawn-monsters").value;
+
+        if (document.getElementById("label-spawn-monsters") !== null) {
+            document.getElementById("label-spawn-monsters").innerHTML = "spawn-monsters=" + document.getElementById("form-spawn-monsters").value;
+        }
+
     });
 
     $("#form-allow-flight").change(function() {
@@ -369,7 +645,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-allow-flight").innerHTML = "allow-flight=" + document.getElementById("form-allow-flight").value;
+
+        if (document.getElementById("label-allow-flight") !== null) {
+            document.getElementById("label-allow-flight").innerHTML = "allow-flight=" + document.getElementById("form-allow-flight").value;
+        }
+
     });
 
     $("#form-player-idle-timeout").change(function() {
@@ -395,7 +675,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-player-idle-timeout").innerHTML = "player-idle-timeout=" + document.getElementById("form-player-idle-timeout").value;
+
+            if (document.getElementById("label-player-idle-timeout") !== null) {
+                document.getElementById("label-player-idle-timeout").innerHTML = "player-idle-timeout=" + document.getElementById("form-player-idle-timeout").value;
+            }
         }
     });
 
@@ -416,7 +699,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
+
+        if (document.getElementById("label-resource-pack") !== null) {
+            document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
+        }
+
     });
 
     $("#form-resource-pack-sha1").keyup(function() {
@@ -436,7 +723,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
+
+        if (document.getElementById("label-resource-pack-sha1") !== null) {
+            document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
+        }
+
     });
 
     $("#form-level-name").keyup(function() {
@@ -457,7 +748,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-level-name").innerHTML = "level-name=" + enviovalor;
+
+        if (document.getElementById("label-level-name") !== null) {
+            document.getElementById("label-level-name").innerHTML = "level-name=" + enviovalor;
+        }
+
     });
 
     $("#form-level-seed").keyup(function() {
@@ -477,7 +772,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-level-seed").innerHTML = "level-seed=" + document.getElementById("form-level-seed").value;
+
+        if (document.getElementById("label-level-seed") !== null) {
+            document.getElementById("label-level-seed").innerHTML = "level-seed=" + document.getElementById("form-level-seed").value;
+        }
+
     });
 
     $("#form-level-type").change(function() {
@@ -497,7 +796,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-level-type").innerHTML = "level-type=" + document.getElementById("form-level-type").value;
+
+        if (document.getElementById("label-level-type") !== null) {
+            document.getElementById("label-level-type").innerHTML = "level-type=" + document.getElementById("form-level-type").value;
+        }
+
     });
 
     $("#form-generator-settings").keyup(function() {
@@ -517,7 +820,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-generator-settings").innerHTML = "generator-settings=" + document.getElementById("form-generator-settings").value;
+
+        if (document.getElementById("label-generator-settings") !== null) {
+            document.getElementById("label-generator-settings").innerHTML = "generator-settings=" + document.getElementById("form-generator-settings").value;
+        }
+
     });
 
     $("#form-max-build-height").change(function() {
@@ -543,7 +850,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-max-build-height").innerHTML = "max-build-height=" + document.getElementById("form-max-build-height").value;
+
+            if (document.getElementById("label-max-build-height") !== null) {
+                document.getElementById("label-max-build-height").innerHTML = "max-build-height=" + document.getElementById("form-max-build-height").value;
+            }
         }
     });
 
@@ -564,7 +874,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-generate-structures").innerHTML = "generate-structures=" + document.getElementById("form-generate-structures").value;
+
+        if (document.getElementById("label-generate-structures") !== null) {
+            document.getElementById("label-generate-structures").innerHTML = "generate-structures=" + document.getElementById("form-generate-structures").value;
+        }
+
     });
 
     $("#form-allow-nether").change(function() {
@@ -584,7 +898,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-allow-nether").innerHTML = "allow-nether=" + document.getElementById("form-allow-nether").value;
+
+        if (document.getElementById("label-allow-nether") !== null) {
+            document.getElementById("label-allow-nether").innerHTML = "allow-nether=" + document.getElementById("form-allow-nether").value;
+        }
+
     });
 
     $("#form-entity-broadcast-range-percentage").change(function() {
@@ -612,7 +930,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-entity-broadcast-range-percentage").innerHTML = "entity-broadcast-range-percentage=" + document.getElementById("form-entity-broadcast-range-percentage").value;
+
+            if (document.getElementById("label-entity-broadcast-range-percentage") !== null) {
+                document.getElementById("label-entity-broadcast-range-percentage").innerHTML = "entity-broadcast-range-percentage=" + document.getElementById("form-entity-broadcast-range-percentage").value;
+            }
         }
     });
 
@@ -641,7 +962,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-spawn-protection").innerHTML = "spawn-protection=" + document.getElementById("form-spawn-protection").value;
+
+            if (document.getElementById("label-spawn-protection") !== null) {
+                document.getElementById("label-spawn-protection").innerHTML = "spawn-protection=" + document.getElementById("form-spawn-protection").value;
+            }
         }
     });
 
@@ -670,7 +994,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-max-world-size").innerHTML = "max-world-size=" + document.getElementById("form-max-world-size").value;
+
+            if (document.getElementById("label-max-world-size") !== null) {
+                document.getElementById("label-max-world-size").innerHTML = "max-world-size=" + document.getElementById("form-max-world-size").value;
+            }
         }
     });
 
@@ -691,7 +1018,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-online-mode").innerHTML = "online-mode=" + document.getElementById("form-online-mode").value;
+
+        if (document.getElementById("label-online-mode") !== null) {
+            document.getElementById("label-online-mode").innerHTML = "online-mode=" + document.getElementById("form-online-mode").value;
+        }
+
     });
 
     $("#form-max-players").change(function() {
@@ -719,7 +1050,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-max-players").innerHTML = "max-players=" + document.getElementById("form-max-players").value;
+
+            if (document.getElementById("label-max-players") !== null) {
+                document.getElementById("label-max-players").innerHTML = "max-players=" + document.getElementById("form-max-players").value;
+            }
         }
     });
 
@@ -740,7 +1074,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-enable-command-block").innerHTML = "enable-command-block=" + document.getElementById("form-enable-command-block").value;
+
+        if (document.getElementById("label-enable-command-block") !== null) {
+            document.getElementById("label-enable-command-block").innerHTML = "enable-command-block=" + document.getElementById("form-enable-command-block").value;
+        }
+
     });
 
     $("#form-enable-query").change(function() {
@@ -760,7 +1098,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-enable-query").innerHTML = "enable-query=" + document.getElementById("form-enable-query").value;
+
+        if (document.getElementById("label-enable-query") !== null) {
+            document.getElementById("label-enable-query").innerHTML = "enable-query=" + document.getElementById("form-enable-query").value;
+        }
+
     });
 
     $("#form-query-port").change(function() {
@@ -788,7 +1130,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-query-port").innerHTML = "query.port=" + document.getElementById("form-query-port").value;
+
+            if (document.getElementById("label-query-port") !== null) {
+                document.getElementById("label-query-port").innerHTML = "query.port=" + document.getElementById("form-query-port").value;
+            }
         }
     });
 
@@ -809,7 +1154,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-enable-rcon").innerHTML = "enable-rcon=" + document.getElementById("form-enable-rcon").value;
+
+        if (document.getElementById("label-enable-rcon") !== null) {
+            document.getElementById("label-enable-rcon").innerHTML = "enable-rcon=" + document.getElementById("form-enable-rcon").value;
+        }
+
     });
 
     $("#form-rconport").change(function() {
@@ -837,7 +1186,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-rconport").innerHTML = "rcon.port=" + document.getElementById("form-rconport").value;
+
+            if (document.getElementById("label-rconport") !== null) {
+                document.getElementById("label-rconport").innerHTML = "rcon.port=" + document.getElementById("form-rconport").value;
+            }
         }
     });
 
@@ -858,7 +1210,10 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-rcon-password").innerHTML = "rcon.password=" + document.getElementById("form-rcon-password").value;
+
+        if (document.getElementById("label-rcon-password") !== null) {
+            document.getElementById("label-rcon-password").innerHTML = "rcon.password=" + document.getElementById("form-rcon-password").value;
+        }
     });
 
     $("#form-white-list").change(function() {
@@ -878,7 +1233,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-white-list").innerHTML = "white-list=" + document.getElementById("form-white-list").value;
+
+        if (document.getElementById("label-white-list") !== null) {
+            document.getElementById("label-white-list").innerHTML = "white-list=" + document.getElementById("form-white-list").value;
+        }
+
     });
 
     $("#form-enforce-whitelist").change(function() {
@@ -898,7 +1257,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-enforce-whitelist").innerHTML = "enforce-whitelist=" + document.getElementById("form-enforce-whitelist").value;
+
+        if (document.getElementById("label-enforce-whitelist") !== null) {
+            document.getElementById("label-enforce-whitelist").innerHTML = "enforce-whitelist=" + document.getElementById("form-enforce-whitelist").value;
+        }
+
     });
 
     $("#form-server-ip").keyup(function() {
@@ -918,7 +1281,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-server-ip").innerHTML = "server-ip=" + document.getElementById("form-server-ip").value;
+
+        if (document.getElementById("label-server-ip") !== null) {
+            document.getElementById("label-server-ip").innerHTML = "server-ip=" + document.getElementById("form-server-ip").value;
+        }
+
     });
 
     $("#form-enable-status").change(function() {
@@ -938,7 +1305,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-enable-status").innerHTML = "enable-status=" + document.getElementById("form-enable-status").value;
+
+        if (document.getElementById("label-enable-status") !== null) {
+            document.getElementById("label-enable-status").innerHTML = "enable-status=" + document.getElementById("form-enable-status").value;
+        }
+
     });
 
     $("#form-broadcast-console-to-ops").change(function() {
@@ -958,7 +1329,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-broadcast-console-to-ops").innerHTML = "broadcast-console-to-ops=" + document.getElementById("form-broadcast-console-to-ops").value;
+
+        if (document.getElementById("label-broadcast-console-to-ops") !== null) {
+            document.getElementById("label-broadcast-console-to-ops").innerHTML = "broadcast-console-to-ops=" + document.getElementById("form-broadcast-console-to-ops").value;
+        }
+
     });
 
     $("#form-broadcast-rcon-to-ops").change(function() {
@@ -978,7 +1353,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-broadcast-rcon-to-ops").innerHTML = "broadcast-rcon-to-ops=" + document.getElementById("form-broadcast-rcon-to-ops").value;
+
+        if (document.getElementById("label-broadcast-rcon-to-ops") !== null) {
+            document.getElementById("label-broadcast-rcon-to-ops").innerHTML = "broadcast-rcon-to-ops=" + document.getElementById("form-broadcast-rcon-to-ops").value;
+        }
+
     });
 
     $("#form-use-native-transport").change(function() {
@@ -998,7 +1377,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-use-native-transport").innerHTML = "use-native-transport=" + document.getElementById("form-use-native-transport").value;
+
+        if (document.getElementById("label-use-native-transport") !== null) {
+            document.getElementById("label-use-native-transport").innerHTML = "use-native-transport=" + document.getElementById("form-use-native-transport").value;
+        }
+
     });
 
     $("#form-prevent-proxy-connections").change(function() {
@@ -1018,7 +1401,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-prevent-proxy-connections").innerHTML = "prevent-proxy-connections=" + document.getElementById("form-prevent-proxy-connections").value;
+
+        if (document.getElementById("label-prevent-proxy-connections") !== null) {
+            document.getElementById("label-prevent-proxy-connections").innerHTML = "prevent-proxy-connections=" + document.getElementById("form-prevent-proxy-connections").value;
+        }
+
     });
 
     $("#form-enable-jmx-monitoring").change(function() {
@@ -1038,7 +1425,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-enable-jmx-monitoring").innerHTML = "enable-jmx-monitoring=" + document.getElementById("form-enable-jmx-monitoring").value;
+
+        if (document.getElementById("label-enable-jmx-monitoring") !== null) {
+            document.getElementById("label-enable-jmx-monitoring").innerHTML = "enable-jmx-monitoring=" + document.getElementById("form-enable-jmx-monitoring").value;
+        }
+
     });
 
     $("#form-snooper-enabled").change(function() {
@@ -1058,7 +1449,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-snooper-enabled").innerHTML = "snooper-enabled=" + document.getElementById("form-snooper-enabled").value;
+
+        if (document.getElementById("label-snooper-enabled") !== null) {
+            document.getElementById("label-snooper-enabled").innerHTML = "snooper-enabled=" + document.getElementById("form-snooper-enabled").value;
+        }
+
     });
 
     $("#form-sync-chunk-writes").change(function() {
@@ -1078,7 +1473,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-sync-chunk-writes").innerHTML = "sync-chunk-writes=" + document.getElementById("form-sync-chunk-writes").value;
+
+        if (document.getElementById("label-sync-chunk-writes") !== null) {
+            document.getElementById("label-sync-chunk-writes").innerHTML = "sync-chunk-writes=" + document.getElementById("form-sync-chunk-writes").value;
+        }
+
     });
 
     $("#form-max-tick-time").change(function() {
@@ -1106,7 +1505,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-max-tick-time").innerHTML = "max-tick-time=" + document.getElementById("form-max-tick-time").value;
+
+            if (document.getElementById("label-max-tick-time") !== null) {
+                document.getElementById("label-max-tick-time").innerHTML = "max-tick-time=" + document.getElementById("form-max-tick-time").value;
+            }
         }
     });
 
@@ -1135,7 +1537,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-op-permission-level").innerHTML = "op-permission-level=" + document.getElementById("form-op-permission-level").value;
+
+            if (document.getElementById("label-op-permission-level") !== null) {
+                document.getElementById("label-op-permission-level").innerHTML = "op-permission-level=" + document.getElementById("form-op-permission-level").value;
+            }
         }
     });
 
@@ -1164,7 +1569,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-function-permission-level").innerHTML = "function-permission-level=" + document.getElementById("form-function-permission-level").value;
+
+            if (document.getElementById("label-function-permission-level") !== null) {
+                document.getElementById("label-function-permission-level").innerHTML = "function-permission-level=" + document.getElementById("form-function-permission-level").value;
+            }
         }
     });
 
@@ -1185,7 +1593,11 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-rate-limit").innerHTML = "rate-limit=" + document.getElementById("form-rate-limit").value;
+
+        if (document.getElementById("label-rate-limit") !== null) {
+            document.getElementById("label-rate-limit").innerHTML = "rate-limit=" + document.getElementById("form-rate-limit").value;
+        }
+
     });
 
     $("#form-network-compression-threshold").change(function() {
@@ -1213,7 +1625,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-network-compression-threshold").innerHTML = "network-compression-threshold=" + document.getElementById("form-network-compression-threshold").value;
+
+            if (document.getElementById("label-network-compression-threshold") !== null) {
+                document.getElementById("label-network-compression-threshold").innerHTML = "network-compression-threshold=" + document.getElementById("form-network-compression-threshold").value;
+            }
         }
     });
 
@@ -1242,7 +1657,10 @@ $(function() {
                     }
                 }
             });
-            document.getElementById("label-view-distance").innerHTML = "view-distance=" + document.getElementById("form-view-distance").value;
+
+            if (document.getElementById("label-view-distance") !== null) {
+                document.getElementById("label-view-distance").innerHTML = "view-distance=" + document.getElementById("form-view-distance").value;
+            }
         }
     });
 
@@ -1258,7 +1676,10 @@ $(function() {
                 if (getdebug == 1) {
                     alert(data);
                 }
-                document.getElementById("visormotd").innerHTML = data;
+
+                if (document.getElementById("visormotd") !== null) {
+                    document.getElementById("visormotd").innerHTML = data;
+                }
             }
         });
     }
@@ -1280,8 +1701,15 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(document.getElementById("form-motd").value);
-        updatemotd(document.getElementById("form-motd").value);
+
+        if (document.getElementById("label-motd") !== null) {
+            document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(document.getElementById("form-motd").value);
+        }
+
+        if (document.getElementById("form-motd") !== null) {
+            updatemotd(document.getElementById("form-motd").value);
+        }
+
     });
 
     document.getElementById("form-motd").addEventListener('paste', function(event) {
@@ -1320,8 +1748,15 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(enviovalor);
-        updatemotd(enviovalor);
+
+        if (document.getElementById("label-motd") !== null) {
+            document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(enviovalor);
+        }
+
+        if (document.getElementById("visormotd") !== null) {
+            updatemotd(enviovalor);
+        }
+
     });
 
     function sessionTimer() {
