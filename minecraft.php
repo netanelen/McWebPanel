@@ -71,7 +71,7 @@ require_once("template/header.php");
                     $array = explode("=", $str);
                     if ($array[0] == $eltipo) {
                         if ($array[0] == 'motd') {
-                            return trim(substr($str, 5));
+                            return substr($str, 5);
                         } else {
                             return trim($array[1]);
                         }
@@ -174,7 +174,7 @@ require_once("template/header.php");
                                                     <p class="lead">Juego por defecto del servidor.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-gamemode">
+                                                    <select id="form-gamemode" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('Supervivencia', 'Creativo', 'Aventura', 'Espectador');
                                                         $losvalues = array('survival', 'creative', 'adventure', 'spectator');
@@ -195,7 +195,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-gamemode">gamemode</p>
+                                                    <p id="label-gamemode" class="lead text-center text-white mt-2 bg-primary">gamemode</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +218,7 @@ require_once("template/header.php");
                                                     <p class="lead">Fuerza a los jugadores a entrar con el modo de juego por defecto configurado.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-force-gamemode">
+                                                    <select id="form-force-gamemode" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -240,7 +240,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-force-gamemode">force-gamemode</p>
+                                                    <p id="label-force-gamemode" class="lead text-center text-white mt-2 bg-primary">force-gamemode</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -263,7 +263,7 @@ require_once("template/header.php");
                                                     <p class="lead">Dificultad del modo Supervivencia.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-difficulty">
+                                                    <select id="form-difficulty" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('Pacifico', 'Facil', 'Normal', 'Dificil');
                                                         $losvalues = array('peaceful', 'easy', 'normal', 'hard');
@@ -285,7 +285,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-difficulty">difficulty</p>
+                                                    <p id="label-difficulty" class="lead text-center text-white mt-2 bg-primary">difficulty</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -308,7 +308,7 @@ require_once("template/header.php");
                                                     <p class="lead">Si está en true, la dificultad es ignorada y fijada en difícil y los jugadores pasan a modo espectador si mueren.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-hardcore">
+                                                    <select id="form-hardcore" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -330,7 +330,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-hardcore">hardcore</p>
+                                                    <p id="label-hardcore" class="lead text-center text-white mt-2 bg-primary">hardcore</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,7 +353,7 @@ require_once("template/header.php");
                                                     <p class="lead">Los jugadores pueden matar a otros jugadores.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-pvp">
+                                                    <select id="form-pvp" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -375,7 +375,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-pvp">pvp</p>
+                                                    <p id="label-pvp" class="lead text-center text-white mt-2 bg-primary">pvp</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -398,7 +398,7 @@ require_once("template/header.php");
                                                     <p class="lead">Los NPC (Aldeanos) podrán spawnear en el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-spawn-npcs">
+                                                    <select id="form-spawn-npcs" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -420,7 +420,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-spawn-npcs">spawn-npcs</p>
+                                                    <p id="label-spawn-npcs" class="lead text-center text-white mt-2 bg-primary">spawn-npcs</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -443,7 +443,7 @@ require_once("template/header.php");
                                                     <p class="lead">Los Animales (Cerdo, Vaca, etc.) podrán spawnear en el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-spawn-animals">
+                                                    <select id="form-spawn-animals" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -465,7 +465,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-spawn-animals">spawn-animals</p>
+                                                    <p id="label-spawn-animals" class="lead text-center text-white mt-2 bg-primary">spawn-animals</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -488,7 +488,7 @@ require_once("template/header.php");
                                                     <p class="lead">Los Monstruos (Creepers, Arañas, etc.) podrán spawnear en el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-spawn-monsters">
+                                                    <select id="form-spawn-monsters" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -510,7 +510,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-spawn-monsters">spawn-monsters</p>
+                                                    <p id="label-spawn-monsters" class="lead text-center text-white mt-2 bg-primary">spawn-monsters</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -533,7 +533,7 @@ require_once("template/header.php");
                                                     <p class="lead">Permite volar a los usuarios.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-allow-flight">
+                                                    <select id="form-allow-flight" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -554,7 +554,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-allow-flight">allow-flight</p>
+                                                    <p id="label-allow-flight" class="lead text-center text-white mt-2 bg-primary">allow-flight</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -577,12 +577,12 @@ require_once("template/header.php");
                                                     <p class="lead">Si el jugador no se mueve en el tiempo asignado (minutos), el servidor lo expulsara.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" id="form-player-idle-timeout" value="<?php echo (leerlineas('player-idle-timeout')); ?>" min="0" max="2147483647">
+                                                    <input id="form-player-idle-timeout" type="number" class="form-control" min="0" max="2147483647" value="<?php echo (leerlineas('player-idle-timeout')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-player-idle-timeout">player-idle-timeout</p>
+                                                    <p id="label-player-idle-timeout" class="lead text-center text-white mt-2 bg-primary">player-idle-timeout</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -605,12 +605,12 @@ require_once("template/header.php");
                                                     <p class="lead">Asignar URL al paquete de recursos.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('resource-pack')); ?>" id="form-resource-pack">
+                                                    <input id="form-resource-pack" type="text" class="form-control" value="<?php echo (leerlineas('resource-pack')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-resource-pack">resource-pack</p>
+                                                    <p id="label-resource-pack" class="lead text-center text-white mt-2 bg-primary">resource-pack</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -633,12 +633,12 @@ require_once("template/header.php");
                                                     <p class="lead">Comprueba si el SHA1 corresponde con el fichero seleccionado de la URL.<br>Se utiliza el SHA1 del fichero en hexadecimal y en minúsculas.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('resource-pack-sha1')); ?>" id="form-resource-pack-sha1">
+                                                    <input id="form-resource-pack-sha1" type="text" class="form-control" value="<?php echo (leerlineas('resource-pack-sha1')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-resource-pack-sha1">resource-pack-sha1</p>
+                                                    <p id="label-resource-pack-sha1" class="lead text-center text-white mt-2 bg-primary">resource-pack-sha1</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -673,12 +673,12 @@ require_once("template/header.php");
                                                     <p class="lead">Nombre con el que se creara el mapa principal.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('level-name')); ?>" id="form-level-name" maxlength="255">
+                                                    <input id="form-level-name" type="text" class="form-control" maxlength="255" value="<?php echo (leerlineas('level-name')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-level-name">level-name</p>
+                                                    <p id="label-level-name" class="lead text-center text-white mt-2 bg-primary">level-name</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -701,12 +701,12 @@ require_once("template/header.php");
                                                     <p class="lead">Semilla para generación de mapas.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('level-seed')); ?>" id="form-level-seed">
+                                                    <input id="form-level-seed" type="text" class="form-control" value="<?php echo (leerlineas('level-seed')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-level-seed">level-seed</p>
+                                                    <p id="label-level-seed" class="lead text-center text-white mt-2 bg-primary">level-seed</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -729,7 +729,7 @@ require_once("template/header.php");
                                                     <p class="lead">Determina el tipo de mapa que se generara.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-level-type">
+                                                    <select id="form-level-type" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('Standard', 'Plano', 'Biomas Largos', 'Amplificado', 'Un bioma (Requiere 1.15 o superior)');
                                                         $losvalues = array('default', 'flat', 'largeBiomes', 'amplified', 'buffet');
@@ -750,7 +750,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-level-type">level-type</p>
+                                                    <p id="label-level-type" class="lead text-center text-white mt-2 bg-primary">level-type</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -773,12 +773,12 @@ require_once("template/header.php");
                                                     <p class="lead">Configuración utilizada para personalizar la generación del mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('generator-settings')); ?>" id="form-generator-settings">
+                                                    <input id="form-generator-settings" type="text" class="form-control" value="<?php echo (leerlineas('generator-settings')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-generator-settings">generator-settings</p>
+                                                    <p id="label-generator-settings" class="lead text-center text-white mt-2 bg-primary">generator-settings</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -801,12 +801,12 @@ require_once("template/header.php");
                                                     <p class="lead">Determina la altura máxima que se podrá construir.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('max-build-height')); ?>" id="form-max-build-height" min="8" max="256">
+                                                    <input id="form-max-build-height" type="number" class="form-control" min="8" max="256" value="<?php echo (leerlineas('max-build-height')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-max-build-height">max-build-height</p>
+                                                    <p id="label-max-build-height" class="lead text-center text-white mt-2 bg-primary">max-build-height</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -829,7 +829,7 @@ require_once("template/header.php");
                                                     <p class="lead">Se generarán estructuras (Aldeas, edificios, etc.) por el mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-generate-structures">
+                                                    <select id="form-generate-structures" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -850,7 +850,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-generate-structures">generate-structures</p>
+                                                    <p id="label-generate-structures" class="lead text-center text-white mt-2 bg-primary">generate-structures</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -873,7 +873,7 @@ require_once("template/header.php");
                                                     <p class="lead">Activar el Nether y sus portales.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-allow-nether">
+                                                    <select id="form-allow-nether" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -894,7 +894,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-allow-nether">allow-nether</p>
+                                                    <p id="label-allow-nether" class="lead text-center text-white mt-2 bg-primary">allow-nether</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -917,12 +917,12 @@ require_once("template/header.php");
                                                     <p class="lead">Ajustar la distancia de renderizado de entidades, si es muy lejano puede causar lag.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('entity-broadcast-range-percentage')); ?>" id="form-entity-broadcast-range-percentage" min="0" max="500">
+                                                    <input id="form-entity-broadcast-range-percentage" type="number" class="form-control" min="0" max="500" value="<?php echo (leerlineas('entity-broadcast-range-percentage')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-entity-broadcast-range-percentage">entity-broadcast-range-percentage</p>
+                                                    <p id="label-entity-broadcast-range-percentage" class="lead text-center text-white mt-2 bg-primary">entity-broadcast-range-percentage</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -945,12 +945,12 @@ require_once("template/header.php");
                                                     <p class="lead">Asignas el radio de protección al punto spawn del mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('spawn-protection')); ?>" id="form-spawn-protection" min="0" max="16">
+                                                    <input id="form-spawn-protection" type="number" class="form-control" min="0" max="16" value="<?php echo (leerlineas('spawn-protection')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-spawn-protection">spawn-protection</p>
+                                                    <p id="label-spawn-protection" class="lead text-center text-white mt-2 bg-primary">spawn-protection</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -973,12 +973,12 @@ require_once("template/header.php");
                                                     <p class="lead">Asignas el tamaño máximo del mundo, no se podrá caminar al llegar al límite</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('max-world-size')); ?>" id="form-max-world-size" min="1" max="29999984">
+                                                    <input id="form-max-world-size" type="number" class="form-control" min="1" max="29999984" value="<?php echo (leerlineas('max-world-size')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-max-world-size">max-world-size</p>
+                                                    <p id="label-max-world-size" class="lead text-center text-white mt-2 bg-primary">max-world-size</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1013,7 +1013,7 @@ require_once("template/header.php");
                                                     <p class="lead">Activar o Desactivar el modo Legal (True) o Pirata (False).</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-online-mode">
+                                                    <select id="form-online-mode" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1034,7 +1034,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-online-mode">online-mode</p>
+                                                    <p id="label-online-mode" class="lead text-center text-white mt-2 bg-primary">online-mode</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1057,12 +1057,12 @@ require_once("template/header.php");
                                                     <p class="lead">Asignas el máximo de jugadores que podrán entrar al servidor.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('max-players')); ?>" id="form-max-players" min="1" max="2147483647">
+                                                    <input id="form-max-players" type="number" class="form-control" min="1" max="2147483647" value="<?php echo (leerlineas('max-players')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-max-players">max-players</p>
+                                                    <p id="label-max-players" class="lead text-center text-white mt-2 bg-primary">max-players</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1085,7 +1085,7 @@ require_once("template/header.php");
                                                     <p class="lead">Activa el bloque de comandos en el servidor.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-enable-command-block">
+                                                    <select id="form-enable-command-block" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -1106,7 +1106,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-enable-command-block">enable-command-block</p>
+                                                    <p id="label-enable-command-block" class="lead text-center text-white mt-2 bg-primary">enable-command-block</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1129,7 +1129,7 @@ require_once("template/header.php");
                                                     <p class="lead">Responde a las solicitudes Query de Servidores y Programas.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-enable-query">
+                                                    <select id="form-enable-query" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -1150,7 +1150,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-enable-query">enable-query</p>
+                                                    <p id="label-enable-query" class="lead text-center text-white mt-2 bg-primary">enable-query</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1173,12 +1173,12 @@ require_once("template/header.php");
                                                     <p class="lead">Establece el puerto para Query.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('query.port')); ?>" id="form-query-port" min="1025" max="65535">
+                                                    <input id="form-query-port" type="number" class="form-control" min="1025" max="65535" value="<?php echo (leerlineas('query.port')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-query-port">query.port</p>
+                                                    <p id="label-query-port" class="lead text-center text-white mt-2 bg-primary">query.port</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1201,7 +1201,7 @@ require_once("template/header.php");
                                                     <p class="lead">Activa protocolo RCON.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-enable-rcon">
+                                                    <select id="form-enable-rcon" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -1222,7 +1222,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-enable-rcon">enable-rcon</p>
+                                                    <p id="label-enable-rcon" class="lead text-center text-white mt-2 bg-primary">enable-rcon</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1245,12 +1245,12 @@ require_once("template/header.php");
                                                     <p class="lead">Establece el puerto de red RCON.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('rcon.port')); ?>" id="form-rconport" min="1025" max="65535">
+                                                    <input id="form-rconport" type="number" class="form-control" min="1025" max="65535" value="<?php echo (leerlineas('rcon.port')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-rconport">rcon.port</p>
+                                                    <p id="label-rconport" class="lead text-center text-white mt-2 bg-primary">rcon.port</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1273,12 +1273,12 @@ require_once("template/header.php");
                                                     <p class="lead">Fijar el password que usaras al conectarte con RCON.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('rcon.password')); ?>" id="form-rcon-password">
+                                                    <input id="form-rcon-password" type="text" class="form-control" value="<?php echo (leerlineas('rcon.password')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-rcon-password">rcon.password</p>
+                                                    <p id="label-rcon-password" class="lead text-center text-white mt-2 bg-primary">rcon.password</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1301,7 +1301,7 @@ require_once("template/header.php");
                                                     <p class="lead">La lista blanca solo permitirá entrar a los usuarios que estén en ella cuando esté activada.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-white-list">
+                                                    <select id="form-white-list" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -1322,7 +1322,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-white-list">white-list</p>
+                                                    <p id="label-white-list" class="lead text-center text-white mt-2 bg-primary">white-list</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1345,7 +1345,7 @@ require_once("template/header.php");
                                                     <p class="lead">Cuando está en true, los usuarios que no están añadidos en la lista blanca (si está esta habilitada) son expulsados ​​del servidor después de que el servidor vuelve a cargar el archivo de la lista blanca.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-enforce-whitelist">
+                                                    <select id="form-enforce-whitelist" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -1366,7 +1366,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-enforce-whitelist">enforce-whitelist</p>
+                                                    <p id="label-enforce-whitelist" class="lead text-center text-white mt-2 bg-primary">enforce-whitelist</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1389,12 +1389,12 @@ require_once("template/header.php");
                                                     <p class="lead">Fijar el servidor obligatoriamente a una IP, se recomienda dejarla en blanco.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('server-ip')); ?>" id="form-server-ip">
+                                                    <input id="form-server-ip" type="text" class="form-control" value="<?php echo (leerlineas('server-ip')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-server-ip">server-ip</p>
+                                                    <p id="label-server-ip" class="lead text-center text-white mt-2 bg-primary">server-ip</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1417,7 +1417,7 @@ require_once("template/header.php");
                                                     <p class="lead">Hace aparecer el servidor 'online' en la lista de servidores.<br>Si está en falso, suprimirá las respuestas de los clientes. Esto significa que aparecerá como fuera de línea, pero seguirá aceptando conexiones.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-enable-status">
+                                                    <select id="form-enable-status" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1438,7 +1438,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-enable-status">enable-status</p>
+                                                    <p id="label-enable-status" class="lead text-center text-white mt-2 bg-primary">enable-status</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1461,7 +1461,7 @@ require_once("template/header.php");
                                                     <p class="lead">Envía los resultados de los comandos de consola a todos los operadores.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-broadcast-console-to-ops">
+                                                    <select id="form-broadcast-console-to-ops" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1482,7 +1482,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-broadcast-console-to-ops">broadcast-console-to-ops</p>
+                                                    <p id="label-broadcast-console-to-ops" class="lead text-center text-white mt-2 bg-primary">broadcast-console-to-ops</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1505,7 +1505,7 @@ require_once("template/header.php");
                                                     <p class="lead">Envía los resultados de los comandos de consola mediante rcon a todos los operadores.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-broadcast-rcon-to-ops">
+                                                    <select id="form-broadcast-rcon-to-ops" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1526,7 +1526,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-broadcast-rcon-to-ops">broadcast-rcon-to-ops</p>
+                                                    <p id="label-broadcast-rcon-to-ops" class="lead text-center text-white mt-2 bg-primary">broadcast-rcon-to-ops</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1549,7 +1549,7 @@ require_once("template/header.php");
                                                     <p class="lead">Mejoras en el rendimiento Linux: envío y recepción de paquetes optimizados.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-use-native-transport">
+                                                    <select id="form-use-native-transport" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1570,7 +1570,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-use-native-transport">use-native-transport</p>
+                                                    <p id="label-use-native-transport" class="lead text-center text-white mt-2 bg-primary">use-native-transport</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1593,7 +1593,7 @@ require_once("template/header.php");
                                                     <p class="lead">Si el ISP/AS enviado desde el servidor es diferente al del Servidor Autentificación de Mojang, el jugador es kickeado.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-prevent-proxy-connections">
+                                                    <select id="form-prevent-proxy-connections" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True');
                                                         $losvalues = array('false', 'true');
@@ -1614,7 +1614,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-prevent-proxy-connections">prevent-proxy-connections</p>
+                                                    <p id="label-prevent-proxy-connections" class="lead text-center text-white mt-2 bg-primary">prevent-proxy-connections</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1637,7 +1637,7 @@ require_once("template/header.php");
                                                     <p class="lead">Monitorear los tiempos de tick del servidor(averageTickTime y tickTimes).</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-enable-jmx-monitoring">
+                                                    <select id="form-enable-jmx-monitoring" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('False', 'True (Requiere 1.16 o superior)');
                                                         $losvalues = array('false', 'true');
@@ -1658,7 +1658,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-enable-jmx-monitoring">enable-jmx-monitoring</p>
+                                                    <p id="label-enable-jmx-monitoring" class="lead text-center text-white mt-2 bg-primary">enable-jmx-monitoring</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1681,7 +1681,7 @@ require_once("template/header.php");
                                                     <p class="lead">Envía estadísticas del Servidor a Mojang.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-snooper-enabled">
+                                                    <select id="form-snooper-enabled" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1702,7 +1702,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-snooper-enabled">snooper-enabled</p>
+                                                    <p id="label-snooper-enabled" class="lead text-center text-white mt-2 bg-primary">snooper-enabled</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1725,7 +1725,7 @@ require_once("template/header.php");
                                                     <p class="lead">Modo Sincronizado previene la perdida de datos y corrupción después de un crasheo.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <select class="form-control w-100" id="form-sync-chunk-writes">
+                                                    <select id="form-sync-chunk-writes" class="form-control w-100">
                                                         <?php
                                                         $lostextos = array('True (Requiere 1.16 o superior)', 'False');
                                                         $losvalues = array('true', 'false');
@@ -1746,7 +1746,7 @@ require_once("template/header.php");
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-sync-chunk-writes">sync-chunk-writes</p>
+                                                    <p id="label-sync-chunk-writes" class="lead text-center text-white mt-2 bg-primary">sync-chunk-writes</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1769,12 +1769,12 @@ require_once("template/header.php");
                                                     <p class="lead">Los segundos que tardara en cerrar el servidor si no responde en X segundos.<br> (60000 = 60 segundos).</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('max-tick-time')); ?>" id="form-max-tick-time" min="1000" max="60000">
+                                                    <input id="form-max-tick-time" type="number" class="form-control" min="1000" max="60000" value="<?php echo (leerlineas('max-tick-time')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-max-tick-time">max-tick-time</p>
+                                                    <p id="label-max-tick-time" class="lead text-center text-white mt-2 bg-primary">max-tick-time</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1797,12 +1797,12 @@ require_once("template/header.php");
                                                     <p class="lead">Asigna el permiso por defecto para operadores.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('op-permission-level')); ?>" id="form-op-permission-level" min="1" max="4">
+                                                    <input id="form-op-permission-level" type="number" class="form-control" min="1" max="4" value="<?php echo (leerlineas('op-permission-level')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-op-permission-level">op-permission-level</p>
+                                                    <p id="label-op-permission-level" class="lead text-center text-white mt-2 bg-primary">op-permission-level</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1825,12 +1825,12 @@ require_once("template/header.php");
                                                     <p class="lead">Asigna el permiso por defecto para funciones.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('function-permission-level')); ?>" id="form-function-permission-level" min="1" max="4">
+                                                    <input id="form-function-permission-level" type="number" class="form-control" min="1" max="4" value="<?php echo (leerlineas('function-permission-level')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-function-permission-level">function-permission-level</p>
+                                                    <p id="label-function-permission-level" class="lead text-center text-white mt-2 bg-primary">function-permission-level</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1853,12 +1853,12 @@ require_once("template/header.php");
                                                     <p class="lead">Permite kikear jugadores que constantemente están enviando demasiados paquetes en cuestión de segundos.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('rate-limit')); ?>" id="form-rate-limit" min="0">
+                                                    <input id="form-rate-limit" type="number" class="form-control" min="0" value="<?php echo (leerlineas('rate-limit')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-rate-limit">rate-limit</p>
+                                                    <p id="label-rate-limit" class="lead text-center text-white mt-2 bg-primary">rate-limit</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1881,12 +1881,12 @@ require_once("template/header.php");
                                                     <p class="lead">Permite comprimir los paquetes de red del servidor.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('network-compression-threshold')); ?>" id="form-network-compression-threshold" min="64" max="256">
+                                                    <input id="form-network-compression-threshold" type="number" class="form-control" min="64" max="256" value="<?php echo (leerlineas('network-compression-threshold')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-network-compression-threshold">network-compression-threshold</p>
+                                                    <p id="label-network-compression-threshold" class="lead text-center text-white mt-2 bg-primary">network-compression-threshold</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1909,12 +1909,12 @@ require_once("template/header.php");
                                                     <p class="lead">Aumentará la distancia de visionado cargando más chunks desde la posición donde mira el jugador.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="number" class="form-control" value="<?php echo (leerlineas('view-distance')); ?>" id="form-view-distance" min="3" max="32">
+                                                    <input id="form-view-distance" type="number" class="form-control" min="3" max="32" value="<?php echo (leerlineas('view-distance')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-view-distance">view-distance</p>
+                                                    <p id="label-view-distance" class="lead text-center text-white mt-2 bg-primary">view-distance</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1937,12 +1937,17 @@ require_once("template/header.php");
                                                     <p class="lead">Mensaje que se muestra en la lista de servidores del cliente.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" value="<?php echo (leerlineas('motd')); ?>" id="form-motd">
+                                                    <input id="form-motd" type="text" class="form-control" value="<?php
+                                                    $elmotd = "";
+                                                    $elmotd = leerlineas('motd');
+                                                    $elmotd = str_replace("<?php", htmlentities("<?php"), $elmotd);
+                                                    echo $elmotd;
+                                                    ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p class="lead text-center text-white mt-2 bg-primary" id="label-motd">motd</p>
+                                                    <p id="label-motd" class="lead text-center text-white mt-2 bg-primary">motd</p>
                                                 </div>
                                             </div>
                                         </div>

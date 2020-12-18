@@ -18,6 +18,10 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function() {
 
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
     $("#form-player-idle-timeout").keypress(function(e) {
         if (e.keyCode < 48 || e.keyCode > 57) {
             return false;
@@ -185,7 +189,7 @@ $(function() {
     document.getElementById("label-rate-limit").innerHTML = "rate-limit=" + document.getElementById("form-rate-limit").value;
     document.getElementById("label-network-compression-threshold").innerHTML = "network-compression-threshold=" + document.getElementById("form-network-compression-threshold").value;
     document.getElementById("label-view-distance").innerHTML = "view-distance=" + document.getElementById("form-view-distance").value;
-    document.getElementById("label-motd").innerHTML = "motd=" + document.getElementById("form-motd").value;
+    document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(document.getElementById("form-motd").value);
     updatemotd(document.getElementById("form-motd").value);
 
     $("#form-gamemode").change(function() {
@@ -1254,7 +1258,6 @@ $(function() {
                 if (getdebug == 1) {
                     alert(data);
                 }
-
                 document.getElementById("visormotd").innerHTML = data;
             }
         });
@@ -1277,7 +1280,7 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-motd").innerHTML = "motd=" + document.getElementById("form-motd").value;
+        document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(document.getElementById("form-motd").value);
         updatemotd(document.getElementById("form-motd").value);
     });
 
@@ -1317,7 +1320,7 @@ $(function() {
                 }
             }
         });
-        document.getElementById("label-motd").innerHTML = "motd=" + enviovalor;
+        document.getElementById("label-motd").innerHTML = "motd=" + htmlEntities(enviovalor);
         updatemotd(enviovalor);
     });
 

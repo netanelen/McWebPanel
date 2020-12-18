@@ -50,6 +50,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $runicode = "";
                 $unicodeChar = "";
 
+                $texto = str_replace("<", htmlentities("<"), $texto);
+                $texto = str_replace("<", htmlentities(">"), $texto);
+
+                $texto = str_replace('\"', htmlentities('"'), $texto);
+
                 $texto = "<span class='colreset'>" . $texto;
 
                 //OFUSCADO

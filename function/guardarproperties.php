@@ -31,12 +31,6 @@ function test_input($data)
   return $data;
 }
 
-function test_motd($data)
-{
-  $data = trim($data);
-  return $data;
-}
-
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
   $_SESSION['VALIDADO'] = "NO";
@@ -67,7 +61,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $str = $búfer;
             $array = explode("=", $str);
             if ($array[0] == $lakey) {
-              $elvalor = trim($elvalor);
+              if ($lakey != "motd") {
+                $elvalor = trim($elvalor);
+              }
               fwrite($file, $lakey . '=' . $elvalor . PHP_EOL);
             } else {
               fwrite($file, $búfer);
@@ -87,7 +83,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $elaction = test_input($_POST['action']);
 
       if ($elaction == "motd") {
-        $elresultado = test_motd($_POST['valor']);
+        $elresultado = $_POST['valor'];
       } else {
         $elresultado = test_input($_POST['valor']);
       }
