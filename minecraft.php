@@ -1936,24 +1936,24 @@ require_once("template/header.php");
                                                 <div class="col-md-8">
                                                     <p class="lead">Mensaje que se muestra en la lista de servidores del cliente.</p>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <input id="form-motd" type="text" class="form-control" value="<?php
-                                                    $elmotd = "";
-                                                    $elmotd = leerlineas('motd');
-                                                    $elmotd = str_replace("<?php", htmlentities("<?php"), $elmotd);
-                                                    echo $elmotd;
-                                                    ?>">
-                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    <div>
+                                                        <input id="form-motd" type="text" class="form-control" value="<?php
+                                                                                                                        $elmotd = "";
+                                                                                                                        $elmotd = leerlineas('motd');
+                                                                                                                        $elmotd = str_replace("<?php", htmlentities("<?php"), $elmotd);
+                                                                                                                        echo $elmotd;
+                                                                                                                        ?>">
+                                                    </div>
                                                     <p id="label-motd" class="lead text-center text-white mt-2 bg-primary">motd</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Separacion Fin -->
-
+                                    <hr>
                                     <!-- Separacion Inicio -->
                                     <div class="">
                                         <div class="container">
@@ -1975,6 +1975,7 @@ require_once("template/header.php");
                                     </div>
 
                                     <!-- Separacion Fin -->
+                                    <hr>
 
                                 </div>
 
