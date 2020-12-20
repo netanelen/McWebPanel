@@ -1976,6 +1976,18 @@ require_once("template/header.php");
 
                                     <!-- Separacion Fin -->
                                     <hr>
+                                    <!-- Separacion Inicio -->
+                                    <div class="">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                <button id="restablecer" type="button" class="btn btn-block btn-lg btn-danger">Restablecer configuración por defecto</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Separacion Fin -->
+                                    <hr>
 
                                 </div>
 

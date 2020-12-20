@@ -1759,6 +1759,31 @@ $(function() {
 
     });
 
+    $("#restablecer").click(function() {
+        var eleccion = confirm("¡Confirmacion de restablecer configuracin por defecto!\n\n¡Esta acción creará un nuevo archivo de configuración server.properties, una vez realizado no se podrá cancelar!\n\n¿Seguro que quieres continuar?");
+        if (eleccion === true) {
+
+            $.ajax({
+                url: 'function/restablecerproperties.php',
+                data: {
+                    action: 'status'
+                },
+                type: 'POST',
+                success: function(data) {
+                    alert(data);
+                    if (data == "OK") {
+                        location.reload();
+                    } else if (data == "nowriteconfig") {
+                        alert("La carpeta config no tiene permisos de escritura");
+                    } else if (data == "nowriteproperties") {
+                        alert("El archivo /config/serverproperties.txt no tiene permisos de escritura");
+                    }
+
+                }
+            });
+        }
+    });
+
     function sessionTimer() {
 
         $.ajax({
