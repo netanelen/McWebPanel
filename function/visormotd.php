@@ -38,125 +38,128 @@ if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 //VALIDAMOS SESSION
 if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
-    //VALIDAMOS SESSION
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconfmine', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconfmine'] == 1) {
 
-        if (isset($_POST['action']) && !empty($_POST['action'])) {
+        //VALIDAMOS SESSION
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            function leermotd($texto)
-            {
+            if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-                $textototal = "";
-                $runicode = "";
-                $unicodeChar = "";
+                function leermotd($texto)
+                {
 
-                $texto = str_replace("<", htmlentities("<"), $texto);
-                $texto = str_replace("<", htmlentities(">"), $texto);
+                    $textototal = "";
+                    $runicode = "";
+                    $unicodeChar = "";
 
-                $texto = str_replace('\"', htmlentities('"'), $texto);
+                    $texto = str_replace("<", htmlentities("<"), $texto);
+                    $texto = str_replace("<", htmlentities(">"), $texto);
 
-                $texto = "<span class='colreset'>" . $texto;
+                    $texto = str_replace('\"', htmlentities('"'), $texto);
 
-                //OFUSCADO
-                $texto = str_replace("\u00a7k", "", $texto);
-                $texto = str_replace("\u00A7k", "", $texto);
+                    $texto = "<span class='colreset'>" . $texto;
 
-                //SALTO
-                $texto = str_replace("\\n", "<br>", $texto);
+                    //OFUSCADO
+                    $texto = str_replace("\u00a7k", "", $texto);
+                    $texto = str_replace("\u00A7k", "", $texto);
 
-                //NEGRITA
-                $texto = str_replace("\u00a7l", "<strong>", $texto);
-                $texto = str_replace("\u00A7l", "<strong>", $texto);
+                    //SALTO
+                    $texto = str_replace("\\n", "<br>", $texto);
 
-                //CURSIVA
-                $texto = str_replace("\u00a7o", "<i>", $texto);
-                $texto = str_replace("\u00A7o", "<i>", $texto);
+                    //NEGRITA
+                    $texto = str_replace("\u00a7l", "<strong>", $texto);
+                    $texto = str_replace("\u00A7l", "<strong>", $texto);
 
-                //SUBRAYADO
-                $texto = str_replace("\u00a7n", "<u>", $texto);
-                $texto = str_replace("\u00A7n", "<u>", $texto);
+                    //CURSIVA
+                    $texto = str_replace("\u00a7o", "<i>", $texto);
+                    $texto = str_replace("\u00A7o", "<i>", $texto);
 
-                //TACHADO
-                $texto = str_replace("\u00a7m", "<s>", $texto);
-                $texto = str_replace("\u00A7m", "<s>", $texto);
+                    //SUBRAYADO
+                    $texto = str_replace("\u00a7n", "<u>", $texto);
+                    $texto = str_replace("\u00A7n", "<u>", $texto);
 
-                //RESET
-                $texto = str_replace("\u00a7r", "</strong></i></u></s><span class='colreset'>", $texto);
-                $texto = str_replace("\u00A7r", "</strong></i></u></s><span class='colreset'>", $texto);
+                    //TACHADO
+                    $texto = str_replace("\u00a7m", "<s>", $texto);
+                    $texto = str_replace("\u00A7m", "<s>", $texto);
 
-                //COLORES MAYUSCULA
-                $texto = str_replace("\u00A70", "<span class='col01'>", $texto);
-                $texto = str_replace("\u00A71", "<span class='col02'>", $texto);
-                $texto = str_replace("\u00A72", "<span class='col03'>", $texto);
-                $texto = str_replace("\u00A73", "<span class='col04'>", $texto);
-                $texto = str_replace("\u00A74", "<span class='col05'>", $texto);
-                $texto = str_replace("\u00A75", "<span class='col06'>", $texto);
-                $texto = str_replace("\u00A76", "<span class='col07'>", $texto);
-                $texto = str_replace("\u00A77", "<span class='col08'>", $texto);
-                $texto = str_replace("\u00A78", "<span class='col09'>", $texto);
-                $texto = str_replace("\u00A79", "<span class='col10'>", $texto);
-                $texto = str_replace("\u00A7a", "<span class='col11'>", $texto);
-                $texto = str_replace("\u00A7b", "<span class='col12'>", $texto);
-                $texto = str_replace("\u00A7c", "<span class='col13'>", $texto);
-                $texto = str_replace("\u00A7d", "<span class='col14'>", $texto);
-                $texto = str_replace("\u00A7e", "<span class='col15'>", $texto);
-                $texto = str_replace("\u00A7f", "<span class='col16'>", $texto);
+                    //RESET
+                    $texto = str_replace("\u00a7r", "</strong></i></u></s><span class='colreset'>", $texto);
+                    $texto = str_replace("\u00A7r", "</strong></i></u></s><span class='colreset'>", $texto);
 
-                //COLORES MINUSCULA
-                $texto = str_replace("\u00a70", "<span class='col01'>", $texto);
-                $texto = str_replace("\u00a71", "<span class='col02'>", $texto);
-                $texto = str_replace("\u00a72", "<span class='col03'>", $texto);
-                $texto = str_replace("\u00a73", "<span class='col04'>", $texto);
-                $texto = str_replace("\u00a74", "<span class='col05'>", $texto);
-                $texto = str_replace("\u00a75", "<span class='col06'>", $texto);
-                $texto = str_replace("\u00a76", "<span class='col07'>", $texto);
-                $texto = str_replace("\u00a77", "<span class='col08'>", $texto);
-                $texto = str_replace("\u00a78", "<span class='col09'>", $texto);
-                $texto = str_replace("\u00a79", "<span class='col10'>", $texto);
-                $texto = str_replace("\u00a7a", "<span class='col11'>", $texto);
-                $texto = str_replace("\u00a7b", "<span class='col12'>", $texto);
-                $texto = str_replace("\u00a7c", "<span class='col13'>", $texto);
-                $texto = str_replace("\u00a7d", "<span class='col14'>", $texto);
-                $texto = str_replace("\u00a7e", "<span class='col15'>", $texto);
-                $texto = str_replace("\u00a7f", "<span class='col16'>", $texto);
+                    //COLORES MAYUSCULA
+                    $texto = str_replace("\u00A70", "<span class='col01'>", $texto);
+                    $texto = str_replace("\u00A71", "<span class='col02'>", $texto);
+                    $texto = str_replace("\u00A72", "<span class='col03'>", $texto);
+                    $texto = str_replace("\u00A73", "<span class='col04'>", $texto);
+                    $texto = str_replace("\u00A74", "<span class='col05'>", $texto);
+                    $texto = str_replace("\u00A75", "<span class='col06'>", $texto);
+                    $texto = str_replace("\u00A76", "<span class='col07'>", $texto);
+                    $texto = str_replace("\u00A77", "<span class='col08'>", $texto);
+                    $texto = str_replace("\u00A78", "<span class='col09'>", $texto);
+                    $texto = str_replace("\u00A79", "<span class='col10'>", $texto);
+                    $texto = str_replace("\u00A7a", "<span class='col11'>", $texto);
+                    $texto = str_replace("\u00A7b", "<span class='col12'>", $texto);
+                    $texto = str_replace("\u00A7c", "<span class='col13'>", $texto);
+                    $texto = str_replace("\u00A7d", "<span class='col14'>", $texto);
+                    $texto = str_replace("\u00A7e", "<span class='col15'>", $texto);
+                    $texto = str_replace("\u00A7f", "<span class='col16'>", $texto);
 
-                //CARACTERES
-                for ($i = 0; $i < strlen($texto); $i++) {
-                    if ($texto[$i] == "\\") {
-                        if ($i + 1 < strlen($texto)) {
-                            if ($texto[$i + 1] == "\\") {
-                                $textototal .= $texto[$i];
-                                $i = $i + 1;
-                            } else {
-                                if ($i + 5 < strlen($texto)) {
-                                    if ($texto[$i + 2] != "\\" && $texto[$i + 3] != "\\" && $texto[$i + 4] != "\\" && $texto[$i + 5] != "\\") {
-                                        $unicodeChar = $texto[$i] . $texto[$i + 1] . $texto[$i + 2] . $texto[$i + 3] . $texto[$i + 4] . $texto[$i + 5];
-                                        $runicode = json_decode('"' . $unicodeChar . '"');
-                                        $textototal .= $runicode;
-                                        $i = $i + 5;
-                                    }
-                                } else {
+                    //COLORES MINUSCULA
+                    $texto = str_replace("\u00a70", "<span class='col01'>", $texto);
+                    $texto = str_replace("\u00a71", "<span class='col02'>", $texto);
+                    $texto = str_replace("\u00a72", "<span class='col03'>", $texto);
+                    $texto = str_replace("\u00a73", "<span class='col04'>", $texto);
+                    $texto = str_replace("\u00a74", "<span class='col05'>", $texto);
+                    $texto = str_replace("\u00a75", "<span class='col06'>", $texto);
+                    $texto = str_replace("\u00a76", "<span class='col07'>", $texto);
+                    $texto = str_replace("\u00a77", "<span class='col08'>", $texto);
+                    $texto = str_replace("\u00a78", "<span class='col09'>", $texto);
+                    $texto = str_replace("\u00a79", "<span class='col10'>", $texto);
+                    $texto = str_replace("\u00a7a", "<span class='col11'>", $texto);
+                    $texto = str_replace("\u00a7b", "<span class='col12'>", $texto);
+                    $texto = str_replace("\u00a7c", "<span class='col13'>", $texto);
+                    $texto = str_replace("\u00a7d", "<span class='col14'>", $texto);
+                    $texto = str_replace("\u00a7e", "<span class='col15'>", $texto);
+                    $texto = str_replace("\u00a7f", "<span class='col16'>", $texto);
+
+                    //CARACTERES
+                    for ($i = 0; $i < strlen($texto); $i++) {
+                        if ($texto[$i] == "\\") {
+                            if ($i + 1 < strlen($texto)) {
+                                if ($texto[$i + 1] == "\\") {
                                     $textototal .= $texto[$i];
+                                    $i = $i + 1;
+                                } else {
+                                    if ($i + 5 < strlen($texto)) {
+                                        if ($texto[$i + 2] != "\\" && $texto[$i + 3] != "\\" && $texto[$i + 4] != "\\" && $texto[$i + 5] != "\\") {
+                                            $unicodeChar = $texto[$i] . $texto[$i + 1] . $texto[$i + 2] . $texto[$i + 3] . $texto[$i + 4] . $texto[$i + 5];
+                                            $runicode = json_decode('"' . $unicodeChar . '"');
+                                            $textototal .= $runicode;
+                                            $i = $i + 5;
+                                        }
+                                    } else {
+                                        $textototal .= $texto[$i];
+                                    }
                                 }
                             }
+                        } else {
+                            $textototal .= $texto[$i];
                         }
-                    } else {
-                        $textototal .= $texto[$i];
                     }
+
+                    //RETORNO
+                    return $textototal;
                 }
 
-                //RETORNO
-                return $textototal;
+                $elerror = 0;
+                $retorno = "";
+
+                $elmotd = $_POST['action'];
+
+                $retorno = leermotd($elmotd);
+
+                echo $retorno;
             }
-
-            $elerror = 0;
-            $retorno = "";
-
-            $elmotd = $_POST['action'];
-
-            $retorno = leermotd($elmotd);
-
-            echo $retorno;
         }
     }
 }
