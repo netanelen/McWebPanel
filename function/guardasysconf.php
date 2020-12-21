@@ -91,6 +91,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $elnombreservidor = CONFIGNOMBRESERVER;
         }
 
+        //RECOLECTOR DE BASURA
         if (isset($_POST['recbasura'])) {
           $elgarbagecolector = test_input($_POST["recbasura"]);
         } else {
@@ -107,6 +108,62 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $elerasecache = test_input($_POST["operasecache"]);
         } else {
           $elerasecache = "0";
+        }
+
+        //SELECTOR JAVA
+        $eljavaname = "0";
+        $eljavamanual = "";
+
+        if (isset($_POST['configjavaselect'])) {
+          $eljavaselect = test_input($_POST["configjavaselect"]);
+        } else {
+          $eljavaselect = "0";
+        }
+
+        if ($eljavaselect == "0") {
+          //PRIMERA OPCION
+          $eljavaname = "0";
+          $eljavamanual = "";
+        } elseif ($eljavaselect == "1") {
+          //SEGUNDA OPCION
+          if (isset($_POST['selectedjavaver'])) {
+            $eljavaname = test_input($_POST["selectedjavaver"]);
+
+            $existjavaruta = shell_exec("update-java-alternatives -l | awk '{ print $3 }'");
+            $existjavaruta = trim($existjavaruta);
+            $existjavaruta = (explode("\n", $existjavaruta));
+            $sijavaexist = 0;
+
+            for ($i = 0; $i < count($existjavaruta); $i++) {
+              if ($existjavaruta[$i] == $eljavaname) {
+                $sijavaexist = 1;
+              }
+            }
+
+            if ($sijavaexist == 1) {
+              $eljavaname .= "/bin/java";
+              clearstatcache();
+              if (!file_exists($eljavaname)) {
+                $retorno = "nojavaenruta";
+                $elerror = 1;
+              }
+            } else {
+              $retorno = "nojavaencontrado";
+              $elerror = 1;
+            }
+          }
+        } elseif ($eljavaselect == "2") {
+          //TERCERA OPCION
+          if (isset($_POST['javamanual'])) {
+            $eljavamanual = test_input($_POST["javamanual"]);
+            $existjavaruta = $eljavamanual;
+            $existjavaruta .= "/bin/java";
+            clearstatcache();
+            if (!file_exists($existjavaruta)) {
+              $retorno = "nojavaenruta";
+              $elerror = 1;
+            }
+          }
         }
 
         $lakey = CONFIGSESSIONKEY;
@@ -186,6 +243,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, 'define("CONFIGOPTIONGARBAGE", "' . $elgarbagecolector . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGOPTIONFORCEUPGRADE", "' . $elforseupgrade . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGOPTIONERASECACHE", "' . $elerasecache . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGJAVASELECT", "' . $eljavaselect . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGJAVANAME", "' . $eljavaname . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGJAVAMANUAL", "' . $eljavamanual . '");' . PHP_EOL);
           fwrite($file, "?>" . PHP_EOL);
           fclose($file);
 

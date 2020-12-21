@@ -29,6 +29,10 @@ $(function() {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta conf no existe.</div>";
             } else if (data == "nowritehtaccess") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo .htaccess en la raíz, no tiene permisos de escritura.</div>";
+            } else if (data == "nojavaenruta") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo java no se encuentra en la ruta.</div>";
+            } else if (data == "nojavaencontrado") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo java no encontrado en el sistema.</div>";
             } else if (data == "saveconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
                 document.getElementById("guardaserver").disabled = true;
@@ -122,6 +126,83 @@ $(function() {
             document.getElementById("result").innerHTML = "";
         });
     }
+
+    if (document.getElementById('configjavaselect0') !== null) {
+        $("#configjavaselect0").change(function() {
+            if (document.getElementById('javamanual') !== null) {
+                document.getElementById('javamanual').value = "";
+            }
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('configjavaselect1') !== null) {
+        $("#configjavaselect1").change(function() {
+            if (document.getElementById('javamanual') !== null) {
+                document.getElementById('javamanual').value = "";
+            }
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('configjavaselect2') !== null) {
+        $("#configjavaselect2").change(function() {
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('selectedjavaver') !== null) {
+        $("#selectedjavaver").change(function() {
+            if (document.getElementById('configjavaselect1') !== null) {
+                document.getElementById('configjavaselect1').checked = true;
+            }
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    if (document.getElementById('javamanual') !== null) {
+        $("#javamanual").keypress(function() {
+            if (document.getElementById('configjavaselect2') !== null) {
+                document.getElementById('configjavaselect2').checked = true;
+            }
+            document.getElementById("guardaserver").disabled = false;
+            document.getElementById("result").innerHTML = "";
+        });
+    }
+
+    document.getElementById("javamanual").addEventListener('paste', function(event) {
+        var enviovalor = event.clipboardData.getData('text');
+
+        var eltext = "";
+        var textini = "";
+        var textfinal = "";
+        var enviar = "";
+
+        var text = document.getElementById("javamanual");
+
+        var startPosition = text.selectionStart;
+        var endPosition = text.selectionEnd;
+        var longitud = text.leng;
+
+        eltext = document.getElementById("javamanual").value;
+        textini = eltext.substring(0, startPosition);
+        textfinal = eltext.substring(endPosition, longitud);
+
+        enviar = textini + event.clipboardData.getData('text') + textfinal;
+        enviovalor = enviar;
+
+        if (document.getElementById('configjavaselect2') !== null) {
+            document.getElementById('configjavaselect2').checked = true;
+        }
+
+        document.getElementById("guardaserver").disabled = false;
+        document.getElementById("result").innerHTML = "";
+
+    });
 
     if (document.getElementById('elport') !== null) {
         $("#elport").change(function() {

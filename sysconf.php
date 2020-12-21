@@ -102,6 +102,10 @@ require_once("template/header.php");
                                                     $recforseupgrade = CONFIGOPTIONFORCEUPGRADE;
                                                     $recerasecache = CONFIGOPTIONERASECACHE;
 
+                                                    $recjavaselect = CONFIGJAVASELECT;
+                                                    $recjavaname = CONFIGJAVANAME;
+                                                    $recjavamanual = CONFIGJAVAMANUAL;
+
                                                     $elnombredirectorio = $reccarpmine;
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
@@ -302,59 +306,125 @@ require_once("template/header.php");
                                                         ?>
 
                                                         <?php
-                                                        //PARAMETROS AVANZADOS
+                                                        //SELECTOR DE JAVA
                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
                                                         ?>
-                                                        <div class="form-group">
-                                                            <label>Parametros Avanzados:</label>
-                                                            <div class="form-row">
-                                                                <div class="form-group col-md-6">
-                                                                    <br>
-                                                                    <label>Garbage collector - Recolector de basura</label>
-                                                                    <div>
-                                                                        <input type="radio" id="basura0" name="recbasura" value="0" <?php if ($recgarbagecolector == "0") {
-                                                                                                                                        echo "checked";
-                                                                                                                                    } ?>>
-                                                                        <label for="basura0">Ninguno</label>
+                                                            <hr>
+                                                            <div class="form-group">
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-8">
+                                                                        <label>Selector de JAVA:</label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="radio" id="configjavaselect0" name="configjavaselect" value="0" <?php if ($recjavaselect == "0") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
+                                                                            <label for="configjavaselect0">Usar JAVA defecto sistema</label>
+                                                                            <p><?php echo exec("java -version 2>&1 | head -n 1 | awk '{ print $1 $3 }'"); ?></p>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <input type="radio" id="configjavaselect1" name="configjavaselect" value="1" <?php if ($recjavaselect == "1") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
+                                                                            <label for="configjavaselect1">Seleccionar versión JAVA</label>
+                                                                            <select id="selectedjavaver" name="selectedjavaver" class="form-control">
+
+                                                                                <?php
+                                                                                $javalist = "";
+                                                                                $javaruta = "";
+                                                                                $javalist = shell_exec("update-java-alternatives -l | awk '{ print $1 }'");
+                                                                                $javaruta = shell_exec("update-java-alternatives -l | awk '{ print $3 }'");
+                                                                                $javalist = trim($javalist);
+                                                                                $javaruta = trim($javaruta);
+                                                                                $javalist = (explode("\n", $javalist));
+                                                                                $javaruta = (explode("\n", $javaruta));
+
+                                                                                for ($i = 0; $i < count($javalist); $i++) {
+                                                                                    //$javacomparar = $javaruta[$i] . 
+
+                                                                                    if ($javaruta[$i] . "/bin/java" == $recjavaname) {
+                                                                                        echo '<option selected value="' . $javaruta[$i] . '">' . $javalist[$i] . '</option>';
+                                                                                    } else {
+                                                                                        echo '<option value="' . $javaruta[$i] . '">' . $javalist[$i] . '</option>';
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </select>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="col-md-8">
+                                                                            <input type="radio" id="configjavaselect2" name="configjavaselect" value="2" <?php if ($recjavaselect == "2") {
+                                                                                                                                                                echo "checked";
+                                                                                                                                                            } ?>>
+                                                                            <label for="configjavaselect2">Ruta manual JAVA</label>
+                                                                            <p>Ejemplo: /usr/lib/jvm/java-1.11.0-openjdk-amd64</p>
+                                                                            <input type="text" class="form-control" id="javamanual" name="javamanual" value="<?php echo $recjavamanual; ?>">
+                                                                        </div>
+
                                                                     </div>
 
-                                                                    <div>
-                                                                        <input type="radio" id="basura1" name="recbasura" value="1" <?php if ($recgarbagecolector == "1") {
-                                                                                                                                        echo "checked";
-                                                                                                                                    } ?>>
-                                                                        <label for="basura1">Usar ConcMarkSweepGC (Solo Java 8)</label>
-                                                                    </div>
-
-                                                                    <div>
-                                                                        <input type="radio" id="basura2" name="recbasura" value="2" <?php if ($recgarbagecolector == "2") {
-                                                                                                                                        echo "checked";
-                                                                                                                                    } ?>>
-                                                                        <label for="basura2">Usar G1GC (Java 8/11 o superior)</label>
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="form-group col-md-6">
-                                                                    <br>
-                                                                    <label>Conversion Mapa ¡PRECAUCIÓN!</label>
-                                                                    <div>
-                                                                        <input id="opforceupgrade" name="opforceupgrade" type="checkbox" value="1"<?php if ($recforseupgrade == "1") {
-                                                                                                                                        echo "checked";
-                                                                                                                                    } ?>>
-                                                                        <label for="opforceupgrade">Usar --forceUpgrade (Requiere Versión: 1.13 o superior)</label>
-                                                                    </div>
-
-                                                                    <div>
-                                                                        <input id="operasecache" name="operasecache" type="checkbox" value="1"<?php if ($recerasecache == "1") {
-                                                                                                                                        echo "checked";
-                                                                                                                                    } ?>>
-                                                                        <label for="operasecache">Usar --eraseCache (Requiere Versión: 1.14 o superior)</label>
-                                                                    </div>
                                                                 </div>
 
                                                             </div>
+                                                        <?php
+                                                        }
+                                                        ?>
 
-                                                        </div>
+
+                                                        <?php
+                                                        //PARAMETROS AVANZADOS
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
+                                                        ?>
+                                                            <hr>
+                                                            <div class="form-group">
+                                                                <label>Parametros Avanzados:</label>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-md-6">
+                                                                        <p>Garbage collector - Recolector de basura</p>
+                                                                        <div>
+                                                                            <input type="radio" id="basura0" name="recbasura" value="0" <?php if ($recgarbagecolector == "0") {
+                                                                                                                                            echo "checked";
+                                                                                                                                        } ?>>
+                                                                            <label for="basura0">Ninguno</label>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <input type="radio" id="basura1" name="recbasura" value="1" <?php if ($recgarbagecolector == "1") {
+                                                                                                                                            echo "checked";
+                                                                                                                                        } ?>>
+                                                                            <label for="basura1">Usar ConcMarkSweepGC (Solo Java 8)</label>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <input type="radio" id="basura2" name="recbasura" value="2" <?php if ($recgarbagecolector == "2") {
+                                                                                                                                            echo "checked";
+                                                                                                                                        } ?>>
+                                                                            <label for="basura2">Usar G1GC (Java 8/11 o superior)</label>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-6">
+                                                                        <br>
+                                                                        <label>Conversion Mapa ¡PRECAUCIÓN!</label>
+                                                                        <div>
+                                                                            <input id="opforceupgrade" name="opforceupgrade" type="checkbox" value="1" <?php if ($recforseupgrade == "1") {
+                                                                                                                                                            echo "checked";
+                                                                                                                                                        } ?>>
+                                                                            <label for="opforceupgrade">Usar --forceUpgrade (Requiere Versión: 1.13 o superior)</label>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <input id="operasecache" name="operasecache" type="checkbox" value="1" <?php if ($recerasecache == "1") {
+                                                                                                                                                        echo "checked";
+                                                                                                                                                    } ?>>
+                                                                            <label for="operasecache">Usar --eraseCache (Requiere Versión: 1.14 o superior)</label>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
                                                         <?php
                                                         }
                                                         ?>
