@@ -55,6 +55,8 @@ $(function() {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo serverproperties.txt de la carpeta config no tiene permisos de lectura.</div>";
                 } else if (data == "eulanowrite") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo eula.txt del servidor minecraft no tiene permisos de escritura.</div>";
+                } else if (data == "nojavaenruta") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo java no se encuentra en la ruta..</div>";
                 }
             }
         });
