@@ -280,6 +280,9 @@ require_once("../template/errorreport.php");
         fwrite($file, 'define("CONFIGOPTIONGARBAGE", "0");' . PHP_EOL);
         fwrite($file, 'define("CONFIGOPTIONFORCEUPGRADE", "0");' . PHP_EOL);
         fwrite($file, 'define("CONFIGOPTIONERASECACHE", "0");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGJAVASELECT", "0");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGJAVANAME", "0");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGJAVAMANUAL", "");' . PHP_EOL);
         fwrite($file, "?>" . PHP_EOL);
         fclose($file);
 
