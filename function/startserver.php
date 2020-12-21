@@ -313,8 +313,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $iniforceupg = "";
                 $inieracecache = "";
 
-                $javaruta = "";
-
                 $cominiciostart = "";
 
                 if ($recgarbagecolector == "1") {
