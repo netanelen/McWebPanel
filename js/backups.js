@@ -54,7 +54,7 @@ $(function() {
         for (var i = 0; i < restaurarbuttons.length; i++) {
             restaurarbuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\nAl Restaurar se borrarán todos los archivos del servidor minecraft.\n\n¿Seguro que quieres continuar?");
-                if (eleccion === true) {
+                if (eleccion == true) {
                     document.getElementById("gifloading").style.visibility = "visible";
                     $.ajax({
                         type: "POST",
@@ -95,7 +95,7 @@ $(function() {
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el backup: " + this.value + " ?");
-                if (eleccion === true) {
+                if (eleccion == true) {
                     var guardanombre = this.value;
                     document.getElementById("gifloading").style.visibility = "visible";
                     $.ajax({
@@ -124,7 +124,7 @@ $(function() {
 
     if (document.getElementById('inputbackup') !== null) {
         $("#inputbackup").keyup(function() {
-            if (document.getElementById("inputbackup").value === "") {
+            if (document.getElementById("inputbackup").value == "") {
                 document.getElementById("crearbackup").disabled = true;
             } else {
                 document.getElementById("crearbackup").disabled = false;

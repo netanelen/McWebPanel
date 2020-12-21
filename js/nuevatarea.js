@@ -24,7 +24,7 @@ $(function() {
     $("#laaccion").change(function() {
         if (document.getElementById("laaccion").value == "acc4") {
             document.getElementById("elcomando").disabled = false;
-            if (document.getElementById("elcomando").value === "") {
+            if (document.getElementById("elcomando").value == "") {
                 document.getElementById("creatarea").disabled = true;
             } else {
                 document.getElementById("creatarea").disabled = false;
@@ -32,7 +32,7 @@ $(function() {
         } else {
             document.getElementById("elcomando").disabled = true;
             document.getElementById("elcomando").value = "";
-            if (document.getElementById("nombretarea").value === "") {
+            if (document.getElementById("nombretarea").value == "") {
                 document.getElementById("creatarea").disabled = true;
             } else {
                 document.getElementById("creatarea").disabled = false;
@@ -41,7 +41,7 @@ $(function() {
     });
 
     $("#elcomando").keyup(function() {
-        if (document.getElementById("elcomando").value === "") {
+        if (document.getElementById("elcomando").value == "") {
             document.getElementById("creatarea").disabled = true;
         } else {
             document.getElementById("creatarea").disabled = false;
@@ -54,7 +54,7 @@ $(function() {
     });
 
     $("#nombretarea").keyup(function() {
-        if (document.getElementById("nombretarea").value === "") {
+        if (document.getElementById("nombretarea").value == "") {
             document.getElementById("creatarea").disabled = true;
         } else {
             document.getElementById("creatarea").disabled = false;

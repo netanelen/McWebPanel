@@ -53,7 +53,7 @@ $(function() {
             document.getElementById("guardaserver").disabled = false;
             document.getElementById("result").innerHTML = "";
 
-            if (this.value === "") {
+            if (this.value == "") {
                 document.getElementById("guardaserver").disabled = true;
             }
 

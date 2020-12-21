@@ -660,7 +660,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
@@ -835,7 +835,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
             $.ajax({
                 type: "POST",
                 url: "function/guardarproperties.php",
@@ -914,7 +914,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -946,7 +946,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -978,7 +978,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1034,7 +1034,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1114,7 +1114,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1170,7 +1170,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1489,7 +1489,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1521,7 +1521,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1553,7 +1553,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1609,7 +1609,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1641,7 +1641,7 @@ $(function() {
             errores = 1;
         }
 
-        if (errores === 0) {
+        if (errores == 0) {
 
             $.ajax({
                 type: "POST",
@@ -1761,7 +1761,7 @@ $(function() {
 
     $("#restablecer").click(function() {
         var eleccion = confirm("¡Confirmacion de restablecer configuracin por defecto!\n\n¡Esta acción creará un nuevo archivo de configuración server.properties, una vez realizado no se podrá cancelar!\n\n¿Seguro que quieres continuar?");
-        if (eleccion === true) {
+        if (eleccion == true) {
 
             $.ajax({
                 url: 'function/restablecerproperties.php',

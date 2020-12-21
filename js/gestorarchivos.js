@@ -75,7 +75,7 @@ $(function() {
         for (var i = 0; i < borrarfilebuttons.length; i++) {
             borrarfilebuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el archivo: " + this.id + " ?");
-                if (eleccion === true) {
+                if (eleccion == true) {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorborrarfile.php",
@@ -112,7 +112,7 @@ $(function() {
         for (var i = 0; i < borrarcarpetabuttons.length; i++) {
             borrarcarpetabuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar la carpeta: " + this.id + " ?");
-                if (eleccion === true) {
+                if (eleccion == true) {
                     $.ajax({
                         type: "POST",
                         url: "function/gestorborrarcarpeta.php",
@@ -459,13 +459,13 @@ $(function() {
             var elindice = 0;
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
-                if (checkseleccionados[i].checked === true) {
+                if (checkseleccionados[i].checked == true) {
                     arrayseleccion[elindice] = checkseleccionados[i].value;
                     elindice = elindice + 1;
                 }
             }
 
-            if (arrayseleccion === "") {
+            if (arrayseleccion == "") {
                 alert("No has seleccionado ningún elemento");
             } else {
                 $.ajax({
@@ -495,7 +495,7 @@ $(function() {
     if (document.getElementById('bpegar') !== null) {
         $("#bpegar").click(function() {
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nEn caso de existir un archivo con el mismo nombre se sobrescribirá.\n\n¿Seguro que quieres continuar?");
-            if (eleccion === true) {
+            if (eleccion == true) {
                 if (document.getElementById('gifloading') !== null) {
                     document.getElementById("gifloading").style.visibility = "visible";
                 }
@@ -532,17 +532,17 @@ $(function() {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
 
             for (var i = 0; i < checkseleccionados.length; i++) {
-                if (checkseleccionados[i].checked === true) {
+                if (checkseleccionados[i].checked == true) {
                     arrayseleccion[elindice] = checkseleccionados[i].value;
                     elindice = elindice + 1;
                 }
             }
 
-            if (arrayseleccion === "") {
+            if (arrayseleccion == "") {
                 alert("No has seleccionado ningún elemento");
             } else {
                 var eleccion = confirm("¡ELIMINAR CONFIRMAR ACCIÓN!\n\n¡Vas a eliminar las carpetas o archivos seleccionados!\n\n¿Seguro que quieres continuar?");
-                if (eleccion === true) {
+                if (eleccion == true) {
                     $.ajax({
                         url: 'function/gestorborrarmultiple.php',
                         data: {

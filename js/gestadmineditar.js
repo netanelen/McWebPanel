@@ -20,7 +20,7 @@ $(function() {
 
     $("#elpass").keyup(function() {
         var getpass = document.getElementById("elpass").value;
-        if (getpass === "") {
+        if (getpass == "") {
             document.getElementById("textoretorno").innerHTML = "";
         } else {
             $.ajax({
