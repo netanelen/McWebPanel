@@ -178,6 +178,12 @@ if ($elerror == 0) {
 
                                                                 $recgarbagecolector = CONFIGOPTIONGARBAGE;
 
+                                                                $recjavaselect = CONFIGJAVASELECT;
+                                                                $recjavaname = CONFIGJAVANAME;
+                                                                $recjavamanual = CONFIGJAVAMANUAL;
+
+                                                                $javaruta = "";
+
                                                                 $rutacarpetamine = "";
 
                                                                 //VERIFICAR CARPETA MINECRAFT
@@ -385,6 +391,27 @@ if ($elerror == 0) {
                                                                     }
                                                                 }
 
+                                                                //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
+                                                                if ($elerror == 0) {
+                                                                    if ($recjavaselect == "0") {
+                                                                        $javaruta = "java";
+                                                                    } elseif ($recjavaselect == "1") {
+                                                                        $javaruta = $recjavaname;
+                                                                        clearstatcache();
+                                                                        if (!file_exists($javaruta)) {
+                                                                            $retorno = "nojavaenruta";
+                                                                            $elerror = 1;
+                                                                        }
+                                                                    } elseif ($recjavaselect == "2") {
+                                                                        $javaruta = $recjavamanual . "/bin/java";
+                                                                        clearstatcache();
+                                                                        if (!file_exists($javaruta)) {
+                                                                            $retorno = "nojavaenruta";
+                                                                            $elerror = 1;
+                                                                        }
+                                                                    }
+                                                                }
+
                                                                 //INICIAR SERVIDOR
                                                                 if ($elerror == 0) {
 
@@ -405,17 +432,17 @@ if ($elerror == 0) {
                                                                     $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
 
                                                                     if ($rectiposerv == "vanilla") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     } elseif ($rectiposerv == "spigot") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
-                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
                                                                         guardareinicio($larutash, $cominiciostart);
                                                                     } elseif ($rectiposerv == "paper") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
-                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
                                                                         guardareinicio($larutash, $cominiciostart);
                                                                     } elseif ($rectiposerv == "otros") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " java -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     }
                                                                     $elpid = shell_exec($comandoserver);
                                                                 }
