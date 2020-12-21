@@ -64,7 +64,6 @@ $(function() {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function() {
-                alert(this.value);
                 var indexarray = String(this.value);
                 if (indexarray == 0) {
                     indexarray = 'CERO';
