@@ -260,6 +260,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             } else {
                                 $arrayobtenido[$i]['psystemconfavanzados'] = 0;
                             }
+
+                            //SYSTEM CONFIG SELECTOR JAVA
+                            if (isset($_POST['psystemconfjavaselect'])) {
+                                $arrayobtenido[$i]['psystemconfjavaselect'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['psystemconfjavaselect'] = 0;
+                            }
                         }
 
                         $nuevoarray[] = $arrayobtenido[$i];

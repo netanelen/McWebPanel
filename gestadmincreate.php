@@ -165,6 +165,14 @@ require_once("template/header.php");
                                                                                 <p>Permite administrar las opciones de lanzamiento del servidor minecraft.</p>
                                                                             </div>
 
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="psystemconfjavaselect" name="psystemconfjavaselect" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="psystemconfjavaselect">Selector JAVA</label>
+                                                                                </div>
+                                                                                <p>Permite configurar la versión de JAVA que usara el servidor minecraft.</p>
+                                                                            </div>
+
                                                                         </div>
 
                                                                     </div>

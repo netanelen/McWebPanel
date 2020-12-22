@@ -253,6 +253,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['psystemconfavanzados'] = 1;
                 }
 
+                //SYSTEM CONFIG SELECTOR JAVA
+                if (isset($_POST['psystemconfjavaselect'])) {
+                    $arrayobtenido[$elindice]['psystemconfjavaselect'] = 1;
+                }
+
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($arrayobtenido);
                 file_put_contents($elarchivo, $serialized);

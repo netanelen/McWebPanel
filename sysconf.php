@@ -307,7 +307,7 @@ require_once("template/header.php");
 
                                                         <?php
                                                         //SELECTOR DE JAVA
-                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfjavaselect', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfjavaselect'] == 1) {
                                                         ?>
                                                             <hr>
                                                             <div class="form-group">
@@ -351,15 +351,22 @@ require_once("template/header.php");
                                                                                 ?>
                                                                             </select>
                                                                         </div>
-                                                                        <br>
-                                                                        <div class="col-md-8">
-                                                                            <input type="radio" id="configjavaselect2" name="configjavaselect" value="2" <?php if ($recjavaselect == "2") {
-                                                                                                                                                                echo "checked";
-                                                                                                                                                            } ?>>
-                                                                            <label for="configjavaselect2">Ruta manual JAVA</label>
-                                                                            <p>Ejemplo: /usr/lib/jvm/java-1.11.0-openjdk-amd64</p>
-                                                                            <input type="text" class="form-control" id="javamanual" name="javamanual" value="<?php echo $recjavamanual; ?>">
-                                                                        </div>
+
+                                                                        <?php
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1) {
+                                                                        ?>
+                                                                            <br>
+                                                                            <div class="col-md-8">
+                                                                                <input type="radio" id="configjavaselect2" name="configjavaselect" value="2" <?php if ($recjavaselect == "2") {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                } ?>>
+                                                                                <label for="configjavaselect2">Ruta manual JAVA</label>
+                                                                                <p>Ejemplo: /usr/lib/jvm/java-1.11.0-openjdk-amd64</p>
+                                                                                <input type="text" class="form-control" id="javamanual" name="javamanual" value="<?php echo $recjavamanual; ?>">
+                                                                            </div>
+                                                                        <?php
+                                                                        }
+                                                                        ?>
 
                                                                     </div>
 

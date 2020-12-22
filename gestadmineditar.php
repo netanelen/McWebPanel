@@ -248,6 +248,22 @@ require_once("template/header.php");
                                                                                     <p>Permite administrar las opciones de lanzamiento del servidor minecraft.</p>
                                                                                 </div>
 
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconfjavaselect" name="psystemconfjavaselect" type="checkbox" value="1" <?php
+
+                                                                                                                                                                                if (array_key_exists('psystemconfjavaselect', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconfjavaselect'] == 1) {
+                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                                ?>>
+
+                                                                                        <label class="negrita mr-2" for="psystemconfjavaselect">Selector JAVA</label>
+                                                                                    </div>
+                                                                                    <p>Permite configurar la versión de JAVA que usara el servidor minecraft.</p>
+                                                                                </div>
+
                                                                             </div>
 
                                                                         </div>
