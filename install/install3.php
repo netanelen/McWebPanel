@@ -197,7 +197,7 @@ require_once("../template/errorreport.php");
 
         $linea1 = "php_value upload_max_filesize " . $elmaxupload . "M";
         $linea2 = "php_value post_max_size " . $elpostmax . "M";
-        $linea3 = "php_value max_file_uploads 1" . "M";
+        $linea3 = "php_value max_file_uploads 1";
 
         $file = fopen($rutaescrivir, "w");
         fwrite($file, "<IfModule mod_php7.c>" . PHP_EOL);
