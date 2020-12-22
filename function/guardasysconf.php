@@ -269,6 +269,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, "<IfModule mod_php7.c>" . PHP_EOL);
           fwrite($file, $linea1 . PHP_EOL);
           fwrite($file, $linea2 . PHP_EOL);
+          fwrite($file, $linea3 . PHP_EOL);
           fwrite($file, "php_value max_execution_time 600" . PHP_EOL);
           fwrite($file, "php_value max_input_time 600" . PHP_EOL);
           fwrite($file, "</IfModule>" . PHP_EOL);
