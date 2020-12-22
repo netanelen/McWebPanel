@@ -111,57 +111,63 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         //SELECTOR JAVA
-        $eljavaname = "0";
-        $eljavamanual = "";
-
-        if (isset($_POST['configjavaselect'])) {
-          $eljavaselect = test_input($_POST["configjavaselect"]);
-        } else {
-          $eljavaselect = "0";
-        }
-
-        if ($eljavaselect == "0") {
-          //PRIMERA OPCION
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfjavaselect', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfjavaselect'] == 1) {
           $eljavaname = "0";
           $eljavamanual = "";
-        } elseif ($eljavaselect == "1") {
-          //SEGUNDA OPCION
-          if (isset($_POST['selectedjavaver'])) {
-            $eljavaname = test_input($_POST["selectedjavaver"]);
 
-            $existjavaruta = shell_exec("update-java-alternatives -l | awk '{ print $3 }'");
-            $existjavaruta = trim($existjavaruta);
-            $existjavaruta = (explode("\n", $existjavaruta));
-            $sijavaexist = 0;
+          if (isset($_POST['configjavaselect'])) {
+            $eljavaselect = test_input($_POST["configjavaselect"]);
+          } else {
+            $eljavaselect = "0";
+          }
 
-            for ($i = 0; $i < count($existjavaruta); $i++) {
-              if ($existjavaruta[$i] == $eljavaname) {
-                $sijavaexist = 1;
+          if ($eljavaselect == "0") {
+            //PRIMERA OPCION
+            $eljavaname = "0";
+            $eljavamanual = "";
+          } elseif ($eljavaselect == "1") {
+            //SEGUNDA OPCION
+            if (isset($_POST['selectedjavaver'])) {
+              $eljavaname = test_input($_POST["selectedjavaver"]);
+
+              $existjavaruta = shell_exec("update-java-alternatives -l | awk '{ print $3 }'");
+              $existjavaruta = trim($existjavaruta);
+              $existjavaruta = (explode("\n", $existjavaruta));
+              $sijavaexist = 0;
+
+              for ($i = 0; $i < count($existjavaruta); $i++) {
+                if ($existjavaruta[$i] == $eljavaname) {
+                  $sijavaexist = 1;
+                }
               }
-            }
 
-            if ($sijavaexist == 1) {
-              $eljavaname .= "/bin/java";
-              clearstatcache();
-              if (!file_exists($eljavaname)) {
-                $retorno = "nojavaenruta";
+              if ($sijavaexist == 1) {
+                $eljavaname .= "/bin/java";
+                clearstatcache();
+                if (!file_exists($eljavaname)) {
+                  $retorno = "nojavaenruta";
+                  $elerror = 1;
+                }
+              } else {
+                $retorno = "nojavaencontrado";
                 $elerror = 1;
               }
-            } else {
-              $retorno = "nojavaencontrado";
-              $elerror = 1;
             }
-          }
-        } elseif ($eljavaselect == "2") {
-          //TERCERA OPCION
-          if (isset($_POST['javamanual'])) {
-            $eljavamanual = test_input($_POST["javamanual"]);
-            $existjavaruta = $eljavamanual;
-            $existjavaruta .= "/bin/java";
-            clearstatcache();
-            if (!file_exists($existjavaruta)) {
-              $retorno = "nojavaenruta";
-              $elerror = 1;
+          } elseif ($eljavaselect == "2") {
+            //TERCERA OPCION
+            if ($_SESSION['CONFIGUSER']['rango'] == 1) {
+              if (isset($_POST['javamanual'])) {
+                $eljavamanual = test_input($_POST["javamanual"]);
+                $existjavaruta = $eljavamanual;
+                $existjavaruta .= "/bin/java";
+                clearstatcache();
+                if (!file_exists($existjavaruta)) {
+                  $retorno = "nojavaenruta";
+                  $elerror = 1;
+                }
+              }
+            } else {
+              $eljavaselect = "0";
             }
           }
         }
