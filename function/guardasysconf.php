@@ -262,7 +262,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
           $linea1 = "php_value upload_max_filesize " . $eluploadmax . "M";
           $linea2 = "php_value post_max_size " . $elpostmax . "M";
-          $linea3 = "php_value max_file_uploads 1" . "M";
+          $linea3 = "php_value max_file_uploads 1";
 
           //GUARDAR FICHERO .HTACCESS EN RAIZ
           $file = fopen($rutaescrivir, "w");
