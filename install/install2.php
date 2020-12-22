@@ -122,6 +122,10 @@ require_once("../template/errorreport.php");
                     <option value="768">768 MB</option>
                     <option value="896">896 MB</option>
                     <option value="1024">1024 MB</option>
+                    <option value="2048">2048 MB</option>
+                    <option value="3072">3072 MB</option>
+                    <option value="4096">4096 MB</option>
+                    <option value="5120">5120 MB</option>
                   </select></div>
               </div>
 

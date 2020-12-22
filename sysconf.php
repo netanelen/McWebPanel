@@ -271,7 +271,7 @@ require_once("template/header.php");
                                                                     <select id="elmaxupload" name="elmaxupload" class="form-control" required="required">
                                                                         <?php
 
-                                                                        $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024');
+                                                                        $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
 
                                                                         for ($i = 0; $i < count($opcionesserver); $i++) {
 
