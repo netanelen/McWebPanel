@@ -88,7 +88,11 @@ $(function() {
 
     $("#form-max-tick-time").keypress(function(e) {
         if (e.keyCode < 48 || e.keyCode > 57) {
-            return false;
+            if (e.keyCode == 45) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return true;
         }
@@ -120,7 +124,11 @@ $(function() {
 
     $("#form-network-compression-threshold").keypress(function(e) {
         if (e.keyCode < 48 || e.keyCode > 57) {
-            return false;
+            if (e.keyCode == 45) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return true;
         }
@@ -1485,7 +1493,8 @@ $(function() {
         var envioaction = "max-tick-time";
         var enviovalor = document.getElementById("form-max-tick-time").value;
 
-        if (enviovalor > 60000 || enviovalor < 1000) {
+        if (enviovalor > 300000 || enviovalor < -1) {
+            document.getElementById("form-max-tick-time").value = 60000;
             errores = 1;
         }
 
@@ -1605,7 +1614,8 @@ $(function() {
         var envioaction = "network-compression-threshold";
         var enviovalor = document.getElementById("form-network-compression-threshold").value;
 
-        if (enviovalor > 256 || enviovalor < 64) {
+        if (enviovalor > 256 || enviovalor < -1) {
+            document.getElementById("form-network-compression-threshold").value = 256;
             errores = 1;
         }
 
@@ -1770,7 +1780,6 @@ $(function() {
                 },
                 type: 'POST',
                 success: function(data) {
-                    alert(data);
                     if (data == "OK") {
                         location.reload();
                     } else if (data == "nowriteconfig") {

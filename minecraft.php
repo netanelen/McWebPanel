@@ -1759,17 +1759,18 @@ require_once("template/header.php");
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><b>Tiempo Máximo Respuesta</b></h3>
+                                                    <p class="lead">Los segundos que tardara en cerrar el servidor si no responde en X segundos.<br> (60000 = 60 segundos).</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: 60000<br>Valor Min: 1000 - Valor Max: 60000</p>
+                                                    <p class="">Valor Defecto: 60000<br>Valor Min: 1000 - Valor Max: 300000<br>Valor Deshabilitar: -1<br>Deshabilitar Requiere Versión: 1.8 o superior</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Los segundos que tardara en cerrar el servidor si no responde en X segundos.<br> (60000 = 60 segundos).</p>
+                                                    <br><br>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-max-tick-time" type="number" class="form-control" min="1000" max="60000" value="<?php echo (leerlineas('max-tick-time')); ?>">
+                                                    <input id="form-max-tick-time" type="number" class="form-control" min="-1" max="60000" value="<?php echo (leerlineas('max-tick-time')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1871,17 +1872,18 @@ require_once("template/header.php");
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><b>Compresión de red</b></h3>
+                                                    <p class="lead">Permite comprimir los paquetes de red del servidor.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: 256<br>Valor Min: 64 - Valor Max: 256</p>
+                                                    <p class="">Valor Defecto: 256<br>Valor Min: 64 - Valor Max: 256<br>Valor 0: Comprimir todo<br>Valor -1: Deshabilitar la compresión</p>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Permite comprimir los paquetes de red del servidor.</p>
+                                                    <br><br>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-network-compression-threshold" type="number" class="form-control" min="64" max="256" value="<?php echo (leerlineas('network-compression-threshold')); ?>">
+                                                    <input id="form-network-compression-threshold" type="number" class="form-control" min="-1" max="256" value="<?php echo (leerlineas('network-compression-threshold')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
