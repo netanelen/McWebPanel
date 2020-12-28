@@ -17,7 +17,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     You should have received a copy of the GNU General Public License
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
-//require_once("template/session.php");
+//require_once("template/session.php"); MOVIDO A LINEA 276
 require_once("template/errorreport.php");
 require_once("template/header.php");
 ?>
@@ -61,20 +61,24 @@ require_once("template/header.php");
     $iniverificonfserverpropertiestxt = trim($iniverificonfserverpropertiestxt);
     $iniverificonfserverpropertiestxt .= "/config/serverproperties.txt";
 
-    //VERIFICAR CARPETA RAIZ
+    //VERIFICAR LECTURA CARPETA RAIZ
     clearstatcache();
     if (!is_readable($iniverificarpraiz)) {
-      $showerrors .= 'Error: No tienes permisos de lectura en la carpeta raiz, revisa los permisos de linux.<br><br>';
+      $showerrors .= 'Error: No tienes permisos de lectura en la carpeta raíz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
+    //VERIFICAR ESCRITURA CARPETA RAIZ
+    clearstatcache();
     if (!is_writable($iniverificarpraiz)) {
-      $showerrors .= 'Error: No tienes permisos de escritura en la carpeta raiz, revisa los permisos de linux.<br><br>';
+      $showerrors .= 'Error: No tienes permisos de escritura en la carpeta raíz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
+    //VERIFICAR EJECUCION CARPETA RAIZ
+    clearstatcache();
     if (!is_executable($iniverifirutatemplate)) {
-      $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta raiz, revisa los permisos de linux.<br><br>';
+      $showerrors .= 'Error: No tienes permisos de ejecucion en la carpeta raíz, revisa los permisos de linux.<br><br>';
       $elerror = 1;
     }
 
