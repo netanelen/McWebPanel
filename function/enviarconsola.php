@@ -52,8 +52,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $rutaarchivo .= "/" . $elnombredirectorio . "/logs/latest.log";
 
       //COMPROVAR SI EXISTE LA RUTA
+      clearstatcache();
       if (file_exists($rutaarchivo)) {
         //COMPROVAR SI SE PUEDE LEER
+        clearstatcache();
         if (is_readable($rutaarchivo)) {
           $devolucion = file_get_contents($rutaarchivo);
         } else {
