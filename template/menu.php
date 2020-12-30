@@ -130,6 +130,20 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     ?>
 
     <?php
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
+    ?>
+        <!-- Nav Item - Compilar Spigot -->
+        <li class="nav-item menu-hover">
+            <a class="nav-link" href="spigot.php">
+                <img class="d-block float-left mr-2" src="img/menu/spigot.png" alt="compilar">
+                <h6 class="text-light">Compilar Spigot</h6>
+            </a>
+        </li>
+    <?php
+    }
+    ?>
+
+    <?php
     if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('psubirservidor', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psubirservidor'] == 1) {
     ?>
         <!-- Nav Item - Subir Server -->
