@@ -104,6 +104,13 @@ CustomLog ${APACHE_LOG_DIR}/access.log combined
 
 ```
 
+Generar Carpeta Maven (Requerido para Compilar Spigot)
+
+```
+sudo mkdir /var/www/.m2
+sudo chown -R www-data:www-data /var/www/.m2
+```
+
 Reiniciar Apache para aplicar cambios
 
 ```
