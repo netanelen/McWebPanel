@@ -36,6 +36,7 @@ php-cli             (Libreria cli php)
 php-json            (Librerua json php)
 unzip               (De-archiver)
 gawk                (GNU awk)
+wget                (GNU Wget)
 ```
 
 ### Instalación 🔧
@@ -52,7 +53,7 @@ sudo apt upgrade
 Instalar Paquetes Requisitos
 
 ```
-sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli php-json gawk unzip 
+sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli php-json gawk wget unzip 
 ```
 
 Instalar
