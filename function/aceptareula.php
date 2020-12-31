@@ -56,6 +56,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
         $elerasecache = CONFIGOPTIONERASECACHE;
 
+        $eljavaselect = CONFIGJAVASELECT;
+        $eljavaname = CONFIGJAVANAME;
+        $eljavamanual = CONFIGJAVAMANUAL;
+
         //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
         $dirconfig = "";
         $dirconfig = dirname(getcwd()) . PHP_EOL;
@@ -94,6 +98,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, 'define("CONFIGOPTIONGARBAGE", "' . $elgarbagecolector . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGOPTIONFORCEUPGRADE", "' . $elforseupgrade . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGOPTIONERASECACHE", "' . $elerasecache . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGJAVASELECT", "0");' . $eljavaselect . PHP_EOL);
+                fwrite($file, 'define("CONFIGJAVANAME", "0");' . $eljavaname . PHP_EOL);
+                fwrite($file, 'define("CONFIGJAVAMANUAL", "");' . $eljavamanual . PHP_EOL);
                 fwrite($file, "?>" . PHP_EOL);
                 fclose($file);
 
