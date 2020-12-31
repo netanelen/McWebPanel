@@ -98,9 +98,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, 'define("CONFIGOPTIONGARBAGE", "' . $elgarbagecolector . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGOPTIONFORCEUPGRADE", "' . $elforseupgrade . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGOPTIONERASECACHE", "' . $elerasecache . '");' . PHP_EOL);
-                fwrite($file, 'define("CONFIGJAVASELECT", "0");' . $eljavaselect . PHP_EOL);
-                fwrite($file, 'define("CONFIGJAVANAME", "0");' . $eljavaname . PHP_EOL);
-                fwrite($file, 'define("CONFIGJAVAMANUAL", "");' . $eljavamanual . PHP_EOL);
+                fwrite($file, 'define("CONFIGJAVASELECT", "' . $eljavaselect . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGJAVANAME", "' . $eljavaname . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGJAVAMANUAL", "' . $eljavamanual . '");' . PHP_EOL);
                 fwrite($file, "?>" . PHP_EOL);
                 fclose($file);
 
