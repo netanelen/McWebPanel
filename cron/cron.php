@@ -454,7 +454,7 @@ if ($elerror == 0) {
 
                                                             $reccarpmine = CONFIGDIRECTORIO;
 
-                                                            $archivo = "AUTOMATICO";
+                                                            $archivo = "AUTO";
 
                                                             $dirconfig = "";
                                                             $dirconfig = $RUTAPRINCIPAL;
