@@ -90,6 +90,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
           if ($elerror == 0) {
 
+            $recjavaselect = CONFIGJAVASELECT;
+            $recjavaname = CONFIGJAVANAME;
+            $recjavamanual = CONFIGJAVAMANUAL;
+
+            $javaruta = "";
+
             //OBTENER VERSION AJAX
             $version = test_input($_POST['laversion']);
 
@@ -140,6 +146,27 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
           }
 
+          //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
+          if ($elerror == 0) {
+            if ($recjavaselect == "0") {
+              $javaruta = "java";
+            } elseif ($recjavaselect == "1") {
+              $javaruta = $recjavaname;
+              clearstatcache();
+              if (!file_exists($javaruta)) {
+                $retorno = "nojavaenruta";
+                $elerror = 1;
+              }
+            } elseif ($recjavaselect == "2") {
+              $javaruta = $recjavamanual . "/bin/java";
+              clearstatcache();
+              if (!file_exists($javaruta)) {
+                $retorno = "nojavaenruta";
+                $elerror = 1;
+              }
+            }
+          }
+
           if ($elerror == 0) {
             $file = fopen($elssh, "w");
             fwrite($file, "#!/bin/bash" . PHP_EOL);
@@ -148,7 +175,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             fwrite($file, "export XDG_CONFIG_HOME=" . $carpcompilar . "/.config" . PHP_EOL);
             fwrite($file, "export M2_HOME=" . $carpcompilar . "/.m2" . PHP_EOL);
             fwrite($file, "git config --global --unset core.autocrlf" . PHP_EOL);
-            fwrite($file, "java -jar BuildTools.jar --rev " . $version . PHP_EOL);
+            fwrite($file, $javaruta . " -jar BuildTools.jar --rev " . $version . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . ".jar spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . "-" . $t . ".jar " . $elnombredirectorio . "spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fclose($file);

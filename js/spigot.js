@@ -47,6 +47,8 @@ $(function() {
                         alert("No se puede borrar la carpeta compilar, no hay permisos de escritura");
                     } else if (data == "nobuildtools") {
                         alert("Error: No se ha podido descargar la herramienta Buildtools");
+                    } else if (data == "nojavaenruta") {
+                        alert("Error: Error: El archivo java no se encuentra en la ruta");
                     }
                 }
             });
