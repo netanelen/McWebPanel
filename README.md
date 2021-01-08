@@ -19,7 +19,7 @@ Estos son los requisitos para que McWebPanel funcione
 
 ```
 Sistemas Operativos:
-Debian 10.5 | 10.6
+Debian 10.5 | 10.6 | 10.7
 Ubuntu Server 18.04 | 20.04
 
 Servidor Web:
@@ -50,10 +50,16 @@ sudo apt update
 sudo apt upgrade
 ```
 
-Instalar Paquetes Requisitos
+Instalar Paquetes Requisitos (Ubuntu Server / Debian)
 
 ```
 sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli php-json gawk wget unzip 
+```
+
+Instalar Paquetes Requisitos (Debian)
+
+```
+sudo apt install git 
 ```
 
 Instalar
