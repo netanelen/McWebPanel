@@ -20,7 +20,7 @@ Estos son los requisitos para que McWebPanel funcione
 ```
 Sistemas Operativos:
 Debian 10.5 | 10.6 | 10.7
-Ubuntu Server 18.04 | 20.04
+Ubuntu Server 18.04 LTS | 20.04 LTS
 
 Servidor Web:
 Apache2
