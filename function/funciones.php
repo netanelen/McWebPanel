@@ -63,6 +63,28 @@ function devolverdatos($loskilobytes, $opcion)
 	}
 }
 
+function getdistroinfo()
+{
+	$vars = array();
+	$files = glob('/etc/*-release');
+
+	foreach ($files as $file) {
+		$lines = array_filter(array_map(function ($line) {
+
+			$parts = explode('=', $line);
+
+			if (count($parts) !== 2) return false;
+
+			$parts[1] = str_replace(array('"', "'"), '', $parts[1]);
+			return $parts;
+		}, file($file)));
+
+		foreach ($lines as $line)
+			$vars[$line[0]] = $line[1];
+	}
+	return $vars;
+}
+
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 	$_SESSION['VALIDADO'] = "NO";
@@ -94,6 +116,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 		} else {
 			$valor3 = "Encendido";
 
+			//OBTENER DISTRO
+			$iddistro = getdistroinfo();
+			$iddistro = trim($iddistro["ID"]);
+
 			//OBTENER CPU
 			$lacpu = shell_exec('uptime');
 			$lacpu = substr($lacpu, -6);
@@ -103,14 +129,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			//OBTENER MEMORIA USADA
 			$tipserver = trim(exec('whoami'));
 
-			$elcomando = "ps aux --sort -rss | grep '" . $tipserver . "' | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+			if ($iddistro == "debian") {
+				$elcomando = "ps aux --sort -rss | grep '" . $tipserver . "' | grep sl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+			} elseif ($iddistro == "ubuntu") {
+				$elcomando = "ps aux --sort -rss | grep '" . $tipserver . "' | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+			}
 			$elpid = shell_exec($elcomando);
 			$laram = $elpid;
 
-			if ($tipserver == "www-data") {
+			if ($iddistro == "debian") {
 				$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
-			} elseif ($tipserver == "apache") {
-				$laram = trim(substr($elpid, 0, (strlen($elpid) - 5)));
+			} elseif ($iddistro == "ubuntu") {
+				$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
 			}
 
 			if (is_numeric($laram)) {
