@@ -56,6 +56,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $ellistadojars = "";
         }
 
+
         //INPUT PUERTO
         if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfpuerto', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfpuerto'] == 1) {
           $elpuerto = test_input($_POST["elport"]);
@@ -92,22 +93,28 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         //RECOLECTOR DE BASURA
-        if (isset($_POST['recbasura'])) {
-          $elgarbagecolector = test_input($_POST["recbasura"]);
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfavanzados', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfavanzados'] == 1) {
+          if (isset($_POST['recbasura'])) {
+            $elgarbagecolector = test_input($_POST["recbasura"]);
+          } else {
+            $elgarbagecolector = CONFIGOPTIONGARBAGE;
+          }
+
+          if (isset($_POST['opforceupgrade'])) {
+            $elforseupgrade = test_input($_POST["opforceupgrade"]);
+          } else {
+            $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+          }
+
+          if (isset($_POST['operasecache'])) {
+            $elerasecache = test_input($_POST["operasecache"]);
+          } else {
+            $elerasecache = CONFIGOPTIONERASECACHE;
+          }
         } else {
           $elgarbagecolector = CONFIGOPTIONGARBAGE;
-        }
-
-        if (isset($_POST['opforceupgrade'])) {
-          $elforseupgrade = test_input($_POST["opforceupgrade"]);
-        } else {
-          $elforseupgrade = "0";
-        }
-
-        if (isset($_POST['operasecache'])) {
-          $elerasecache = test_input($_POST["operasecache"]);
-        } else {
-          $elerasecache = "0";
+          $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+          $elerasecache = CONFIGOPTIONERASECACHE;
         }
 
         //SELECTOR JAVA
@@ -130,17 +137,20 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if (isset($_POST['selectedjavaver'])) {
               $eljavaname = test_input($_POST["selectedjavaver"]);
 
+              //OBTENER DIRECTORIOS JAVA
               $existjavaruta = shell_exec("update-java-alternatives -l | awk '{ print $3 }'");
               $existjavaruta = trim($existjavaruta);
               $existjavaruta = (explode("\n", $existjavaruta));
               $sijavaexist = 0;
 
+              //COMPROBAR SI EXISTA LA RUTA INTRODUCIDA
               for ($i = 0; $i < count($existjavaruta); $i++) {
                 if ($existjavaruta[$i] == $eljavaname) {
                   $sijavaexist = 1;
                 }
               }
 
+              //SI EXISTE COMPROBAR SI ESTA JAVA DENTRO
               if ($sijavaexist == 1) {
                 $eljavaname .= "/bin/java";
                 clearstatcache();
@@ -177,6 +187,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $eljavamanual = CONFIGJAVAMANUAL;
         }
 
+        //OPCIONES QUE NO SE CAMBIAN DESDE GUARDARSYSCONF
         $lakey = CONFIGSESSIONKEY;
         $eldirectorio = CONFIGDIRECTORIO;
         $elpostmax = "";
