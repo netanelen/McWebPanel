@@ -184,6 +184,7 @@ function test_input($data)
                                                             <br>
                                                             <?php
                                                             $elerror = 0;
+                                                            $retorno = "";
                                                             $recjavaselect = CONFIGJAVASELECT;
                                                             $recjavaname = CONFIGJAVANAME;
                                                             $recjavamanual = CONFIGJAVAMANUAL;
@@ -193,33 +194,43 @@ function test_input($data)
 
                                                             if ($recjavaselect == "0") {
                                                                 $javaruta = "java";
+                                                                //COMPROBAR SI JAVA DEFAULT EXISTE
+                                                                $comreq = shell_exec('command -v java >/dev/null && echo "yes" || echo "no"');
+                                                                $comreq = trim($comreq);
+                                                                if ($comreq == "no") {
+                                                                    $retorno = "Java no encontrado en el servidor";
+                                                                    $elerror = 1;
+                                                                }
                                                             } elseif ($recjavaselect == "1") {
                                                                 $javaruta = $recjavaname;
                                                                 clearstatcache();
                                                                 if (!file_exists($javaruta)) {
-                                                                    $retorno = "nojavaenruta";
+                                                                    $retorno = "El archivo java no se encuentra en la ruta";
                                                                     $elerror = 1;
                                                                 }
                                                             } elseif ($recjavaselect == "2") {
                                                                 $javaruta = $recjavamanual . "/bin/java";
                                                                 clearstatcache();
                                                                 if (!file_exists($javaruta)) {
-                                                                    $retorno = "nojavaenruta";
+                                                                    $retorno = "El archivo java no se encuentra en la ruta";
                                                                     $elerror = 1;
                                                                 }
+                                                            } else {
+                                                                $retorno = "No hay ningún java seleccionado en System Config";
+                                                                $elerror = 1;
                                                             }
 
-                                                            if($elerror == 0){
+                                                            if ($elerror == 0) {
 
-                                                                ?>
-                                                                <p>Se compilara usando JAVA: <?php echo exec($javaruta ." -version 2>&1 | head -n 1 | awk '{ print $1 $3 }'"); ?></p>
+                                                            ?>
+                                                                <p>Se compilara usando JAVA: <?php echo exec($javaruta . " -version 2>&1 | head -n 1 | awk '{ print $1 $3 }'"); ?></p>
                                                                 <button class="btn btn-primary btn-block mt-2" id="compilar" name="compilar">Compilar</button>
-                                                                <?php
-                                                            }else{
-                                                                echo '<p>Error: Java no encontrado</p>';
+                                                            <?php
+                                                            } else {
+                                                                echo '<p>Error: ' . $retorno . '</p>';
                                                             }
                                                             ?>
-                                                            
+
                                                         </div>
                                                         <div class="col-md-6">
                                                             <img class="" src="img/loading.gif" id="gifloading" alt="loading" style="visibility: hidden;">

@@ -57,6 +57,10 @@ $(function() {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo eula.txt del servidor minecraft no tiene permisos de escritura.</div>";
                 } else if (data == "nojavaenruta") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo java no se encuentra en la ruta.</div>";
+                } else if (data == "nojavaselect") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay ningún java seleccionado en System Config.</div>";
+                } else if (data == "nojavadefault") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Java no encontrado en el servidor.</div>";
                 }
             }
         });

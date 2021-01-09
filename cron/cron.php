@@ -395,6 +395,13 @@ if ($elerror == 0) {
                                                                 if ($elerror == 0) {
                                                                     if ($recjavaselect == "0") {
                                                                         $javaruta = "java";
+                                                                        //COMPROBAR SI JAVA DEFAULT EXISTE
+                                                                        $comreq = shell_exec('command -v java >/dev/null && echo "yes" || echo "no"');
+                                                                        $comreq = trim($comreq);
+                                                                        if ($comreq == "no") {
+                                                                            $retorno = "nojavadefault";
+                                                                            $elerror = 1;
+                                                                        }
                                                                     } elseif ($recjavaselect == "1") {
                                                                         $javaruta = $recjavaname;
                                                                         clearstatcache();
@@ -409,6 +416,9 @@ if ($elerror == 0) {
                                                                             $retorno = "nojavaenruta";
                                                                             $elerror = 1;
                                                                         }
+                                                                    } else {
+                                                                        $retorno = "nojavaselect";
+                                                                        $elerror = 1;
                                                                     }
                                                                 }
 
