@@ -170,6 +170,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               $eljavaselect = "0";
             }
           }
+        } else {
+          //SI NO TIENE PERMISOS SE ASIGNA LOS QUE YA TIENE
+          $eljavaselect = CONFIGJAVASELECT;
+          $eljavaname = CONFIGJAVANAME;
+          $eljavamanual = CONFIGJAVAMANUAL;
         }
 
         $lakey = CONFIGSESSIONKEY;
