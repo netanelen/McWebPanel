@@ -119,6 +119,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			//OBTENER DISTRO
 			$iddistro = getdistroinfo();
 			$iddistro = trim($iddistro["ID"]);
+			$iddistro = strtolower($iddistro);
 
 			//OBTENER CPU
 			$lacpu = shell_exec('uptime');
