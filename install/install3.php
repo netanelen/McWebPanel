@@ -183,10 +183,12 @@ require_once("../template/errorreport.php");
 
         //GENERAR TAREA CRONTAB
         $rutacron = $rutaraiz;
+        $rutacronstat = $rutaraiz;
         $rutacron .= "/cron/cron.php";
+        $rutacronstat .= "/cron/cronstat.log";
         $comandocron = 'crontab -l | grep -v -F "' . $rutacron . '"> mycron';
         exec($comandocron);
-        $comandocron = 'echo "* * * * * php ' . $rutacron . '" >> mycron';
+        $comandocron = 'echo "* * * * * php ' . $rutacron . ' >> '. $rutacronstat .' 2>&1" >> mycron';
         exec($comandocron);
         exec('crontab mycron');
         exec('rm mycron');
