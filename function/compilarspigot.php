@@ -175,7 +175,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             fwrite($file, "export XDG_CONFIG_HOME=" . $carpcompilar . "/.config" . PHP_EOL);
             fwrite($file, "export M2_HOME=" . $carpcompilar . "/.m2" . PHP_EOL);
             fwrite($file, "git config --global --unset core.autocrlf" . PHP_EOL);
-            fwrite($file, $javaruta . " -jar BuildTools.jar --rev " . $version . PHP_EOL);
+            fwrite($file, $javaruta . " -Xmx1024M -jar BuildTools.jar --rev " . $version . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . ".jar spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . "-" . $t . ".jar " . $elnombredirectorio . "spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fclose($file);
