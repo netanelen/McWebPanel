@@ -217,6 +217,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <!-- Linea Final -->
     <hr class="sidebar-divider d-none d-md-block">
 
-    <p class="text-light text-right pr-4 mini-ver">McWebAdmin<br>Ver 0.4 Pre-Release</p>
+    <p class="text-light text-right pr-4 mini-ver">McWebAdmin<br>Ver 0.5 Pre-Release</p>
 
 </ul>
