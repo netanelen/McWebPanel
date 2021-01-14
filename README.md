@@ -66,7 +66,7 @@ Instalar
 
 ```
 Descargar:
-wget https://github.com/Konata400/McWebPanel/archive/master.zip
+wget https://github.com/Konata400/McWebPanel/archive/0.5-pre.zip
 
 Descomprimir:
 unzip master.zip
