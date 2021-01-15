@@ -33,6 +33,12 @@ $(function() {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo java no se encuentra en la ruta.</div>";
             } else if (data == "nojavaencontrado") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo java no encontrado en el sistema.</div>";
+            } else if (data == "datolimitebacksuperior") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has asignado más gigas en backups de lo permitido.</div>";
+            } else if (data == "datolimiteminesuperior") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has asignado más gigas en minecraft de lo permitido.</div>";
+            } else if (data == "valornonumerico") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has asignado un valor incorrecto no numérico.</div>";
             } else if (data == "saveconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
                 document.getElementById("guardaserver").disabled = true;
@@ -174,6 +180,8 @@ $(function() {
         });
     }
 
+
+
     document.getElementById("javamanual").addEventListener('paste', function(event) {
         var enviovalor = event.clipboardData.getData('text');
 
@@ -219,6 +227,52 @@ $(function() {
 
     if (document.getElementById('elport') !== null) {
         $("#elport").keypress(function(e) {
+            if (e.keyCode < 48 || e.keyCode > 57) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+    }
+
+    if (document.getElementById('limitbackupgb') !== null) {
+        $("#limitbackupgb").change(function() {
+            var elnumero = document.getElementById("limitbackupgb").value;
+            document.getElementById("result").innerHTML = "";
+
+            if (elnumero < 0 || elnumero > 100) {
+                document.getElementById("limitbackupgb").value = "";
+            } else {
+                document.getElementById("guardaserver").disabled = false;
+            }
+        });
+    }
+
+    if (document.getElementById('limitbackupgb') !== null) {
+        $("#limitbackupgb").keypress(function(e) {
+            if (e.keyCode < 48 || e.keyCode > 57) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+    }
+
+    if (document.getElementById('limitminecraftgb') !== null) {
+        $("#limitminecraftgb").change(function() {
+            var elnumero = document.getElementById("limitminecraftgb").value;
+            document.getElementById("result").innerHTML = "";
+
+            if (elnumero < 0 || elnumero > 100) {
+                document.getElementById("limitminecraftgb").value = "";
+            } else {
+                document.getElementById("guardaserver").disabled = false;
+            }
+        });
+    }
+
+    if (document.getElementById('limitminecraftgb') !== null) {
+        $("#limitminecraftgb").keypress(function(e) {
             if (e.keyCode < 48 || e.keyCode > 57) {
                 return false;
             } else {

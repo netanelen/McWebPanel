@@ -187,6 +187,50 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $eljavamanual = CONFIGJAVAMANUAL;
         }
 
+        //LIMITE ALMACENAMIENTO
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfjavaselect', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfjavaselect'] == 1) {
+          if (isset($_POST["limitbackupgb"])) {
+            //OBTENER INPUT LIMITE BACKUPS GIGAS
+            $ellimitebackupgb = test_input($_POST["limitbackupgb"]);
+
+            //MIRAR SI ES NUMERICO
+            if (is_numeric($ellimitebackupgb)) {
+              //MIRAR SI SUPERA EL LIMITE PERMITIDO
+              if ($ellimitebackupgb > 100) {
+                $elerror = 1;
+                $retorno = "datolimitebacksuperior";
+              }
+            } else {
+              $elerror = 1;
+              $retorno = "valornonumerico";
+            }
+          } else {
+            $ellimitebackupgb = CONFIGFOLDERBACKUPSIZE;
+          }
+
+          if (isset($_POST["limitminecraftgb"])) {
+            //OBTENER INPUT LIMITE MINECRAF GIGAS
+            $ellimiteminecraftgb = test_input($_POST["limitminecraftgb"]);
+
+            //MIRAR SI ES NUMERICO
+            if (is_numeric($ellimiteminecraftgb)) {
+              //MIRAR SI SUPERA EL LIMITE PERMITIDO
+              if ($ellimiteminecraftgb > 100) {
+                $elerror = 1;
+                $retorno = "datolimiteminesuperior";
+              }
+            } else {
+              $elerror = 1;
+              $retorno = "valornonumerico";
+            }
+          } else {
+            $ellimiteminecraftgb = CONFIGFOLDERMINECRAFTSIZE;
+          }
+        } else {
+          $ellimitebackupgb = CONFIGFOLDERBACKUPSIZE;
+          $ellimiteminecraftgb = CONFIGFOLDERMINECRAFTSIZE;
+        }
+
         //OPCIONES QUE NO SE CAMBIAN DESDE GUARDARSYSCONF
         $lakey = CONFIGSESSIONKEY;
         $eldirectorio = CONFIGDIRECTORIO;
@@ -268,6 +312,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, 'define("CONFIGJAVASELECT", "' . $eljavaselect . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGJAVANAME", "' . $eljavaname . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGJAVAMANUAL", "' . $eljavamanual . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGFOLDERBACKUPSIZE", "' . $ellimitebackupgb . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGFOLDERMINECRAFTSIZE", "' . $ellimiteminecraftgb . '");' . PHP_EOL);
           fwrite($file, "?>" . PHP_EOL);
           fclose($file);
 
