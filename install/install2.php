@@ -126,28 +126,30 @@ require_once("../template/errorreport.php");
                     <option value="3072">3072 MB</option>
                     <option value="4096">4096 MB</option>
                     <option value="5120">5120 MB</option>
-                  </select></div>
+                  </select>
+                </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group col-md-6"> <label for="elram" class="">Memoria Ram Limite</label>
-                <select id="elram" name="elram" class="form-control" required="required">
+                  <select id="elram" name="elram" class="form-control" required="required">
                     <?php
 
-                    $salida = shell_exec('free -h | grep Mem');
-                    $totalram = substr($salida, 14, 4);
-                    $totalram = preg_replace('/\s+/', '', $totalram);
-                    $totalram = trim($totalram);
+                    $salida = shell_exec("free -g | grep Mem | awk '{ print $2 }'");
+                    $totalram = trim($salida);
+                    $totalram = intval($totalram);
 
-                    for ($i = 1;; $i++) {
-                      if ($i > $totalram) {
-                        break;
+                    if ($totalram == 0) {
+                      echo '<option selected value="0">MEMORIA INSUFICIENTE / NO TIENES NI UN GB</option>';
+                    } elseif ($totalram >= 1) {
+                      for ($i = 1; $i <= $totalram; $i++) {
+                        echo '<option value="' . $i . '">' . $i . ' GB</option>';
                       }
-                      echo '<option value="' . $i . '">' . $i . ' GB</option>';
                     }
 
                     ?>
-                  </select></div>
+                  </select>
+                </div>
                 <div class="form-group col-md-6">
                   <label for="eltipserv">Tipo Servidor</label>
                   <select id="eltipserv" name="eltipserv" class="form-control" required="required">
@@ -155,7 +157,8 @@ require_once("../template/errorreport.php");
                     <option value="spigot">Spigot</option>
                     <option value="paper">Paper</option>
                     <option value="otros">Otros</option>
-                  </select></div>
+                  </select>
+                </div>
               </div>
               <p class="lead" id="errorsubmit"></p>
               <button type="submit" id="binstalar" class="btn btn-primary btn-block">Instalar</button>
@@ -167,7 +170,7 @@ require_once("../template/errorreport.php");
     </div>
     <script src="js/install2.js"></script>
   <?php
-  //FIN DEL IF DEL POST
+    //FIN DEL IF DEL POST
   } else {
     header("location:index.php");
   }

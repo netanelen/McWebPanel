@@ -22,7 +22,7 @@ $(function() {
 
     $("#elpass").change(function() {
         var getpass = document.getElementById("elpass").value;
-        if (getpass === "") {
+        if (getpass == "") {
             document.getElementById("textoretorno").innerHTML = "";
         } else {
             $.ajax({
@@ -66,19 +66,19 @@ $(function() {
         var elerror = 0;
         var eltexto = "<div class='alert alert-danger' role='alert'>";
 
-        if (document.getElementById("eluser").value === "") {
+        if (document.getElementById("eluser").value == "") {
             eltexto = eltexto + "No has introducido ningún nombre de usuario";
             eltexto = eltexto + "<br>";
             elerror = 1;
         }
 
-        if (document.getElementById("elnomserv").value === "") {
+        if (document.getElementById("elnomserv").value == "") {
             eltexto = eltexto + "No has introducido ningún nombre al servidor";
             eltexto = eltexto + "<br>";
             elerror = 1;
         }
 
-        if (document.getElementById("elport").value === "") {
+        if (document.getElementById("elport").value == "") {
             eltexto = eltexto + "No has introducido ningún puerto";
             eltexto = eltexto + "<br>";
             elerror = 1;
@@ -86,6 +86,12 @@ $(function() {
 
         if (document.getElementById("elpass").value != document.getElementById("elrepass").value) {
             eltexto = eltexto + "Las contraseñas no coinciden";
+            eltexto = eltexto + "<br>";
+            elerror = 1;
+        }
+
+        if (document.getElementById("elram").value == 0) {
+            eltexto = eltexto + "No cumples el mínimo de memoria ram";
             eltexto = eltexto + "<br>";
             elerror = 1;
         }
