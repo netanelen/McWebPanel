@@ -98,7 +98,7 @@ $(function() {
 
         eltexto = eltexto + "</div>";
 
-        if (elerror === 0) {
+        if (elerror == 0) {
             return true;
         } else {
             document.getElementById("errorsubmit").innerHTML = eltexto;
