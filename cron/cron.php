@@ -360,10 +360,9 @@ if ($elerror == 0) {
                                                                             $retorno = "ramselectout";
                                                                         }
 
-                                                                        //COMPROBAR SI HAY MEMORIA SUFICIENTE PARA INICIAR  CON LA RAM RESERVADA RESTADA
+                                                                        //COMPROBAR SI HAY MEMORIA SUFICIENTE PARA INICIAR CON RAM DISPONIBLE
                                                                         if ($elerror == 0) {
-                                                                            $ramrestante = $getramavaliable - $recram;
-                                                                            if ($recram > $ramrestante) {
+                                                                            if ($recram > $getramavaliable) {
                                                                                 $elerror = 1;
                                                                                 $retorno = "ramavaliableout";
                                                                             }
