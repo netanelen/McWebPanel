@@ -106,6 +106,9 @@ require_once("template/header.php");
                                                     $recjavaname = CONFIGJAVANAME;
                                                     $recjavamanual = CONFIGJAVAMANUAL;
 
+                                                    $recbackuplimitgb = CONFIGFOLDERBACKUPSIZE;
+                                                    $recminecraftlimitgb = CONFIGFOLDERMINECRAFTSIZE;
+
                                                     $elnombredirectorio = $reccarpmine;
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
@@ -196,7 +199,7 @@ require_once("template/header.php");
                                                             ?>
 
                                                             <?php
-                                                            //PUERTO
+                                                            //MEMORIA RAM LIMITE
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfmemoria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfmemoria'] == 1) {
                                                             ?>
                                                                 <div class="form-group col-md-6">
@@ -204,20 +207,18 @@ require_once("template/header.php");
                                                                     <select id="elram" name="elram" class="form-control" required="required">
                                                                         <?php
 
-                                                                        $salida = shell_exec('free -h | grep Mem');
-                                                                        $totalram = substr($salida, 14, 4);
-                                                                        $totalram = preg_replace('/\s+/', '', $totalram);
-                                                                        $totalram = trim($totalram);
-
-                                                                        for ($i = 1;; $i++) {
-                                                                            if ($i > $totalram) {
-                                                                                break;
-                                                                            }
-
-                                                                            if ($recram == $i) {
-                                                                                echo '<option selected value="' . $i . '">' . $i . ' GB</option>';
-                                                                            } else {
-                                                                                echo '<option value="' . $i . '">' . $i . ' GB</option>';
+                                                                        $salida = shell_exec("free -g | grep Mem | awk '{ print $2 }'");
+                                                                        $totalram = trim($salida);
+                                                                        $totalram = intval($totalram);
+                                                                        if ($totalram == 0) {
+                                                                            echo '<option selected value="0">MEMORIA INSUFICIENTE / NO TIENES NI UN GB</option>';
+                                                                        } elseif ($totalram >= 1) {
+                                                                            for ($i = 1; $i <= $totalram; $i++) {
+                                                                                if ($recram == $i) {
+                                                                                    echo '<option selected value="' . $i . '">' . $i . ' GB</option>';
+                                                                                } else {
+                                                                                    echo '<option value="' . $i . '">' . $i . ' GB</option>';
+                                                                                }
                                                                             }
                                                                         }
 
@@ -377,6 +378,53 @@ require_once("template/header.php");
                                                         }
                                                         ?>
 
+                                                        <?php
+
+                                                        //LIMITES ALMACENAMIENTO
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfjavaselect', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfjavaselect'] == 1) {
+                                                        ?>
+                                                            <hr>
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <label>Limite Almacenamiento:</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="">
+                                                                <div class="container">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Carpeta Backups</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <label>Carpeta Minecraft</label>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <input type="number" class="form-control  text-right" id="limitbackupgb" name="limitbackupgb" required="required" min="0" max="100" value="<?php echo $recbackuplimitgb; ?>">
+                                                                                <label> 0 = Ilimitado</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-1">
+                                                                            <p class="lead">GB</p>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <input type="number" class="form-control text-right" id="limitminecraftgb" name="limitminecraftgb" required="required" min="0" max="100" value="<?php echo $recminecraftlimitgb; ?>">
+                                                                                <label> 0 = Ilimitado</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-1">
+                                                                            <p class="lead">GB</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php
+                                                        }
+                                                        ?>
 
                                                         <?php
                                                         //PARAMETROS AVANZADOS
