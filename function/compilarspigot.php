@@ -146,6 +146,31 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
           }
 
+          //COMPROVAR MEMORIA RAM
+          if ($elerror == 0) {
+            $totalramsys = shell_exec("free -g | grep Mem | awk '{ print $2 }'");
+            $totalramsys = trim($totalramsys);
+            $totalramsys = intval($totalramsys);
+
+            $getramavaliable = shell_exec("free -g | grep Mem | awk '{ print $7 }'");
+            $getramavaliable = trim($getramavaliable);
+            $getramavaliable = intval($getramavaliable);
+
+            //COMPRUEBA SI AL MENOS SE TIENE 1GB
+            if ($totalramsys == 0) {
+              $elerror = 1;
+              $retorno = "rammenoragiga";
+            }
+
+            if ($totalramsys >= 1) {
+              //COMPRUEBA QUE HAYA AL MENOS 1GB DE MEMORIA DISPONIBLE
+              if ($getramavaliable < 1) {
+                $elerror = 1;
+                $retorno = "ramavaiableout";
+              }
+            }
+          }
+
           //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
           if ($elerror == 0) {
             if ($recjavaselect == "0") {

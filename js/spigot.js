@@ -49,6 +49,10 @@ $(function() {
                         alert("Error: No se ha podido descargar la herramienta Buildtools");
                     } else if (data == "nojavaenruta") {
                         alert("Error: Error: El archivo java no se encuentra en la ruta");
+                    } else if (data == "rammenoragiga") {
+                        alert("Error: Error: La memoria del sistema es menor a 1 GB");
+                    } else if (data == "ramavaiableout") {
+                        alert("Error: Error: No hay memoria suficiente para ejecutar la compilacion de Spigot");
                     }
                 }
             });
