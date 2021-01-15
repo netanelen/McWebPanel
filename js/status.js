@@ -61,6 +61,12 @@ $(function() {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay ningún java seleccionado en System Config.</div>";
                 } else if (data == "nojavadefault") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Java no encontrado en el servidor.</div>";
+                } else if (data == "rammenoragiga") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La memoria del sistema es menor a 1 GB.</div>";
+                } else if (data == "ramselectout") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La memoria seleccionada supera la memoria total del sistema.</div>";
+                } else if (data == "ramavaliableout") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay memoria suficiente para ejecutar el servidor minecraft.</div>";
                 }
             }
         });
