@@ -30,6 +30,20 @@ function test_input($data)
     return $data;
 }
 
+function converdatoscarpbackup($losbytes, $opcion)
+{
+    $eltipo = "GB";
+    $result = $losbytes / 1048576;
+
+    if ($opcion == 0) {
+        $result = str_replace(".", ",", strval(round($result, 2)));
+        return $result;
+    } elseif ($opcion == 1) {
+        $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+        return $result;
+    }
+}
+
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
     $_SESSION['VALIDADO'] = "NO";
@@ -74,6 +88,26 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $dirconfig = dirname(getcwd()) . PHP_EOL;
             $dirconfig = trim($dirconfig);
             $dirconfig .= "/backups";
+
+            //LIMITE ALMACENAMIENTO
+            if ($elerror == 0) {
+                //OBTENER GIGAS CARPETA BACKUPS
+                $getgigasbackup = shell_exec("du -s " . $dirconfig . " | awk '{ print $1 }' ");
+                $getgigasbackup = trim($getgigasbackup);
+                $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0);
+
+                //OBTENER GIGAS LIMITE BACKUPS
+                $limitbackupgb = CONFIGFOLDERBACKUPSIZE;
+
+                //MIRAR SI ES ILIMITADO
+                if ($limitbackupgb >= 1) {
+                    if ($getgigasbackup > $limitbackupgb) {
+                        $retorno = "limitgbexceeded";
+                        $elerror = 1;
+                    }
+                }
+            }
+
 
             if ($elerror == 0) {
                 if (file_exists($dirconfig)) {

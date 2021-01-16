@@ -164,6 +164,8 @@ $(function() {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no válido.</div>";
                     } else if (data == "noejecutable") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
+                    } else if (data == "limitgbexceeded") {
+                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado el límite de GB para Backups.</div>";
                     }
                 }
             });
