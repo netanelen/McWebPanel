@@ -411,8 +411,33 @@ $(function() {
 
     $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
-
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+        $.ajax({
+            url: 'function/gestorlimituploadfile.php',
+            data: {
+                action: 'eltexto'
+            },
+            type: 'POST',
+            success: function(data) {
+
+                if (data == "OUTGIGAS") {
+                    if (document.getElementById('botonsubir') !== null) {
+                        document.getElementById("botonsubir").disabled = true;
+
+                    }
+                    document.getElementById('fileName').value = "";
+                    $('#lvltext').text("Elija el archivo");
+                    alert("Has superado los GB asignados a la carpeta minecraft")
+
+                } else if (data == "OKGIGAS") {
+                    if (document.getElementById('botonsubir') !== null) {
+                        document.getElementById("botonsubir").disabled = false;
+                    }
+                }
+            }
+        });
+
         if (document.getElementById('botonsubir') !== null) {
             document.getElementById("botonsubir").disabled = false;
         }
@@ -620,6 +645,8 @@ $(function() {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se acepta ese tipo de archivo.</div>";
                 } else if (data == "novalidoname") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre archivo no válido.</div>";
+                } else if (data == "OUTGIGAS") {
+                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado los GB asignados a la carpeta minecraft.</div>";
                 } else if (data == "errprocess") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Errores en el proceso de subida del archivo.</div>";
                 } else if (data == "errorupload") {

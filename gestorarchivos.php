@@ -532,7 +532,7 @@ function devolverdatos($losbytes, $opcion)
 
                                                                     <div class="custom-file mb-3">
                                                                         <input type="file" class="custom-file-input" id="fileName" name="uploadedFile">
-                                                                        <label class="custom-file-label" for="fileName">Elija el archivo</label>
+                                                                        <label class="custom-file-label" for="fileName" id="lvltext">Elija el archivo</label>
                                                                     </div>
 
                                                                     <button class="btn btn-primary btn-block btn-lg text-white mt-2" id="botonsubir" type="submit" value="Upload">Subir Archivo</button>
