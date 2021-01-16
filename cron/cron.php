@@ -494,7 +494,22 @@ if ($elerror == 0) {
                                                         case "acc3":
                                                             //BACKUP SERVIDOR
 
+                                                            function converdatoscarpbackup($losbytes, $opcion)
+                                                            {
+                                                                $eltipo = "GB";
+                                                                $result = $losbytes / 1048576;
+
+                                                                if ($opcion == 0) {
+                                                                    $result = str_replace(".", ",", strval(round($result, 2)));
+                                                                    return $result;
+                                                                } elseif ($opcion == 1) {
+                                                                    $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+                                                                    return $result;
+                                                                }
+                                                            }
+
                                                             $reccarpmine = CONFIGDIRECTORIO;
+                                                            $elerror = 0;
 
                                                             $archivo = "AUTO";
 
@@ -503,27 +518,48 @@ if ($elerror == 0) {
                                                             $dirconfig = trim($dirconfig);
                                                             $dirconfig .= "/backups";
 
-                                                            if (file_exists($dirconfig)) {
-                                                                //COMPROVAR SI SE PUEDE ESCRIVIR
-                                                                if (is_writable($dirconfig)) {
-                                                                    $rutaarchivo = $RUTAPRINCIPAL;
-                                                                    $rutaarchivo = trim($rutaarchivo);
-                                                                    $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
-                                                                    if (is_readable($rutaminelimpia)) {
-                                                                        $rutaarchivo .= "/" . $reccarpmine . "/ .";
-                                                                        $dirconfig = $dirconfig . "/" . $archivo . "-";
-                                                                        $t = date("Y-m-d-G:i:s");
-                                                                        $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
-                                                                        if (is_executable($rutaminelimpia)) {
-                                                                            exec($elcomando, $out, $oky);
+                                                            //LIMITE ALMACENAMIENTO
+                                                            if ($elerror == 0) {
+                                                                //OBTENER GIGAS CARPETA BACKUPS
+                                                                $getgigasbackup = shell_exec("du -s " . $dirconfig . " | awk '{ print $1 }' ");
+                                                                $getgigasbackup = trim($getgigasbackup);
+                                                                $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0);
 
-                                                                            if (!$oky) {
-                                                                            } else {
+                                                                //OBTENER GIGAS LIMITE BACKUPS
+                                                                $limitbackupgb = CONFIGFOLDERBACKUPSIZE;
 
-                                                                                //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
-                                                                                $borrarerror = $dirconfig . $t . ".tar.gz";
-                                                                                if (file_exists($borrarerror)) {
-                                                                                    unlink($borrarerror);
+                                                                //MIRAR SI ES ILIMITADO
+                                                                if ($limitbackupgb >= 1) {
+                                                                    if ($getgigasbackup > $limitbackupgb) {
+                                                                        $retorno = "limitgbexceeded";
+                                                                        $elerror = 1;
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            if ($elerror == 0) {
+                                                                if (file_exists($dirconfig)) {
+                                                                    //COMPROVAR SI SE PUEDE ESCRIVIR
+                                                                    if (is_writable($dirconfig)) {
+                                                                        $rutaarchivo = $RUTAPRINCIPAL;
+                                                                        $rutaarchivo = trim($rutaarchivo);
+                                                                        $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
+                                                                        if (is_readable($rutaminelimpia)) {
+                                                                            $rutaarchivo .= "/" . $reccarpmine . "/ .";
+                                                                            $dirconfig = $dirconfig . "/" . $archivo . "-";
+                                                                            $t = date("Y-m-d-G:i:s");
+                                                                            $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
+                                                                            if (is_executable($rutaminelimpia)) {
+                                                                                exec($elcomando, $out, $oky);
+
+                                                                                if (!$oky) {
+                                                                                } else {
+
+                                                                                    //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
+                                                                                    $borrarerror = $dirconfig . $t . ".tar.gz";
+                                                                                    if (file_exists($borrarerror)) {
+                                                                                        unlink($borrarerror);
+                                                                                    }
                                                                                 }
                                                                             }
                                                                         }
