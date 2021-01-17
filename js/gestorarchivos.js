@@ -431,7 +431,7 @@ $(function() {
                     }
                     document.getElementById('fileName').value = "";
                     $('#lvltext').text("Elija el archivo");
-                    alert("Error: No puedes subir archivo, as superado los GB asignados a la carpeta minecraft")
+                    alert("Error: No puedes subir el archivo, has superado los GB asignados a la carpeta minecraft")
 
                 } else if (data == "OKGIGAS") {
                     if (document.getElementById('botonsubir') !== null) {
