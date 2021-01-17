@@ -413,10 +413,13 @@ $(function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 
+        var elarchivo = document.getElementById('fileName');
+        var eltamano = elarchivo.files.item(0).size;
+
         $.ajax({
             url: 'function/gestorlimituploadfile.php',
             data: {
-                action: 'eltexto'
+                action: eltamano
             },
             type: 'POST',
             success: function(data) {
@@ -428,12 +431,20 @@ $(function() {
                     }
                     document.getElementById('fileName').value = "";
                     $('#lvltext').text("Elija el archivo");
-                    alert("Has superado los GB asignados a la carpeta minecraft")
+                    alert("Error: No puedes subir archivo, as superado los GB asignados a la carpeta minecraft")
 
                 } else if (data == "OKGIGAS") {
                     if (document.getElementById('botonsubir') !== null) {
                         document.getElementById("botonsubir").disabled = false;
                     }
+                } else if (data == "OUTUPLOAD") {
+                    if (document.getElementById('botonsubir') !== null) {
+                        document.getElementById("botonsubir").disabled = true;
+
+                    }
+                    document.getElementById('fileName').value = "";
+                    $('#lvltext').text("Elija el archivo");
+                    alert("Error: El archivo supera el límite de subida")
                 }
             }
         });

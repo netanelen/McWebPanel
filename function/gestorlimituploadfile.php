@@ -20,6 +20,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
+require_once("../config/confopciones.php");
 
 function test_input($data)
 {
@@ -56,14 +57,32 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         $retorno = "";
         $elerror = 0;
-
+        $archivosize = 0;
+        $maxdeupload = CONFIGMAXUPLOAD;
         $elnombredirectorio = CONFIGDIRECTORIO;
-        $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
-        $rutacarpetamine = trim($rutacarpetamine);
-        $rutacarpetamine .= "/" . $elnombredirectorio;
+
+        $archivosize = test_input($_POST['action']);
+
+        //CONVERTIR BYTE A MB
+        $decimales = 0;
+        $archivosizemb = number_format($archivosize / 1048576, $decimales);
+
+        //COMPROBAR SI LO QUE SE SUBE ES MAYOR AL UPLOAD PERMITIDO
+        if ($elerror == 0) {
+            if ($archivosizemb > $maxdeupload) {
+                $elerror = 1;
+                $retorno = "OUTUPLOAD";
+            }
+        }
 
         //LIMITE ALMACENAMIENTO
         if ($elerror == 0) {
+
+            //OBTENER CARPETA SERVIDOR MINECRAFT
+            $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
+            $rutacarpetamine = trim($rutacarpetamine);
+            $rutacarpetamine .= "/" . $elnombredirectorio;
+            
             //OBTENER GIGAS CARPETA BACKUPS
             $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
             $getgigasmine = trim($getgigasmine);
