@@ -264,6 +264,22 @@ require_once("template/header.php");
                                                                                     <p>Permite configurar la versión de JAVA que usara el servidor minecraft.</p>
                                                                                 </div>
 
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconffoldersize" name="psystemconffoldersize" type="checkbox" value="1" <?php
+
+                                                                                                                                                                                if (array_key_exists('psystemconffoldersize', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconffoldersize'] == 1) {
+                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                                ?>>
+
+                                                                                        <label class="negrita mr-2" for="psystemconffoldersize">Limite Almacenamiento</label>
+                                                                                    </div>
+                                                                                    <p>Permite configurar los GB de espacio disponible en las carpetas del servidor.</p>
+                                                                                </div>
+
                                                                             </div>
 
                                                                         </div>

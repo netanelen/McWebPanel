@@ -267,6 +267,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             } else {
                                 $arrayobtenido[$i]['psystemconfjavaselect'] = 0;
                             }
+
+                            //SYSTEM CONFIG LIMITE ALMACENAMIENTO
+                            if (isset($_POST['psystemconffoldersize'])) {
+                                $arrayobtenido[$i]['psystemconffoldersize'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['psystemconffoldersize'] = 0;
+                            }
+
+
                         }
 
                         $nuevoarray[] = $arrayobtenido[$i];

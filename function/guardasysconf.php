@@ -188,7 +188,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         //LIMITE ALMACENAMIENTO
-        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfjavaselect', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfjavaselect'] == 1) {
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconffoldersize', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconffoldersize'] == 1) {
           if (isset($_POST["limitbackupgb"])) {
             //OBTENER INPUT LIMITE BACKUPS GIGAS
             $ellimitebackupgb = test_input($_POST["limitbackupgb"]);
