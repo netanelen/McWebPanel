@@ -60,6 +60,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $eljavaname = CONFIGJAVANAME;
         $eljavamanual = CONFIGJAVAMANUAL;
 
+        $ellimitbackfoldersize = CONFIGFOLDERBACKUPSIZE;
+        $ellimitminefoldersize = CONFIGFOLDERMINECRAFTSIZE;
+
         //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
         $dirconfig = "";
         $dirconfig = dirname(getcwd()) . PHP_EOL;
@@ -101,6 +104,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, 'define("CONFIGJAVASELECT", "' . $eljavaselect . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGJAVANAME", "' . $eljavaname . '");' . PHP_EOL);
                 fwrite($file, 'define("CONFIGJAVAMANUAL", "' . $eljavamanual . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGFOLDERBACKUPSIZE", "' . $ellimitbackfoldersize . '");' . PHP_EOL);
+                fwrite($file, 'define("CONFIGFOLDERMINECRAFTSIZE", "' . $ellimitminefoldersize . '");' . PHP_EOL);
                 fwrite($file, "?>" . PHP_EOL);
                 fclose($file);
 

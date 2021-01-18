@@ -288,6 +288,8 @@ require_once("../template/errorreport.php");
         fwrite($file, 'define("CONFIGJAVASELECT", "0");' . PHP_EOL);
         fwrite($file, 'define("CONFIGJAVANAME", "0");' . PHP_EOL);
         fwrite($file, 'define("CONFIGJAVAMANUAL", "");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGFOLDERBACKUPSIZE", "0");' . PHP_EOL);
+        fwrite($file, 'define("CONFIGFOLDERMINECRAFTSIZE", "0");' . PHP_EOL);
         fwrite($file, "?>" . PHP_EOL);
         fclose($file);
 
