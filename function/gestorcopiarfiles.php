@@ -20,7 +20,21 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
+require_once("../config/confopciones.php");
 
+function converdatoscarpmine($losbytes, $opcion)
+{
+    $eltipo = "GB";
+    $result = $losbytes / 1048576;
+
+    if ($opcion == 0) {
+        $result = str_replace(".", ",", strval(round($result, 2)));
+        return $result;
+    } elseif ($opcion == 1) {
+        $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+        return $result;
+    }
+}
 
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
@@ -39,6 +53,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $retorno = "";
             $elerror = 0;
             $test = 0;
+
+            $elnombrescreen = CONFIGDIRECTORIO;
+            $limitmine = CONFIGFOLDERMINECRAFTSIZE;
+            $rutacarpetamine = "";
+            $getgigasmine = "";
 
             $copiados = $_POST['action'];
 
@@ -118,6 +137,28 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $retorno = "nopermenter";
                             $elerror = 1;
                         }
+                    }
+                }
+            }
+
+            //LIMITE ALMACENAMIENTO
+            if ($elerror == 0) {
+
+                //OBTENER CARPETA SERVIDOR MINECRAFT
+                $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
+                $rutacarpetamine = trim($rutacarpetamine);
+                $rutacarpetamine .= "/" . $elnombrescreen;
+
+                //OBTENER GIGAS CARPETA BACKUPS
+                $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
+                $getgigasmine = trim($getgigasmine);
+                $getgigasmine = converdatoscarpmine($getgigasmine, 0);
+
+                //MIRAR SI ES ILIMITADO
+                if ($limitmine >= 1) {
+                    if ($getgigasmine > $limitmine) {
+                        $retorno = "OUTGIGAS";
+                        $elerror = 1;
                     }
                 }
             }

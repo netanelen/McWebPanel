@@ -60,6 +60,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $archivosize = 0;
         $maxdeupload = CONFIGMAXUPLOAD;
         $elnombredirectorio = CONFIGDIRECTORIO;
+        $limitmine = CONFIGFOLDERMINECRAFTSIZE;
+        $rutacarpetamine = "";
+        $getgigasmine="";
 
         $archivosize = test_input($_POST['action']);
 
@@ -82,14 +85,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/" . $elnombredirectorio;
-            
+
             //OBTENER GIGAS CARPETA BACKUPS
             $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
             $getgigasmine = trim($getgigasmine);
             $getgigasmine = converdatoscarpmine($getgigasmine, 0);
-
-            //OBTENER GIGAS LIMITE BACKUPS
-            $limitmine = CONFIGFOLDERMINECRAFTSIZE;
 
             //MIRAR SI ES ILIMITADO
             if ($limitmine >= 1) {
