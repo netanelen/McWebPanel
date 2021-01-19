@@ -306,7 +306,7 @@ function devolverdatos($losbytes, $opcion)
                                                                             $getinfofile = pathinfo($archivoconcreto);
                                                                             $tipoarchivo = "." . strtolower($getinfofile['extension']);
                                                                             $tipoarchivo = trim($tipoarchivo);
- 
+
                                                                             if ($tipoarchivo != ".htaccess" && $tipoarchivo != ".sh") {
                                                                                 $farchivos[] = $a[$i];
                                                                             }
@@ -506,12 +506,49 @@ function devolverdatos($losbytes, $opcion)
                                                                                 <?php
                                                                                 }
                                                                                 ?>
-                                                                <?php
+                                                                    <?php
                                                                             }
                                                                         }
                                                                     }
                                                                 }
 
+                                                                if (defined('CONFIGFOLDERMINECRAFTSIZE')) {
+                                                                    //OBTENER TAMAÑO CARPETA MINE MAXIMO PERMITIDO
+                                                                    $recsizemine = CONFIGFOLDERMINECRAFTSIZE;
+
+                                                                    //OBTENER CARPETA SERVIDOR MINECRAFT
+                                                                    $rutacarpetamine = getcwd() . PHP_EOL;
+                                                                    $rutacarpetamine = trim($rutacarpetamine);
+                                                                    $rutacarpetamine .= "/" . $reccarpmine;
+
+                                                                    //OBTENER USADO
+                                                                    $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
+                                                                    $getgigasmine = trim($getgigasmine);
+                                                                    $getgigasmine = number_format($getgigasmine / 1048576, 2);
+                                                                    ?>
+
+                                                                    <tr>
+                                                                        <th>
+                                                                            <p class="lead">Almacenamiento Minecraft</p>
+                                                                        </th>
+                                                                        <td>
+                                                                            <p class="lead">Usado: <?php echo ($getgigasmine); ?> GB</p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="lead">Total: <?php if ($recsizemine == 0) {
+                                                                                                        echo ("Ilimitado");
+                                                                                                    } else {
+                                                                                                        echo ($recsizemine . " GB");
+                                                                                                    } ?></p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="lead"></p>
+                                                                        </td>
+                                                                        <td></td>
+                                                                    </tr>
+
+                                                                <?php
+                                                                }
                                                                 ?>
                                                             </tbody>
                                                         </table>
