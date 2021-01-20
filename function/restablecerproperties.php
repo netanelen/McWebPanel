@@ -20,6 +20,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
+require_once("../config/confopciones.php");
 
 function test_input($data)
 {
@@ -48,6 +49,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $retorno = "";
                 $dirconfig = "";
                 $rutaescrivir = "";
+
+                //OBTENER PUERTO DE LA CONFIGURACION
+                $recpuerto = CONFIGPUERTO;
 
                 //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
                 $dirconfig = dirname(getcwd()) . PHP_EOL;
@@ -104,7 +108,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     fwrite($file, "max-build-height=256" . PHP_EOL);
                     fwrite($file, "server-ip=" . PHP_EOL);
                     fwrite($file, "allow-nether=true" . PHP_EOL);
-                    fwrite($file, "server-port=25565" . PHP_EOL);
+                    fwrite($file, "server-port=" .$recpuerto . PHP_EOL);
                     fwrite($file, "enable-rcon=false" . PHP_EOL);
                     fwrite($file, "sync-chunk-writes=true" . PHP_EOL);
                     fwrite($file, "op-permission-level=4" . PHP_EOL);
