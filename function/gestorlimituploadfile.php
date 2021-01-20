@@ -62,13 +62,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $elnombredirectorio = CONFIGDIRECTORIO;
         $limitmine = CONFIGFOLDERMINECRAFTSIZE;
         $rutacarpetamine = "";
-        $getgigasmine="";
+        $getgigasmine = "";
 
         $archivosize = test_input($_POST['action']);
 
-        //CONVERTIR BYTE A MB
-        $decimales = 0;
-        $archivosizemb = number_format($archivosize / 1048576, $decimales);
+        //CONVERTIR DATOS
+        $archivosizemb = converdatoscarpmine($archivosize, 0);
 
         //COMPROBAR SI LO QUE SE SUBE ES MAYOR AL UPLOAD PERMITIDO
         if ($elerror == 0) {
@@ -97,9 +96,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $retorno = "OUTGIGAS";
                     $elerror = 1;
                 }
-            } else {
-                $retorno = "OKGIGAS";
             }
+        }
+
+        //SI NO HAY ERRORES DEVOLVER OKGIGAS
+        if ($elerror == 0) {
+            $retorno = "OKGIGAS";
         }
 
         echo $retorno;
