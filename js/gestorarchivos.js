@@ -434,7 +434,6 @@ $(function() {
                 if (data == "OUTGIGAS") {
                     if (document.getElementById('botonsubir') !== null) {
                         document.getElementById("botonsubir").disabled = true;
-
                     }
                     document.getElementById('fileName').value = "";
                     $('#lvltext').text("Elija el archivo");
@@ -455,10 +454,6 @@ $(function() {
                 }
             }
         });
-
-        if (document.getElementById('botonsubir') !== null) {
-            document.getElementById("botonsubir").disabled = false;
-        }
 
     });
 

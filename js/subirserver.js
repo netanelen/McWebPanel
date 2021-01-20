@@ -22,16 +22,56 @@ $(function() {
     document.getElementById("gifloading").style.visibility = "hidden";
 
     $(".custom-file-input").on("change", function() {
+        var elerror = 0;
         var fileName = $(this).val().split("\\").pop();
         var res = fileName.substring(fileName.length - 4, fileName.length);
         if (res == ".jar") {
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            document.getElementById("botonsubir").disabled = false;
+            var elarchivo = document.getElementById('fileName');
+            var eltamano = elarchivo.files.item(0).size;
         } else {
             alert("Solo se permiten subir archivos .jar");
             document.getElementById("botonsubir").disabled = true;
             document.getElementById("fileName").value = "";
+            elerror = 1;
         }
+
+        if (elerror == 0) {
+
+            $.ajax({
+                url: 'function/gestorlimituploadfile.php',
+                data: {
+                    action: eltamano
+                },
+                type: 'POST',
+                success: function(data) {
+
+                    if (data == "OUTGIGAS") {
+                        if (document.getElementById('botonsubir') !== null) {
+                            document.getElementById("botonsubir").disabled = true;
+                        }
+                        document.getElementById('fileName').value = "";
+                        $('#lvltext').text("Elija el archivo");
+                        alert("Error: No puedes subir el archivo, has superado los GB asignados a la carpeta minecraft")
+
+                    } else if (data == "OKGIGAS") {
+                        if (document.getElementById('botonsubir') !== null) {
+                            document.getElementById("botonsubir").disabled = false;
+                        }
+                    } else if (data == "OUTUPLOAD") {
+                        if (document.getElementById('botonsubir') !== null) {
+                            document.getElementById("botonsubir").disabled = true;
+
+                        }
+                        document.getElementById('fileName').value = "";
+                        $('#lvltext').text("Elija el archivo");
+                        alert("Error: El archivo supera el límite de subida")
+                    }
+                }
+            });
+
+        }
+
     });
 
     $("#form").on('submit', (function(e) {

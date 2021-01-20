@@ -90,7 +90,7 @@ require_once("template/header.php");
 
                                                         <div class="custom-file mb-3">
                                                             <input type="file" class="custom-file-input" id="fileName" name="uploadedFile" accept=".jar">
-                                                            <label class="custom-file-label" for="fileName">Elija el archivo</label>
+                                                            <label class="custom-file-label" for="fileName" id="lvltext">Elija el archivo</label>
                                                         </div>
 
                                                         <div class="mt-3">
