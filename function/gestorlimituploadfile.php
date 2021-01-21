@@ -36,10 +36,10 @@ function converdatoscarpmine($losbytes, $opcion)
     $result = $losbytes / 1048576;
 
     if ($opcion == 0) {
-        $result = str_replace(".", ",", strval(round($result, 2)));
+        $result = str_replace(".", ",", strval(round($result, 0)));
         return $result;
     } elseif ($opcion == 1) {
-        $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+        $result = str_replace(".", ",", strval(round($result, 0))) . " " . $eltipo;
         return $result;
     }
 }
@@ -58,7 +58,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $retorno = "";
         $elerror = 0;
         $archivosize = 0;
-        $maxdeupload = CONFIGMAXUPLOAD;
+        $maxdeupload = ini_get("upload_max_filesize");
+        $maxdeupload = substr($maxdeupload, 0, -1);
+        $maxdeupload = trim($maxdeupload);
         $elnombredirectorio = CONFIGDIRECTORIO;
         $limitmine = CONFIGFOLDERMINECRAFTSIZE;
         $rutacarpetamine = "";
@@ -68,6 +70,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         //CONVERTIR DATOS
         $archivosizemb = converdatoscarpmine($archivosize, 0);
+
+        //$retorno = $archivosizemb ." / " . $maxdeupload;
+        //$elerror = 1;
 
         //COMPROBAR SI LO QUE SE SUBE ES MAYOR AL UPLOAD PERMITIDO
         if ($elerror == 0) {
