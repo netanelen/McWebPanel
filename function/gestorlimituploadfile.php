@@ -58,21 +58,20 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $retorno = "";
         $elerror = 0;
         $archivosize = 0;
-        $maxdeupload = ini_get("upload_max_filesize");
-        $maxdeupload = substr($maxdeupload, 0, -1);
-        $maxdeupload = trim($maxdeupload);
         $elnombredirectorio = CONFIGDIRECTORIO;
         $limitmine = CONFIGFOLDERMINECRAFTSIZE;
         $rutacarpetamine = "";
         $getgigasmine = "";
 
+        //OBTENER UPLOAD MAX PHP
+        $maxdeupload = ini_get("upload_max_filesize");
+        $maxdeupload = substr($maxdeupload, 0, -1);
+        $maxdeupload = trim($maxdeupload);
+
         $archivosize = test_input($_POST['action']);
 
         //CONVERTIR DATOS
         $archivosizemb = converdatoscarpmine($archivosize, 0);
-
-        //$retorno = $archivosizemb ." / " . $maxdeupload;
-        //$elerror = 1;
 
         //COMPROBAR SI LO QUE SE SUBE ES MAYOR AL UPLOAD PERMITIDO
         if ($elerror == 0) {
