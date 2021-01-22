@@ -109,6 +109,9 @@ require_once("template/header.php");
                                                     $recbackuplimitgb = CONFIGFOLDERBACKUPSIZE;
                                                     $recminecraftlimitgb = CONFIGFOLDERMINECRAFTSIZE;
 
+                                                    //OBTENER TIPO SERVIDOR WEB
+                                                    $servidorweb = $_SERVER["SERVER_SOFTWARE"];
+
                                                     $elnombredirectorio = $reccarpmine;
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
@@ -263,7 +266,7 @@ require_once("template/header.php");
                                                             ?>
 
                                                             <?php
-                                                            //TIPO SERVIDOR
+                                                            //LIMITE SUBIR ARCHIVO
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
                                                             ?>
 
@@ -272,15 +275,23 @@ require_once("template/header.php");
                                                                     <select id="elmaxupload" name="elmaxupload" class="form-control" required="required">
                                                                         <?php
 
-                                                                        $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
+                                                                        //COMPROBAR TIPO DE SERVIDOR WEB
+                                                                        if ($servidorweb == "Apache") {
+                                                                            $opcionesserver = array('128', '256', '386', '512', '640', '768', '896', '1024', '2048', '3072', '4096', '5120');
 
-                                                                        for ($i = 0; $i < count($opcionesserver); $i++) {
+                                                                            for ($i = 0; $i < count($opcionesserver); $i++) {
 
-                                                                            if ($recmaxupload == $opcionesserver[$i]) {
-                                                                                echo '<option selected value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
-                                                                            } else {
-                                                                                echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
+                                                                                if ($recmaxupload == $opcionesserver[$i]) {
+                                                                                    echo '<option selected value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
+                                                                                } else {
+                                                                                    echo '<option value="' . $opcionesserver[$i] . '">' . $opcionesserver[$i] . " MB" . '</option>';
+                                                                                }
                                                                             }
+                                                                        } else {
+                                                                            $maxdeupload = ini_get("upload_max_filesize");
+                                                                            $maxdeupload = substr($maxdeupload, 0, -1);
+                                                                            $maxdeupload = trim($maxdeupload);
+                                                                            echo '<option value="' . $maxdeupload . '">' . "Solo disponible en Apache" . '</option>';
                                                                         }
 
                                                                         ?>
@@ -341,7 +352,6 @@ require_once("template/header.php");
                                                                                 $javaruta = (explode("\n", $javaruta));
 
                                                                                 for ($i = 0; $i < count($javalist); $i++) {
-                                                                                    //$javacomparar = $javaruta[$i] . 
 
                                                                                     if ($javaruta[$i] . "/bin/java" == $recjavaname) {
                                                                                         echo '<option selected value="' . $javaruta[$i] . '">' . $javalist[$i] . '</option>';
