@@ -30,6 +30,20 @@ function test_input($data)
   return $data;
 }
 
+function converdatoscarpmine($losbytes, $opcion)
+{
+  $eltipo = "GB";
+  $result = $losbytes / 1048576;
+
+  if ($opcion == 0) {
+    $result = str_replace(".", ",", strval(round($result, 2)));
+    return $result;
+  } elseif ($opcion == 1) {
+    $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+    return $result;
+  }
+}
+
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
   $_SESSION['VALIDADO'] = "NO";
@@ -44,6 +58,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (isset($_POST['action']) && !empty($_POST['action'])) {
       $retorno = "";
       $elerror = 0;
+
+      $elnombrescreen = CONFIGDIRECTORIO;
+      $limitmine = CONFIGFOLDERMINECRAFTSIZE;
+      $rutacarpetamine = "";
+      $getgigasmine = "";
+
       $laaction = test_input($_POST['action']);
 
       $carpraiz = dirname(getcwd()) . PHP_EOL;
@@ -75,17 +95,41 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       if ($elerror == 0) {
         if ($laaction == "compilar") {
 
-          //SABER SI ESTA EN EJECUCION
-          $elcomando = "";
-          $nombresession = str_replace("/", "", $carpcompilar);
-          $elcomando = "screen -ls | awk '/\." . $nombresession . "\t/ {print strtonum($1)'}";
-          $elpid = shell_exec($elcomando);
+          //LIMITE ALMACENAMIENTO
+          if ($elerror == 0) {
 
-          if ($elpid == "") {
-            $elerror = 0;
-          } else {
-            $elerror = 1;
-            $retorno = "yaenmarcha";
+            //OBTENER CARPETA SERVIDOR MINECRAFT
+            $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
+            $rutacarpetamine = trim($rutacarpetamine);
+            $rutacarpetamine .= "/" . $elnombrescreen;
+
+            //OBTENER GIGAS CARPETA BACKUPS
+            $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
+            $getgigasmine = trim($getgigasmine);
+            $getgigasmine = converdatoscarpmine($getgigasmine, 0);
+
+            //MIRAR SI ES ILIMITADO
+            if ($limitmine >= 1) {
+              if ($getgigasmine > $limitmine) {
+                $retorno = "OUTGIGAS";
+                $elerror = 1;
+              }
+            }
+          }
+
+          if ($elerror == 0) {
+            //SABER SI ESTA EN EJECUCION
+            $elcomando = "";
+            $nombresession = str_replace("/", "", $carpcompilar);
+            $elcomando = "screen -ls | awk '/\." . $nombresession . "\t/ {print strtonum($1)'}";
+            $elpid = shell_exec($elcomando);
+
+            if ($elpid == "") {
+              $elerror = 0;
+            } else {
+              $elerror = 1;
+              $retorno = "yaenmarcha";
+            }
           }
 
           if ($elerror == 0) {

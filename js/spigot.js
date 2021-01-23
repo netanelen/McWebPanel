@@ -53,6 +53,8 @@ $(function() {
                         alert("Error: Error: La memoria del sistema es menor a 1 GB");
                     } else if (data == "ramavaiableout") {
                         alert("Error: Error: No hay memoria suficiente para ejecutar la compilacion de Spigot");
+                    } else if (data == "OUTGIGAS") {
+                        alert("Error: Has superado los GB asignados a la carpeta minecraft");
                     }
                 }
             });
