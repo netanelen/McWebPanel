@@ -529,13 +529,13 @@ function devolverdatos($losbytes, $opcion)
 
                                                                     <tr>
                                                                         <th>
-                                                                            <p class="lead">Almacenamiento Minecraft</p>
+                                                                            <p class="lead negrita">Almacenamiento Minecraft</p>
                                                                         </th>
                                                                         <td>
-                                                                            <p class="lead">Usado: <?php echo ($getgigasmine); ?> GB</p>
+                                                                            <p class="lead negrita">Usado: <?php echo ($getgigasmine); ?> GB</p>
                                                                         </td>
                                                                         <td>
-                                                                            <p class="lead">Total: <?php if ($recsizemine == 0) {
+                                                                            <p class="lead negrita">Total: <?php if ($recsizemine == 0) {
                                                                                                         echo ("Ilimitado");
                                                                                                     } else {
                                                                                                         echo ($recsizemine . " GB");
