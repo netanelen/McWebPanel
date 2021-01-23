@@ -437,7 +437,7 @@ $(function() {
                     }
                     document.getElementById('fileName').value = "";
                     $('#lvltext').text("Elija el archivo");
-                    alert("Error: No puedes subir el archivo, has superado los GB asignados a la carpeta minecraft")
+                    alert("Error: No puedes subir el archivo, has superado los GB asignados a la carpeta minecraft");
 
                 } else if (data == "OKGIGAS") {
                     if (document.getElementById('botonsubir') !== null) {
@@ -450,7 +450,23 @@ $(function() {
                     }
                     document.getElementById('fileName').value = "";
                     $('#lvltext').text("Elija el archivo");
-                    alert("Error: El archivo supera el límite de subida")
+                    alert("Error: El archivo supera el límite de subida");
+                } else if (data == "OUTLIMITE") {
+                    if (document.getElementById('botonsubir') !== null) {
+                        document.getElementById("botonsubir").disabled = true;
+
+                    }
+                    document.getElementById('fileName').value = "";
+                    $('#lvltext').text("Elija el archivo");
+                    alert("Error: El archivo supera los GB asignados a la carpeta minecraft");
+                } else if (data == "NOFREESPACE") {
+                    if (document.getElementById('botonsubir') !== null) {
+                        document.getElementById("botonsubir").disabled = true;
+
+                    }
+                    document.getElementById('fileName').value = "";
+                    $('#lvltext').text("Elija el archivo");
+                    alert("Error: No hay espacio libre suficiente en la carpeta minecraft para subir el archivo");
                 }
             }
         });

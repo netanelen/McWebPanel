@@ -30,16 +30,30 @@ function test_input($data)
     return $data;
 }
 
-function converdatoscarpmine($losbytes, $opcion)
+function converdatoscarpmine($losbytes, $opcion, $decimal)
 {
     $eltipo = "GB";
     $result = $losbytes / 1048576;
 
     if ($opcion == 0) {
-        $result = str_replace(".", ",", strval(round($result, 0)));
+        $result = str_replace(".", ",", strval(round($result, $decimal)));
         return $result;
     } elseif ($opcion == 1) {
-        $result = str_replace(".", ",", strval(round($result, 0))) . " " . $eltipo;
+        $result = str_replace(".", ",", strval(round($result, $decimal))) . " " . $eltipo;
+        return $result;
+    }
+}
+
+function converdatoscarpmineGB($losbytes, $opcion, $decimal)
+{
+    $eltipo = "GB";
+    $result = $losbytes / 1073741824;
+
+    if ($opcion == 0) {
+        $result = str_replace(".", ",", strval(round($result, $decimal)));
+        return $result;
+    } elseif ($opcion == 1) {
+        $result = str_replace(".", ",", strval(round($result, $decimal))) . " " . $eltipo;
         return $result;
     }
 }
@@ -71,13 +85,24 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $archivosize = test_input($_POST['action']);
 
         //CONVERTIR DATOS
-        $archivosizemb = converdatoscarpmine($archivosize, 0);
+        $archivosizemb = converdatoscarpmine($archivosize, 0, 0);
+        $archivosizegb = converdatoscarpmineGB($archivosize, 0, 2);
 
         //COMPROBAR SI LO QUE SE SUBE ES MAYOR AL UPLOAD PERMITIDO
         if ($elerror == 0) {
             if ($archivosizemb > $maxdeupload) {
                 $elerror = 1;
                 $retorno = "OUTUPLOAD";
+            }
+        }
+
+        //COMPROBAR SI LO QUE SE SUBE ES MAYOR AL LIMITE CARPETA MINECRAFT
+        if ($elerror == 0) {
+            if ($limitmine >= 1) {
+                if ($archivosizegb > $limitmine) {
+                    $elerror = 1;
+                    $retorno = "OUTLIMITE";
+                }
             }
         }
 
@@ -92,12 +117,25 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //OBTENER GIGAS CARPETA BACKUPS
             $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
             $getgigasmine = trim($getgigasmine);
-            $getgigasmine = converdatoscarpmine($getgigasmine, 0);
+            $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
             //MIRAR SI ES ILIMITADO
             if ($limitmine >= 1) {
+                //COMPROBAR SI EL ESPACIO OCUPADO ES MAYOR AL LIMITE CARPETA MINECRAFT
                 if ($getgigasmine > $limitmine) {
                     $retorno = "OUTGIGAS";
+                    $elerror = 1;
+                }
+            }
+        }
+
+        //COMPROVAR SI LO QUE SE SUBE ES MAYOR AL TAMAÑO RESTANTE DISPONIBLE
+        if ($elerror == 0) {
+            if ($limitmine >= 1) {
+                $laresta = str_replace(",", ".", $getgigasmine);
+                $espaciolibre = $limitmine - $laresta;
+                if ($archivosizegb > $espaciolibre) {
+                    $retorno = "NOFREESPACE";
                     $elerror = 1;
                 }
             }
