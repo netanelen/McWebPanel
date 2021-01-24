@@ -94,7 +94,7 @@ require_once("template/header.php");
                                                         </div>
 
                                                         <div class="mt-3">
-                                                            <button class="btn btn-primary" id="botonsubir" type="submit" value="Upload">Subir Archivo</button>
+                                                            <button class="btn btn-primary btn-block btn-lg" id="botonsubir" type="submit" value="Upload">Subir Archivo</button>
                                                             <img class="" src="img/loading.gif" id="gifloading" alt="loading" width="147" height="72">
 
                                                         </div>
