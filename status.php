@@ -76,12 +76,12 @@ function test_input($data)
                                     <!-- Page Heading -->
                                     <div class="py-1">
                                         <div class="container">
-                                            <h1 class="mb-4">Status</h1>
+                                            <h1 class="mb-4">Estado</h1>
                                             <div class="row">
 
-                                                <div class="col-md-8">
+                                                <div class="col-md-9">
                                                     <div class="card mb-4">
-                                                        <div class="card-header text-white bg-primary">Estadísticas</div>
+                                                        <div class="card-header text-white bg-primary negrita">Estadísticas</div>
                                                         <div class="card-body">
                                                             <img class="d-block float-left mr-2" src="img/cpu.png" alt="CPU">
                                                             <p class="lead" id="textocpu">Cpu:</p>
@@ -93,30 +93,30 @@ function test_input($data)
                                                         </div>
                                                     </div>
                                                     <div class="card">
-                                                        <div class="card-header text-white bg-info">Acciones Servidor</div>
-                                                        <div class="card-body">
+                                                        <div class="card-header text-white bg-info negrita">Acciones Servidor</div>
+                                                        <div class="card-body text-center">
 
                                                             <?php
 
                                                             $rectiposerv = CONFIGTIPOSERVER;
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusstarserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusstarserver'] == 1) {
-                                                                echo '<button class="btn btn-primary mx-1" id="binicio" name="binicio" value="binicio" type="button">Iniciar Servidor</button>';
+                                                                echo '<button class="btn btn-primary btn-lg mx-1 mt-1" id="binicio" name="binicio" value="binicio" type="button">Iniciar Servidor</button>';
                                                             }
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusrestartserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusrestartserver'] == 1) {
 
                                                                 if ($rectiposerv == "spigot" || $rectiposerv == "paper") {
-                                                                    echo '<button class="btn btn-warning mx-1" id="breiniciar" name="breiniciar" value="breiniciar" type="button">Reiniciar Servidor</button>';
+                                                                    echo '<button class="btn btn-warning btn-lg mx-1 mt-1" id="breiniciar" name="breiniciar" value="breiniciar" type="button">Reiniciar Servidor</button>';
                                                                 }
                                                             }
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatusstopserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatusstopserver'] == 1) {
-                                                                echo '<button class="btn btn-primary mx-1" id="bparar" name="bparar" value="bparar" type="button">Apagar Servidor</button>';
+                                                                echo '<button class="btn btn-primary btn-lg mx-1 mt-1" id="bparar" name="bparar" value="bparar" type="button">Apagar Servidor</button>';
                                                             }
 
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pstatuskillserver', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pstatuskillserver'] == 1) {
-                                                                echo '<button class="btn btn-danger mx-1" id="bkill" name="bkill" value="bkill" type="button">Matar Servidor</button>';
+                                                                echo '<button class="btn btn-danger btn-lg mx-1 mt-1" id="bkill" name="bkill" value="bkill" type="button">Matar Servidor</button>';
                                                             }
                                                             ?>
 
