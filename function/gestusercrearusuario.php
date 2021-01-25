@@ -276,6 +276,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['psystemconf'] = 1;
                 }
 
+                //COMPILAR SPIGOT
+                if (isset($_POST['pcompilarspigot'])) {
+                    $arrayobtenido[$elindice]['pcompilarspigot'] = 1;
+                }
+
                 //SUBIR SERVIDOR
                 if (isset($_POST['psubirservidor'])) {
                     $arrayobtenido[$elindice]['psubirservidor'] = 1;

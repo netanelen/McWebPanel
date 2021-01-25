@@ -336,6 +336,28 @@ require_once("template/header.php");
 
                                                                         <br>
 
+                                                                        <!-- COMPILAR SPIGOT -->
+                                                                        <div class="negrita card-header text-white bg-primary">Página Compilar Spigot</div>
+                                                                        <div class="card-body border">
+
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="pcompilarspigot" name="pcompilarspigot" type="checkbox" value="1" <?php
+                                                                                                                                                            if (array_key_exists('pcompilarspigot', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pcompilarspigot'] == 1) {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                }
+                                                                                                                                                            }
+                                                                                                                                                            ?>>
+                                                                                    <label class="negrita mr-2" for="pcompilarspigot">Acceder y Configurar</label>
+                                                                                </div>
+                                                                                <p>Permite acceder a la página y compilar el servidor spigot.</p>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <br>
+
                                                                         <!-- SUBIR SERVIDOR -->
                                                                         <div class="negrita card-header text-white bg-primary">Página Subir Servidor</div>
                                                                         <div class="card-body border">
