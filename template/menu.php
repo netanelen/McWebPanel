@@ -45,7 +45,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     <li class="nav-item menu-hover">
         <a class="nav-link" href="status.php">
             <img class="d-block float-left mr-2" src="img/menu/status.png" alt="status">
-            <h6 class="text-light">Status</h6>
+            <h6 class="text-light">Estado</h6>
         </a>
     </li>
 
