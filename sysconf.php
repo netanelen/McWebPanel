@@ -112,6 +112,14 @@ require_once("template/header.php");
                                                     //OBTENER TIPO SERVIDOR WEB
                                                     $servidorweb = $_SERVER["SERVER_SOFTWARE"];
 
+                                                    if (substr($servidorweb, 0, 6) == "Apache") {
+                                                        $servidorweb = "Apache";
+                                                    } else if (substr($servidorweb, 0, 5) == "Nginx") {
+                                                        $servidorweb = "Nginx";
+                                                    } else {
+                                                        $servidorweb = "Otros";
+                                                    }
+
                                                     $elnombredirectorio = $reccarpmine;
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
