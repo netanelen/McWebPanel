@@ -103,18 +103,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           if (isset($_POST['opforceupgrade'])) {
             $elforseupgrade = test_input($_POST["opforceupgrade"]);
           } else {
-            $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
+            $elforseupgrade = 0;
           }
 
           if (isset($_POST['operasecache'])) {
             $elerasecache = test_input($_POST["operasecache"]);
           } else {
-            $elerasecache = CONFIGOPTIONERASECACHE;
+            $elerasecache = 0;
           }
         } else {
           $elgarbagecolector = CONFIGOPTIONGARBAGE;
-          $elforseupgrade = CONFIGOPTIONFORCEUPGRADE;
-          $elerasecache = CONFIGOPTIONERASECACHE;
+          $elforseupgrade = 0;
+          $elerasecache = 0;
         }
 
         //SELECTOR JAVA
