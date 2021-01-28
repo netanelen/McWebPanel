@@ -169,6 +169,7 @@ $(function() {
 
                     document.getElementById("textocpu").innerHTML = "Cpu:";
                     document.getElementById("textoram").innerHTML = "Ram:";
+                    document.getElementById("eluptime").innerHTML = "Uptime:"
 
                 } else if (data.encendido == "Encendido") {
 
@@ -178,6 +179,8 @@ $(function() {
                         document.getElementById("textoram").innerHTML = "Ram: " + String(data.memoria) + " / Total: " + String(data.ramconfig) + " GB";
 
                     }
+
+                    document.getElementById("eluptime").innerHTML = "Uptime: " + String(data.uptime);
 
                     if (document.getElementById('binicio') !== null) {
                         document.getElementById("binicio").disabled = true;

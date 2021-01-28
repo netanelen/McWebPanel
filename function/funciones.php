@@ -85,6 +85,38 @@ function getdistroinfo()
 	return $vars;
 }
 
+function secondsToTime($inputSeconds)
+{
+
+	$secondsInAMinute = 60;
+	$secondsInAnHour  = 60 * $secondsInAMinute;
+	$secondsInADay    = 24 * $secondsInAnHour;
+
+	//EXTRAER DIAS
+	$days = floor($inputSeconds / $secondsInADay);
+
+	//EXTRAER HORAS
+	$hourSeconds = $inputSeconds % $secondsInADay;
+	$hours = floor($hourSeconds / $secondsInAnHour);
+
+	//EXTRAER MINUTOS
+	$minuteSeconds = $hourSeconds % $secondsInAnHour;
+	$minutes = floor($minuteSeconds / $secondsInAMinute);
+
+	//EXTRAER SEGUNDOS
+	$remainingSeconds = $minuteSeconds % $secondsInAMinute;
+	$seconds = ceil($remainingSeconds);
+
+	// return the final array
+	$obj = array(
+		'd' => (int) $days,
+		'h' => (int) $hours,
+		'm' => (int) $minutes,
+		's' => (int) $seconds,
+	);
+	return $obj;
+}
+
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 	$_SESSION['VALIDADO'] = "NO";
@@ -104,6 +136,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 		$laramconfig = "";
 		$tipserver = "";
 		$lahora = date("H:i:s");
+		$eluptime = "";
 
 		//OBTENER PID SABER SI ESTA EN EJECUCION
 		$elcomando = "";
@@ -127,34 +160,38 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 			$lacpu = strval($lacpu);
 			$lacpu = trim($lacpu);
 
-			//OBTENER MEMORIA USADA
+			//OBTENER QUIEN EJECUTA
 			$tipserver = trim(exec('whoami'));
 
-			if ($iddistro == "debian") {
-				$elcomando = "ps aux --sort -rss | grep '" . $tipserver . "' | grep sl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
-			} elseif ($iddistro == "ubuntu") {
-				$elcomando = "ps aux --sort -rss | grep '" . $tipserver . "' | grep Ssl+ | grep '" . $elnombrescreen . "' | awk '{print $6}'";
-			}
-			$elpid = shell_exec($elcomando);
-			$laram = $elpid;
+			//OBTENER PID
+			$elpid = "ps au | grep '" . $tipserver . "' | grep '" . $elnombrescreen . "' | awk '{print $2}'";
+			$elpid = shell_exec($elpid);
+			$elpid = trim($elpid);
 
-			if ($iddistro == "debian") {
-				$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
-			} elseif ($iddistro == "ubuntu") {
-				$laram = trim(substr($elpid, 0, (strlen($elpid) - 4)));
-			}
+			//OBTENER RAM
+			$laram = "ps au | grep '" . $tipserver . "' | grep '" . $elnombrescreen . "' | awk '{print $6}'";
+			$laram = shell_exec($laram);
+			$laram = trim($laram);
 
+			//CONVERTIR RAM EN GB
 			if (is_numeric($laram)) {
 				$laram = devolverdatos($laram, 1);
 			} else {
 				$laram = "";
 			}
 
+			//OBTENER UPTIME
+			$uptime = "ps -p " . $elpid . " -o etimes=";
+			$uptime = shell_exec($uptime);
+			$uptime = trim($uptime);
+			$uptimearray = secondsToTime($uptime);
+			$eluptime = $uptimearray['d'] . " Dias  " . $uptimearray['h'] . " Horas  " . $uptimearray['m'] . " Minutos  " . $uptimearray['s'] . " Segundos";
+
 			//OBTENER MEMORIA TOTAL CONFIGURADA
 			$laramconfig = CONFIGRAM;
 		}
 
-		$elarray = array("cpu" => $lacpu, "memoria" => $laram, "ramconfig" => $laramconfig, "encendido" => $valor3, "hora" => $lahora);
+		$elarray = array("cpu" => $lacpu, "memoria" => $laram, "ramconfig" => $laramconfig, "encendido" => $valor3, "hora" => $lahora, "uptime" => $eluptime);
 		echo json_encode($elarray);
 	}
 }
