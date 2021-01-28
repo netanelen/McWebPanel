@@ -46,7 +46,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $retorno = "";
             $elerror = 0;
 
-            //OBTENER PID SABER SI ESTA EN EJECUCION
+            //OBTENER PID SABER SI SCREEN ESTA EN EJECUCION
             $elcomando = "";
             $elnombrescreen = CONFIGDIRECTORIO;
             $elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
@@ -54,8 +54,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //SI ESTA EN EJECUCION ENVIAR COMANDO MATAR SESSION
             if (!$elpid == "") {
-                $laejecucion = 'screen -S ' . $elnombrescreen . ' -X kill';
-                shell_exec($laejecucion);
+
+                //OBTENER PID JAVA
+                $tipserver = trim(exec('whoami'));
+                $elpid = "ps au | grep '" . $tipserver . "' | grep '" . $elnombrescreen . "' | awk '{print $2}'";
+                $elpid = shell_exec($elpid);
+                $elpid = trim($elpid);
+
+                //FORZAR SIGKILL
+                $elcomando = "kill -9 " . $elpid;
+                $elcomando = trim($elcomando);
+                shell_exec($elcomando);
+
                 $retorno = "ok";
             }
             echo $retorno;
