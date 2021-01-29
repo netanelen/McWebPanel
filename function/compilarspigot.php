@@ -244,7 +244,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             fwrite($file, "export XDG_CONFIG_HOME=" . $carpcompilar . "/.config" . PHP_EOL);
             fwrite($file, "export M2_HOME=" . $carpcompilar . "/.m2" . PHP_EOL);
             fwrite($file, "git config --global --unset core.autocrlf" . PHP_EOL);
-            fwrite($file, $javaruta . " -Xmx1024M -jar BuildTools.jar --rev " . $version . PHP_EOL);
+            fwrite($file, $javaruta . " -Xmx1024M -jar " . $carpcompilar . "/BuildTools.jar --rev " . $version . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . ".jar spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . "-" . $t . ".jar " . $elnombredirectorio . "spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fclose($file);
@@ -289,6 +289,35 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $retorno = "OFF";
           } else {
             $retorno = "ON";
+          }
+        } elseif ($laaction == "matarcompilar") {
+
+          //SABER SI ESTA EN EJECUCION
+          $elcomando = "";
+          $nombresession = str_replace("/", "", $carpcompilar);
+          $elcomando = "screen -ls | awk '/\." . $nombresession . "\t/ {print strtonum($1)'}";
+          $elpid = shell_exec($elcomando);
+
+          if ($elpid == "") {
+            $retorno = "OFF";
+          } else {
+
+            //OBTENER PID COMPILADOR BUILDTOOLS
+            $tipserver = trim(exec('whoami'));
+            $elpid = "ps au | grep '" . $tipserver . "' | grep '" . $carpcompilar . "/BuildTools.jar' | awk '{print $2}'";
+            $elpid = shell_exec($elpid);
+            $elpid = trim($elpid);
+
+            //COMPROVAR QUE SEA NUMERICO
+            if (is_numeric($elpid)) {
+              $elcomando = "kill -9 " . $elpid;
+              $elcomando = trim($elcomando);
+              shell_exec($elcomando);
+              $retorno = "OK";
+            }else{
+              $retorno = "OFF";
+            }
+
           }
         }
       }

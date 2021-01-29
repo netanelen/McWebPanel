@@ -43,6 +43,8 @@ function test_input($data)
 
     $expulsar = 0;
 
+    $totver = 0;
+
     //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
     if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
         $_SESSION['VALIDADO'] = "NO";
@@ -71,6 +73,7 @@ function test_input($data)
         $context = stream_context_create(
             array(
                 "http" => array(
+                    "timeout" => 10,
                     "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
                 )
             )
@@ -119,8 +122,6 @@ function test_input($data)
 
             $elarray = explode(" ", $contenido);
 
-            $totver = 0;
-
             for ($i = 0; $i < count($elarray); $i++) {
 
                 $test = substr_count($elarray[$i], "R0.1-SNAPSHOT");
@@ -146,7 +147,7 @@ function test_input($data)
 
             if ($totver > 0) {
                 $versiones = array_reverse($versiones);
-            }else{
+            } else {
                 $versiones[] = "ERROR";
             }
         }
@@ -229,9 +230,9 @@ function test_input($data)
                                                             }
 
                                                             if ($elerror == 0) {
-                                                                if($totver == 0){
-                                                                $retorno = "ERROR AL OBTENER PAGINA SPIGOT";
-                                                                $elerror = 1;
+                                                                if ($totver == 0) {
+                                                                    $retorno = "No se pudo obtener las versiones de la pagina de Spigot<br>Carcaga lista versiones interna";
+                                                                    echo '<p>Error: ' . $retorno . '</p>';
                                                                 }
                                                             }
 
@@ -239,6 +240,7 @@ function test_input($data)
                                                             ?>
                                                                 <p>Se compilara usando JAVA: <?php echo exec($javaruta . " -version 2>&1 | head -n 1 | awk '{ print $1 $3 }'"); ?></p>
                                                                 <button class="btn btn-primary btn-block mt-2" id="compilar" name="compilar">Compilar</button>
+                                                                <button class="btn btn-danger btn-block mt-2" id="killcompilar" name="killcompilar">Matar Compilar</button>
                                                             <?php
                                                             } else {
                                                                 echo '<p>Error: ' . $retorno . '</p>';

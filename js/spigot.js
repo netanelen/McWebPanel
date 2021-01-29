@@ -22,6 +22,10 @@ $(function() {
         document.getElementById("compilar").disabled = true;
     }
 
+    if (document.getElementById('killcompilar') !== null) {
+        document.getElementById("killcompilar").disabled = true;
+    }
+
     if (document.getElementById('gifloading') !== null) {
         document.getElementById("gifloading").style.visibility = "hidden";
     }
@@ -61,6 +65,23 @@ $(function() {
         });
     }
 
+    if (document.getElementById('killcompilar') !== null) {
+
+        $("#killcompilar").click(function() {
+            $.ajax({
+                url: 'function/compilarspigot.php',
+                data: {
+                    action: 'matarcompilar'
+                },
+                type: 'POST',
+                success: function(data) {
+
+                }
+            });
+        });
+
+    }
+
     function myTimer() {
 
         $.ajax({
@@ -94,6 +115,10 @@ $(function() {
                         document.getElementById("compilar").disabled = true;
                     }
 
+                    if (document.getElementById('killcompilar') !== null) {
+                        document.getElementById("killcompilar").disabled = false;
+                    }
+
                     if (document.getElementById('gifloading') !== null) {
                         document.getElementById("gifloading").style.visibility = "visible";
                     }
@@ -101,6 +126,10 @@ $(function() {
 
                     if (document.getElementById('compilar') !== null) {
                         document.getElementById("compilar").disabled = false;
+                    }
+
+                    if (document.getElementById('killcompilar') !== null) {
+                        document.getElementById("killcompilar").disabled = true;
                     }
 
                     if (document.getElementById('gifloading') !== null) {
