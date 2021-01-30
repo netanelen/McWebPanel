@@ -203,6 +203,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 if (!$oky) {
 
+                    //SEGURIDAD
+                    $permcomando = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
+                    exec($permcomando);
+
                     //PERFMISOS FTP
                     $permcomando = "cd '" . $lacarpeta . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
                     exec($permcomando);
