@@ -208,7 +208,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             if ($totalramsys >= 1) {
               //COMPRUEBA QUE HAYA AL MENOS 1GB DE MEMORIA DISPONIBLE
-              if ($getramavaliable < 1) {
+              if ($getramavaliable < 2) {
                 $elerror = 1;
                 $retorno = "ramavaiableout";
               }
@@ -244,7 +244,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             fwrite($file, "export XDG_CONFIG_HOME=" . $carpcompilar . "/.config" . PHP_EOL);
             fwrite($file, "export M2_HOME=" . $carpcompilar . "/.m2" . PHP_EOL);
             fwrite($file, "git config --global --unset core.autocrlf" . PHP_EOL);
-            fwrite($file, $javaruta . " -Xmx1024M -jar " . $carpcompilar . "/BuildTools.jar --rev " . $version . PHP_EOL);
+            fwrite($file, $javaruta . " -Xmx2048M -jar " . $carpcompilar . "/BuildTools.jar --rev " . $version . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . ".jar spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fwrite($file, "mv spigot-" . $version . "-" . $t . ".jar " . $elnombredirectorio . "spigot-" . $version . "-" . $t . ".jar" . PHP_EOL);
             fclose($file);
