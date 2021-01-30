@@ -64,7 +64,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //EVITAR CIERTAS EXTENSIONES
             if ($elerror == 0) {
 
-                $verificar = array('phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'exe', 'pl', 'asp', 'aspx', 'shtml', 'shtm', 'fcgi', 'fpl', 'jsp', 'htm', 'html', 'wml', 'js', 'xhtml', 'xht', 'asa', 'cer', 'asax', 'swf', 'xap', 'css', 'sh', 'ksh', 'bash', 'zsh', 'py', 'pdf');
+                $verificar = array('phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'exe', 'pl', 'asp', 'aspx', 'shtml', 'shtm', 'fcgi', 'fpl', 'jsp', 'htm', 'html', 'wml', 'js', 'xhtml', 'xht', 'asa', 'cer', 'asax', 'swf', 'xap', 'css', 'sh', 'ksh', 'bash', 'zsh', 'py', 'pdf', 'htaccess');
 
                 for ($i = 0; $i < count($verificar); $i++) {
 
