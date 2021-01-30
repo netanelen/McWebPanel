@@ -257,7 +257,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $nombresession = str_replace("/", "", $carpcompilar);
 
             //INICIAR SCREEN
-            $comando = "cd " . $carpcompilar . " && umask 002 && screen -Logfile sacado.txt -dmS '" . $nombresession . "' sh compilar.sh";
+            $comando = "cd " . $carpcompilar . " && umask 002 && screen -dmS '" . $nombresession . "' sh compilar.sh";
             shell_exec($comando);
 
             $retorno = "OK";
