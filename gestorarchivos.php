@@ -195,6 +195,8 @@ function devolverdatos($losbytes, $opcion)
                                                     $rutahta = $_SESSION['RUTALIMITE'] . "/.htaccess";
                                                     $file = fopen($rutahta, "w");
                                                     fwrite($file, "deny from all" . PHP_EOL);
+                                                    fwrite($file, "php_flag engine off" . PHP_EOL);
+                                                    fwrite($file, "AllowOverride None" . PHP_EOL);
                                                     fclose($file);
 
                                                     //SEPARAR RUTA EN ARRAY
@@ -536,10 +538,10 @@ function devolverdatos($losbytes, $opcion)
                                                                         </td>
                                                                         <td>
                                                                             <p class="lead negrita">Total: <?php if ($recsizemine == 0) {
-                                                                                                        echo ("Ilimitado");
-                                                                                                    } else {
-                                                                                                        echo ($recsizemine . " GB");
-                                                                                                    } ?></p>
+                                                                                                                echo ("Ilimitado");
+                                                                                                            } else {
+                                                                                                                echo ($recsizemine . " GB");
+                                                                                                            } ?></p>
                                                                         </td>
                                                                         <td>
                                                                             <p class="lead"></p>
