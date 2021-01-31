@@ -108,8 +108,7 @@ $(function() {
                             document.getElementById("gifloading").style.visibility = "hidden";
 
                             if (data == "1") {
-                                document.getElementById(guardanombre).closest("tr").remove();
-                                document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Archivo borrado correctamente.</div>";
+                                location.reload();
                             } else if (data == "nowritable") {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay permisos de escritura.</div>";
                             } else if (data == "noexiste") {
