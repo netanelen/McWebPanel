@@ -83,14 +83,19 @@ require_once("template/header.php");
                                             <h1 class="mb-5">Gestor Usuarios</h1>
                                             <div class="row">
                                                 <div class="col-md-12">
-
-                                                    <div class="col-md-4">
+                                                    <div class="row">
                                                         <?php
                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1) {
-                                                            echo '<button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearadmin">Crear Administrador</button>';
+                                                        ?>
+                                                            <div class="col-md-6">
+                                                                <button type="button" class="btn btn-primary btn-block btn-lg text-white" id="crearadmin">Crear Administrador</button>
+                                                            </div>
+                                                        <?php
                                                         }
                                                         ?>
-                                                        <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearuser">Crear Nuevo Usuario</button>
+                                                        <div class="col-md-6">
+                                                            <button type="button" class="btn btn-primary btn-block btn-lg text-white" id="crearuser">Crear Nuevo Usuario</button>
+                                                        </div>
                                                     </div>
 
                                                     <?php
