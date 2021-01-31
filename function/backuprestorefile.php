@@ -156,10 +156,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $permcomando = "chmod 775 '" . $dirmine . "'";
                 exec($permcomando);
 
-                //GUARDAR FICHERO .htaccess
+                //GUARDAR FICHERO .htaccess EN MINECRAFT
                 $diraccess = $dirmine . "/.htaccess";
                 $fileht = fopen($diraccess, "w");
                 fwrite($fileht, "deny from all" . PHP_EOL);
+                fwrite($file, "php_flag engine off" . PHP_EOL);
+                fwrite($file, "AllowOverride None" . PHP_EOL);
                 fclose($fileht);
 
                 //DESCOMPRIMIR TAR
@@ -168,6 +170,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 $elcomando = "tar -xzvf " . $dirbackups . $archivo . " -C " . $dirmine;
                 exec($elcomando, $out, $oky);
+
+                //GUARDAR FICHERO .htaccess EN MINECRAFT
+                $diraccess = $dirmine . "/.htaccess";
+                $fileht = fopen($diraccess, "w");
+                fwrite($fileht, "deny from all" . PHP_EOL);
+                fwrite($file, "php_flag engine off" . PHP_EOL);
+                fwrite($file, "AllowOverride None" . PHP_EOL);
+                fclose($fileht);
 
                 if (!$oky) {
 

@@ -149,15 +149,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //CREAR .htaccess
-            if ($elerror == 0) {
-                $rutaescrivir = $rutacarpetamine;
-                $rutaescrivir .= "/.htaccess";
-                $file = fopen($rutaescrivir, "w");
-                fwrite($file, "deny from all" . PHP_EOL);
-                fclose($file);
-            }
-
             //COMPROVAR SI EXISTE EL ARCHIVO A SUBIR EN LA CARPETA MINECRAFT
             if ($elerror == 0) {
                 $rutacarpetamine .= "/" . $_FILES['uploadedFile']['name'];

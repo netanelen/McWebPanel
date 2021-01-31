@@ -248,6 +248,8 @@ require_once("../template/errorreport.php");
 
         $file = fopen($rutaescrivir, "w");
         fwrite($file, "deny from all" . PHP_EOL);
+        fwrite($file, "php_flag engine off" . PHP_EOL);
+        fwrite($file, "AllowOverride None" . PHP_EOL);
         fclose($file);
 
         //GUARDAR FICHERO CONFUSER.JSON
