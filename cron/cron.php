@@ -120,10 +120,12 @@ if ($elerror == 0) {
                                                                 $dirconfig = trim($dirconfig);
                                                                 $dirconfig .= "/" . $elnombrescreen;
 
+                                                                /*
                                                                 $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
                                                                 exec($permcomando);
                                                                 $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
                                                                 exec($permcomando);
+                                                                */
 
                                                                 //PROTECCION SH
                                                                 $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
@@ -591,10 +593,12 @@ if ($elerror == 0) {
                                                                     $dirconfig = trim($dirconfig);
                                                                     $dirconfig .= "/" . $elnombrescreen;
 
+                                                                    /*
                                                                     $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
                                                                     exec($permcomando);
                                                                     $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
                                                                     exec($permcomando);
+                                                                    */
 
                                                                     //PROTECCION SH
                                                                     $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
