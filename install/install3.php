@@ -107,6 +107,12 @@ require_once("../template/errorreport.php");
         $dirbackups = trim($dirbackups);
         $dirbackups .= "/backups";
 
+        //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA TEMP
+        $dirtemp = "";
+        $dirtemp = dirname(getcwd()) . PHP_EOL;
+        $dirtemp = trim($dirtemp);
+        $dirtemp .= "/temp";
+
         //OBTENER RUTA DONDE TIENE QUE ESTAR LA CARPETA CONFIG
         $dirinstall = "";
         $dirinstall = dirname(getcwd()) . PHP_EOL;
@@ -171,6 +177,12 @@ require_once("../template/errorreport.php");
             mkdir($dirbackups, 0700);
         }
 
+        //CREAR CARPETA TEMP
+        clearstatcache();
+        if (!file_exists($dirtemp)) {
+            mkdir($dirtemp, 0700);
+        }
+
         //CREAR CARPETA SERVER MINECRAFT
         clearstatcache();
         if (!file_exists($dircarpserver)) {
@@ -228,6 +240,14 @@ require_once("../template/errorreport.php");
 
         //GUARDAR FICHERO .htaccess EN BACKUPS
         $rutaescrivir = $dirbackups;
+        $rutaescrivir .= "/.htaccess";
+
+        $file = fopen($rutaescrivir, "w");
+        fwrite($file, "deny from all" . PHP_EOL);
+        fclose($file);
+
+        //GUARDAR FICHERO .htaccess EN TEMP
+        $rutaescrivir = $dirtemp;
         $rutaescrivir .= "/.htaccess";
 
         $file = fopen($rutaescrivir, "w");
