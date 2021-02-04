@@ -1,0 +1,101 @@
+<?php
+
+/*
+This file is part of McWebPanel.
+Copyright (C) 2020 Cristina Ibañez, Konata400
+
+    McWebPanel is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    McWebPanel is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+require_once("../template/session.php");
+require_once("../template/errorreport.php");
+require_once("../config/confopciones.php");
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+function converdatoscarpbackup($losbytes, $opcion)
+{
+    $eltipo = "GB";
+    $result = $losbytes / 1048576;
+
+    if ($opcion == 0) {
+        $result = str_replace(".", ",", strval(round($result, 2)));
+        return $result;
+    } elseif ($opcion == 1) {
+        $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+        return $result;
+    }
+}
+
+//COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
+if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
+    $_SESSION['VALIDADO'] = "NO";
+    $_SESSION['KEYSECRETA'] = "0";
+}
+
+//VALIDAMOS SESSION
+if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
+
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackupscrear', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackupscrear'] == 1) {
+
+        if (isset($_POST['action']) && !empty($_POST['action'])) {
+
+            if (!isset($_SESSION['BACKUPSTATUS'])) {
+                $_SESSION['BACKUPSTATUS'] = 0;
+            }
+
+            $retorno = "";
+            $reccarpmine = CONFIGDIRECTORIO;
+            $elerror = 0;
+            $test = 0;
+
+            $archivo = test_input($_POST['action']);
+            $archivo = trim($archivo);
+
+            //OBTENER RUTA RAIZ
+            $dirraiz = dirname(getcwd()) . PHP_EOL;
+            $dirraiz = trim($dirraiz);
+
+            //OBTENER IDENFIFICADOR SCREEN
+            $nombrescreen = $dirraiz . "/losbackups";
+            $nombrescreen = str_replace("/", "", $nombrescreen);
+
+            //VER SI HAY UN PROCESO YA EN BACKUP
+            $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+            $elpid = shell_exec($elcomando);
+
+
+            //SELECTOR TIPO PROCESO
+            if ($archivo == "estadobackup") {
+                if ($elpid != "") {
+                    $retorno = "ON";
+                } else {
+                    if ($_SESSION['BACKUPSTATUS'] == 1) {
+                        $retorno = "REFRESH";
+                        $_SESSION['BACKUPSTATUS'] = 0;
+                    } else {
+                        $retorno = "OFF";
+                    }
+                }
+            }
+        }
+        echo $retorno;
+    }
+}

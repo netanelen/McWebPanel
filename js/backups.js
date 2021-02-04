@@ -22,6 +22,10 @@ $(function() {
         document.getElementById("crearbackup").disabled = true;
     }
 
+    if (document.getElementById('inputbackup') !== null) {
+        document.getElementById("inputbackup").disabled = true;
+    }
+
     if (document.getElementById('gifloading') !== null) {
         document.getElementById("gifloading").style.visibility = "hidden";
     }
@@ -137,7 +141,6 @@ $(function() {
 
     if (document.getElementById('crearbackup') !== null) {
         $("#crearbackup").click(function() {
-            document.getElementById("gifloading").style.visibility = "visible";
             var eltexto = document.getElementById("inputbackup").value;
             $.ajax({
                 type: "POST",
@@ -147,14 +150,10 @@ $(function() {
                 },
                 success: function(data) {
 
-                    document.getElementById("gifloading").style.visibility = "hidden";
-
-                    if (data == "okbackup") {
-                        location.reload();
-                    } else if (data == "nobackup") {
+                    if (data == "nobackup") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al crear el backup.</div>";
                     } else if (data == "nowritable") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta no tiene permisos de escritura.</div>";
+                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no tiene permisos de escritura.</div>";
                     } else if (data == "noexiste") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no existe.</div>";
                     } else if (data == "nolectura") {
@@ -165,13 +164,57 @@ $(function() {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
                     } else if (data == "limitgbexceeded") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado el límite de GB para Backups.</div>";
+                    } else if (data == "backenejecucion") {
+                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Ya hay un backup en ejecución.</div>";
+                    } else if (data == "notempexiste") {
+                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no existe.</div>";
+                    } else if (data == "notempwritable") {
+                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no tiene permisos de escritura.</div>";
                     }
                 }
             });
         });
     }
 
+
+
     function sessionTimer() {
+
+        $.ajax({
+            url: 'function/backupstate.php',
+            data: {
+                action: 'estadobackup'
+            },
+            type: 'POST',
+            success: function(data) {
+
+                if (data == "ON") {
+
+                    if (document.getElementById('crearbackup') !== null) {
+                        document.getElementById("crearbackup").disabled = true;
+                    }
+
+                    if (document.getElementById('inputbackup') !== null) {
+                        document.getElementById("inputbackup").disabled = true;
+                    }
+
+                    if (document.getElementById('gifloading') !== null) {
+                        document.getElementById("gifloading").style.visibility = "visible";
+                    }
+                } else if (data == "OFF") {
+
+                    if (document.getElementById('inputbackup') !== null) {
+                        document.getElementById("inputbackup").disabled = false;
+                    }
+
+                    if (document.getElementById('gifloading') !== null) {
+                        document.getElementById("gifloading").style.visibility = "hidden";
+                    }
+                } else if (data == "REFRESH") {
+                    location.reload();
+                }
+            }
+        });
 
         $.ajax({
             url: 'function/salirsession.php',

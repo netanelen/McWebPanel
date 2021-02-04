@@ -64,9 +64,53 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $archivo = test_input($_POST['action']);
 
+            //OBTENER RUTA RAIZ
+            $dirraiz = dirname(getcwd()) . PHP_EOL;
+            $dirraiz = trim($dirraiz);
+
+            //OBTENER RUTA CARPETA BACKUP
+            $dirbackups = "";
+            $dirbackups = dirname(getcwd()) . PHP_EOL;
+            $dirbackups = trim($dirbackups);
+            $dirbackups .= "/backups";
+
+            //OBTENER RUTA CARPETA MINECRAFT
+            $dirminecraft = "";
+            $dirminecraft = dirname(getcwd()) . PHP_EOL;
+            $dirminecraft = trim($dirminecraft);
+            $dirminecraft .= "/" . $reccarpmine;
+
+            //OBTENER RUTA TEMP
+            $dirtemp = "";
+            $dirtemp = dirname(getcwd()) . PHP_EOL;
+            $dirtemp = trim($dirtemp);
+            $dirtemp .= "/temp";
+
+            //OBTENER RUTA SH TEMP
+            $dirsh = "";
+            $dirsh = $dirtemp;
+            $dirsh .= "/backup.sh";
+
+            //OBTENER IDENFIFICADOR SCREEN
+            $nombrescreen = $dirraiz . "/losbackups";
+            $nombrescreen = str_replace("/", "", $nombrescreen);
+
+            //VER SI HAY UN PROCESO YA EN BACKUP
+            if ($elerror == 0) {
+                $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "backenejecucion";
+                    $elerror = 1;
+                }
+            }
+
             //Evitar poder ir a una ruta hacia atras
-            if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
-                exit;
+            if ($elerror == 0) {
+                if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
+                    exit;
+                }
             }
 
             if ($elerror == 0) {
@@ -84,15 +128,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            $dirconfig = "";
-            $dirconfig = dirname(getcwd()) . PHP_EOL;
-            $dirconfig = trim($dirconfig);
-            $dirconfig .= "/backups";
-
             //LIMITE ALMACENAMIENTO
             if ($elerror == 0) {
                 //OBTENER GIGAS CARPETA BACKUPS
-                $getgigasbackup = shell_exec("du -s " . $dirconfig . " | awk '{ print $1 }' ");
+                $getgigasbackup = shell_exec("du -s " . $dirbackups . " | awk '{ print $1 }' ");
                 $getgigasbackup = trim($getgigasbackup);
                 $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0);
 
@@ -108,44 +147,88 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //MIRAR SI CARPETA BACKUPS EXISTE
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!file_exists($dirbackups)) {
+                    $retorno = "noexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA BACKUPS SE PUEDE ESCRIVIR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_writable($dirbackups)) {
+                    $retorno = "nowritable";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI LA CARPETA TEMP EXISTE
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!file_exists($dirtemp)) {
+                    $retorno = "notempexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA TEMP SE PUEDE ESCRIVIR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_writable($dirtemp)) {
+                    $retorno = "notempwritable";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA MINECRAFT SE PUEDE LEER
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_readable($dirminecraft)) {
+                    $retorno = "nolectura";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA MINECRAF SE PUEDE EJECUTAR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_executable($dirminecraft)) {
+                    $retorno = "noejecutable";
+                    $elerror = 1;
+                }
+            }
 
             if ($elerror == 0) {
-                if (file_exists($dirconfig)) {
-                    //COMPROVAR SI SE PUEDE ESCRIVIR
-                    if (is_writable($dirconfig)) {
-                        $rutaarchivo = dirname(getcwd()) . PHP_EOL;
-                        $rutaarchivo = trim($rutaarchivo);
-                        $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
-                        if (is_readable($rutaminelimpia)) {
-                            $rutaarchivo .= "/" . $reccarpmine . "/ .";
-                            $dirconfig = $dirconfig . "/" . $archivo . "-";
-                            //$t = time();
-                            $t = date("Y-m-d-G:i:s");
-                            $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
-                            if (is_executable($rutaminelimpia)) {
-                                exec($elcomando, $out, $oky);
 
-                                if (!$oky) {
-                                    $retorno = "okbackup";
-                                } else {
-                                    $retorno = "nobackup";
-                                    //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
-                                    $borrarerror = $dirconfig . $t . ".tar.gz";
-                                    if (file_exists($borrarerror)) {
-                                        unlink($borrarerror);
-                                    }
-                                }
-                            } else {
-                                $retorno = "noejecutable";
-                            }
-                        } else {
-                            $retorno = "nolectura";
-                        }
-                    } else {
-                        $retorno = "nowritable";
-                    }
+                $t = date("Y-m-d-G:i:s");
+                $rutacrearbackup = $dirtemp . "/" . $archivo . "-" . $t;
+                $rutaacomprimir = $dirminecraft . "/ .";
+                $elcomando = "tar -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                $moverabackups = "mv '" . $archivo . "-" . $t . ".tar.gz' " . $dirbackups . "/'" . $archivo . "-" . $t . ".tar.gz'";
+                $delsh = "rm backup.sh";
+
+                $file = fopen($dirsh, "w");
+                fwrite($file, "#!/bin/bash" . PHP_EOL);
+                fwrite($file, $elcomando . PHP_EOL);
+                fwrite($file, $moverabackups . PHP_EOL);
+                fwrite($file, $delsh . PHP_EOL);
+                fclose($file);
+
+                //DAR PERMISOS AL SH
+                $comando = "cd " . $dirtemp . " && chmod +x backup.sh";
+                exec($comando, $out, $oky);
+
+                //INICIAR SCREEN
+                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS '" . $nombrescreen . "' sh backup.sh";
+                exec($comando, $out, $oky);
+
+                if (!$oky) {
+                    $_SESSION['BACKUPSTATUS'] = 1;
                 } else {
-                    $retorno = "noexiste";
+                    $retorno = "nobackup";
                 }
             }
         }

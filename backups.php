@@ -145,6 +145,25 @@ require_once("template/header.php");
                                                                 $rutaarchivo = trim($rutaarchivo);
                                                                 $rutaarchivo .= "/backups";
 
+
+                                                                //OBTENER RUTA RAIZ
+                                                                $dirraiz = getcwd() . PHP_EOL;
+                                                                $dirraiz = trim($dirraiz);
+
+                                                                //OBTENER IDENFIFICADOR SCREEN
+                                                                $nombrescreen = $dirraiz . "/losbackups";
+                                                                $nombrescreen = str_replace("/", "", $nombrescreen);
+
+                                                                //VER SI HAY UN PROCESO YA EN BACKUP
+                                                                $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+                                                                $elpid = shell_exec($elcomando);
+
+                                                                if ($elpid != "") {
+                                                                    $_SESSION['BACKUPSTATUS'] = 1;
+                                                                } else {
+                                                                    $_SESSION['BACKUPSTATUS'] = 0;
+                                                                }
+
                                                                 //COMPROVAR SI EXISTE CARPETA BACKUP
                                                                 if (!file_exists($rutaarchivo)) {
                                                                     echo "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta backup.</div>";
@@ -265,10 +284,10 @@ require_once("template/header.php");
                                                                         </td>
                                                                         <td>
                                                                             <p class="lead negrita">Total: <?php if ($recsizebackup == 0) {
-                                                                                                        echo ("Ilimitado");
-                                                                                                    } else {
-                                                                                                        echo ($recsizebackup . " GB");
-                                                                                                    } ?></p>
+                                                                                                                echo ("Ilimitado");
+                                                                                                            } else {
+                                                                                                                echo ($recsizebackup . " GB");
+                                                                                                            } ?></p>
                                                                         </td>
                                                                         <td>
                                                                             <p class="lead"></p>
