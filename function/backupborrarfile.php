@@ -44,36 +44,61 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $retorno = "";
             $verificarex = "";
+            $elerror = 0;
 
             $archivo = test_input($_POST['action']);
 
+            //OBTENER RUTA RAIZ
+            $dirraiz = dirname(getcwd()) . PHP_EOL;
+            $dirraiz = trim($dirraiz);
+
+            //VER SI HAY UN PROCESO YA EN RESTORE
+            if ($elerror == 0) {
+                $procesorestore = $dirraiz . "/restaurar";
+                $procesorestore = str_replace("/", "", $procesorestore);
+
+                $elcomando = "screen -ls | awk '/\." . $procesorestore . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "restoreenejecucion";
+                    $elerror = 1;
+                }
+            }
+
             //Evitar poder ir a una ruta hacia atras
-            if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
-                exit;
+            if ($elerror == 0) {
+                if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
+                    exit;
+                }
             }
 
             //VERIFICAR EXTENSION
-            $verificarex = substr($archivo, -7);
-            if ($verificarex != ".tar.gz") {
-                exit;
+            if ($elerror == 0) {
+                $verificarex = substr($archivo, -7);
+                if ($verificarex != ".tar.gz") {
+                    exit;
+                }
             }
 
-            $dirconfig = "";
-            $dirconfig = dirname(getcwd()) . PHP_EOL;
-            $dirconfig = trim($dirconfig);
-            $dirconfig .= "/backups";
+            if ($elerror == 0) {
+                //OBTENER RUTA CARPETA BACKUP
+                $dirconfig = "";
+                $dirconfig = dirname(getcwd()) . PHP_EOL;
+                $dirconfig = trim($dirconfig);
+                $dirconfig .= "/backups";
+                $dirconfig = $dirconfig . "/" . $archivo;
 
-            $dirconfig = $dirconfig . "/" . $archivo;
-
-            if (file_exists($dirconfig)) {
-                //COMPROVAR SI SE PUEDE ESCRIVIR
-                if (is_writable($dirconfig)) {
-                    $retorno = unlink($dirconfig);
+                if (file_exists($dirconfig)) {
+                    //COMPROVAR SI SE PUEDE ESCRIVIR
+                    if (is_writable($dirconfig)) {
+                        $retorno = unlink($dirconfig);
+                    } else {
+                        $retorno = "nowritable";
+                    }
                 } else {
-                    $retorno = "nowritable";
+                    $retorno = "noexiste";
                 }
-            } else {
-                $retorno = "noexiste";
             }
         }
         echo $retorno;

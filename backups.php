@@ -321,36 +321,46 @@ require_once("template/header.php");
                                                             </div>
                                                         </div>
                                                     <?php
-                                                    }
+                                                    } else {
                                                     ?>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <img class="" src="img/loading.gif" id="gifloading" alt="loading">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <p class="lead" id="textobackupretorno"></p>
+                                                            </div>
+                                                        <?php
+                                                    }
+                                                        ?>
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- /.container-fluid -->
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <!-- End of Footer -->
             </div>
-            <!-- End of Main Content -->
+            <!-- End of Content Wrapper -->
 
-            <!-- Footer -->
-            <!-- End of Footer -->
-        </div>
-        <!-- End of Content Wrapper -->
+            <script src="js/backups.js"></script>
 
-        <script src="js/backups.js"></script>
-
-    <?php
+        <?php
 
         //FINAL VALIDAR SESSION
     } else {
         header("location:index.php");
     }
-    ?>
+        ?>
 
 </body>
 

@@ -53,7 +53,7 @@ if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 //VALIDAMOS SESSION
 if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
-    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackupscrear', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackupscrear'] == 1) {
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pbackups', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pbackups'] == 1) {
 
         if (isset($_POST['action']) && !empty($_POST['action'])) {
 
@@ -77,14 +77,21 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $nombrescreen = $dirraiz . "/losbackups";
             $nombrescreen = str_replace("/", "", $nombrescreen);
 
+            $procesorestore = $dirraiz . "/restaurar";
+            $procesorestore = str_replace("/", "", $procesorestore);
+
             //VER SI HAY UN PROCESO YA EN BACKUP
             $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
             $elpid = shell_exec($elcomando);
 
+            //VER SI HAY UN PROCESO YA EN RESTAURAR
+            $elcomando = "screen -ls | awk '/\." . $procesorestore . "\t/ {print strtonum($1)'}";
+            $elpid2 = shell_exec($elcomando);
+
 
             //SELECTOR TIPO PROCESO
             if ($archivo == "estadobackup") {
-                if ($elpid != "") {
+                if ($elpid != "" || $elpid2 != "") {
                     $retorno = "ON";
                 } else {
                     if ($_SESSION['BACKUPSTATUS'] == 1) {

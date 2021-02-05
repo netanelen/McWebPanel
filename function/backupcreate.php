@@ -95,6 +95,20 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $nombrescreen = $dirraiz . "/losbackups";
             $nombrescreen = str_replace("/", "", $nombrescreen);
 
+            //VER SI HAY UN PROCESO YA EN RESTORE
+            if ($elerror == 0) {
+                $procesorestore = $dirraiz . "/restaurar";
+                $procesorestore = str_replace("/", "", $procesorestore);
+
+                $elcomando = "screen -ls | awk '/\." . $procesorestore . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "restoreenejecucion";
+                    $elerror = 1;
+                }
+            }
+
             //VER SI HAY UN PROCESO YA EN BACKUP
             if ($elerror == 0) {
                 $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
@@ -202,6 +216,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             if ($elerror == 0) {
+
+                $borrastart = $dirminecraft . "/start.sh";
+                clearstatcache();
+                if (file_exists($borrastart . "/start.sh")) {
+                    unlink($borrastart);
+                }
 
                 $t = date("Y-m-d-G:i:s");
                 $rutacrearbackup = $dirtemp . "/" . $archivo . "-" . $t;

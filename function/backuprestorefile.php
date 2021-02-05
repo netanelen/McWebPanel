@@ -43,28 +43,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-            function delete_directory($dirname)
-            {
-                if (is_dir($dirname))
-                    $dir_handle = opendir($dirname);
-                if (!$dir_handle)
-                    return false;
-                while ($file = readdir($dir_handle)) {
-                    if ($file != "." && $file != "..") {
-                        if (!is_dir($dirname . "/" . $file))
-                            unlink($dirname . "/" . $file);
-                        else
-                            delete_directory($dirname . '/' . $file);
-                    }
-                }
-                closedir($dir_handle);
-                rmdir($dirname);
-                return true;
-            }
-
             $retorno = "";
             $reccarpmine = CONFIGDIRECTORIO;
-            $loserrores = 0;
+            $elerror = 0;
             $verificarex = "";
 
             $permcomando = "";
@@ -72,133 +53,211 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $archivo = test_input($_POST['action']);
 
-            //Evitar poder ir a una ruta hacia atras
-            if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
-                exit;
-            }
-
-            //VERIFICAR EXTENSION
-            $verificarex = substr($archivo, -7);
-            if ($verificarex != ".tar.gz") {
-                exit;
-            }
-
+            //OBTENER RUTA RAIZ
             $rutaraiz = dirname(getcwd()) . PHP_EOL;
             $rutaraiz = trim($rutaraiz);
 
-            $dirmine = $rutaraiz . "/" . $reccarpmine;
+            //OBTENER RUTA CARPETA BACKUP
+            $dirbackups = "";
+            $dirbackups = dirname(getcwd()) . PHP_EOL;
+            $dirbackups = trim($dirbackups);
+            $dirbackups .= "/backups";
 
+            //OBTENER RUTA CARPETA MINECRAFT
+            $dirminecraft = "";
+            $dirminecraft = dirname(getcwd()) . PHP_EOL;
+            $dirminecraft = trim($dirminecraft);
+            $dirminecraft .= "/" . $reccarpmine;
+
+            //OBTENER RUTA TEMP
+            $dirtemp = "";
+            $dirtemp = dirname(getcwd()) . PHP_EOL;
+            $dirtemp = trim($dirtemp);
+            $dirtemp .= "/temp";
+
+            //OBTENER RUTA SH TEMP
+            $dirsh = "";
+            $dirsh = $dirtemp;
+            $dirsh .= "/restaurar.sh";
+
+            //OBTENER IDENFIFICADOR SCREEN
+            $nombrescreen = $rutaraiz . "/restaurar";
+            $nombrescreen = str_replace("/", "", $nombrescreen);
+
+            //OBTENER RUTA BACKUP COMPLETA
             $comproarchivo = $rutaraiz;
             $comproarchivo = $comproarchivo . "/backups/" . $archivo;
 
+            //VER SI ESTA EL SERVIDOR ENCENDIDO
+            if ($elerror == 0) {
+                $elcomando = "screen -ls | awk '/\." . $reccarpmine . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "servidorejecucion";
+                    $elerror = 1;
+                }
+            }
+
+            //VER SI HAY UN PROCESO YA EN BACKUP
+            if ($elerror == 0) {
+                $procesobackup = $rutaraiz . "/losbackups";
+                $procesobackup = str_replace("/", "", $procesobackup);
+
+                $elcomando = "screen -ls | awk '/\." . $procesobackup . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "backenejecucion";
+                    $elerror = 1;
+                }
+            }
+
+            //VER SI HAY UN PROCESO YA EN RESTAURAR
+            if ($elerror == 0) {
+                $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "restoreenejecucion";
+                    $elerror = 1;
+                }
+            }
+
+            //Evitar poder ir a una ruta hacia atras
+            if ($elerror == 0) {
+                if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
+                    exit;
+                }
+            }
+
+            //VERIFICAR EXTENSION
+            if ($elerror == 0) {
+                $verificarex = substr($archivo, -7);
+                if ($verificarex != ".tar.gz") {
+                    exit;
+                }
+            }
+
             //COMPROVAR SI LA RAIZ SE PUEDE ESCRIVIR
-            if ($loserrores == 0) {
+            if ($elerror == 0) {
                 clearstatcache();
                 if (!is_writable($rutaraiz)) {
                     $retorno = "nowriteraiz";
-                    $loserrores = 1;
+                    $elerror = 1;
                 }
             }
 
             //COMPROVAR SI EXISTE LA CARPETA SERVIDOR MINECRAFT
-            if ($loserrores == 0) {
+            if ($elerror == 0) {
                 clearstatcache();
-                if (!file_exists($dirmine)) {
+                if (!file_exists($dirminecraft)) {
                     $retorno = "nominexiste";
-                    $loserrores = 1;
+                    $elerror = 1;
                 }
             }
 
             //COMPROVAR SI SE PUEDE ESCRIBIR LA CARPETA SERVIDOR MINECRAFT
-            if ($loserrores == 0) {
+            if ($elerror == 0) {
                 clearstatcache();
-                if (!is_writable($dirmine)) {
+                if (!is_writable($dirminecraft)) {
                     $retorno = "minenowrite";
-                    $loserrores = 1;
+                    $elerror = 1;
                 }
             }
 
+            //MIRAR SI LA CARPETA TEMP EXISTE
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!file_exists($dirtemp)) {
+                    $retorno = "notempexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA TEMP SE PUEDE ESCRIVIR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_writable($dirtemp)) {
+                    $retorno = "notempwritable";
+                    $elerror = 1;
+                }
+            }
 
             //COMPROVAR SI EXISTE EL ARCHIVO TAR
-            if ($loserrores == 0) {
+            if ($elerror == 0) {
                 clearstatcache();
                 if (!file_exists($comproarchivo)) {
                     $retorno = "tarnoexiste";
-                    $loserrores = 1;
+                    $elerror = 1;
                 }
             }
 
             //COMPROVAR SI SE PUEDE ESCRIVIR EN ARCHIVO TAR
-            if ($loserrores == 0) {
+            if ($elerror == 0) {
                 clearstatcache();
                 if (!is_readable($comproarchivo)) {
                     $retorno = "tarnolectura";
-                    $loserrores = 1;
+                    $elerror = 1;
                 }
             }
-
-            //BORRAR CARPETA SERVIDOR MINECRAFT
-            if ($loserrores == 0) {
-                $compdel = delete_directory($dirmine);
-                if ($compdel != 1) {
-                    $loserrores = 1;
-                    $retorno = "noborrado";
-                }
-            }
-
 
             //PROCEDE A RESTAURAR
-            if ($loserrores == 0) {
+            if ($elerror == 0) {
+
+                //BORRAR CARPETA MINECRAFT
+                $permcomando = "rm -R '" . $dirminecraft . "'";
+                exec($permcomando);
+
                 //CREAR CARPETA
-                mkdir("$dirmine", 0700);
+                mkdir("$dirminecraft", 0700);
 
                 //PERFMISOS FTP
-                $permcomando = "chmod 775 '" . $dirmine . "'";
+                $permcomando = "chmod 775 '" . $dirminecraft . "'";
                 exec($permcomando);
 
                 //GUARDAR FICHERO .htaccess EN MINECRAFT
-                $diraccess = $dirmine . "/.htaccess";
-                $fileht = fopen($diraccess, "w");
-                fwrite($fileht, "deny from all" . PHP_EOL);
+                $diraccess = $dirminecraft . "/.htaccess";
+                $file = fopen($diraccess, "w");
+                fwrite($file, "deny from all" . PHP_EOL);
                 fwrite($file, "php_flag engine off" . PHP_EOL);
                 fwrite($file, "AllowOverride None" . PHP_EOL);
-                fclose($fileht);
+                fclose($file);
 
                 //DESCOMPRIMIR TAR
                 $dirbackups = $rutaraiz;
                 $dirbackups = $dirbackups . "/backups/";
 
-                $elcomando = "tar -xzvf " . $dirbackups . $archivo . " -C " . $dirmine;
-                exec($elcomando, $out, $oky);
+                $elcomando1 = "tar -xzvf " . $dirbackups . $archivo . " -C " . $dirminecraft;
+                $elcomando2 = "rm " . $diraccess;
+                $elcomando3 = "echo 'deny from all' >> " . $diraccess;
+                $elcomando4 = "echo 'php_flag engine off' >> " . $diraccess;
+                $elcomando5 = "echo 'AllowOverride None' >> " . $diraccess;
+                $elcomando6 = "chmod 644 " . $diraccess;
+                $delsh = "rm " . $dirsh;
 
-                //GUARDAR FICHERO .htaccess EN MINECRAFT
-                $diraccess = $dirmine . "/.htaccess";
-                $fileht = fopen($diraccess, "w");
-                fwrite($fileht, "deny from all" . PHP_EOL);
-                fwrite($file, "php_flag engine off" . PHP_EOL);
-                fwrite($file, "AllowOverride None" . PHP_EOL);
-                fclose($fileht);
+                $file = fopen($dirsh, "w");
+                fwrite($file, "#!/bin/bash" . PHP_EOL);
+                fwrite($file, $elcomando1 . PHP_EOL);
+                fwrite($file, $elcomando2 . PHP_EOL);
+                fwrite($file, $elcomando3 . PHP_EOL);
+                fwrite($file, $elcomando4 . PHP_EOL);
+                fwrite($file, $elcomando5 . PHP_EOL);
+                fwrite($file, $elcomando6 . PHP_EOL);
+                //fwrite($file, $delsh . PHP_EOL);
+                fclose($file);
+
+                //DAR PERMISOS AL SH
+                $comando = "cd " . $dirtemp . " && chmod +x restaurar.sh";
+                exec($comando);
+
+                //INICIAR SCREEN
+                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS '" . $nombrescreen . "' sh restaurar.sh";
+                exec($comando, $out, $oky);
 
                 if (!$oky) {
-
-                    //PERFMISOS FTP
-                    $dirconfig = dirname(getcwd()) . PHP_EOL;
-                    $dirconfig = trim($dirconfig);
-                    $dirconfig .= "/" . $reccarpmine;
-
-                    $permcomando = "cd '" . $dirconfig . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
-                    exec($permcomando);
-                    $permcomando = "cd '" . $dirconfig . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
-                    exec($permcomando);
-
-                    //PROTECCION SH
-                    $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                    clearstatcache();
-                    if (file_exists($dirconfig . "/start.sh")) {
-                        exec($permcomando);
-                    }
-                    
                     $retorno = "okrestore";
+                    $_SESSION['BACKUPSTATUS'] = 1;
                 } else {
                     $retorno = "norestore";
                 }

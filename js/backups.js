@@ -80,12 +80,18 @@ $(function() {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Error: El backup seleccionado no existe.</div>";
                             } else if (data == "tarnolectura") {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Error: El backup seleccionado no se puede leer.</div>";
-                            } else if (data == "noborrado") {
-                                document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Error: La carpeta del servidor minecraft no se pudo borrar.</div>";
-                            } else if (data == "okrestore") {
-                                document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor Minecraft restaurado correctamente.</div>";
                             } else if (data == "norestore") {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha podido restaurar el servidor.</div>";
+                            } else if (data == "notempexiste") {
+                                document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no existe.</div>";
+                            } else if (data == "notempwritable") {
+                                document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no tiene permisos de escritura.</div>";
+                            } else if (data == "restoreenejecucion") {
+                                document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Ya hay un restore en ejecución.</div>";
+                            } else if (data == "servidorejecucion") {
+                                document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El servidor está encendido.</div>";
+                            } else if (data == "backenejecucion") {
+                                document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Ya hay un restore en ejecución.</div>";
                             }
                         }
                     });
@@ -117,6 +123,8 @@ $(function() {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay permisos de escritura.</div>";
                             } else if (data == "noexiste") {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo no existe.</div>";
+                            } else if (data == "restoreenejecucion") {
+                                document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Hay un restore en ejecución.</div>";
                             }
                         }
                     });
