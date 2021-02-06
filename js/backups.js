@@ -59,7 +59,7 @@ $(function() {
             restaurarbuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\nAl Restaurar se borrarán todos los archivos del servidor minecraft.\n\n¿Seguro que quieres continuar?");
                 if (eleccion == true) {
-                    document.getElementById("gifloading").style.visibility = "visible";
+
                     $.ajax({
                         type: "POST",
                         url: "function/backuprestorefile.php",
@@ -67,8 +67,6 @@ $(function() {
                             action: this.value
                         },
                         success: function(data) {
-
-                            document.getElementById("gifloading").style.visibility = "hidden";
 
                             if (data == "nowriteraiz") {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta raíz no tiene permisos de escritura.</div>";
@@ -106,8 +104,7 @@ $(function() {
             borrarbuttons[i].addEventListener("click", function() {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el backup: " + this.value + " ?");
                 if (eleccion == true) {
-                    var guardanombre = this.value;
-                    document.getElementById("gifloading").style.visibility = "visible";
+
                     $.ajax({
                         type: "POST",
                         url: "function/backupborrarfile.php",
@@ -115,7 +112,6 @@ $(function() {
                             action: this.value
                         },
                         success: function(data) {
-                            document.getElementById("gifloading").style.visibility = "hidden";
 
                             if (data == "1") {
                                 location.reload();
