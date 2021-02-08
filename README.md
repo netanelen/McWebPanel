@@ -34,6 +34,7 @@ php-mbstring        (Libreria strings php)
 php-zip             (Libreria Zip php)
 php-cli             (Libreria cli php)
 php-json            (Librerua json php)
+zip                 (Info-ZIP)
 unzip               (De-archiver)
 gawk                (GNU awk)
 wget                (GNU Wget)
@@ -53,7 +54,7 @@ sudo apt upgrade
 Instalar Paquetes Requisitos (Ubuntu Server / Debian)
 
 ```
-sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli php-json gawk wget unzip 
+sudo apt install apache2 php libapache2-mod-php default-jdk screen php-mbstring php-zip php-cli php-json gawk wget zip unzip 
 ```
 
 Instalar Paquetes Requisitos (Debian)
