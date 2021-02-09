@@ -69,11 +69,16 @@ require_once("template/header.php");
                 while (($búfer = fgets($gestor, 4096)) !== false) {
                     $str = $búfer;
                     $array = explode("=", $str);
+                    $totalletras = strlen($str);
+                    $lakey = strlen($array[0]);
+                    $lakey++;
                     if ($array[0] == $eltipo) {
-                        if ($array[0] == 'motd') {
-                            return substr($str, 5);
-                        } else {
-                            return trim($array[1]);
+                        if($lakey < $totalletras){
+                            $elresul = substr($str,$lakey);
+                            return trim($elresul);
+                        }else{
+                            $vacio = "";
+                            return $vacio;
                         }
                     }
                 }
@@ -1983,7 +1988,7 @@ require_once("template/header.php");
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                <button id="restablecer" type="button" class="btn btn-block btn-lg btn-danger">Restablecer configuración por defecto</button>
+                                                    <button id="restablecer" type="button" class="btn btn-block btn-lg btn-danger">Restablecer configuración por defecto</button>
                                                 </div>
                                             </div>
                                         </div>

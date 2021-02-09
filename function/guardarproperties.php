@@ -60,10 +60,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           while (($búfer = fgets($gestor, 4096)) !== false) {
             $str = $búfer;
             $array = explode("=", $str);
+
             if ($array[0] == $lakey) {
-              if ($lakey != "motd") {
-                $elvalor = trim($elvalor);
-              }
               fwrite($file, $lakey . '=' . $elvalor . PHP_EOL);
             } else {
               fwrite($file, $búfer);
@@ -80,13 +78,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
       }
 
-      $elaction = test_input($_POST['action']);
+      $elaction = trim($_POST['action']);
+      $elresultado = trim($_POST['valor']);
 
-      if ($elaction == "motd") {
-        $elresultado = $_POST['valor'];
-      } else {
-        $elresultado = test_input($_POST['valor']);
-      }
       $retorno = escribir($elaction, $elresultado);
     }
 
