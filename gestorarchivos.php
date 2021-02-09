@@ -143,6 +143,10 @@ function devolverdatos($losbytes, $opcion)
                                                     $recarchivojar = CONFIGARCHIVOJAR;
                                                     $receulaminecraft = CONFIGEULAMINECRAFT;
 
+                                                    //OBTENER RUTA RAIZ
+                                                    $dirraiz = dirname(getcwd()) . PHP_EOL;
+                                                    $dirraiz = trim($dirraiz);
+
                                                     //OBTENER RUTA SERVIDOR MINECRAFT
                                                     $rutaarchivo = getcwd();
                                                     $rutaarchivo = trim($rutaarchivo);
@@ -155,6 +159,21 @@ function devolverdatos($losbytes, $opcion)
                                                         $_SESSION['COPIARFILES'] = "0";
                                                     } else {
                                                         $rutaarchivo = $_SESSION['RUTACTUAL'];
+                                                    }
+
+                                                    //OBTENER IDENFIFICADOR SCREEN GESTOR ARCHIVOS
+                                                    $processdescomzip = $dirraiz . "/gestorarchivos";
+                                                    $processdescomzip = str_replace("/", "", $processdescomzip);
+
+                                                    //VER SI HAY UN PROCESO YA DESCOMPRIMIENDO ZIP
+                                                    $elcomando = "screen -ls | awk '/\." . $processdescomzip . "\t/ {print strtonum($1)'}";
+                                                    $retornodeszip = shell_exec($elcomando);
+
+                                                    //INICIALIZAR SESSIONES STATE
+                                                    if ($retornodeszip != "") {
+                                                        $_SESSION['GESTARCHPROSSES'] = 1;
+                                                    } else {
+                                                        $_SESSION['GESTARCHPROSSES'] = 0;
                                                     }
 
                                                     //COMPROVAR SI EXISTE CARPETA SERVIDOR MINECRAF
@@ -509,6 +528,9 @@ function devolverdatos($losbytes, $opcion)
                                                                 ?>
                                                             </tbody>
                                                         </table>
+                                                        <hr>
+                                                        <p class="lead negrita">Estados Procesos</p>
+                                                        <p id= "gifstatus"></p>
                                                         <p class="lead" id="textoretorno"></p>
                                                     </div>
                                                     <hr>
@@ -533,7 +555,7 @@ function devolverdatos($losbytes, $opcion)
                                                                 </form>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <img class="" src="img/loading.gif" id="gifloading" alt="loading">
+                                                                <img class="" src="img/loading.gif" id="gifuploading" alt="uploading">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <p class="lead" id="textouploadretorno"></p>

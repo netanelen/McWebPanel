@@ -278,9 +278,7 @@ $(function() {
         var descomprimirtarbuttons = document.getElementsByClassName('descomprimirtar');
         for (var i = 0; i < descomprimirtarbuttons.length; i++) {
             descomprimirtarbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') !== null) {
-                    document.getElementById("gifloading").style.visibility = "visible";
-                }
+
                 $.ajax({
                     url: 'function/gestordescomprimirtar.php',
                     data: {
@@ -289,9 +287,6 @@ $(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== null) {
-                            document.getElementById("gifloading").style.visibility = "hidden";
-                        }
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -310,9 +305,12 @@ $(function() {
                             alert("Error al descomprimir");
                         } else if (data.eserror == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
-                        } else if (data.eserror == "ok") {
-                            alert("Descomprimido en la carpeta: " + data.carpeta);
-                            location.reload();
+                        } else if (data.eserror == "notempexiste") {
+                            alert("Error: La carpeta temp no existe");
+                        } else if (data.eserror == "notempwritable") {
+                            alert("Error: La carpeta temp no tiene permisos de escritura.");
+                        } else if (data.eserror == "processenejecucion") {
+                            alert("Error: Existe un proceso en ejecución.");
                         }
 
                     }
@@ -325,9 +323,7 @@ $(function() {
         var descomprimirzipbuttons = document.getElementsByClassName('descomprimirzip');
         for (var i = 0; i < descomprimirzipbuttons.length; i++) {
             descomprimirzipbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') !== null) {
-                    document.getElementById("gifloading").style.visibility = "visible";
-                }
+
                 $.ajax({
                     url: 'function/gestordescomprimirzip.php',
                     data: {
@@ -336,9 +332,6 @@ $(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== null) {
-                            document.getElementById("gifloading").style.visibility = "hidden";
-                        }
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -353,9 +346,12 @@ $(function() {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data.eserror == "fallo") {
                             alert("Error al descomprimir");
-                        } else if (data.eserror == "ok") {
-                            alert("Zip descomprimido en la carpeta: " + data.carpeta);
-                            location.reload();
+                        } else if (data.eserror == "notempexiste") {
+                            alert("Error: La carpeta temp no existe");
+                        } else if (data.eserror == "notempwritable") {
+                            alert("Error: La carpeta temp no tiene permisos de escritura.");
+                        } else if (data.eserror == "processenejecucion") {
+                            alert("Error: Existe un proceso en ejecución.");
                         }
 
                     }
@@ -368,9 +364,7 @@ $(function() {
         var comprimircarpetazipbuttons = document.getElementsByClassName('comprimirzipfolder');
         for (var i = 0; i < comprimircarpetazipbuttons.length; i++) {
             comprimircarpetazipbuttons[i].addEventListener("click", function() {
-                if (document.getElementById('gifloading') !== null) {
-                    document.getElementById("gifloading").style.visibility = "visible";
-                }
+
                 $.ajax({
                     url: 'function/gestorcomprimircarpetazip.php',
                     data: {
@@ -379,10 +373,6 @@ $(function() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(data) {
-
-                        if (document.getElementById('gifloading') !== null) {
-                            document.getElementById("gifloading").style.visibility = "hidden";
-                        }
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -397,9 +387,12 @@ $(function() {
                             alert("No tienes permiso de ejecucion/enter en la carpeta");
                         } else if (data.eserror == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
-                        } else if (data.eserror == "ok") {
-                            alert("Zip comprimido en archivo: " + data.carpeta);
-                            location.reload();
+                        } else if (data.eserror == "notempexiste") {
+                            alert("Error: La carpeta temp no existe");
+                        } else if (data.eserror == "notempwritable") {
+                            alert("Error: La carpeta temp no tiene permisos de escritura.");
+                        } else if (data.eserror == "processenejecucion") {
+                            alert("Error: Existe un proceso en ejecución.");
                         }
 
                     }
@@ -412,8 +405,8 @@ $(function() {
         document.getElementById("botonsubir").disabled = true;
     }
 
-    if (document.getElementById('gifloading') !== null) {
-        document.getElementById("gifloading").style.visibility = "hidden";
+    if (document.getElementById('gifuploading') !== null) {
+        document.getElementById("gifuploading").style.visibility = "hidden";
     }
 
     $(".custom-file-input").on("change", function() {
@@ -554,9 +547,7 @@ $(function() {
         $("#bpegar").click(function() {
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nEn caso de existir un archivo con el mismo nombre se sobrescribirá.\n\n¿Seguro que quieres continuar?");
             if (eleccion == true) {
-                if (document.getElementById('gifloading') !== null) {
-                    document.getElementById("gifloading").style.visibility = "visible";
-                }
+
                 $.ajax({
                     url: 'function/gestorpegarfiles.php',
                     data: {
@@ -564,9 +555,6 @@ $(function() {
                     },
                     type: 'POST',
                     success: function(data) {
-                        if (document.getElementById('gifloading') !== null) {
-                            document.getElementById("gifloading").style.visibility = "hidden";
-                        }
 
                         if (data == "nocopy") {
                             alert("Nada que pegar");
@@ -576,8 +564,12 @@ $(function() {
                             alert("La ruta a pegar no tiene permisos de escritura");
                         } else if (data == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
-                        } else if (data == "OK") {
-                            location.reload();
+                        } else if (data == "notempexiste") {
+                            alert("Error: La carpeta temp no existe");
+                        } else if (data == "notempwritable") {
+                            alert("Error: La carpeta temp no tiene permisos de escritura.");
+                        } else if (data == "processenejecucion") {
+                            alert("Error: Existe un proceso en ejecución.");
                         }
                     }
                 });
@@ -653,8 +645,8 @@ $(function() {
     }
 
     $("#form").on('submit', (function(e) {
-        if (document.getElementById('gifloading') !== null) {
-            document.getElementById("gifloading").style.visibility = "visible";
+        if (document.getElementById('gifuploading') !== null) {
+            document.getElementById("gifuploading").style.visibility = "visible";
         }
         e.preventDefault();
         $.ajax({
@@ -665,9 +657,9 @@ $(function() {
             cache: false,
             processData: false,
             success: function(data) {
-
-                if (document.getElementById('gifloading') !== null) {
-                    document.getElementById("gifloading").style.visibility = "hidden";
+                alert(data);
+                if (document.getElementById('gifuploading') !== null) {
+                    document.getElementById("gifuploading").style.visibility = "hidden";
                 }
 
                 if (data == "nowrite") {
@@ -698,6 +690,32 @@ $(function() {
     }));
 
     function sessionTimer() {
+
+        $.ajax({
+            url: 'function/gestorstate.php',
+            data: {
+                action: 'estado'
+            },
+            type: 'POST',
+            success: function(data) {
+
+                if (data == "ON") {
+
+                    if (document.getElementById('gifstatus') !== null) {
+                        document.getElementById('gifstatus').innerHTML = '<img class="" src="img/loading.gif" id="gifloading" alt="loading">';
+                        document.getElementById("gifstatus").style.visibility = "visible";
+                    }
+                } else if (data == "OFF") {
+
+                    if (document.getElementById('gifstatus') !== null) {
+                        document.getElementById("gifstatus").style.visibility = "hidden";
+                        document.getElementById('gifstatus').innerHTML = '';
+                    }
+                } else if (data == "REFRESH") {
+                    location.reload();
+                }
+            }
+        });
 
         $.ajax({
             url: 'function/salirsession.php',

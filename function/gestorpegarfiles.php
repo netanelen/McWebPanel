@@ -65,7 +65,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $permcomando = "";
             $dirconfig = "";
-            $elnombrescreen = CONFIGDIRECTORIO;
+            $reccarpmine = CONFIGDIRECTORIO;
             $limitmine = CONFIGFOLDERMINECRAFTSIZE;
             $rutacarpetamine = "";
             $getgigasmine = "";
@@ -78,10 +78,40 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $copiados = $_SESSION['COPIARFILES'];
             }
 
+            //OBTENER RUTA RAIZ
+            $rutaraiz = dirname(getcwd()) . PHP_EOL;
+            $rutaraiz = trim($rutaraiz);
+
+            //OBTENER RUTA TEMP
+            $dirtemp = "";
+            $dirtemp = dirname(getcwd()) . PHP_EOL;
+            $dirtemp = trim($dirtemp);
+            $dirtemp .= "/temp";
+
+            //OBTENER RUTA SH TEMP
+            $dirsh = "";
+            $dirsh = $dirtemp;
+            $dirsh .= "/gestorpegar.sh";
+
+            //OBTENER IDENFIFICADOR SCREEN
+            $nombrescreen = $rutaraiz . "/gestorarchivos";
+            $nombrescreen = str_replace("/", "", $nombrescreen);
+
             //COMPROBAR SI ESTA VACIO
             if ($elerror == 0) {
                 if ($copiados == "") {
                     $retorno = "nocopy";
+                    $elerror = 1;
+                }
+            }
+
+            //VER SI HAY UN PROCESO YA EN PROCESO
+            if ($elerror == 0) {
+                $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "processenejecucion";
                     $elerror = 1;
                 }
             }
@@ -106,13 +136,31 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //MIRAR SI LA CARPETA TEMP EXISTE
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!file_exists($dirtemp)) {
+                    $retorno = "notempexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA TEMP SE PUEDE ESCRIVIR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_writable($dirtemp)) {
+                    $retorno = "notempwritable";
+                    $elerror = 1;
+                }
+            }
+
             //LIMITE ALMACENAMIENTO
             if ($elerror == 0) {
 
                 //OBTENER CARPETA SERVIDOR MINECRAFT
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
                 $rutacarpetamine = trim($rutacarpetamine);
-                $rutacarpetamine .= "/" . $elnombrescreen;
+                $rutacarpetamine .= "/" . $reccarpmine;
 
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
@@ -130,29 +178,31 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //PEGAR
             if ($elerror == 0) {
+
+                $delsh = "rm " . $dirsh;
+
+                $file = fopen($dirsh, "w");
+                fwrite($file, "#!/bin/bash" . PHP_EOL);
+
                 for ($b = 0; $b < count($copiados); $b++) {
                     $ejecucion = "cp -r '" . $copiados[$b] . "' " . $_SESSION['RUTACTUAL'];
-                    shell_exec($ejecucion);
+                    fwrite($file, $ejecucion . PHP_EOL);
                 }
 
-                //PERFMISOS FTP
-                $permcomando = "cd '" . $_SESSION['RUTACTUAL'] . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
-                exec($permcomando);
-                $permcomando = "cd '" . $_SESSION['RUTACTUAL'] . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
-                exec($permcomando);
+                fwrite($file, $delsh . PHP_EOL);
+                fclose($file);
 
-                //PROTECCION SH
-                $dirconfig = dirname(getcwd()) . PHP_EOL;
-                $dirconfig = trim($dirconfig);
-                $dirconfig .= "/" . $elnombrescreen;
+                //DAR PERMISOS AL SH
+                $comando = "cd " . $dirtemp . " && chmod +x gestorpegar.sh";
+                exec($comando);
 
-                $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                clearstatcache();
-                if (file_exists($dirconfig . "/start.sh")) {
-                    exec($permcomando);
+                //INICIAR SCREEN
+                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS '" . $nombrescreen . "' sh gestorpegar.sh";
+                exec($comando, $out, $oky);
+
+                if (!$oky) {
+                    $_SESSION['GESTARCHPROSSES'] = 1;
                 }
-
-                $retorno = "OK";
             }
 
             $_SESSION['COPIARFILES'] = "0";

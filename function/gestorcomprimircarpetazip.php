@@ -65,17 +65,49 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $lacarpeta = "";
             $test = 0;
 
-            $elnombrescreen = CONFIGDIRECTORIO;
+            $reccarpmine = CONFIGDIRECTORIO;
             $limitmine = CONFIGFOLDERMINECRAFTSIZE;
             $rutacarpetamine = "";
             $getgigasmine = "";
 
             $archivo = test_input($_POST['action']);
 
+            $nombrecarpeta = $archivo;
+
+            //OBTENER RUTA RAIZ
+            $rutaraiz = dirname(getcwd()) . PHP_EOL;
+            $rutaraiz = trim($rutaraiz);
+
+            //OBTENER RUTA TEMP
+            $dirtemp = "";
+            $dirtemp = dirname(getcwd()) . PHP_EOL;
+            $dirtemp = trim($dirtemp);
+            $dirtemp .= "/temp";
+
+            //OBTENER RUTA SH TEMP
+            $dirsh = "";
+            $dirsh = $dirtemp;
+            $dirsh .= "/comprimircarpeta.sh";
+
+            //OBTENER IDENFIFICADOR SCREEN
+            $nombrescreen = $rutaraiz . "/gestorarchivos";
+            $nombrescreen = str_replace("/", "", $nombrescreen);
+
             //COMPROBAR SI ESTA VACIO
             if ($elerror == 0) {
                 if ($archivo == "") {
                     $retorno = "nada";
+                    $elerror = 1;
+                }
+            }
+
+            //VER SI HAY UN PROCESO YA EN PROCESO
+            if ($elerror == 0) {
+                $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "processenejecucion";
                     $elerror = 1;
                 }
             }
@@ -118,6 +150,24 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //MIRAR SI LA CARPETA TEMP EXISTE
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!file_exists($dirtemp)) {
+                    $retorno = "notempexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA TEMP SE PUEDE ESCRIVIR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_writable($dirtemp)) {
+                    $retorno = "notempwritable";
+                    $elerror = 1;
+                }
+            }
+
             //COMPROBAR SI EXISTE EL FICHERO
             if ($elerror == 0) {
 
@@ -149,7 +199,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //OBTENER CARPETA SERVIDOR MINECRAFT
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
                 $rutacarpetamine = trim($rutacarpetamine);
-                $rutacarpetamine .= "/" . $elnombrescreen;
+                $rutacarpetamine .= "/" . $reccarpmine;
 
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
@@ -168,33 +218,29 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //COMPRIMIR
             if ($elerror == 0) {
 
-                $zip = new ZipArchive();
-                if ($zip->open($elzip, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+                $elcomando1 = "cd " . $_SESSION['RUTACTUAL'] . " && zip -r " . $dirtemp . "/" .$nombrecarpeta . ".zip" . " " . $nombrecarpeta;
+                $elcomando2 = "mv " . $dirtemp . "/" .$nombrecarpeta . ".zip ". $_SESSION['RUTACTUAL'];
+                $delsh = "rm " . $dirsh;
 
-                    $files = new RecursiveIteratorIterator(
-                        new RecursiveDirectoryIterator($archivo),
-                        RecursiveIteratorIterator::LEAVES_ONLY
-                    );
+                $file = fopen($dirsh, "w");
+                fwrite($file, "#!/bin/bash" . PHP_EOL);
+                fwrite($file, $elcomando1 . PHP_EOL);
+                fwrite($file, $elcomando2 . PHP_EOL);
+                fwrite($file, $delsh . PHP_EOL);
+                fclose($file);
 
-                    foreach ($files as $name => $file) {
+                //DAR PERMISOS AL SH
+                $comando = "cd " . $dirtemp . " && chmod +x comprimircarpeta.sh";
+                exec($comando);
 
-                        if (!$file->isDir()) {
+                //INICIAR SCREEN
+                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS '" . $nombrescreen . "' sh comprimircarpeta.sh";
+                exec($comando, $out, $oky);
 
-                            $filePath = $file->getRealPath();
-                            $relativePath = substr($filePath, strlen($archivo) + 1);
-
-                            $zip->addFile($filePath, $relativePath);
-                        }
-                    }
-                    $zip->close();
-
-                    //PERFMISOS FTP
-                    $permcomando = "chmod 664 '" . $elzip . "'";
-                    exec($permcomando);
-
-                    $retorno = "ok";
+                if (!$oky) {
+                    $_SESSION['GESTARCHPROSSES'] = 1;
                 } else {
-                    $retorno = 'fallo';
+                    $retorno = "fallo";
                 }
             }
 

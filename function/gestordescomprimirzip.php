@@ -67,18 +67,47 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $permcomando = "";
             $dirconfig = "";
-            $elnombrescreen = CONFIGDIRECTORIO;
-
+            $reccarpmine = CONFIGDIRECTORIO;
             $limitmine = CONFIGFOLDERMINECRAFTSIZE;
             $rutacarpetamine = "";
             $getgigasmine = "";
 
             $archivo = test_input($_POST['action']);
 
+            //OBTENER RUTA RAIZ
+            $rutaraiz = dirname(getcwd()) . PHP_EOL;
+            $rutaraiz = trim($rutaraiz);
+
+            //OBTENER RUTA TEMP
+            $dirtemp = "";
+            $dirtemp = dirname(getcwd()) . PHP_EOL;
+            $dirtemp = trim($dirtemp);
+            $dirtemp .= "/temp";
+
+            //OBTENER RUTA SH TEMP
+            $dirsh = "";
+            $dirsh = $dirtemp;
+            $dirsh .= "/descomprimirzip.sh";
+
+            //OBTENER IDENFIFICADOR SCREEN
+            $nombrescreen = $rutaraiz . "/gestorarchivos";
+            $nombrescreen = str_replace("/", "", $nombrescreen);
+
             //COMPROBAR SI ESTA VACIO
             if ($elerror == 0) {
                 if ($archivo == "") {
                     $retorno = "nada";
+                    $elerror = 1;
+                }
+            }
+
+            //VER SI HAY UN PROCESO YA EN PROCESO
+            if ($elerror == 0) {
+                $elcomando = "screen -ls | awk '/\." . $nombrescreen . "\t/ {print strtonum($1)'}";
+                $elpid = shell_exec($elcomando);
+
+                if ($elpid != "") {
+                    $retorno = "processenejecucion";
                     $elerror = 1;
                 }
             }
@@ -112,11 +141,29 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //MIRAR SI EXISTE
+            //MIRAR SI EXISTE EL ARCHIVO A DESCOMPRIMIR
             if ($elerror == 0) {
                 clearstatcache();
                 if (!file_exists($archivo)) {
                     $retorno = "noexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI LA CARPETA TEMP EXISTE
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!file_exists($dirtemp)) {
+                    $retorno = "notempexiste";
+                    $elerror = 1;
+                }
+            }
+
+            //MIRAR SI CARPETA TEMP SE PUEDE ESCRIVIR
+            if ($elerror == 0) {
+                clearstatcache();
+                if (!is_writable($dirtemp)) {
+                    $retorno = "notempwritable";
                     $elerror = 1;
                 }
             }
@@ -134,26 +181,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //comprovar si existe la carpeta
-            if ($elerror == 0) {
-                $lacarpeta = $getarchivo['dirname'] . "/" . $limpio;
-
-                clearstatcache();
-                if (!file_exists($lacarpeta)) {
-                    mkdir($lacarpeta, 0700);
-                } else {
-                    $retorno = "carpyaexiste";
-                    $elerror = 1;
-                }
-            }
-
             //LIMITE ALMACENAMIENTO
             if ($elerror == 0) {
 
                 //OBTENER CARPETA SERVIDOR MINECRAFT
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
                 $rutacarpetamine = trim($rutacarpetamine);
-                $rutacarpetamine .= "/" . $elnombrescreen;
+                $rutacarpetamine .= "/" . $reccarpmine;
 
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
@@ -169,72 +203,43 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //comprovar si existe la carpeta
+            if ($elerror == 0) {
+                $lacarpeta = $getarchivo['dirname'] . "/" . $limpio;
+
+                clearstatcache();
+                if (file_exists($lacarpeta)) {
+                    $retorno = "carpyaexiste";
+                    $elerror = 1;
+                }
+            }
+
             //DESCOMPRIMIR
             if ($elerror == 0) {
 
-                $zip = new ZipArchive;
-                if ($zip->open($archivo) === TRUE) {
-                    $zip->extractTo($lacarpeta);
-                    $zip->close();
+                $elcomando1 = "unzip '" . $archivo . "' -d " . $lacarpeta;
+                $elcomando2 = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
+                $delsh = "rm " . $dirsh;
 
-                    //SEGURIDAD
-                    $permcomando = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
-                    exec($permcomando);
+                $file = fopen($dirsh, "w");
+                fwrite($file, "#!/bin/bash" . PHP_EOL);
+                fwrite($file, $elcomando1 . PHP_EOL);
+                fwrite($file, $elcomando2 . PHP_EOL);
+                fwrite($file, $delsh . PHP_EOL);
+                fclose($file);
 
-                    //PERFMISOS FTP
-                    $permcomando = "cd '" . $lacarpeta . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
-                    exec($permcomando);
-                    $permcomando = "cd '" . $lacarpeta . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
-                    exec($permcomando);
+                //DAR PERMISOS AL SH
+                $comando = "cd " . $dirtemp . " && chmod +x descomprimirzip.sh";
+                exec($comando);
 
-                    //PROTECCION SH
-                    $dirconfig = dirname(getcwd()) . PHP_EOL;
-                    $dirconfig = trim($dirconfig);
-                    $dirconfig .= "/" . $elnombrescreen;
+                //INICIAR SCREEN
+                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS '" . $nombrescreen . "' sh descomprimirzip.sh";
+                exec($comando, $out, $oky);
 
-                    $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                    clearstatcache();
-                    if (file_exists($dirconfig . "/start.sh")) {
-                        exec($permcomando);
-                    }
-
-                    $retorno = 'ok';
+                if (!$oky) {
+                    $_SESSION['GESTARCHPROSSES'] = 1;
                 } else {
-                    $retorno = 'fallo';
-
-                    //PARCHE POR SI ES ZIP64
-                    $permcomando = "unzip " . $archivo . " -d " . $lacarpeta;
-                    $retorno = exec($permcomando);
-
-                    if ($retorno == trim("Archive:  " . $archivo)) {
-                        $permcomando = "rm -R " . $lacarpeta;
-                        exec($permcomando);
-                        $retorno = "fallo";
-                    } else {
-
-                        //SEGURIDAD
-                        $permcomando = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
-                        exec($permcomando);
-
-                        //PERFMISOS FTP
-                        $permcomando = "cd '" . $lacarpeta . "' && find . -type d -print0 | xargs -0 -I {} chmod 775 {}";
-                        exec($permcomando);
-                        $permcomando = "cd '" . $lacarpeta . "' && find . -type f -print0 | xargs -0 -I {} chmod 664 {}";
-                        exec($permcomando);
-
-                        //PROTECCION SH
-                        $dirconfig = dirname(getcwd()) . PHP_EOL;
-                        $dirconfig = trim($dirconfig);
-                        $dirconfig .= "/" . $elnombrescreen;
-
-                        $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                        clearstatcache();
-                        if (file_exists($dirconfig . "/start.sh")) {
-                            exec($permcomando);
-                        }
-
-                        $retorno = "ok";
-                    }
+                    $retorno = "fallo";
                 }
             }
 
