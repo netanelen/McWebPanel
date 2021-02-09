@@ -657,7 +657,7 @@ $(function() {
             cache: false,
             processData: false,
             success: function(data) {
-                alert(data);
+
                 if (document.getElementById('gifuploading') !== null) {
                     document.getElementById("gifuploading").style.visibility = "hidden";
                 }
