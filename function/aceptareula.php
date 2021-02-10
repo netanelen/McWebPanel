@@ -73,15 +73,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //COMPROVAR SI SE PUEDE ESCRIVIR
             if (is_writable($dirconfig)) {
 
-                //CREAR RUTA FICHERO .htaccess
-                $rutaescrivir = $dirconfig;
-                $rutaescrivir .= "/.htaccess";
-
-                //GUARDAR FICHERO .htaccess
-                $file = fopen($rutaescrivir, "w");
-                fwrite($file, "deny from all" . PHP_EOL);
-                fclose($file);
-
                 //CREAR RUTA FICHERO CONFOPCIONES.PHP
                 $rutaescrivir = $dirconfig;
                 $rutaescrivir .= "/confopciones.php";
@@ -108,35 +99,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, 'define("CONFIGFOLDERMINECRAFTSIZE", "' . $ellimitminefoldersize . '");' . PHP_EOL);
                 fwrite($file, "?>" . PHP_EOL);
                 fclose($file);
-
-                //SI HAY PERMISOS ESCRITURA EN RAIZ
-                $rutaraiz = dirname(getcwd()) . PHP_EOL;
-                $rutaraiz = trim($rutaraiz);
-
-                if (is_writable($rutaraiz)) {
-                    //COMPROVAR SI EXISTE LA CARPETA MINECRAFT
-                    $elnombredirectorio = CONFIGDIRECTORIO;
-                    $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
-                    $rutacarpetamine = trim($rutacarpetamine);
-                    $rutacarpetamine .= "/" . $elnombredirectorio;
-
-                    if (!file_exists($rutacarpetamine)) {
-                        //SI NO EXISTE, CREARLA
-                        mkdir("$rutacarpetamine", 0700);
-                        //devuelve 1 si la ha creado
-                    }
-
-                    //DOBLE SI EXISTE MINECRAFT
-                    if (file_exists($rutacarpetamine)) {
-                        //GUARDAR EULA.TXT
-                        $rutaescrivir = $rutacarpetamine;
-                        $rutaescrivir .= "/eula.txt";
-
-                        $file = fopen($rutaescrivir, "w");
-                        fwrite($file, "eula=true" . PHP_EOL);
-                        fclose($file);
-                    }
-                }
 
                 $retorno = "ok";
             } else {

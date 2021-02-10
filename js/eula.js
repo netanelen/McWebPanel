@@ -19,7 +19,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 $(function() {
 
     $("#CANCELAREULA").click(function() {
-        location.href = "salir.php";
+        window.location.replace("status.php");
     });
 
     $("#ACEPTAREULA").click(function() {
@@ -34,7 +34,7 @@ $(function() {
                 if (data == "ok") {
                     window.location.replace("status.php");
                 } else {
-                    window.location.replace("index.php");
+                    window.location.replace("status.php");
                 }
             }
         });

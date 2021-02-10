@@ -38,8 +38,6 @@ $(function() {
                     document.getElementById("textologinerror").innerHTML = "<div class='alert alert-danger' role='alert'>Nombre de usuario o contraseña incorrecta.</div>";
                 } else if (data == "userdesactivado") {
                     document.getElementById("textologinerror").innerHTML = "<div class='alert alert-danger' role='alert'>El usuario esta desactivado.</div>";
-                } else if (data == "gotoeula") {
-                    location.href = "eula.php";
                 } else if (data == "gotostatus") {
                     location.href = "status.php";
                 }

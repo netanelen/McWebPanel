@@ -32,7 +32,7 @@ $(function() {
                 } else if (data == "noexistecarpetaminecraft") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta del servidor minecraft.</div>";
                 } else if (data == "noeula") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No has aceptado el eula de minecraft.</div>";
+                    location.href = "eula.php";
                 } else if (data == "noconfjar") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No has seleccionado un servidor .jar.</div>";
                 } else if (data == "noexistejar") {

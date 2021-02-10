@@ -163,7 +163,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             //VERIFICAR EULA EN CONFIG
             if ($elerror == 0) {
-                if ($receulaminecraft == "") {
+                if ($receulaminecraft != "1") {
                     $elerror = 1;
                     $retorno = "noeula";
                 }
@@ -290,7 +290,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 rename($rutatemp, $rutacarpetamine);
                 copy($rutacarpetamine, $rutafinal);
             }
-
+            
+            
             //INSERTAR SERVER-ICON EN CASO QUE NO EXISTA
             if ($elerror == 0) {
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;

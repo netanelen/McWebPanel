@@ -20,6 +20,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
+//confopciones cargado mas abajo
 
 function test_input($data)
 {
@@ -54,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $elusuario = "";
     $elpassword = "";
     $lakey = "";
-    $receulaminecraft = "";
     $dirconfig = "";
 
     //SESSION DE REINTENTOS
@@ -125,13 +125,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     unset($lakey);
 
-                    $receulaminecraft = CONFIGEULAMINECRAFT;
-
-                    if ($receulaminecraft == "") {
-                        $retorno = "gotoeula";
-                    } else {
-                        $retorno = "gotostatus";
-                    }
+                    $retorno = "gotostatus";
+                    
                 }
             }
         }
