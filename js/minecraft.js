@@ -212,25 +212,25 @@ $(function() {
 
     if (document.getElementById("label-resource-pack") !== null) {
         if (document.getElementById("form-resource-pack") !== null) {
-            document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
+            document.getElementById("label-resource-pack").innerHTML = htmlEntities("resource-pack=" + document.getElementById("form-resource-pack").value);
         }
     }
 
     if (document.getElementById("label-resource-pack-sha1") !== null) {
         if (document.getElementById("form-resource-pack-sha1") !== null) {
-            document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
+            document.getElementById("label-resource-pack-sha1").innerHTML = htmlEntities("resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value);
         }
     }
 
     if (document.getElementById("label-level-name") !== null) {
         if (document.getElementById("form-level-name") !== null) {
-            document.getElementById("label-level-name").innerHTML = "level-name=" + document.getElementById("form-level-name").value;
+            document.getElementById("label-level-name").innerHTML = htmlEntities("level-name=" + document.getElementById("form-level-name").value);
         }
     }
 
     if (document.getElementById("label-level-seed") !== null) {
         if (document.getElementById("form-level-seed") !== null) {
-            document.getElementById("label-level-seed").innerHTML = "level-seed=" + document.getElementById("form-level-seed").value;
+            document.getElementById("label-level-seed").innerHTML = htmlEntities("level-seed=" + document.getElementById("form-level-seed").value);
         }
     }
 
@@ -242,7 +242,7 @@ $(function() {
 
     if (document.getElementById("label-generator-settings") !== null) {
         if (document.getElementById("form-generator-settings") !== null) {
-            document.getElementById("label-generator-settings").innerHTML = "generator-settings=" + document.getElementById("form-generator-settings").value;
+            document.getElementById("label-generator-settings").innerHTML = htmlEntities("generator-settings=" + document.getElementById("form-generator-settings").value);
         }
     }
 
@@ -326,7 +326,7 @@ $(function() {
 
     if (document.getElementById("label-rcon-password") !== null) {
         if (document.getElementById("form-rcon-password") !== null) {
-            document.getElementById("label-rcon-password").innerHTML = "rcon.password=" + document.getElementById("form-rcon-password").value;
+            document.getElementById("label-rcon-password").innerHTML = htmlEntities("rcon.password=" + document.getElementById("form-rcon-password").value);
         }
     }
 
@@ -344,7 +344,7 @@ $(function() {
 
     if (document.getElementById("label-server-ip") !== null) {
         if (document.getElementById("form-server-ip") !== null) {
-            document.getElementById("label-server-ip").innerHTML = "server-ip=" + document.getElementById("form-server-ip").value;
+            document.getElementById("label-server-ip").innerHTML = htmlEntities("server-ip=" + document.getElementById("form-server-ip").value);
         }
     }
 
@@ -709,7 +709,7 @@ $(function() {
         });
 
         if (document.getElementById("label-resource-pack") !== null) {
-            document.getElementById("label-resource-pack").innerHTML = "resource-pack=" + document.getElementById("form-resource-pack").value;
+            document.getElementById("label-resource-pack").innerHTML = htmlEntities("resource-pack=" + document.getElementById("form-resource-pack").value);
         }
 
     });
@@ -733,7 +733,7 @@ $(function() {
         });
 
         if (document.getElementById("label-resource-pack-sha1") !== null) {
-            document.getElementById("label-resource-pack-sha1").innerHTML = "resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value;
+            document.getElementById("label-resource-pack-sha1").innerHTML = htmlEntities("resource-pack-sha1=" + document.getElementById("form-resource-pack-sha1").value);
         }
 
     });
@@ -758,7 +758,7 @@ $(function() {
         });
 
         if (document.getElementById("label-level-name") !== null) {
-            document.getElementById("label-level-name").innerHTML = "level-name=" + enviovalor;
+            document.getElementById("label-level-name").innerHTML = htmlEntities("level-name=" + enviovalor);
         }
 
     });
@@ -782,7 +782,7 @@ $(function() {
         });
 
         if (document.getElementById("label-level-seed") !== null) {
-            document.getElementById("label-level-seed").innerHTML = "level-seed=" + document.getElementById("form-level-seed").value;
+            document.getElementById("label-level-seed").innerHTML = htmlEntities("level-seed=" + document.getElementById("form-level-seed").value);
         }
 
     });
@@ -830,7 +830,7 @@ $(function() {
         });
 
         if (document.getElementById("label-generator-settings") !== null) {
-            document.getElementById("label-generator-settings").innerHTML = "generator-settings=" + document.getElementById("form-generator-settings").value;
+            document.getElementById("label-generator-settings").innerHTML = htmlEntities("generator-settings=" + document.getElementById("form-generator-settings").value);
         }
 
     });
@@ -1220,7 +1220,7 @@ $(function() {
         });
 
         if (document.getElementById("label-rcon-password") !== null) {
-            document.getElementById("label-rcon-password").innerHTML = "rcon.password=" + document.getElementById("form-rcon-password").value;
+            document.getElementById("label-rcon-password").innerHTML = htmlEntities("rcon.password=" + document.getElementById("form-rcon-password").value);
         }
     });
 
@@ -1291,7 +1291,7 @@ $(function() {
         });
 
         if (document.getElementById("label-server-ip") !== null) {
-            document.getElementById("label-server-ip").innerHTML = "server-ip=" + document.getElementById("form-server-ip").value;
+            document.getElementById("label-server-ip").innerHTML = htmlEntities("server-ip=" + document.getElementById("form-server-ip").value);
         }
 
     });

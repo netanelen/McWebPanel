@@ -22,6 +22,15 @@ require_once("template/session.php");
 require_once("template/errorreport.php");
 require_once("config/confopciones.php");
 require_once("template/header.php");
+
+function test_input($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 ?>
 <!-- Custom styles for this template-->
 <link href="css/test.css" rel="stylesheet">
@@ -610,7 +619,7 @@ require_once("template/header.php");
                                                     <p class="lead">Asignar URL al paquete de recursos.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-resource-pack" type="text" class="form-control" value="<?php echo (leerlineas('resource-pack')); ?>">
+                                                    <input id="form-resource-pack" type="text" class="form-control" value="<?php echo (test_input(leerlineas('resource-pack'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -638,7 +647,7 @@ require_once("template/header.php");
                                                     <p class="lead">Comprueba si el SHA1 corresponde con el fichero seleccionado de la URL.<br>Se utiliza el SHA1 del fichero en hexadecimal y en minúsculas.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-resource-pack-sha1" type="text" class="form-control" value="<?php echo (leerlineas('resource-pack-sha1')); ?>">
+                                                    <input id="form-resource-pack-sha1" type="text" class="form-control" value="<?php echo (test_input(leerlineas('resource-pack-sha1'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -678,7 +687,7 @@ require_once("template/header.php");
                                                     <p class="lead">Nombre con el que se creara el mapa principal.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-level-name" type="text" class="form-control" maxlength="255" value="<?php echo (leerlineas('level-name')); ?>">
+                                                    <input id="form-level-name" type="text" class="form-control" maxlength="255" value="<?php echo (test_input(leerlineas('level-name'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -706,7 +715,7 @@ require_once("template/header.php");
                                                     <p class="lead">Semilla para generación de mapas.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-level-seed" type="text" class="form-control" value="<?php echo (leerlineas('level-seed')); ?>">
+                                                    <input id="form-level-seed" type="text" class="form-control" value="<?php echo (test_input(leerlineas('level-seed'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -778,7 +787,7 @@ require_once("template/header.php");
                                                     <p class="lead">Configuración utilizada para personalizar la generación del mapa.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-generator-settings" type="text" class="form-control" value="<?php echo (leerlineas('generator-settings')); ?>">
+                                                    <input id="form-generator-settings" type="text" class="form-control" value="<?php echo (test_input(leerlineas('generator-settings'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1278,7 +1287,7 @@ require_once("template/header.php");
                                                     <p class="lead">Fijar el password que usaras al conectarte con RCON.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-rcon-password" type="text" class="form-control" value="<?php echo (leerlineas('rcon.password')); ?>">
+                                                    <input id="form-rcon-password" type="text" class="form-control" value="<?php echo (test_input(leerlineas('rcon.password'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1394,7 +1403,7 @@ require_once("template/header.php");
                                                     <p class="lead">Fijar el servidor obligatoriamente a una IP, se recomienda dejarla en blanco.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-server-ip" type="text" class="form-control" value="<?php echo (leerlineas('server-ip')); ?>">
+                                                    <input id="form-server-ip" type="text" class="form-control" value="<?php echo (test_input(leerlineas('server-ip'))); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
