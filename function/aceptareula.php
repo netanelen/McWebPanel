@@ -69,8 +69,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $dirconfig = trim($dirconfig);
         $dirconfig .= "/config";
 
+        clearstatcache();
         if (file_exists($dirconfig)) {
             //COMPROVAR SI SE PUEDE ESCRIVIR
+            clearstatcache();
             if (is_writable($dirconfig)) {
 
                 //CREAR RUTA FICHERO CONFOPCIONES.PHP
