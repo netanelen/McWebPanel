@@ -82,6 +82,11 @@ Cambiar Usuario Archivos:
 sudo chown -R www-data:www-data /var/www/html/
 ```
 
+Configurar zona horaria
+```
+sudo dpkg-reconfigure tzdata
+```
+
 Configurar Directorio Apache
 - Requerido para Proteger Carpetas.
 - Requerido para configuración Subir archivos.
