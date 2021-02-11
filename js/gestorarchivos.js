@@ -16,19 +16,19 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     if (document.getElementsByClassName('entrar') !== null) {
         var entrarbuttons = document.getElementsByClassName('entrar');
         for (var i = 0; i < entrarbuttons.length; i++) {
-            entrarbuttons[i].addEventListener("click", function() {
+            entrarbuttons[i].addEventListener("click", function () {
                 $.ajax({
                     type: "POST",
                     url: "function/carpetaentrar.php",
                     data: {
                         action: this.value
                     },
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data == "OK") {
                             location.reload();
@@ -47,14 +47,14 @@ $(function() {
     if (document.getElementsByClassName('atras') !== null) {
         var atrasbuttons = document.getElementsByClassName('atras');
         for (var i = 0; i < atrasbuttons.length; i++) {
-            atrasbuttons[i].addEventListener("click", function() {
+            atrasbuttons[i].addEventListener("click", function () {
                 $.ajax({
                     type: "POST",
                     url: "function/carpetatras.php",
                     data: {
                         action: this.value
                     },
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data == "OK") {
                             location.reload();
@@ -73,7 +73,7 @@ $(function() {
     if (document.getElementsByClassName('borrarfile') !== null) {
         var borrarfilebuttons = document.getElementsByClassName('borrarfile');
         for (var i = 0; i < borrarfilebuttons.length; i++) {
-            borrarfilebuttons[i].addEventListener("click", function() {
+            borrarfilebuttons[i].addEventListener("click", function () {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el archivo: " + this.id + " ?");
                 if (eleccion == true) {
                     $.ajax({
@@ -82,7 +82,7 @@ $(function() {
                         data: {
                             action: this.value
                         },
-                        success: function(data) {
+                        success: function (data) {
 
                             if (data == "1") {
                                 location.reload();
@@ -110,7 +110,7 @@ $(function() {
     if (document.getElementsByClassName('borrarcarpeta') !== null) {
         var borrarcarpetabuttons = document.getElementsByClassName('borrarcarpeta');
         for (var i = 0; i < borrarcarpetabuttons.length; i++) {
-            borrarcarpetabuttons[i].addEventListener("click", function() {
+            borrarcarpetabuttons[i].addEventListener("click", function () {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar la carpeta: " + this.id + " ?");
                 if (eleccion == true) {
                     $.ajax({
@@ -119,7 +119,7 @@ $(function() {
                         data: {
                             action: this.value
                         },
-                        success: function(data) {
+                        success: function (data) {
 
                             if (data == "1") {
                                 location.reload();
@@ -151,7 +151,7 @@ $(function() {
     if (document.getElementsByClassName('renamefile') !== null) {
         var renamefilebuttons = document.getElementsByClassName('renamefile');
         for (var i = 0; i < renamefilebuttons.length; i++) {
-            renamefilebuttons[i].addEventListener("click", function() {
+            renamefilebuttons[i].addEventListener("click", function () {
                 var renombrado = prompt("Renombrar fichero:", this.id);
                 if (renombrado !== null) {
                     $.ajax({
@@ -161,7 +161,7 @@ $(function() {
                             action: this.value,
                             renombre: renombrado
                         },
-                        success: function(data) {
+                        success: function (data) {
 
                             if (data == "1") {
                                 location.reload();
@@ -194,7 +194,7 @@ $(function() {
     if (document.getElementsByClassName('renamefolder') !== null) {
         var renamefolderbuttons = document.getElementsByClassName('renamefolder');
         for (var i = 0; i < renamefolderbuttons.length; i++) {
-            renamefolderbuttons[i].addEventListener("click", function() {
+            renamefolderbuttons[i].addEventListener("click", function () {
                 var renombrado = prompt("Renombrar carpeta:", this.id);
                 if (renombrado !== null) {
                     $.ajax({
@@ -204,7 +204,7 @@ $(function() {
                             action: this.value,
                             renombre: renombrado
                         },
-                        success: function(data) {
+                        success: function (data) {
 
                             if (data == "1") {
                                 location.reload();
@@ -237,14 +237,14 @@ $(function() {
     if (document.getElementsByClassName('editarfile') !== null) {
         var editarbuttons = document.getElementsByClassName('editarfile');
         for (var i = 0; i < editarbuttons.length; i++) {
-            editarbuttons[i].addEventListener("click", function() {
+            editarbuttons[i].addEventListener("click", function () {
                 $.ajax({
                     type: "POST",
                     url: "function/gestoreditarfile.php",
                     data: {
                         action: this.value
                     },
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data == "OK") {
                             location.href = "editararchivo.php";
@@ -268,7 +268,7 @@ $(function() {
     if (document.getElementsByClassName('descargarfile') !== null) {
         var descargarbuttons = document.getElementsByClassName('descargarfile');
         for (var i = 0; i < descargarbuttons.length; i++) {
-            descargarbuttons[i].addEventListener("click", function() {
+            descargarbuttons[i].addEventListener("click", function () {
                 window.open('function/gestordownfile.php?action=' + this.value, '_blank', 'noopener noreferrer', "toolbar=no,scrollbars=yes,resizable=yes,top=400,left=500,width=400,height=100");
             });
         }
@@ -277,7 +277,7 @@ $(function() {
     if (document.getElementsByClassName('descomprimirtar') !== null) {
         var descomprimirtarbuttons = document.getElementsByClassName('descomprimirtar');
         for (var i = 0; i < descomprimirtarbuttons.length; i++) {
-            descomprimirtarbuttons[i].addEventListener("click", function() {
+            descomprimirtarbuttons[i].addEventListener("click", function () {
 
                 $.ajax({
                     url: 'function/gestordescomprimirtar.php',
@@ -286,7 +286,7 @@ $(function() {
                     },
                     type: 'POST',
                     dataType: 'json',
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -322,7 +322,7 @@ $(function() {
     if (document.getElementsByClassName('descomprimirzip') !== null) {
         var descomprimirzipbuttons = document.getElementsByClassName('descomprimirzip');
         for (var i = 0; i < descomprimirzipbuttons.length; i++) {
-            descomprimirzipbuttons[i].addEventListener("click", function() {
+            descomprimirzipbuttons[i].addEventListener("click", function () {
 
                 $.ajax({
                     url: 'function/gestordescomprimirzip.php',
@@ -331,7 +331,7 @@ $(function() {
                     },
                     type: 'POST',
                     dataType: 'json',
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -363,7 +363,7 @@ $(function() {
     if (document.getElementsByClassName('comprimirzipfolder') !== null) {
         var comprimircarpetazipbuttons = document.getElementsByClassName('comprimirzipfolder');
         for (var i = 0; i < comprimircarpetazipbuttons.length; i++) {
-            comprimircarpetazipbuttons[i].addEventListener("click", function() {
+            comprimircarpetazipbuttons[i].addEventListener("click", function () {
 
                 $.ajax({
                     url: 'function/gestorcomprimircarpetazip.php',
@@ -372,7 +372,7 @@ $(function() {
                     },
                     type: 'POST',
                     dataType: 'json',
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
@@ -409,7 +409,7 @@ $(function() {
         document.getElementById("gifuploading").style.visibility = "hidden";
     }
 
-    $(".custom-file-input").on("change", function() {
+    $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 
@@ -422,7 +422,7 @@ $(function() {
                 action: eltamano
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "OUTGIGAS") {
                     if (document.getElementById('botonsubir') !== null) {
@@ -467,13 +467,13 @@ $(function() {
     });
 
     if (document.getElementById('bnactualizar') !== null) {
-        $("#bnactualizar").click(function() {
+        $("#bnactualizar").click(function () {
             location.reload();
         });
     }
 
     if (document.getElementById('bnnuevacarpeta') !== null) {
-        $("#bnnuevacarpeta").click(function() {
+        $("#bnnuevacarpeta").click(function () {
             var renombrado = prompt("Nombre nueva carpeta:");
             if (renombrado !== null) {
                 $.ajax({
@@ -482,7 +482,7 @@ $(function() {
                         action: renombrado
                     },
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         if (data == "nowrite") {
                             alert("No hay permisos de escritura");
                         } else if (data == "carpyaexiste") {
@@ -503,7 +503,7 @@ $(function() {
     }
 
     if (document.getElementById('bcopiar') !== null) {
-        $("#bcopiar").click(function() {
+        $("#bcopiar").click(function () {
             var arrayseleccion = [];
             var elindice = 0;
             var checkseleccionados = document.getElementsByClassName('laseleccion');
@@ -523,7 +523,7 @@ $(function() {
                         action: arrayseleccion
                     },
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         if (data == "nocopy") {
                             alert("Nada que copiar");
                         } else if (data == "noexiste") {
@@ -544,7 +544,7 @@ $(function() {
     }
 
     if (document.getElementById('bpegar') !== null) {
-        $("#bpegar").click(function() {
+        $("#bpegar").click(function () {
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nEn caso de existir un archivo con el mismo nombre se sobrescribirá.\n\n¿Seguro que quieres continuar?");
             if (eleccion == true) {
 
@@ -554,7 +554,7 @@ $(function() {
                         action: 'ok'
                     },
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
 
                         if (data == "nocopy") {
                             alert("Nada que pegar");
@@ -578,7 +578,7 @@ $(function() {
     }
 
     if (document.getElementById('beliminarseleccion') !== null) {
-        $("#beliminarseleccion").click(function() {
+        $("#beliminarseleccion").click(function () {
             var arrayseleccion = [];
             var elindice = 0;
             var checkseleccionados = document.getElementsByClassName('laseleccion');
@@ -601,7 +601,7 @@ $(function() {
                             action: arrayseleccion
                         },
                         type: 'POST',
-                        success: function(data) {
+                        success: function (data) {
                             if (data == "nocopy") {
                                 alert("Nada que borrar");
                             } else if (data == "rutacambiada") {
@@ -627,7 +627,7 @@ $(function() {
     }
 
     if (document.getElementById('bselectall') !== null) {
-        $("#bselectall").click(function() {
+        $("#bselectall").click(function () {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
                 checkseleccionados[i].checked = true;
@@ -636,7 +636,7 @@ $(function() {
     }
 
     if (document.getElementById('bunselectall') !== null) {
-        $("#bunselectall").click(function() {
+        $("#bunselectall").click(function () {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
                 checkseleccionados[i].checked = false;
@@ -644,7 +644,42 @@ $(function() {
         });
     }
 
-    $("#form").on('submit', (function(e) {
+    //INICIAR VARIABLE SESSION
+    sessionStorage.pulsorecuadro = 0;
+
+    if (document.getElementsByClassName('elclick1') !== null) {
+        var clickhover = document.getElementsByClassName('elclick1');
+        var checkseleccionados = document.getElementsByClassName('laseleccion');
+        for (var i = 0; i < clickhover.length; i++) {
+            clickhover[i].addEventListener("click", function () {
+
+                if (sessionStorage.pulsorecuadro == 0) {
+
+                    if (checkseleccionados[this.id - 1].checked == false) {
+                        checkseleccionados[this.id - 1].checked = true;
+                    } else {
+                        checkseleccionados[this.id - 1].checked = false;
+                    }
+
+                } else {
+                    sessionStorage.pulsorecuadro = 0;
+                }
+
+            });
+        }
+    }
+
+    if (document.getElementsByClassName('laseleccion') !== null) {
+        var checkseleccionados = document.getElementsByClassName('laseleccion');
+        for (var i = 0; i < checkseleccionados.length; i++) {
+            checkseleccionados[i].addEventListener("click", function () {
+
+                sessionStorage.pulsorecuadro = 1;
+            });
+        }
+    }
+
+    $("#form").on('submit', (function (e) {
         if (document.getElementById('gifuploading') !== null) {
             document.getElementById("gifuploading").style.visibility = "visible";
         }
@@ -656,7 +691,7 @@ $(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
 
                 if (document.getElementById('gifuploading') !== null) {
                     document.getElementById("gifuploading").style.visibility = "hidden";
@@ -683,7 +718,7 @@ $(function() {
                 }
 
             },
-            error: function(errorThrown) {
+            error: function (errorThrown) {
                 alert(errorThrown);
             }
         });
@@ -697,7 +732,7 @@ $(function() {
                 action: 'estado'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "ON") {
 
@@ -723,7 +758,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }

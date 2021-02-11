@@ -327,7 +327,7 @@ function devolverdatos($losbytes, $opcion)
                                                                     $archivoconcreto = $rutaarchivo . "/" . $fcarpetas[$i];
                                                                     echo '<tr class = "menu-hover">';
 
-                                                                    echo '<th scope="row">';
+                                                                    echo '<th class = "elclick1" scope="row" id="' .$i .'">';
 
                                                                     if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
                                                                         clearstatcache();
@@ -400,9 +400,9 @@ function devolverdatos($losbytes, $opcion)
                                                                     //AÑADIR FECHA ARCHIVO/CARPETA
                                                                     clearstatcache();
                                                                     if (!is_dir($archivoconcreto)) {
-                                                                        echo '<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
+                                                                        echo '<td class = "elclick1" id="' .$i .'">' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                     } else {
-                                                                        echo '<td>' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
+                                                                        echo '<td class = "elclick1" id="' .$i .'">' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                     }
 
                                                                     //AÑADIR TAMAÑO ARCHIVO
@@ -412,7 +412,7 @@ function devolverdatos($losbytes, $opcion)
                                                                     } else {
                                                                         $eltamano = ".";
                                                                     }
-                                                                    echo '<td>' . $eltamano . '</td>';
+                                                                    echo '<td class = "elclick1" id="' .$i .'">' . $eltamano . '</td>';
                                                                     echo '<td>';
 
                                                                     //CREAR BOTONES ARCHIVOS Y CARPETAS
