@@ -91,6 +91,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/" . $reccarpmine;
 
+            $rutaminecraffijo = $rutacarpetamine;
+
             //VARIABLE RUTA CARPETA CONFIG
             $rutacarpetaconfig = dirname(getcwd()) . PHP_EOL;
             $rutacarpetaconfig = trim($rutacarpetaconfig);
@@ -194,6 +196,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //PERMISO EULA.TXT
+            $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 eula.txt";
+            exec($elcommando);
+
             //VERIFICAR SI HAY NOMBRE.JAR
             if ($elerror == 0) {
                 if ($recarchivojar == "") {
@@ -290,6 +296,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 rename($rutatemp, $rutacarpetamine);
                 copy($rutacarpetamine, $rutafinal);
             }
+
+            //PERMISO SERVER.PROPERTIES
+            $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 server.properties";
+            exec($elcommando);
             
             
             //INSERTAR SERVER-ICON EN CASO QUE NO EXISTA
@@ -310,6 +320,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     }
                 }
             }
+
+            //PERMISO SERVER.PROPERTIES
+            $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 server-icon.png";
+            exec($elcommando);
 
             //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
             if ($elerror == 0) {
