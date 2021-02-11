@@ -321,7 +321,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //PERMISO SERVER.PROPERTIES
+            //PERMISO SERVER-ICON.PNG
             $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 server-icon.png";
             exec($elcommando);
 
