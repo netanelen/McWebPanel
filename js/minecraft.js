@@ -918,7 +918,7 @@ $(function() {
         var envioaction = "entity-broadcast-range-percentage";
         var enviovalor = document.getElementById("form-entity-broadcast-range-percentage").value;
 
-        if (enviovalor > 500 || enviovalor < 0) {
+        if (enviovalor > 1000 || enviovalor < 10) {
             errores = 1;
         }
 

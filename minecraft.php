@@ -923,7 +923,7 @@ function test_input($data)
                                                     <h3 class=""><b>Distancia para renderizar entidades</b></h3>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <p class="">Valor Defecto: 100<br>Valor Min: 0 - Valor Max: 500</p>
+                                                    <p class="">Valor Defecto: 100<br>Valor Min: 10 - Valor Max: 1000</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -931,7 +931,7 @@ function test_input($data)
                                                     <p class="lead">Ajustar la distancia de renderizado de entidades, si es muy lejano puede causar lag.</p>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-entity-broadcast-range-percentage" type="number" class="form-control" min="0" max="500" value="<?php echo (leerlineas('entity-broadcast-range-percentage')); ?>">
+                                                    <input id="form-entity-broadcast-range-percentage" type="number" class="form-control" min="10" max="1000" value="<?php echo (leerlineas('entity-broadcast-range-percentage')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1802,17 +1802,24 @@ function test_input($data)
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <h3 class=""><b>op-permission-level</b></h3>
+                                                    <p class="lead">Asigna el permiso por defecto para operadores.</p>
+                                                    <p class="">Valor 1: Ops pueden hacer bypass a la protección del spawn.
+                                                    <br>Valor 2: Ops pueden usar todos los comandos de un jugador, /debug y bloques de comandos.
+                                                    <br>Valor 3: Ops pueden usar la mayoría de comandos multijugador incluidos /ban /op, etc...
+                                                    <br>Valor 4: Ops pueden usar todos los comandos incluso /stop /save-all /save-on y /save-off
+                                                    </p>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <p class="">Valor Defecto: 4<br>Valor Min: 1 - Valor Max: 4</p>
+                                                    <input id="form-op-permission-level" type="number" class="form-control" min="1" max="4" value="<?php echo (leerlineas('op-permission-level')); ?>">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8">
-                                                    <p class="lead">Asigna el permiso por defecto para operadores.</p>
+                                                    
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input id="form-op-permission-level" type="number" class="form-control" min="1" max="4" value="<?php echo (leerlineas('op-permission-level')); ?>">
+                                                    
                                                 </div>
                                             </div>
                                             <div class="row">
