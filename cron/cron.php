@@ -114,18 +114,6 @@ if ($elerror == 0) {
                                                                 $paraejecutar = "stop";
                                                                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
                                                                 shell_exec($laejecucion);
-
-                                                                //PERFMISOS FTP
-                                                                $dirconfig = $RUTAPRINCIPAL;
-                                                                $dirconfig = trim($dirconfig);
-                                                                $dirconfig .= "/" . $elnombrescreen;
-
-                                                                //PROTECCION SH
-                                                                $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                                                                clearstatcache();
-                                                                if (file_exists($dirconfig . "/start.sh")) {
-                                                                    exec($permcomando);
-                                                                }
                                                             }
 
                                                             break;
@@ -579,19 +567,6 @@ if ($elerror == 0) {
                                                                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
 
                                                                 shell_exec($laejecucion);
-
-                                                                //PERFMISOS FTP
-                                                                if (strtolower($paraejecutar) == "stop") {
-                                                                    $dirconfig = $RUTAPRINCIPAL;
-                                                                    $dirconfig = trim($dirconfig);
-                                                                    $dirconfig .= "/" . $elnombrescreen;
-
-                                                                    //PROTECCION SH
-                                                                    $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                                                                    clearstatcache();
-                                                                    if (file_exists($dirconfig . "/start.sh")) {
-                                                                        exec($permcomando);
-                                                                    }
                                                                 }
                                                             }
 

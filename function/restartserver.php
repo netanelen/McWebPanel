@@ -61,18 +61,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
                 shell_exec($laejecucion);
 
-                //PERFMISOS FTP
-                $dirconfig = dirname(getcwd()) . PHP_EOL;
-                $dirconfig = trim($dirconfig);
-                $dirconfig .= "/" . $elnombrescreen;
-
-                //PROTECCION SH
-                $permcomando = "chmod 644 " . $dirconfig . "/start.sh";
-                clearstatcache();
-                if (file_exists($dirconfig . "/start.sh")) {
-                    exec($permcomando);
-                }
-
                 $retorno = "ok";
             }
             echo $retorno;
