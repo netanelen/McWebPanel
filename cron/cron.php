@@ -186,6 +186,8 @@ if ($elerror == 0) {
                                                                 $rutacarpetamine = trim($rutacarpetamine);
                                                                 $rutacarpetamine .= "/" . $reccarpmine;
 
+                                                                $rutaminecraffijo = $rutacarpetamine;
+
                                                                 //VARIABLE RUTA CARPETA CONFIG
                                                                 $rutacarpetaconfig = $RUTAPRINCIPAL;
                                                                 $rutacarpetaconfig = trim($rutacarpetaconfig);
@@ -256,26 +258,11 @@ if ($elerror == 0) {
                                                                     }
                                                                 }
 
-                                                                //VERIFICAR EULA
+                                                                //VERIFICAR EULA EN CONFIG
                                                                 if ($elerror == 0) {
-                                                                    if ($receulaminecraft == "") {
-                                                                        $retorno = "no hay eula";
-                                                                        $elerror = 1;
-                                                                    }
-                                                                }
-
-                                                                //VERIFICAR EULA
-                                                                if ($elerror == 0) {
-                                                                    if ($receulaminecraft == "") {
+                                                                    if ($receulaminecraft != "1") {
                                                                         $elerror = 1;
                                                                         $retorno = "noeula";
-                                                                    } elseif ($receulaminecraft == "1") {
-                                                                        $rutaescrivir = $rutacarpetamine;
-                                                                        $rutaescrivir .= "/eula.txt";
-
-                                                                        $file = fopen($rutaescrivir, "w");
-                                                                        fwrite($file, "eula=true" . PHP_EOL);
-                                                                        fclose($file);
                                                                     }
                                                                 }
 
@@ -303,6 +290,10 @@ if ($elerror == 0) {
                                                                         }
                                                                     }
                                                                 }
+
+                                                                //PERMISO EULA.TXT
+                                                                $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 eula.txt";
+                                                                exec($elcommando);
 
                                                                 //VERIFICAR SI HAY NOMBRE.JAR
                                                                 if ($elerror == 0) {
@@ -390,6 +381,7 @@ if ($elerror == 0) {
 
                                                                     if (!feof($gestor)) {
                                                                         $elerror = 1;
+                                                                        $retorno = "fallofgets";
                                                                     }
 
                                                                     fclose($gestor);
@@ -398,6 +390,10 @@ if ($elerror == 0) {
                                                                     rename($rutatemp, $rutacarpetamine);
                                                                     copy($rutacarpetamine, $rutafinal);
                                                                 }
+
+                                                                //PERMISO SERVER.PROPERTIES
+                                                                $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 server.properties";
+                                                                exec($elcommando);
 
                                                                 //INSERTAR SERVER-ICON EN CASO QUE NO EXISTA
                                                                 if ($elerror == 0) {
@@ -417,6 +413,10 @@ if ($elerror == 0) {
                                                                         }
                                                                     }
                                                                 }
+
+                                                                //PERMISO SERVER-ICON.PNG
+                                                                $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 server-icon.png";
+                                                                exec($elcommando);
 
                                                                 //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
                                                                 if ($elerror == 0) {
