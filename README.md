@@ -19,7 +19,7 @@ Estos son los requisitos para que McWebPanel funcione
 
 ```
 Sistemas Operativos:
-Debian 10.5 | 10.6 | 10.7
+Debian 10.5 | 10.6 | 10.7 | 10.8
 Ubuntu Server 18.04 LTS | 20.04 LTS
 
 Servidor Web:
@@ -82,7 +82,7 @@ Cambiar Usuario Archivos:
 sudo chown -R www-data:www-data /var/www/html/
 ```
 
-Configurar zona horaria
+Configurar zona horaria (Ubuntu)
 ```
 sudo dpkg-reconfigure tzdata
 ```
