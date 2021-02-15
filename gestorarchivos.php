@@ -308,8 +308,14 @@ function devolverdatos($losbytes, $opcion)
                                                                         //Evitar mostrar .htaccess
                                                                         $archivoconcreto = $rutaarchivo . "/" . $a[$i];
                                                                         $getinfofile = pathinfo($archivoconcreto);
-                                                                        $tipoarchivo = "." . strtolower($getinfofile['extension']);
-                                                                        $tipoarchivo = trim($tipoarchivo);
+
+                                                                        //COMPRUEBA SI EL ARCHIVO TIENE EXTENSION
+                                                                        if (array_key_exists('extension', $getinfofile)) {
+                                                                            $tipoarchivo = "." . strtolower($getinfofile['extension']);
+                                                                            $tipoarchivo = trim($tipoarchivo);
+                                                                        } else {
+                                                                            $tipoarchivo = "";
+                                                                        }
 
                                                                         if ($tipoarchivo != ".htaccess" && $tipoarchivo != ".sh") {
                                                                             $farchivos[] = $a[$i];
@@ -327,7 +333,7 @@ function devolverdatos($losbytes, $opcion)
                                                                     $archivoconcreto = $rutaarchivo . "/" . $fcarpetas[$i];
                                                                     echo '<tr class = "menu-hover">';
 
-                                                                    echo '<th class = "elclick1" scope="row" id="' .$i .'">';
+                                                                    echo '<th class = "elclick1" scope="row" id="' . $i . '">';
 
                                                                     if ($fcarpetas[$i] != "." && $fcarpetas[$i] != "..") {
                                                                         clearstatcache();
@@ -350,9 +356,12 @@ function devolverdatos($losbytes, $opcion)
                                                                         echo '<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>';
                                                                     } else {
 
-                                                                        //FIX SI EL ARCHIVO NO TIENE EXTENSION
-                                                                        if (isset($getinfofile['extension'])) {
+                                                                        //COMPRUEBA SI EL ARCHIVO TIENE EXTENSION
+                                                                        if (array_key_exists('extension', $getinfofile)) {
                                                                             $tipoarchivo = "." . strtolower($getinfofile['extension']);
+                                                                            $tipoarchivo = trim($tipoarchivo);
+                                                                        }else{
+                                                                            $tipoarchivo = "";
                                                                         }
 
                                                                         //VER TIPO Y AÑADIR ICONO
@@ -400,9 +409,9 @@ function devolverdatos($losbytes, $opcion)
                                                                     //AÑADIR FECHA ARCHIVO/CARPETA
                                                                     clearstatcache();
                                                                     if (!is_dir($archivoconcreto)) {
-                                                                        echo '<td class = "elclick1" id="' .$i .'">' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
+                                                                        echo '<td class = "elclick1" id="' . $i . '">' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                     } else {
-                                                                        echo '<td class = "elclick1" id="' .$i .'">' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
+                                                                        echo '<td class = "elclick1" id="' . $i . '">' . date("d/m/Y H:i:s", filemtime($archivoconcreto)) . '</td>';
                                                                     }
 
                                                                     //AÑADIR TAMAÑO ARCHIVO
@@ -412,7 +421,7 @@ function devolverdatos($losbytes, $opcion)
                                                                     } else {
                                                                         $eltamano = ".";
                                                                     }
-                                                                    echo '<td class = "elclick1" id="' .$i .'">' . $eltamano . '</td>';
+                                                                    echo '<td class = "elclick1" id="' . $i . '">' . $eltamano . '</td>';
                                                                     echo '<td>';
 
                                                                     //CREAR BOTONES ARCHIVOS Y CARPETAS
@@ -530,7 +539,7 @@ function devolverdatos($losbytes, $opcion)
                                                         </table>
                                                         <hr>
                                                         <p class="lead negrita">Estados Procesos</p>
-                                                        <p id= "gifstatus"></p>
+                                                        <p id="gifstatus"></p>
                                                         <p class="lead" id="textoretorno"></p>
                                                     </div>
                                                     <hr>
