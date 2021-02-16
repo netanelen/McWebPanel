@@ -360,7 +360,7 @@ function devolverdatos($losbytes, $opcion)
                                                                         if (array_key_exists('extension', $getinfofile)) {
                                                                             $tipoarchivo = "." . strtolower($getinfofile['extension']);
                                                                             $tipoarchivo = trim($tipoarchivo);
-                                                                        }else{
+                                                                        } else {
                                                                             $tipoarchivo = "";
                                                                         }
 
@@ -399,7 +399,7 @@ function devolverdatos($losbytes, $opcion)
                                                                             echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".zip") {
                                                                             echo '<img class="mr-2" src="img/gestorarchivos/zip.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".gz" || $tipoarchivo == ".tar" || $tipoarchivo == ".bz2") {
+                                                                        } elseif ($tipoarchivo == ".tar" || $tipoarchivo == ".bz2" || $tipoarchivo == ".gz" || $tipoarchivo == ".lz" || $tipoarchivo == ".lzma" || $tipoarchivo == ".xz" || $tipoarchivo == ".z" || $tipoarchivo == ".taz" || $tipoarchivo == ".tb2" || $tipoarchivo == ".tbz" || $tipoarchivo == ".tbz2" || $tipoarchivo == ".tgz" || $tipoarchivo == ".tlz" || $tipoarchivo == ".txz" || $tipoarchivo == ".tz") {
                                                                             echo '<img class="mr-2" src="img/gestorarchivos/tar.png">' . $fcarpetas[$i] . '</th>';
                                                                         } else {
                                                                             echo '<img class="mr-2" src="img/gestorarchivos/void.png">' . $fcarpetas[$i] . '</th>';
@@ -435,7 +435,7 @@ function devolverdatos($losbytes, $opcion)
 
                                                                         //BOTON DESCOMPRIMIR
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosdescomprimir', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosdescomprimir'] == 1) {
-                                                                            if ($tipoarchivo == ".gz" || $tipoarchivo == ".tar" || $tipoarchivo == ".bz2") {
+                                                                            if ($tipoarchivo == ".tar" || $tipoarchivo == ".bz2" || $tipoarchivo == ".gz" || $tipoarchivo == ".lz" || $tipoarchivo == ".lzma" || $tipoarchivo == ".xz" || $tipoarchivo == ".z" || $tipoarchivo == ".taz" || $tipoarchivo == ".tb2" || $tipoarchivo == ".tbz" || $tipoarchivo == ".tbz2" || $tipoarchivo == ".tgz" || $tipoarchivo == ".tlz" || $tipoarchivo == ".txz" || $tipoarchivo == ".tz") {
                                                                                 echo '<button type="button" class="descomprimirtar btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>';
                                                                             } elseif ($tipoarchivo == ".zip") {
                                                                                 echo '<button type="button" class="descomprimirzip btn btn-primary mr-1" value="' . $fcarpetas[$i] . '" title="Descomprimir"><img src="img/botones/descomprimir.png" alt="Descomprimir"></button>';
