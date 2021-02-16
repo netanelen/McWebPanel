@@ -170,35 +170,25 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //obtener solo nombre fichero sin extension
-            if ($elerror == 0) {
-                $getarchivo = pathinfo($archivo);
-                $limpio = "." . strtolower($getarchivo['extension']);
 
-                if ($limpio == ".gz") {
-                    $limpio = substr($getarchivo['basename'], -7);
-                    if ($limpio == ".tar.gz") {
-                        $limpio = rtrim($getarchivo['basename'], ".tar.gz");
-                        $tipodecompress = ".tar.gz";
-                    } else {
-                        $retorno = "notargz";
+            //COMPROBAR TIPO ARCHIVO
+            if ($elerror == 0) {
+
+                $eltipoapplication = mime_content_type($archivo);
+                $eltipoapplication = trim($eltipoapplication);
+
+                switch ($eltipoapplication) {
+                    case "application/x-tar":
+                        break;
+                    case "application/x-bzip2":
+                        break;
+                    case "application/gzip":
+                        break;
+                    case "application/x-xz":
+                        break;
+                    default:
                         $elerror = 1;
-                    }
-                } elseif ($limpio == ".bz2") {
-                    $limpio = substr($getarchivo['basename'], -8);
-                    if ($limpio == ".tar.bz2") {
-                        $limpio = rtrim($getarchivo['basename'], ".tar.bz2");
-                        $tipodecompress = ".tar.bz2";
-                    } else {
-                        $retorno = "notarbz2";
-                        $elerror = 1;
-                    }
-                } elseif ($limpio == ".tar") {
-                    $limpio = rtrim($getarchivo['basename'], ".tar");
-                    $tipodecompress = ".tar";
-                } else {
-                    $retorno = "notar";
-                    $elerror = 1;
+                        $retorno = "novaltipe";
                 }
             }
 
@@ -224,10 +214,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-
-            //comprovar si existe la carpeta
+            //COMPROVAR SI EXISTE LA CARPETA
             if ($elerror == 0) {
-                $lacarpeta = $getarchivo['dirname'] . "/" . $limpio;
+                $getarchivo = pathinfo($archivo);
+                $array = explode(".", $getarchivo['filename']);
+                $lacarpeta = $getarchivo['dirname'] . "/" . $array[0];
+
                 clearstatcache();
                 if (file_exists($lacarpeta)) {
                     $retorno = "carpyaexiste";
@@ -238,14 +230,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //DESCOMPRIMIR
             if ($elerror == 0) {
 
-                if ($tipodecompress == ".tar.gz") {
-                    $elcomando1 = "tar -xzvf " . $archivo . " -C " . $lacarpeta;
-                } elseif ($tipodecompress == ".tar") {
-                    $elcomando1 = "tar -xvf " . $archivo . " -C " . $lacarpeta;
-                } elseif ($tipodecompress == ".tar.bz2") {
-                    $elcomando1 = "tar -xjvf " . $archivo . " -C " . $lacarpeta;
-                }
-
+                $elcomando1 = "tar -xvf " . $archivo . " -C " . $lacarpeta;
                 $elcomando2 = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
                 $delsh = "rm " . $dirsh;
 
