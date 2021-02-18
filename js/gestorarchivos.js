@@ -333,7 +333,6 @@ $(function () {
                     type: 'POST',
                     dataType: 'json',
                     success: function (data) {
-alert(data.eserror);
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
                         } else if (data.eserror == "noexiste") {
