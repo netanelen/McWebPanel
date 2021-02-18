@@ -333,7 +333,7 @@ $(function () {
                     type: 'POST',
                     dataType: 'json',
                     success: function (data) {
-
+alert(data.eserror);
                         if (data.eserror == "nada") {
                             alert("No se ha pasado ningún archivo a descomprimir");
                         } else if (data.eserror == "noexiste") {
@@ -353,6 +353,8 @@ $(function () {
                             alert("Error: La carpeta temp no tiene permisos de escritura.");
                         } else if (data.eserror == "processenejecucion") {
                             alert("Error: Existe un proceso en ejecución.");
+                        } else if (data.eserror == "novaltipe") {
+                            alert("Error: El tipo de archivo no es válido o es falso.");
                         }
 
                     }

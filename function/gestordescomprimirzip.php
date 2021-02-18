@@ -171,13 +171,26 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //obtener solo nombre fichero sin extension
             if ($elerror == 0) {
                 $getarchivo = pathinfo($archivo);
-                $limpio = "." . strtolower($getarchivo['extension']);
+                $laextension = strtolower($getarchivo['extension']);
 
-                if ($limpio == ".zip") {
-                    $limpio = rtrim($getarchivo['basename'], ".zip");
-                } else {
+                if ($laextension != "zip") {
                     $retorno = "nozip";
                     $elerror = 1;
+                }
+            }
+
+            //COMPROBAR TIPO ARCHIVO
+            if ($elerror == 0) {
+
+                $eltipoapplication = mime_content_type($archivo);
+                $eltipoapplication = trim($eltipoapplication);
+
+                switch ($eltipoapplication) {
+                    case "application/zip":
+                        break;
+                    default:
+                        $elerror = 1;
+                        $retorno = "novaltipe";
                 }
             }
 
@@ -203,8 +216,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //comprovar si existe la carpeta
+            //COMPROVAR SI EXISTE LA CARPETA
             if ($elerror == 0) {
+                $limpio = $getarchivo['filename'];
+                $limpio = trim($limpio);
                 $lacarpeta = $getarchivo['dirname'] . "/" . $limpio;
 
                 clearstatcache();
