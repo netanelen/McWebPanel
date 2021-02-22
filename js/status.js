@@ -16,16 +16,16 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
-    $("#binicio").click(function() {
+    $("#binicio").click(function () {
         $.ajax({
             url: 'function/startserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor iniciado correctamente.</div>";
@@ -67,19 +67,21 @@ $(function() {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La memoria seleccionada supera la memoria total del sistema.</div>";
                 } else if (data == "ramavaliableout") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay memoria suficiente para ejecutar el servidor minecraft.</div>";
+                } else if (data == "noscreenconf") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo /config/screen.conf no existe.</div>";
                 }
             }
         });
     });
 
-    $("#breiniciar").click(function() {
+    $("#breiniciar").click(function () {
         $.ajax({
             url: 'function/restartserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Reiniciando Servidor.</div>";
@@ -88,30 +90,30 @@ $(function() {
         });
     });
 
-    $("#bparar").click(function() {
+    $("#bparar").click(function () {
         $.ajax({
             url: 'function/stopserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "ok") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Servidor apagado correctamente.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Señal apagar servidor enviada correctamente.</div>";
                 }
             }
         });
     });
 
-    $("#bkill").click(function() {
+    $("#bkill").click(function () {
         $.ajax({
             url: 'function/killserver.php',
             data: {
                 action: 'eltexto'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "ok") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>El servidor fue matado correctamente.</div>";
@@ -144,7 +146,7 @@ $(function() {
             },
             type: 'POST',
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
 
                 document.getElementById("textoservidor").innerHTML = "Servidor: " + String(data.encendido);
                 document.getElementById("horaserver").innerHTML = "Hora Servidor: " + String(data.hora);
@@ -169,7 +171,7 @@ $(function() {
 
                     document.getElementById("textocpu").innerHTML = "Cpu:";
                     document.getElementById("textoram").innerHTML = "Ram:";
-                    document.getElementById("eluptime").innerHTML = "Uptime:"
+                    document.getElementById("eluptime").innerHTML = "Uptime:";
 
                 } else if (data.encendido == "Encendido") {
 
@@ -177,8 +179,7 @@ $(function() {
 
                     if (data.memoria !== "") {
                         document.getElementById("textoram").innerHTML = "Ram: " + String(data.memoria) + " / Total: " + String(data.ramconfig) + " GB";
-
-                    }
+                    }         
 
                     document.getElementById("eluptime").innerHTML = "Uptime: " + String(data.uptime);
 
@@ -204,6 +205,22 @@ $(function() {
 
     setInterval(myTimer, 1000);
 
+    function getuserserver() {
+
+        $.ajax({
+            url: 'function/statusgetusers.php',
+            data: {
+                action: 'status'
+            },
+            type: 'POST',
+            success: function (data) {
+                document.getElementById("jugadores").innerHTML = "Jugadores Online: " + String(data);  
+            }
+        });
+    }
+
+    setInterval(getuserserver, 1000);
+
     function sessionTimer() {
 
         $.ajax({
@@ -212,7 +229,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
