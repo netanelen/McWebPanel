@@ -49,7 +49,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $elnombredirectorio = CONFIGDIRECTORIO;
       $rutaarchivo = dirname(getcwd()) . PHP_EOL;
       $rutaarchivo = trim($rutaarchivo);
-      $rutaarchivo .= "/" . $elnombredirectorio . "/logs/latest.log";
+      $rutaarchivo .= "/" . $elnombredirectorio . "/logs/screen.log";
 
       //COMPROVAR SI EXISTE LA RUTA
       clearstatcache();
