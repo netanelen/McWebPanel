@@ -28,6 +28,8 @@ $(function() {
 
     window.addEventListener("resize", redimensionar);
 
+    sessionStorage.antiguo = "";
+
     function myTimer() {
 
         $.ajax({
@@ -37,14 +39,13 @@ $(function() {
             },
             type: 'POST',
             success: function(data) {
-                var textoantiguo = document.getElementById("laconsola").value;
 
                 document.getElementById("laconsola").value = data;
 
-                if (data !== textoantiguo) {
+                if (data.length != sessionStorage.antiguo) {
                     document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
                 }
-
+                sessionStorage.antiguo = data.length;
             }
         });
     }
