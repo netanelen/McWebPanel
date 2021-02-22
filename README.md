@@ -140,6 +140,7 @@ http://la-ip-del-servidor
 * [Bootstrap](https://getbootstrap.com/) - Bootstrap
 * [jQuery](https://jquery.com/) - jQuery
 * [PHP](https://www.php.net/) - PHP
+* [xPaw Library](https://github.com/xPaw/PHP-Minecraft-Query) - PHP Minecraft Query library
 
 ## Colaboradores ✒️
 
