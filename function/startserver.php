@@ -43,7 +43,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-            function guardareinicio($rutaelsh, $elcom)
+            function guardareinicio($rutaelsh, $elcom, $rutaarchivlog)
             {
                 $rutaelsh .= "/start.sh";
 
@@ -53,6 +53,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     if (is_writable($rutaelsh)) {
                         $file = fopen($rutaelsh, "w");
                         fwrite($file, "#!/bin/sh" . PHP_EOL);
+                        fwrite($file, "rm " . $rutaarchivlog . PHP_EOL);
                         fwrite($file, $elcom . PHP_EOL);
                         fclose($file);
                     }
@@ -197,7 +198,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             //PERMISO EULA.TXT
-            $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 eula.txt";
+            $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 eula.txt";
             exec($elcommando);
 
             //VERIFICAR SI HAY NOMBRE.JAR
@@ -297,11 +298,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 copy($rutacarpetamine, $rutafinal);
             }
 
-            //PERMISO SERVER.PROPERTIES
-            $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 server.properties";
-            exec($elcommando);
-            
-            
             //INSERTAR SERVER-ICON EN CASO QUE NO EXISTA
             if ($elerror == 0) {
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
@@ -322,7 +318,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             //PERMISO SERVER-ICON.PNG
-            $elcommando = "cd " .$rutaminecraffijo ." && chmod 664 server-icon.png";
+            $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 server-icon.png";
             exec($elcommando);
 
             //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
@@ -356,6 +352,19 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //COMPROBAR SI EXISTE SCREEN.CONF
+            if ($elerror == 0) {
+                $rutascreenconf = dirname(getcwd()) . PHP_EOL;
+                $rutascreenconf = trim($rutascreenconf);
+                $rutascreenconf .= "/config/screen.conf";
+
+                clearstatcache();
+                if (!file_exists($rutascreenconf)) {
+                    $retorno = "noscreenconf";
+                    $elerror = 1;
+                }
+            }
+
             //INICIAR SERVIDOR
             if ($elerror == 0) {
                 $comandoserver = "";
@@ -364,6 +373,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $rutacarpetamine = dirname(getcwd()) . PHP_EOL;
                 $rutacarpetamine = trim($rutacarpetamine);
                 $larutash = $rutacarpetamine . "/" . $reccarpmine;
+                $larutascrrenlog = $rutacarpetamine . "/" . $reccarpmine . "/logs/screen.log";
                 $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
 
                 $inigc = "";
@@ -372,32 +382,42 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 $cominiciostart = "";
 
+                //BORRAR LOG SCREEN
+                clearstatcache();
+                if (file_exists($larutascrrenlog)) {
+                    unlink($larutascrrenlog);
+                }
+
+                //RECOLECTOR
                 if ($recgarbagecolector == "1") {
                     $inigc = "-XX:+UseConcMarkSweepGC";
                 } elseif ($recgarbagecolector == "2") {
                     $inigc = "-XX:+UseG1GC";
                 }
 
+                //FORCEUPGRADE MAPA
                 if ($recforseupgrade == "1") {
                     $iniforceupg = "--forceUpgrade";
                 }
 
+                //ERASE CACHE MAPA
                 if ($recerasecache == "1") {
                     $inieracecache = "--eraseCache";
                 }
 
+                //TIPO SERVIDOR
                 if ($rectiposerv == "vanilla") {
-                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
+                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
                 } elseif ($rectiposerv == "spigot") {
-                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui -nojline --log-strip-color";
-                    $cominiciostart = "screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
-                    guardareinicio($larutash, $cominiciostart);
+                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui -nojline --log-strip-color";
+                    $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                    guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                 } elseif ($rectiposerv == "paper") {
-                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
-                    $cominiciostart = "screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
-                    guardareinicio($larutash, $cominiciostart);
+                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmSL " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
+                    $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
+                    guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                 } elseif ($rectiposerv == "otros") {
-                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
+                    $comandoserver .= "cd .. && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' " . $iniforceupg . " " . $inieracecache . " nogui";
                 }
 
                 $elpid = shell_exec($comandoserver);
