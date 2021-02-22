@@ -128,7 +128,7 @@ if ($elerror == 0) {
 
                                                             if ($elpid == "") {
 
-                                                                function guardareinicio($rutaelsh, $elcom)
+                                                                function guardareinicio($rutaelsh, $elcom, $rutaarchivlog)
                                                                 {
                                                                     $rutaelsh .= "/start.sh";
 
@@ -138,6 +138,7 @@ if ($elerror == 0) {
                                                                         if (is_writable($rutaelsh)) {
                                                                             $file = fopen($rutaelsh, "w");
                                                                             fwrite($file, "#!/bin/sh" . PHP_EOL);
+                                                                            fwrite($file, "rm " . $rutaarchivlog . PHP_EOL);
                                                                             fwrite($file, $elcom . PHP_EOL);
                                                                             fclose($file);
                                                                         }
@@ -379,10 +380,6 @@ if ($elerror == 0) {
                                                                     copy($rutacarpetamine, $rutafinal);
                                                                 }
 
-                                                                //PERMISO SERVER.PROPERTIES
-                                                                $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 server.properties";
-                                                                exec($elcommando);
-
                                                                 //INSERTAR SERVER-ICON EN CASO QUE NO EXISTA
                                                                 if ($elerror == 0) {
                                                                     $rutacarpetamine = $RUTAPRINCIPAL;
@@ -437,6 +434,19 @@ if ($elerror == 0) {
                                                                     }
                                                                 }
 
+                                                                //COMPROBAR SI EXISTE SCREEN.CONF
+                                                                if ($elerror == 0) {
+                                                                    $rutascreenconf = $RUTAPRINCIPAL;
+                                                                    $rutascreenconf = trim($rutascreenconf);
+                                                                    $rutascreenconf .= "/config/screen.conf";
+
+                                                                    clearstatcache();
+                                                                    if (!file_exists($rutascreenconf)) {
+                                                                        $retorno = "noscreenconf";
+                                                                        $elerror = 1;
+                                                                    }
+                                                                }
+
                                                                 //INICIAR SERVIDOR
                                                                 if ($elerror == 0) {
 
@@ -445,29 +455,36 @@ if ($elerror == 0) {
                                                                     $larutash = "";
                                                                     $inigc = "";
 
+                                                                    $rutacarpetamine = $RUTAPRINCIPAL;
+                                                                    $rutacarpetamine = trim($rutacarpetamine);
+                                                                    $larutash = $rutacarpetamine . "/" . $reccarpmine;
+                                                                    $larutascrrenlog = $rutacarpetamine . "/" . $reccarpmine . "/logs/screen.log";
+                                                                    $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
+
+                                                                    //BORRAR LOG SCREEN
+                                                                    clearstatcache();
+                                                                    if (file_exists($larutascrrenlog)) {
+                                                                        unlink($larutascrrenlog);
+                                                                    }
+
                                                                     if ($recgarbagecolector == "1") {
                                                                         $inigc = "-XX:+UseConcMarkSweepGC";
                                                                     } elseif ($recgarbagecolector == "2") {
                                                                         $inigc = "-XX:+UseG1GC";
                                                                     }
 
-                                                                    $rutacarpetamine = $RUTAPRINCIPAL;
-                                                                    $rutacarpetamine = trim($rutacarpetamine);
-                                                                    $larutash = $rutacarpetamine . "/" . $reccarpmine;
-                                                                    $rutacarpetamine .= "/" . $reccarpmine . "/" . $recarchivojar;
-
                                                                     if ($rectiposerv == "vanilla") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     } elseif ($rectiposerv == "spigot") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
-                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
-                                                                        guardareinicio($larutash, $cominiciostart);
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                                                                     } elseif ($rectiposerv == "paper") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
-                                                                        $cominiciostart = "screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
-                                                                        guardareinicio($larutash, $cominiciostart);
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
+                                                                        guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                                                                     } elseif ($rectiposerv == "otros") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -dmS " . $reccarpmine . " " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
                                                                     }
                                                                     $elpid = shell_exec($comandoserver);
                                                                 }
@@ -567,7 +584,6 @@ if ($elerror == 0) {
                                                                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
 
                                                                 shell_exec($laejecucion);
-                                                                }
                                                             }
 
                                                             break;
