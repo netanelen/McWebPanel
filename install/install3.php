@@ -315,6 +315,15 @@ require_once("../template/errorreport.php");
         fwrite($file, "?>" . PHP_EOL);
         fclose($file);
 
+        //GUARDAR FICHERO SCREEN.CONF
+        $rutaescrivir = $dirconfig;
+        $rutaescrivir .= "/screen.conf";
+
+        $file = fopen($rutaescrivir, "w");
+        fwrite($file, "logfile flush 0" . PHP_EOL);
+        fwrite($file, "log on" . PHP_EOL);
+        fclose($file);
+
         //GUARDAR FICHERO serverproperties.txt
         $rutaescrivir = $dirconfig;
         $rutaescrivir .= "/serverproperties.txt";
