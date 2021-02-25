@@ -18,6 +18,9 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function() {
 
+    sessionStorage.antiguo = "";
+    sessionStorage.actdesroll = 0;
+
     function redimensionar() {
         var tamano = window.innerHeight;
         tamano = tamano - 150;
@@ -27,8 +30,6 @@ $(function() {
     redimensionar();
 
     window.addEventListener("resize", redimensionar);
-
-    sessionStorage.antiguo = "";
 
     function myTimer() {
 
@@ -43,7 +44,9 @@ $(function() {
                 document.getElementById("laconsola").value = data;
 
                 if (data.length != sessionStorage.antiguo) {
-                    document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
+                    if(sessionStorage.actdesroll == 0){
+                        document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
+                    }
                 }
                 sessionStorage.antiguo = data.length;
             }
@@ -70,6 +73,18 @@ $(function() {
                 }
             });
         }
+    }
+
+    if (document.getElementById('descroll') !== null) {
+        $("#descroll").click(function() {
+            if(sessionStorage.actdesroll == 0){
+                sessionStorage.actdesroll = 1;
+                document.getElementById('descroll').innerText = "Activar Scroll";
+            }else{
+                sessionStorage.actdesroll = 0;
+                document.getElementById('descroll').innerText = "Desactivar Scroll";
+            }
+        });
     }
 
     if (document.getElementById('botonconsola') !== null) {

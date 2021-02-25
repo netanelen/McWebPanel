@@ -77,33 +77,34 @@ require_once("template/header.php");
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 text-gray-800 pt-2 mb-2">Consola</h1>
-
-                        <div class="py-0">
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <textarea readonly class="form-control textoconsola mb-1" id="laconsola" name="laconsola"></textarea>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h1 class="h3 text-gray-800 pt-2">Consola</h1>
                             </div>
-
+                            <div class="col-md-10">
+                                <button class="btn btn-primary mt-2 float-right" id="descroll" type="button">Desactivar Scroll</button>
+                            </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea readonly class="form-control textoconsola mb-1" id="laconsola" name="laconsola"></textarea>
+                            </div>
+                        </div>
+
                         <hr>
                         <?php
                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pconsolaenviar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pconsolaenviar'] == 1) {
                         ?>
-                            <div class="py-0">
-
-                                <div class="row">
-                                    <div class="col-md-11">
-                                        <input type="text" class="form-control mb-2" id="elcomando" name="elcomando" placeholder="Comando">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-primary mb-2" id="botonconsola" type="button">Enviar</button>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control mb-2" id="elcomando" name="elcomando" placeholder="Comando">
                                 </div>
-
+                                <div class="col-md-2">
+                                    <button class="form-control btn btn-primary float-right" id="botonconsola" type="button">Enviar</button>
+                                </div>
                             </div>
+
                         <?php
                         }
                         ?>
