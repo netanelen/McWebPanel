@@ -632,7 +632,9 @@ $(function () {
         $("#bselectall").click(function () {
             var checkseleccionados = document.getElementsByClassName('laseleccion');
             for (var i = 0; i < checkseleccionados.length; i++) {
-                checkseleccionados[i].checked = true;
+                if (checkseleccionados[i].disabled == false) {
+                    checkseleccionados[i].checked = true;
+                }
             }
         });
     }
@@ -657,10 +659,12 @@ $(function () {
 
                 if (sessionStorage.pulsorecuadro == 0) {
 
-                    if (checkseleccionados[this.id - 1].checked == false) {
-                        checkseleccionados[this.id - 1].checked = true;
-                    } else {
-                        checkseleccionados[this.id - 1].checked = false;
+                    if (checkseleccionados[this.id - 1].disabled == false) {
+                        if (checkseleccionados[this.id - 1].checked == false) {
+                            checkseleccionados[this.id - 1].checked = true;
+                        } else {
+                            checkseleccionados[this.id - 1].checked = false;
+                        }
                     }
 
                 } else {

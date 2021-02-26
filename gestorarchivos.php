@@ -176,36 +176,37 @@ function devolverdatos($losbytes, $opcion)
                                                         $_SESSION['GESTARCHPROSSES'] = 0;
                                                     }
 
-                                                    //COMPROVAR SI EXISTE CARPETA SERVIDOR MINECRAF
-                                                    //CON DOBLE CONFIRMACION POR SI TE QUEDAS ATASCADO EN UNA CARPETA SUPERIOR Y LUEGO SE ELIMINO POR CONSOLA O FTP
+                                                    //SI TE QUEDAS ATASCADO EN UNA CARPETA SUPERIOR Y LUEGO SE ELIMINO POR CONSOLA O FTP
                                                     clearstatcache();
                                                     if (!file_exists($rutaarchivo)) {
                                                         $_SESSION['RUTACTUAL'] = $_SESSION['RUTALIMITE'];
                                                         $rutaarchivo = $_SESSION['RUTALIMITE'];
-                                                        clearstatcache();
-                                                        if (!file_exists($rutaarchivo)) {
-                                                            echo "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta servidor minecraft.</div>";
-                                                            exit;
-                                                        }
+                                                    }
+
+                                                    //COMPROVAR SI EXISTE CARPETA SERVIDOR MINECRAF
+                                                    clearstatcache();
+                                                    if (!file_exists($_SESSION['RUTALIMITE'])) {
+                                                        echo "<div class='alert alert-danger' role='alert'>Error: No existe la carpeta servidor minecraft.</div>";
+                                                        exit;
                                                     }
 
                                                     //COMPROVAR SI SE PUEDE LEER CARPETA
                                                     clearstatcache();
-                                                    if (!is_readable($rutaarchivo)) {
+                                                    if (!is_readable($_SESSION['RUTALIMITE'])) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta servidor minecraft no tiene permisos de lectura.</div>";
                                                         exit;
                                                     }
 
                                                     //COMPROVAR SI SE PUEDE ESCRIVIR EN CARPETA
                                                     clearstatcache();
-                                                    if (!is_writable($rutaarchivo)) {
+                                                    if (!is_writable($_SESSION['RUTALIMITE'])) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta servidor minecraft no tiene permisos de escritura.</div>";
                                                         exit;
                                                     }
 
                                                     //COMPROVAR SI SE PUEDE EJECUTAR EN CARPETA
                                                     clearstatcache();
-                                                    if (!is_executable($rutaarchivo)) {
+                                                    if (!is_executable($_SESSION['RUTALIMITE'])) {
                                                         echo "<div class='alert alert-danger' role='alert'>Error: La carpeta servidor minecraft no tiene permisos de ejecucion.</div>";
                                                         exit;
                                                     }
@@ -342,7 +343,7 @@ function devolverdatos($losbytes, $opcion)
                                                                             if (is_executable($archivoconcreto)) {
                                                                                 echo '<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">';
                                                                             } else {
-                                                                                echo '<input class="mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled>';
+                                                                                echo '<input class="laseleccion mr-2" title="Sin permisos de ejecucion/Enter" type="checkbox" disabled="disabled">';
                                                                             }
                                                                         } else {
                                                                             echo '<input class="laseleccion mr-2" type="checkbox" value="' . $fcarpetas[$i] . '">';
