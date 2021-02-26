@@ -18,6 +18,11 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; child-src 'none'; object-src 'none'; frame-ancestors 'none'");
+header('X-Content-Type-Options: nosniff');
+header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
+header("X-XSS-Protection: 1; mode=block");
+
 require_once("../template/session.php");
 require_once("../template/errorreport.php");
 
@@ -101,7 +106,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         exit;
                     } else {
                         echo ('<!doctype html><html lang="es"><head><title>Backups</title><link rel="stylesheet" href="../css/bootstrap.min.css"></head><body>');
-                        echo '<div class="alert alert-danger" role="alert">Error: El backup no tiene permisos de lectura.</div>';
+                        echo '<div class="alert alert-danger" role="alert">Error: El archivo no tiene permisos de lectura.</div>';
                         echo ('</body></html>');
                     }
                 }
