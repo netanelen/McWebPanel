@@ -91,9 +91,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $Info = $Query->Query();
 
                             if (is_array($Info)) {
-                                $subarray = $Info['players'];
-                                $maxplayers = $subarray['max'];
-                                $playersin = $subarray['online'];
+                                
+                                if (isset($Info['players'])) {
+                                    $subarray = $Info['players'];
+                                    $maxplayers = $subarray['max'];
+                                    $playersin = $subarray['online'];
+                                }
                             }
 
                             if ($Info === false) {
@@ -103,8 +106,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                                 $Info = $Query->QueryOldPre17();
                                 if (is_array($Info)) {
-                                    $maxplayers = $Info['MaxPlayers'];
-                                    $playersin = $Info['Players'];
+
+                                    if (isset($Info['MaxPlayers'])) {
+                                        $maxplayers = $Info['MaxPlayers'];
+                                    }
+
+                                    if (isset($Info['Players'])) {
+                                        $playersin = $Info['Players'];
+                                    }
                                 }
                             }
                         } catch (MinecraftPingException $e) {
