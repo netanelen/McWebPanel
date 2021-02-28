@@ -18,11 +18,19 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; child-src 'none'; object-src 'none'; frame-ancestors 'none'");
+header('X-Content-Type-Options: nosniff');
+header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
+header("X-XSS-Protection: 1; mode=block");
+
 $RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
 $RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -14);
 $RUTACONFIG = $RUTAPRINCIPAL . "/config/confopciones.php";
 
 require_once($RUTACONFIG);
+
+$retorno = "";
+$logfechayhora = "[" . date("d/m/Y") . "] [" . date("H:i:s") . "]";
 
 $elerror = 0;
 $time = date("G:i");
@@ -49,6 +57,7 @@ if ($elerror == 0) {
 //COMPROVAR SI CONFIG TIENE PERMISOS DE LECTURA
 if ($elerror == 0) {
     if (!is_readable($rutaarchivo)) {
+        $retorno = "Error la carpeta config no tiene permisos de lectura.";
         $elerror = 1;
     }
 }
@@ -56,6 +65,7 @@ if ($elerror == 0) {
 //COMPROVAR SI CONFIG TIENE PERMISOS DE ESCRITURA
 if ($elerror == 0) {
     if (!is_writable($rutaarchivo)) {
+        $retorno = "Error la carpeta config no tiene permisos de escritura.";
         $elerror = 1;
     }
 }
@@ -67,6 +77,7 @@ if ($elerror == 0) {
         //COMPROVAR SI SE PUEDE LEER EL JSON
         if ($elerror == 0) {
             if (!is_readable($elarchivo)) {
+                $retorno = "Error el archivo de tareas no tiene permisos de lectura.";
                 $elerror = 1;
             }
         }
@@ -74,6 +85,7 @@ if ($elerror == 0) {
         //COMPROVAR SI SE PUEDE ESCRIVIR EL JSON
         if ($elerror == 0) {
             if (!is_writable($elarchivo)) {
+                $retorno = "Error el archivo de tareas no tiene permisos de escritura.";
                 $elerror = 1;
             }
         }
@@ -97,7 +109,6 @@ if ($elerror == 0) {
                                                 if ($arrayobtenido[$i][$d]['minuto'] == $minutoactual) {
                                                     //TAREA VALIDA PROCEDER A LA EJECUCION
                                                     $tarea = $arrayobtenido[$i]['accion'];
-                                                    //echo "DENTRO";
 
                                                     switch ($tarea) {
                                                         case "acc1":
@@ -114,6 +125,9 @@ if ($elerror == 0) {
                                                                 $paraejecutar = "stop";
                                                                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . $paraejecutar . '\\015"';
                                                                 shell_exec($laejecucion);
+                                                                $retorno = "Tarea Apagar Servidor, ejecutado correctamente.";
+                                                            } else {
+                                                                $retorno = "Tarea Apagar Servidor, no se puede realizar al estar apagado.";
                                                             }
 
                                                             break;
@@ -190,7 +204,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!file_exists($rutacarpetamine)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noexistecarpetaminecraft";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no existe la carpeta Minecraft.";
                                                                     }
                                                                 }
 
@@ -199,7 +213,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!is_readable($rutacarpetamine)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "nolecturamine";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no hay permisos de lectura en la carpeta Minecraft.";
                                                                     }
                                                                 }
 
@@ -208,7 +222,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!is_writable($rutacarpetamine)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noescritura";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no hay permisos de escritura en la carpeta Minecraft.";
                                                                     }
                                                                 }
 
@@ -217,7 +231,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!is_executable($rutacarpetamine)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noejecutable";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no hay permisos de ejecución en la carpeta Minecraft.";
                                                                     }
                                                                 }
 
@@ -226,7 +240,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!is_writable($rutacarpetaconfig)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noconfigwrite";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no hay permisos de escritura en la carpeta Config.";
                                                                     }
                                                                 }
 
@@ -234,7 +248,7 @@ if ($elerror == 0) {
                                                                 if ($elerror == 0) {
                                                                     if (!file_exists($rutaconfigproperties)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noserverpropertiestxt";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no existe el archivo /config/serverproperties.txt";
                                                                     }
                                                                 }
 
@@ -243,7 +257,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!is_writable($rutaconfigproperties)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noconfservpropergwrite";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no hay permisos de escritura en /config/serverproperties.txt";
                                                                     }
                                                                 }
 
@@ -251,7 +265,7 @@ if ($elerror == 0) {
                                                                 if ($elerror == 0) {
                                                                     if ($receulaminecraft != "1") {
                                                                         $elerror = 1;
-                                                                        $retorno = "noeula";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no has aceptado el eula de Minecraft.";
                                                                     }
                                                                 }
 
@@ -269,7 +283,7 @@ if ($elerror == 0) {
                                                                                 fwrite($file, "eula=true" . PHP_EOL);
                                                                                 fclose($file);
                                                                             } else {
-                                                                                $retorno = "eulanowrite";
+                                                                                $retorno = "Error Tarea Iniciar Servidor, no hay permisos de escritura en eula.txt";
                                                                                 $elerror = 1;
                                                                             }
                                                                         } else {
@@ -288,7 +302,7 @@ if ($elerror == 0) {
                                                                 if ($elerror == 0) {
                                                                     if ($recarchivojar == "") {
                                                                         $elerror = 1;
-                                                                        $retorno = "noconfjar";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no hay seleccionado un servidor .jar";
                                                                     }
                                                                 }
 
@@ -299,7 +313,7 @@ if ($elerror == 0) {
                                                                     clearstatcache();
                                                                     if (!file_exists($rutacarpetamine)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "noexistejar";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, el .jar seleccionado no existe.";
                                                                     }
                                                                 }
 
@@ -308,7 +322,7 @@ if ($elerror == 0) {
                                                                     $comandopuerto = "netstat -tulpn 2>/dev/null | grep :" . $recpuerto;
                                                                     $obtener = exec($comandopuerto);
                                                                     if ($obtener != "") {
-                                                                        $retorno = "no puerto";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, puerto ya en uso.";
                                                                         $elerror = 1;
                                                                     }
                                                                 }
@@ -326,20 +340,20 @@ if ($elerror == 0) {
                                                                     //COMPRUEBA SI AL MENOS SE TIENE 1GB
                                                                     if ($totalramsys == 0) {
                                                                         $elerror = 1;
-                                                                        $retorno = "rammenoragiga";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, Memoria Ram menor a 1 GB.";
                                                                     } elseif ($totalramsys >= 1) {
 
                                                                         //COMPRUEBA QUE LA RAM SELECCIONADA NO SEA MAYOR A LA DEL SISTEMA
                                                                         if ($recram > $totalramsys) {
                                                                             $elerror = 1;
-                                                                            $retorno = "ramselectout";
+                                                                            $retorno = "Error Tarea Iniciar Servidor, la Ram seleccionada es superior a la del sistema.";
                                                                         }
 
                                                                         //COMPROBAR SI HAY MEMORIA SUFICIENTE PARA INICIAR CON RAM DISPONIBLE
                                                                         if ($elerror == 0) {
-                                                                            if ($recram > $getramavaliable) {
+                                                                            if ($recram >= $getramavaliable) {
                                                                                 $elerror = 1;
-                                                                                $retorno = "ramavaliableout";
+                                                                                $retorno = "Error Tarea Iniciar Servidor, Memoria del sistema insuficiente para iniciar el servidor";
                                                                             }
                                                                         }
                                                                     }
@@ -370,7 +384,7 @@ if ($elerror == 0) {
 
                                                                     if (!feof($gestor)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "fallofgets";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, ocurrió un error al guardar server.properties";
                                                                     }
 
                                                                     fclose($gestor);
@@ -411,26 +425,37 @@ if ($elerror == 0) {
                                                                         $comreq = shell_exec('command -v java >/dev/null && echo "yes" || echo "no"');
                                                                         $comreq = trim($comreq);
                                                                         if ($comreq == "no") {
-                                                                            $retorno = "nojavadefault";
+                                                                            $retorno = "Error Tarea Iniciar Servidor, no se encontro Java.";
                                                                             $elerror = 1;
                                                                         }
                                                                     } elseif ($recjavaselect == "1") {
                                                                         $javaruta = $recjavaname;
                                                                         clearstatcache();
                                                                         if (!file_exists($javaruta)) {
-                                                                            $retorno = "nojavaenruta";
+                                                                            $retorno = "Error Tarea Iniciar Servidor, no se encontró Java en la ruta especificada.";
                                                                             $elerror = 1;
                                                                         }
                                                                     } elseif ($recjavaselect == "2") {
                                                                         $javaruta = $recjavamanual . "/bin/java";
                                                                         clearstatcache();
                                                                         if (!file_exists($javaruta)) {
-                                                                            $retorno = "nojavaenruta";
+                                                                            $retorno = "Error Tarea Iniciar Servidor, no se encontró Java en la ruta especificada.";
                                                                             $elerror = 1;
                                                                         }
                                                                     } else {
-                                                                        $retorno = "nojavaselect";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, no se ha seleccionado ningún tipo de Java.";
                                                                         $elerror = 1;
+                                                                    }
+                                                                }
+
+                                                                //CREAR CARPETA LOGS EN CASO QUE NO EXISTA
+                                                                if ($elerror == 0) {
+                                                                    $rutacarplogs = $rutaminecraffijo . "/logs";
+                                                                    clearstatcache();
+                                                                    if (!file_exists($rutacarplogs)) {
+                                                                        mkdir($rutacarplogs, 0700);
+                                                                        $elcommando = "chmod 775 " . $rutacarplogs;
+                                                                        exec($elcommando);
                                                                     }
                                                                 }
 
@@ -442,7 +467,7 @@ if ($elerror == 0) {
 
                                                                     clearstatcache();
                                                                     if (!file_exists($rutascreenconf)) {
-                                                                        $retorno = "noscreenconf";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, el archivo de configuración de Screen no existe.";
                                                                         $elerror = 1;
                                                                     }
                                                                 }
@@ -474,20 +499,23 @@ if ($elerror == 0) {
                                                                     }
 
                                                                     if ($rectiposerv == "vanilla") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Dfile.encoding=UTF8" . " -jar '" . $rutacarpetamine . "' nogui";
                                                                     } elseif ($rectiposerv == "spigot") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -XX:+UseConcMarkSweepGC -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
                                                                         $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Djline.terminal=jline.UnsupportedTerminal -Dfile.encoding=UTF8 -jar '" . $rutacarpetamine . "' nogui -nojline --log-strip-color";
                                                                         guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                                                                     } elseif ($rectiposerv == "paper") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
-                                                                        $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Dfile.encoding=UTF8" . " -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $cominiciostart = "screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Dfile.encoding=UTF8" . " -jar '" . $rutacarpetamine . "' nogui";
                                                                         guardareinicio($larutash, $cominiciostart, $larutascrrenlog);
                                                                     } elseif ($rectiposerv == "otros") {
-                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G -jar '" . $rutacarpetamine . "' nogui";
+                                                                        $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Dfile.encoding=UTF8" . " -jar '" . $rutacarpetamine . "' nogui";
                                                                     }
                                                                     $elpid = shell_exec($comandoserver);
+                                                                    $retorno = "Tarea Iniciar Servidor, ejecutada correctamente.";
                                                                 }
+                                                            } else {
+                                                                $retorno = "Tarea Iniciar Servidor, no se puede realizar al estar ya en ejecución.";
                                                             }
 
                                                             break;
@@ -531,7 +559,7 @@ if ($elerror == 0) {
                                                                 //MIRAR SI ES ILIMITADO
                                                                 if ($limitbackupgb >= 1) {
                                                                     if ($getgigasbackup > $limitbackupgb) {
-                                                                        $retorno = "limitgbexceeded";
+                                                                        $retorno = "Error tarea Backup, se ha superado el límite GB para backups.";
                                                                         $elerror = 1;
                                                                     }
                                                                 }
@@ -553,8 +581,9 @@ if ($elerror == 0) {
                                                                                 exec($elcomando, $out, $oky);
 
                                                                                 if (!$oky) {
+                                                                                    $retorno = "Tarea Crear Backup, ejecutada correctamente.";
                                                                                 } else {
-
+                                                                                    $retorno = "Error Tarea Crear Backup, no se creo correctamente.";
                                                                                     //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
                                                                                     $borrarerror = $dirconfig . $t . ".tar.gz";
                                                                                     if (file_exists($borrarerror)) {
@@ -582,8 +611,10 @@ if ($elerror == 0) {
                                                             //SI ESTA EN EJECUCION ENVIAR COMANDO
                                                             if (!$elpid == "") {
                                                                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
-
                                                                 shell_exec($laejecucion);
+                                                                $retorno = "Tarea Enviar Comando, ejecutada correctamente";
+                                                            } else {
+                                                                $retorno = "Tarea Enviar Comando, no se puede realizar al estar apagado el servidor";
                                                             }
 
                                                             break;
@@ -600,4 +631,9 @@ if ($elerror == 0) {
             }
         }
     }
+}
+if ($retorno != "") {
+    echo $logfechayhora . " " . $retorno . PHP_EOL;
+} else {
+    echo $retorno;
 }
