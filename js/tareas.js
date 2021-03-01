@@ -118,7 +118,7 @@ $(function () {
                 type: 'POST',
                 success: function (data) {
                     if (data == "ok") {
-                        location.reload();
+                        alert("Log borrado correctamente");
                     } else if (data == "nowritelog") {
                         alert("El archivo cronlog.log no tiene permisos de escritura");
                     }
@@ -126,6 +126,8 @@ $(function () {
             });
         });
     }
+
+    function eltimerlog() {
 
     if (document.getElementById('logcron') !== null) {
         $.ajax({
@@ -138,7 +140,9 @@ $(function () {
                 document.getElementById("logcron").value = data;
             }
         });
-    }
+    }}
+
+    setInterval(eltimerlog, 1000);
 
     function sessionTimer() {
 

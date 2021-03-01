@@ -205,6 +205,7 @@ require_once("template/header.php");
                                                         </div>
                                                         <textarea readonly="" class="form-control textoconsola mb-1" id="logcron" name="logcron" rows="18"></textarea>
                                                     </div>
+                                                    <hr>
                                                 </div>
                                             </div>
                                         </div>
