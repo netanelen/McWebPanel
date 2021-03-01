@@ -25,6 +25,7 @@ require_once("template/header.php");
 ?>
 <!-- Custom styles for this template-->
 <link href="css/test.css" rel="stylesheet">
+<link href="css/consola.css" rel="stylesheet">
 
 </head>
 
@@ -54,6 +55,26 @@ require_once("template/header.php");
 
     //VALIDAMOS SESSION SINO ERROR
     if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
+        function devolver_accion($laaccion)
+        {
+            if ($laaccion == "acc1") {
+                return "Apagar Servidor";
+            } elseif ($laaccion == "acc2") {
+                return "Iniciar Servidor";
+            } elseif ($laaccion == "acc3") {
+                return "Backup Servidor";
+            } elseif ($laaccion == "acc4") {
+                return "Enviar Comando";
+            }
+        }
+
+        function test_input($data)
+        {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
     ?>
 
         <!-- Page Wrapper -->
@@ -97,27 +118,6 @@ require_once("template/header.php");
                                                             <tbody>
                                                                 <?php
 
-                                                                function devolver_accion($laaccion)
-                                                                {
-                                                                    if ($laaccion == "acc1") {
-                                                                        return "Apagar Servidor";
-                                                                    } elseif ($laaccion == "acc2") {
-                                                                        return "Iniciar Servidor";
-                                                                    } elseif ($laaccion == "acc3") {
-                                                                        return "Backup Servidor";
-                                                                    } elseif ($laaccion == "acc4") {
-                                                                        return "Enviar Comando";
-                                                                    }
-                                                                }
-
-                                                                function test_input($data)
-                                                                {
-                                                                    $data = trim($data);
-                                                                    $data = stripslashes($data);
-                                                                    $data = htmlspecialchars($data);
-                                                                    return $data;
-                                                                }
-
                                                                 //INICIAR VARIABLES
                                                                 $contadorarchivos = 0;
                                                                 $eltamano = "";
@@ -153,17 +153,13 @@ require_once("template/header.php");
                                                                         echo ('<td>' . test_input(addslashes($arrayobtenido[$i]["comando"])) . '</td>');
                                                                         echo ('<td>' . $arrayobtenido[$i]["estado"] . '</td>');
                                                                         echo ('<td>');
-                                                                ?>
 
-                                                                        <?php
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasactdes', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasactdes'] == 1) {
-                                                                        ?>
+                                                                ?>
                                                                             <button type="button" class="actdes btn btn-info text-white mr-1" value="<?php echo $i ?>">Activar/Desactivar</button>
                                                                         <?php
                                                                         }
-                                                                        ?>
 
-                                                                        <?php
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasborrar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasborrar'] == 1) {
                                                                         ?>
                                                                             <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $i ?>">Borrar</button>
@@ -199,6 +195,16 @@ require_once("template/header.php");
                                                     <?php
                                                     }
                                                     ?>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <h1 class="">Log</h1>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <button type="button" class="btn btn-primary text-white float-right" id="borrarlog">Borrar Archivo Log</button>
+                                                        </div>
+                                                        <textarea readonly="" class="form-control textoconsola mb-1" id="logcron" name="logcron" rows="18"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,18 +214,16 @@ require_once("template/header.php");
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <script src="js/tareas.js"></script>
+                <script src="js/tareas.js"></script>
 
-    <?php
+            <?php
 
-        //FINAL VALIDAR SESSION
-    } else {
-        header("location:index.php");
-    }
-    ?>
+            //FINAL VALIDAR SESSION
+        } else {
+            header("location:index.php");
+        }
+            ?>
 
 </body>
 

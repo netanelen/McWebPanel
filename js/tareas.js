@@ -16,12 +16,12 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     if (document.getElementsByClassName('actdes') !== null) {
         var actdesbuttons = document.getElementsByClassName('actdes');
         for (var i = 0; i < actdesbuttons.length; i++) {
-            actdesbuttons[i].addEventListener("click", function() {
+            actdesbuttons[i].addEventListener("click", function () {
                 var indexarray = String(this.value);
                 if (indexarray == 0) {
                     indexarray = 'CERO';
@@ -32,7 +32,7 @@ $(function() {
                         action: indexarray
                     },
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         var getdebug = 0;
                         if (getdebug == 1) {
                             alert(data);
@@ -52,7 +52,7 @@ $(function() {
                         }
 
                     },
-                    error: function(errorThrown) {
+                    error: function (errorThrown) {
                         alert(errorThrown);
                     }
                 });
@@ -63,7 +63,7 @@ $(function() {
     if (document.getElementsByClassName('borrar') !== null) {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
-            borrarbuttons[i].addEventListener("click", function() {
+            borrarbuttons[i].addEventListener("click", function () {
                 var indexarray = String(this.value);
                 if (indexarray == 0) {
                     indexarray = 'CERO';
@@ -74,7 +74,7 @@ $(function() {
                         action: indexarray
                     },
                     type: 'POST',
-                    success: function(data) {
+                    success: function (data) {
                         var getdebug = 0;
                         if (getdebug == 1) {
                             alert(data);
@@ -94,7 +94,7 @@ $(function() {
                         }
 
                     },
-                    error: function(errorThrown) {
+                    error: function (errorThrown) {
                         alert(errorThrown);
                     }
                 });
@@ -103,8 +103,40 @@ $(function() {
     }
 
     if (document.getElementById('anadirtarea') !== null) {
-        $("#anadirtarea").click(function() {
+        $("#anadirtarea").click(function () {
             location.href = "nuevatarea.php";
+        });
+    }
+
+    if (document.getElementById('borrarlog') !== null) {
+        $("#borrarlog").click(function () {
+            $.ajax({
+                url: 'function/tarealog.php',
+                data: {
+                    action: 'borralog'
+                },
+                type: 'POST',
+                success: function (data) {
+                    if (data == "ok") {
+                        location.reload();
+                    } else if (data == "nowritelog") {
+                        alert("El archivo cronlog.log no tiene permisos de escritura");
+                    }
+                }
+            });
+        });
+    }
+
+    if (document.getElementById('logcron') !== null) {
+        $.ajax({
+            url: 'function/tarealog.php',
+            data: {
+                action: 'getlog'
+            },
+            type: 'POST',
+            success: function (data) {
+                document.getElementById("logcron").value = data;
+            }
         });
     }
 
@@ -116,7 +148,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
