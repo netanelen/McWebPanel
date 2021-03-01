@@ -353,7 +353,7 @@ if ($elerror == 0) {
                                                                         if ($elerror == 0) {
                                                                             if ($recram >= $getramavaliable) {
                                                                                 $elerror = 1;
-                                                                                $retorno = "Error Tarea Iniciar Servidor, Memoria del sistema insuficiente para iniciar el servidor";
+                                                                                $retorno = "Error Tarea Iniciar Servidor, Memoria del sistema insuficiente para iniciar el servidor.";
                                                                             }
                                                                         }
                                                                     }
@@ -384,7 +384,7 @@ if ($elerror == 0) {
 
                                                                     if (!feof($gestor)) {
                                                                         $elerror = 1;
-                                                                        $retorno = "Error Tarea Iniciar Servidor, ocurrió un error al guardar server.properties";
+                                                                        $retorno = "Error Tarea Iniciar Servidor, ocurrió un error al guardar server.properties.";
                                                                     }
 
                                                                     fclose($gestor);
@@ -512,7 +512,7 @@ if ($elerror == 0) {
                                                                         $comandoserver .= "cd " . $RUTAPRINCIPAL . " && cd " . $reccarpmine . " && umask 002 && screen -c '" . $rutascreenconf . "' -dmS " . $reccarpmine . " -L -Logfile 'logs/screen.log' " . $javaruta . " -Xms1G -Xmx" . $recram . "G " . $inigc . " -Dfile.encoding=UTF8" . " -jar '" . $rutacarpetamine . "' nogui";
                                                                     }
                                                                     $elpid = shell_exec($comandoserver);
-                                                                    $retorno = "Tarea Iniciar Servidor, ejecutada correctamente.";
+                                                                    $retorno = "Tarea Iniciar Servidor, ejecutado correctamente.";
                                                                 }
                                                             } else {
                                                                 $retorno = "Tarea Iniciar Servidor, no se puede realizar al estar ya en ejecución.";
@@ -581,7 +581,7 @@ if ($elerror == 0) {
                                                                                 exec($elcomando, $out, $oky);
 
                                                                                 if (!$oky) {
-                                                                                    $retorno = "Tarea Crear Backup, ejecutada correctamente.";
+                                                                                    $retorno = "Tarea Crear Backup, ejecutado correctamente.";
                                                                                 } else {
                                                                                     $retorno = "Error Tarea Crear Backup, no se creo correctamente.";
                                                                                     //AUNQUE NO SE CREA, A VECES SI CREA UN FICHERO VACIO
@@ -612,9 +612,9 @@ if ($elerror == 0) {
                                                             if (!$elpid == "") {
                                                                 $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
                                                                 shell_exec($laejecucion);
-                                                                $retorno = "Tarea Enviar Comando, ejecutada correctamente";
+                                                                $retorno = "Tarea Enviar Comando, ejecutado correctamente.";
                                                             } else {
-                                                                $retorno = "Tarea Enviar Comando, no se puede realizar al estar apagado el servidor";
+                                                                $retorno = "Tarea Enviar Comando, no se puede realizar al estar apagado el servidor.";
                                                             }
 
                                                             break;
@@ -633,7 +633,7 @@ if ($elerror == 0) {
     }
 }
 if ($retorno != "") {
-    echo $logfechayhora . " " . $retorno . PHP_EOL;
+    echo $logfechayhora . ": " . $retorno . PHP_EOL;
 } else {
     echo $retorno;
 }
