@@ -46,6 +46,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             if (isset($_POST['action']) && !empty($_POST['action'])) {
 
+                $retorno = "";
+
                 $indexarrayborrar = test_input($_POST['action']);
 
                 if ($indexarrayborrar == 'CERO') {
