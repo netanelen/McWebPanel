@@ -196,16 +196,22 @@ require_once("template/header.php");
                                                     }
                                                     ?>
                                                     <hr>
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            <h1 class="">Log</h1>
+                                                    <?php
+                                                    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareaslog', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareaslog'] == 1) {
+                                                    ?>
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                <h1 class="">Log</h1>
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <button type="button" class="btn btn-primary text-white float-right" id="borrarlog">Borrar Archivo Log</button>
+                                                            </div>
+                                                            <textarea readonly="" class="form-control textoconsola mb-1" id="logcron" name="logcron" rows="18"></textarea>
                                                         </div>
-                                                        <div class="col-md-10">
-                                                            <button type="button" class="btn btn-primary text-white float-right" id="borrarlog">Borrar Archivo Log</button>
-                                                        </div>
-                                                        <textarea readonly="" class="form-control textoconsola mb-1" id="logcron" name="logcron" rows="18"></textarea>
-                                                    </div>
-                                                    <hr>
+                                                        <hr>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
