@@ -229,6 +229,14 @@ require_once("template/header.php");
                                                                                 <p>Permite borrar las tareas programadas.</p>
                                                                             </div>
 
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="pprogtareaslog" name="pprogtareaslog" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="pprogtareaslog">Ver Log / Borrar Log</label>
+                                                                                </div>
+                                                                                <p>Permite Ver o borrar el archivo log de las tareas programadas.</p>
+                                                                            </div>
+
                                                                         </div>
 
                                                                         <br>

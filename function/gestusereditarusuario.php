@@ -289,6 +289,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pprogtareasborrar'] = 0;
                             }
 
+                            if (isset($_POST['pprogtareaslog'])) {
+                                $arrayobtenido[$i]['pprogtareaslog'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pprogtareaslog'] = 0;
+                            }
+
                             //SYSTEM CONFIG
                             if (isset($_POST['psystemconf'])) {
                                 $arrayobtenido[$i]['psystemconf'] = 1;
