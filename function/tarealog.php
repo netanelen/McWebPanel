@@ -40,7 +40,7 @@ if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
 
 if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
-    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareas', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareas'] == 1) {
+    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareaslog', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareaslog'] == 1) {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
