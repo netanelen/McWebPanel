@@ -88,7 +88,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     exit;
                 }
 
-
+                session_write_close();
                 //COMPROVAR SI EXISTE
                 clearstatcache();
                 if (file_exists($dirconfig)) {
@@ -105,7 +105,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         readfile($dirconfig);
                         exit;
                     } else {
-                        echo ('<!doctype html><html lang="es"><head><title>Backups</title><link rel="stylesheet" href="../css/bootstrap.min.css"></head><body>');
+                        echo ('<!doctype html><html lang="es"><head><title>Descargas</title><link rel="stylesheet" href="../css/bootstrap.min.css"></head><body>');
                         echo '<div class="alert alert-danger" role="alert">Error: El archivo no tiene permisos de lectura.</div>';
                         echo ('</body></html>');
                     }
