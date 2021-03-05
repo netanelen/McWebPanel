@@ -253,7 +253,7 @@ require_once("template/header.php");
                                                                     <label for="eltipserv">Tipo Servidor</label>
                                                                     <select id="eltipserv" name="eltipserv" class="form-control" required="required">
                                                                         <?php
-                                                                        $opcionesserver = array('vanilla', 'spigot', 'paper', 'otros');
+                                                                        $opcionesserver = array('vanilla', 'spigot', 'paper', 'magma', 'otros');
 
                                                                         for ($i = 0; $i < count($opcionesserver); $i++) {
 
