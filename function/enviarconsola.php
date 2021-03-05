@@ -44,9 +44,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
     if (isset($_POST['action']) && !empty($_POST['action'])) {
       $devolucion = "";
       $rutaarchivo = "";
+      $linea = "";
 
       //OBTENER RUTA LOG MINECRAFT
       $elnombredirectorio = CONFIGDIRECTORIO;
+      $rectiposerv = CONFIGTIPOSERVER;
       $rutaarchivo = dirname(getcwd()) . PHP_EOL;
       $rutaarchivo = trim($rutaarchivo);
       $rutaarchivo .= "/" . $elnombredirectorio . "/logs/screen.log";
@@ -57,7 +59,28 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPROVAR SI SE PUEDE LEER
         clearstatcache();
         if (is_readable($rutaarchivo)) {
-          $devolucion = file_get_contents($rutaarchivo);
+          //$devolucion = file_get_contents($rutaarchivo);
+
+          if ($rectiposerv == "magma") {
+            $gestor = fopen($rutaarchivo, "r");
+
+            if ($gestor) {
+              while (($búfer = fgets($gestor, 4096)) !== false) {
+                $linea = $búfer;
+                $linea = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '', $linea);
+                $linea = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $linea);
+                $linea = str_replace(">", "", $linea);
+                $linea = $linea . PHP_EOL;
+                $devolucion .= $linea;
+              }
+              if (!feof($gestor)) {
+                echo "Error: fallo inesperado de fgets()\n";
+              }
+              fclose($gestor);
+            }
+          } else {
+            $devolucion = file_get_contents($rutaarchivo);
+          }
         } else {
           $devolucion = "No se puede leer el archivo";
         }
