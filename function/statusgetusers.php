@@ -67,7 +67,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 if (is_readable($larutascrrenlog)) {
                     //OBTENER LOG
                     $devolucion = file_get_contents($larutascrrenlog);
-                    $buscadone = strrpos($devolucion, "[Server thread/INFO]: Done");
+                    $buscadone = strrpos($devolucion, "Done (");
                     if ($buscadone != "") {
 
                         //OBTENER JUGADORES ONLINE
