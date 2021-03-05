@@ -59,8 +59,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPROVAR SI SE PUEDE LEER
         clearstatcache();
         if (is_readable($rutaarchivo)) {
-          //$devolucion = file_get_contents($rutaarchivo);
-
+          session_write_close();
           if ($rectiposerv == "magma") {
             $gestor = fopen($rutaarchivo, "r");
 
@@ -69,7 +68,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $linea = $búfer;
                 $linea = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '', $linea);
                 $linea = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $linea);
-                $linea = str_replace(">", "", $linea);
+                $linea = ltrim($linea, '>'); 
                 $linea = $linea . PHP_EOL;
                 $devolucion .= $linea;
               }
