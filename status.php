@@ -87,6 +87,7 @@ function test_input($data)
                                                             <p class="lead" id="textocpu">Cpu:</p>
                                                             <img class="d-block float-left mr-2" src="img/ram.png" alt="RAM">
                                                             <p class="lead" id="textoram">Ram:</p>
+                                                            <img class="d-block float-left mr-2" src="img/menu/users.png" alt="Players">
                                                             <p class="lead" id="jugadores">Jugadores Online:</p>
                                                             <p class="lead" id="eluptime">Uptime:</p>
                                                             <p class="lead" id="horaserver">Hora Servidor:</p>
