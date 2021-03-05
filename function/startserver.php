@@ -254,7 +254,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                     //COMPROBAR SI HAY MEMORIA SUFICIENTE PARA INICIAR CON RAM DISPONIBLE
                     if ($elerror == 0) {
-                        if ($recram >= $getramavaliable) {
+                        if ($recram > $getramavaliable) {
                             $elerror = 1;
                             $retorno = "ramavaliableout";
                         }
