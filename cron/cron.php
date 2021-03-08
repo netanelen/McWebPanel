@@ -261,6 +261,17 @@ if ($elerror == 0) {
                                                                     }
                                                                 }
 
+                                                                if ($elerror == 0) {
+                                                                    if ($rectiposerv == "forge") {
+                                                                        $libforge = $rutacarpetamine . "/libraries";
+                                                                        clearstatcache();
+                                                                        if (!file_exists($libforge)) {
+                                                                            $retorno = "Error Tarea Iniciar Servidor, faltan las librerias necesarias para iniciar el servidor de Forge.";
+                                                                            $elerror = 1;
+                                                                        }
+                                                                    }
+                                                                }
+
                                                                 //VERIFICAR EULA EN CONFIG
                                                                 if ($elerror == 0) {
                                                                     if ($receulaminecraft != "1") {

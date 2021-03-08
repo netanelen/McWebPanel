@@ -164,6 +164,17 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            if ($elerror == 0) {
+                if ($rectiposerv == "forge") {
+                    $libforge = $rutacarpetamine . "/libraries";
+                    clearstatcache();
+                    if (!file_exists($libforge)) {
+                        $retorno = "nolibforge";
+                        $elerror = 1;
+                    }
+                }
+            }
+
             //VERIFICAR EULA EN CONFIG
             if ($elerror == 0) {
                 if ($receulaminecraft != "1") {
@@ -361,7 +372,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $elcommando = "chmod 775 " . $rutacarplogs;
                     exec($elcommando);
                 }
-
             }
 
             //COMPROBAR SI EXISTE SCREEN.CONF
