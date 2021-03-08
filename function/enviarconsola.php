@@ -60,7 +60,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         clearstatcache();
         if (is_readable($rutaarchivo)) {
           session_write_close();
-          if ($rectiposerv == "magma") {
+          if ($rectiposerv == "magma" || $rectiposerv == "forge") {
             $gestor = fopen($rutaarchivo, "r");
 
             if ($gestor) {
