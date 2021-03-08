@@ -156,6 +156,7 @@ require_once("../template/errorreport.php");
                     <option value="vanilla">Vanilla</option>
                     <option value="spigot">Spigot</option>
                     <option value="paper">Paper</option>
+                    <option value="forge">Forge</option>
                     <option value="magma">Magma</option>
                     <option value="otros">Otros</option>
                   </select>
