@@ -69,6 +69,8 @@ $(function () {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay memoria suficiente para ejecutar el servidor minecraft.</div>";
                 } else if (data == "noscreenconf") {
                     document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo /config/screen.conf no existe.</div>";
+                }else if (data == "nolibforge") {
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Faltan las librerias necesarias para iniciar el servidor de Forge.</div>";
                 }
             }
         });
