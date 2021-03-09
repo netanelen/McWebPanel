@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     sessionStorage.antiguo = "";
     sessionStorage.actdesroll = 0;
@@ -31,6 +31,27 @@ $(function() {
 
     window.addEventListener("resize", redimensionar);
 
+    $.ajax({
+        url: 'function/enviarconsola.php',
+        data: {
+            action: 'status'
+        },
+        type: 'POST',
+        success: function (data) {
+
+            if (data !== undefined) {
+                document.getElementById("laconsola").value = data;
+
+                if (data.length != sessionStorage.antiguo) {
+                    if (sessionStorage.actdesroll == 0) {
+                        document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
+                    }
+                }
+                sessionStorage.antiguo = data.length;
+            }
+        }
+    });
+
     function myTimer() {
 
         $.ajax({
@@ -39,21 +60,26 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
-                document.getElementById("laconsola").value = data;
-
-                if (data.length != sessionStorage.antiguo) {
-                    if(sessionStorage.actdesroll == 0){
-                        document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
+                if (data !== undefined) {
+                    if (data !== "") {
+                        document.getElementById("laconsola").value = data;
                     }
+
+
+                    if (data.length != sessionStorage.antiguo) {
+                        if (sessionStorage.actdesroll == 0) {
+                            document.getElementById("laconsola").scrollTop = document.getElementById("laconsola").scrollHeight;
+                        }
+                    }
+                    sessionStorage.antiguo = data.length;
                 }
-                sessionStorage.antiguo = data.length;
             }
         });
     }
 
-    setInterval(myTimer, 500);
+    setInterval(myTimer, 2000);
 
     function enviarcomando() {
         var eltexto = "";
@@ -68,7 +94,7 @@ $(function() {
                     action: eltexto
                 },
                 type: 'POST',
-                success: function(data) {
+                success: function (data) {
                     document.getElementById("elcomando").value = "";
                 }
             });
@@ -76,11 +102,11 @@ $(function() {
     }
 
     if (document.getElementById('descroll') !== null) {
-        $("#descroll").click(function() {
-            if(sessionStorage.actdesroll == 0){
+        $("#descroll").click(function () {
+            if (sessionStorage.actdesroll == 0) {
                 sessionStorage.actdesroll = 1;
                 document.getElementById('descroll').innerText = "Activar Scroll";
-            }else{
+            } else {
                 sessionStorage.actdesroll = 0;
                 document.getElementById('descroll').innerText = "Desactivar Scroll";
             }
@@ -88,13 +114,13 @@ $(function() {
     }
 
     if (document.getElementById('botonconsola') !== null) {
-        $("#botonconsola").click(function() {
+        $("#botonconsola").click(function () {
             enviarcomando();
         });
     }
 
     if (document.getElementById('elcomando') !== null) {
-        $("#elcomando").keypress(function(e) {
+        $("#elcomando").keypress(function (e) {
             if (e.keyCode == 13) {
                 enviarcomando();
             }
@@ -109,7 +135,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
