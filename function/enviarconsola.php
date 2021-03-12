@@ -74,10 +74,16 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
       }
 
-      //OBTENER LINEAS CONSOLA
       if ($elerror == 0) {
-        $elcomando = "tail -n " . $recnumerolineaconsola . " " . $rutaarchivo;
-        $laconsola = shell_exec($elcomando);
+
+        if ($recnumerolineaconsola == "0") {
+          //OBTENER TODO EL LOG
+          $laconsola = file_get_contents($rutaarchivo);
+        } else {
+          //OBTENER X LINEAS DEL LOG
+          $elcomando = "tail -n " . $recnumerolineaconsola . " " . $rutaarchivo;
+          $laconsola = shell_exec($elcomando);
+        }
 
         //COMPROBAR SI ES MAGMA O FORGE
         if ($rectiposerv == "magma" || $rectiposerv == "forge") {
