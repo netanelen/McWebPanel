@@ -45,6 +45,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $devolucion = "";
       $rutaarchivo = "";
       $linea = "";
+      $elerror = 0;
+      $recnumerolineaconsola = CONFIGLINEASCONSOLA;
+
+      //DESACTIVAR SESSION
+      session_write_close();
 
       //OBTENER RUTA LOG MINECRAFT
       $elnombredirectorio = CONFIGDIRECTORIO;
@@ -55,38 +60,44 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
       //COMPROVAR SI EXISTE LA RUTA
       clearstatcache();
-      if (file_exists($rutaarchivo)) {
-        //COMPROVAR SI SE PUEDE LEER
-        clearstatcache();
-        if (is_readable($rutaarchivo)) {
-          session_write_close();
-          if ($rectiposerv == "magma" || $rectiposerv == "forge") {
-            $gestor = fopen($rutaarchivo, "r");
-
-            if ($gestor) {
-              while (($búfer = fgets($gestor, 4096)) !== false) {
-                $linea = $búfer;
-                $linea = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '', $linea);
-                $linea = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $linea);
-                $linea = ltrim($linea, '>'); 
-                $linea = $linea . PHP_EOL;
-                $devolucion .= $linea;
-              }
-              if (!feof($gestor)) {
-                echo "Error: fallo inesperado de fgets()\n";
-              }
-              fclose($gestor);
-            }
-          } else {
-            $devolucion = file_get_contents($rutaarchivo);
-          }
-        } else {
-          $devolucion = "No se puede leer el archivo";
-        }
-      } else {
+      if (!file_exists($rutaarchivo)) {
         $devolucion = "";
+        $elerror = 1;
       }
 
+      //COMPROVAR SI SE PUEDE LEER
+      if ($elerror == 0) {
+        clearstatcache();
+        if (!is_readable($rutaarchivo)) {
+          $devolucion = "No se puede leer el archivo";
+          $elerror = 1;
+        }
+      }
+
+      //OBTENER LINEAS CONSOLA
+      if ($elerror == 0) {
+        $elcomando = "tail -n " . $recnumerolineaconsola . " " . $rutaarchivo;
+        $laconsola = shell_exec($elcomando);
+
+        //COMPROBAR SI ES MAGMA O FORGE
+        if ($rectiposerv == "magma" || $rectiposerv == "forge") {
+
+          //CONVERTIR STRING EN ARRAY
+          $arr = preg_split('/\n/', $laconsola);
+
+          //LIMPIAR ANSI
+          for ($i = 0; $i < count($arr); $i++) {
+            $linea = $arr[$i];
+            $linea = preg_replace('#\\x1b[[][^A-Za-z]*[A-Za-z]#', '', $linea);
+            $linea = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $linea);
+            $linea = ltrim($linea, '>');
+            $linea = $linea . PHP_EOL;
+            $devolucion .= $linea;
+          }
+        } else {
+          $devolucion = $laconsola;
+        }
+      }
       echo $devolucion;
     }
   }
