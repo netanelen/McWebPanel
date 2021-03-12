@@ -263,6 +263,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['psystemconffoldersize'] = 1;
                 }
 
+                //SYSTEM CONFIG LIMITE LINEAS CONSOLA
+                if (isset($_POST['psystemconflinconsole'])) {
+                    $arrayobtenido[$elindice]['psystemconflinconsole'] = 1;
+                }
+
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($arrayobtenido);
                 file_put_contents($elarchivo, $serialized);

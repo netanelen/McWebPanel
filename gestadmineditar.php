@@ -280,6 +280,22 @@ require_once("template/header.php");
                                                                                     <p>Permite configurar los GB de espacio disponible en las carpetas del servidor.</p>
                                                                                 </div>
 
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input id="psystemconflinconsole" name="psystemconflinconsole" type="checkbox" value="1" <?php
+
+                                                                                                                                                                                if (array_key_exists('psystemconflinconsole', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconflinconsole'] == 1) {
+                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                                ?>>
+
+                                                                                        <label class="negrita mr-2" for="psystemconflinconsole">Líneas Consola</label>
+                                                                                    </div>
+                                                                                    <p>Permite configurar el máximo de líneas que se mostraran en la consola.</p>
+                                                                                </div>
+
                                                                             </div>
 
                                                                         </div>

@@ -275,6 +275,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['psystemconffoldersize'] = 0;
                             }
 
+                            //SYSTEM CONFIG LIMITE LINEAS CONSOLA
+                            if (isset($_POST['psystemconflinconsole'])) {
+                                $arrayobtenido[$i]['psystemconflinconsole'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['psystemconflinconsole'] = 0;
+                            }
 
                         }
 
