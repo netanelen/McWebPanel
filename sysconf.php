@@ -329,11 +329,11 @@ require_once("template/header.php");
 
                                                         <?php
                                                         //LINEAS CONSOLA
-                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfnombre', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfnombre'] == 1) {
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconflinconsole', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconflinconsole'] == 1) {
                                                         ?>
                                                             <hr>
                                                             <div class="form-group col-md-3">
-                                                                <label class="negrita" for="linconsola">Lineas Mostradas por Consola:</label>
+                                                                <label class="negrita" for="linconsola">Líneas Mostradas por Consola:</label>
                                                                 <input type="number" class="form-control" id="linconsola" name="linconsola" required="required" min="0" max="1000" value="<?php echo $recnumerolineaconsola; ?>">
                                                                 <label> 0 = Ilimitado</label>
                                                             </div>
