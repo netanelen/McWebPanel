@@ -86,10 +86,17 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         }
 
         //INPUT NOMBRE SERVIDOR
-        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfsubida', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfsubida'] == 1) {
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfnombre', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfnombre'] == 1) {
           $elnombreservidor = test_input($_POST["elnomserv"]);
         } else {
           $elnombreservidor = CONFIGNOMBRESERVER;
+        }
+
+        //LINEAS CONSOLA
+        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfnombre', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfnombre'] == 1) {
+          $elnumerolineaconsola = test_input($_POST["linconsola"]);
+        } else {
+          $elnumerolineaconsola = CONFIGLINEASCONSOLA;
         }
 
         //RECOLECTOR DE BASURA
@@ -314,6 +321,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, 'define("CONFIGJAVAMANUAL", "' . $eljavamanual . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGFOLDERBACKUPSIZE", "' . $ellimitebackupgb . '");' . PHP_EOL);
           fwrite($file, 'define("CONFIGFOLDERMINECRAFTSIZE", "' . $ellimiteminecraftgb . '");' . PHP_EOL);
+          fwrite($file, 'define("CONFIGLINEASCONSOLA", "' . $elnumerolineaconsola . '");' . PHP_EOL);
           fwrite($file, "?>" . PHP_EOL);
           fclose($file);
 
@@ -343,7 +351,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           fwrite($file, "php_value max_input_time 600" . PHP_EOL);
           fwrite($file, "</IfModule>" . PHP_EOL);
           fclose($file);
-
+          sleep(2);
           $retorno = "saveconf";
         }
         echo $retorno;

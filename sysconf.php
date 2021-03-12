@@ -109,6 +109,8 @@ require_once("template/header.php");
                                                     $recbackuplimitgb = CONFIGFOLDERBACKUPSIZE;
                                                     $recminecraftlimitgb = CONFIGFOLDERMINECRAFTSIZE;
 
+                                                    $recnumerolineaconsola = CONFIGLINEASCONSOLA;
+
                                                     //OBTENER TIPO SERVIDOR WEB
                                                     $servidorweb = $_SERVER["SERVER_SOFTWARE"];
 
@@ -142,7 +144,7 @@ require_once("template/header.php");
                                                     ?>
                                                     <form id="formconf" action="function/guardasysconf.php" method="post">
                                                         <div class="form-group">
-                                                            <label for="listadojars">Seleccione Servidor Minecraft:</label>
+                                                            <label class="negrita" for="listadojars">Seleccione Servidor Minecraft:</label>
                                                             <select class="form-control mb-2" id="listadojars" name="listadojars">
 
                                                                 <?php
@@ -201,8 +203,8 @@ require_once("template/header.php");
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfpuerto', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfpuerto'] == 1) {
                                                             ?>
                                                                 <div class="form-group col-md-6">
-                                                                    <label for="elport">Puerto</label>
-                                                                    <input type="number" value="<?php echo $recpuerto; ?>" class="form-control" id="elport" name="elport" required="required" min="1025" max="65535">
+                                                                    <label class="negrita" for="elport">Puerto:</label>
+                                                                    <input type="number" class="form-control" id="elport" name="elport" required="required" min="1025" max="65535" value="<?php echo $recpuerto; ?>">
                                                                 </div>
 
                                                             <?php
@@ -214,7 +216,7 @@ require_once("template/header.php");
                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfmemoria', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfmemoria'] == 1) {
                                                             ?>
                                                                 <div class="form-group col-md-6">
-                                                                    <label for="elram" class="">Memoria Ram Limite</label>
+                                                                    <label for="elram" class="negrita">Memoria Ram Limite:</label>
                                                                     <select id="elram" name="elram" class="form-control" required="required">
                                                                         <?php
 
@@ -250,7 +252,7 @@ require_once("template/header.php");
 
 
                                                                 <div class="form-group col-md-6">
-                                                                    <label for="eltipserv">Tipo Servidor</label>
+                                                                    <label class="negrita" for="eltipserv">Tipo Servidor:</label>
                                                                     <select id="eltipserv" name="eltipserv" class="form-control" required="required">
                                                                         <?php
                                                                         $opcionesserver = array('vanilla', 'spigot', 'paper', 'forge', 'magma', 'otros');
@@ -279,7 +281,7 @@ require_once("template/header.php");
                                                             ?>
 
                                                                 <div class="form-group col-md-6">
-                                                                    <label for="elmaxupload">Subida Fichero Máximo (MB)</label>
+                                                                    <label class="negrita" for="elmaxupload">Subida Fichero Máximo (MB):</label>
                                                                     <select id="elmaxupload" name="elmaxupload" class="form-control" required="required">
                                                                         <?php
 
@@ -317,8 +319,23 @@ require_once("template/header.php");
                                                         ?>
 
                                                             <div class="form-group">
-                                                                <label for="elnomserv">Nombre Servidor</label>
+                                                                <label class="negrita" for="elnomserv">Nombre Servidor:</label>
                                                                 <input type="text" class="form-control" id="elnomserv" name="elnomserv" required="required" value="<?php echo $recnombreserv; ?>">
+                                                            </div>
+
+                                                        <?php
+                                                        }
+                                                        ?>
+
+                                                        <?php
+                                                        //LINEAS CONSOLA
+                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfnombre', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfnombre'] == 1) {
+                                                        ?>
+                                                            <hr>
+                                                            <div class="form-group col-md-3">
+                                                                <label class="negrita" for="linconsola">Lineas Mostradas por Consola:</label>
+                                                                <input type="number" class="form-control" id="linconsola" name="linconsola" required="required" min="0" max="1000" value="<?php echo $recnumerolineaconsola; ?>">
+                                                                <label> 0 = Ilimitado</label>
                                                             </div>
 
                                                         <?php
@@ -333,7 +350,7 @@ require_once("template/header.php");
                                                             <div class="form-group">
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-8">
-                                                                        <label>Selector de JAVA:</label>
+                                                                        <label class="negrita">Selector de JAVA:</label>
                                                                         <div class="col-md-6">
                                                                             <input type="radio" id="configjavaselect0" name="configjavaselect" value="0" <?php if ($recjavaselect == "0") {
                                                                                                                                                                 echo "checked";
@@ -405,7 +422,7 @@ require_once("template/header.php");
                                                             <div class="container">
                                                                 <div class="row">
                                                                     <div class="col-md-12">
-                                                                        <label>Limite Almacenamiento:</label>
+                                                                        <label class="negrita">Limite Almacenamiento:</label>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -450,7 +467,7 @@ require_once("template/header.php");
                                                         ?>
                                                             <hr>
                                                             <div class="form-group">
-                                                                <label>Parametros Avanzados:</label>
+                                                                <label class="negrita">Parametros Avanzados:</label>
                                                                 <div class="form-row">
                                                                     <div class="form-group col-md-6">
                                                                         <p>Garbage collector - Recolector de basura</p>
@@ -508,7 +525,7 @@ require_once("template/header.php");
                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2) {
                                                         ?>
                                                             <div class="form-group">
-                                                                <label for="eldirect">Nombre carpeta del servidor Minecraft</label>
+                                                                <label class="negrita" for="eldirect">Nombre carpeta del servidor Minecraft</label>
                                                                 <input readonly type="text" data-toggle="tooltip" data-placement="top" title="No se puede modificar la carpeta" class="form-control" id="eldirect" name="eldirect" required="required" value="<?php echo $reccarpmine; ?>">
                                                             </div>
 
