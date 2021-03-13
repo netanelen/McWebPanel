@@ -98,7 +98,7 @@ require_once("template/header.php");
                         ?>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control mb-2" id="elcomando" name="elcomando" placeholder="Comando">
+                                    <input type="text" class="form-control mb-2" id="elcomando" name="elcomando" placeholder="Comando" maxlength="4096">
                                 </div>
                                 <div class="col-md-2">
                                     <button class="form-control btn btn-primary float-right" id="botonconsola" type="button">Enviar</button>

@@ -95,7 +95,14 @@ $(function () {
                 },
                 type: 'POST',
                 success: function (data) {
-                    document.getElementById("elcomando").value = "";
+
+                    if (data == "ok") {
+                        document.getElementById("elcomando").value = "";
+                    } else if (data == "off") {
+                        alert("El servidor esta apagado");
+                    } else if (data == "lenmax") {
+                        alert("El comando supera los 4096 caracteres");
+                    }
                 }
             });
         }

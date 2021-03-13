@@ -43,6 +43,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
     if (isset($_POST['action']) && !empty($_POST['action'])) {
 
+      $retorno = "";
       $elcomando = "";
       $dirconfig = "";
       $elnombrescreen = "";
@@ -50,6 +51,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $laejecucion = "";
       $paraejecutar = "";
       $permcomando = "";
+      $elerror = 0;
 
       $paraejecutar = addslashes($_POST['action']);
 
@@ -58,12 +60,22 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
       $elpid = shell_exec($elcomando);
 
-      //SI ESTA EN EJECUCION ENVIAR COMANDO
-      if (!$elpid == "") {
-        $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
-        shell_exec($laejecucion);
+      if (strlen($paraejecutar) > 4096) {
+        $elerror = 1;
+        $retorno = "lenmax";
       }
-      echo "ok";
+
+      if ($elerror == 0) {
+        //SI ESTA EN EJECUCION ENVIAR COMANDO
+        if (!$elpid == "") {
+          $laejecucion = 'screen -S ' . $elnombrescreen . ' -X stuff "' . trim($paraejecutar) . '^M"';
+          shell_exec($laejecucion);
+          $retorno = "ok";
+        } else {
+          $retorno = "off";
+        }
+        echo $retorno;
+      }
     }
   }
 }
