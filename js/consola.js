@@ -102,6 +102,8 @@ $(function () {
                         alert("El servidor esta apagado");
                     } else if (data == "lenmax") {
                         alert("El comando supera los 4096 caracteres");
+                    } else if (data == "badchars") {
+                        alert("El comando tiene caracteres no válidos");
                     }
                 }
             });

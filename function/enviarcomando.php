@@ -60,10 +60,21 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
       $elcomando = "screen -ls | awk '/\." . $elnombrescreen . "\t/ {print strtonum($1)'}";
       $elpid = shell_exec($elcomando);
 
-      if (strlen($paraejecutar) > 4096) {
-        $elerror = 1;
-        $retorno = "lenmax";
+      if ($elerror == 0) {
+        if (strlen($paraejecutar) > 4096) {
+          $elerror = 1;
+          $retorno = "lenmax";
+        }
       }
+
+      if ($elerror == 0) {
+        $buscar = preg_match('/[\^][a-zA-Z]/', $paraejecutar);
+        if ($buscar >= 1) {
+          $retorno = "badchars";
+          $elerror = 1;
+        }
+      }
+
 
       if ($elerror == 0) {
         //SI ESTA EN EJECUCION ENVIAR COMANDO
@@ -74,8 +85,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         } else {
           $retorno = "off";
         }
-        echo $retorno;
       }
+      echo $retorno;
     }
   }
 }

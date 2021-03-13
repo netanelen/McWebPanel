@@ -84,6 +84,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $elerror = 1;
                         } else {
                             $getcommando = $_POST["elcomando"];
+                            $buscar = preg_match('/[\^][a-zA-Z]/', $getcommando);
+                            if ($buscar >= 1) {
+                                $retorno = "badchars";
+                                $elerror = 1;
+                            }
                         }
                     } else {
                         $getcommando = "";

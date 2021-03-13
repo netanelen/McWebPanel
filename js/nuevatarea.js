@@ -87,6 +87,8 @@ $(function() {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Hay que introducir un comando.</div>";
             } else if (data == "nocomando") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo json no tiene permisos de escritura.</div>";
+            } else if (data == "badchars") {
+                document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El comando tiene caracteres no válidos.</div>";
             } else if (data == "OK") {
                 location.href = "tareas.php";
             }
