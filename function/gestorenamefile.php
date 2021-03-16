@@ -50,8 +50,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $getinfofile = "";
             $test = 0;
 
-            $archivo = test_input($_POST['action']);
-            $renombre = test_input($_POST['renombre']);
+            $archivo = $_POST['action'];
+
+            $renombre = $_POST['renombre'];
 
             //COMPROVAR SI ESTA VACIO RENOMBRE
             if ($elerror == 0) {
@@ -85,21 +86,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
-            //AÑADIR RUTAS
-            if ($elerror == 0) {
-                $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
-                $nuevofile = $_SESSION['RUTACTUAL'] . "/" . $renombre;
-            }
-
-            //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
-            if ($elerror == 0) {
-                if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
-                    $retorno = "rutacambiada";
-                    $elerror = 1;
-                }
-            }
-
-            //COMPOBAR SI HAY ".." "..." EN RUTA
+            //COMPOBAR SI HAY ".." "..." EN ARCHIVO
             if ($elerror == 0) {
 
                 $verificar = array('..', '...', '~', '../', './', '&&');
@@ -122,12 +109,34 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 for ($i = 0; $i < count($verificar); $i++) {
 
-                    $test = substr_count($nuevofile, $verificar[$i]);
+                    $test = substr_count($renombre, $verificar[$i]);
 
                     if ($test >= 1) {
                         $retorno = "renomnovalido";
                         $elerror = 1;
                     }
+                }
+            }
+
+            //AÑADIR RUTAS
+            if ($elerror == 0) {
+                $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
+                $nuevofile = $_SESSION['RUTACTUAL'] . "/" . $renombre;
+            }
+
+            //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+            if ($elerror == 0) {
+                if ($_SESSION['RUTALIMITE'] != substr($archivo, 0, strlen($_SESSION['RUTALIMITE']))) {
+                    $retorno = "rutacambiada";
+                    $elerror = 1;
+                }
+            }
+
+            //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
+            if ($elerror == 0) {
+                if ($_SESSION['RUTALIMITE'] != substr($nuevofile, 0, strlen($_SESSION['RUTALIMITE']))) {
+                    $retorno = "rutacambiada";
+                    $elerror = 1;
                 }
             }
 
