@@ -79,20 +79,30 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //AÑADIR RUTA ACTUAL AL ARCHIVO
             if ($elerror == 0) {
                 for ($a = 0; $a < count($archivos); $a++) {
+
+                    $comarchivo = $archivos[$a];
                     $archivos[$a] = $_SESSION['RUTACTUAL'] . "/" . $archivos[$a];
+
+                    clearstatcache();
+                    if (!is_dir($archivos[$a])) {
+                        if ($comarchivo == ".htaccess") {
+                            $retorno = "archivoprohibido";
+                            $elerror = 1;
+                        }
+                    }
                 }
             }
 
             //COMPROVAR QUE EL INICIO DE RUTA SEA IGUAL A LA SESSION
             if ($elerror == 0) {
                 for ($a = 0; $a < count($archivos); $a++) {
+                    $test = substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']));
                     if ($_SESSION['RUTALIMITE'] != substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']))) {
-                        $retorno = "rutacambiada";
+                        $retorno = substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']));
                         $elerror = 1;
                     }
                 }
             }
-
 
             //COMPOBAR SI HAY ".." "..."
             if ($elerror == 0) {

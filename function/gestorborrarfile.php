@@ -57,6 +57,14 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //EVITAR BORRAR .htaccess
+            if ($elerror == 0) {
+                if ($archivo == ".htaccess") {
+                    $retorno = "seguridad";
+                    $elerror = 1;
+                }
+            }
+
             //AÑADIR RUTA ACTUAL AL ARCHIVO
             if ($elerror == 0) {
                 $archivo = $_SESSION['RUTACTUAL'] . "/" . $archivo;
