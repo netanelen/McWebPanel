@@ -63,6 +63,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
             $archivos = "";
             $retorno = "";
+            $comarchivo = "";
             $elerror = 0;
             $test = 0;
 
@@ -86,7 +87,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     clearstatcache();
                     if (!is_dir($archivos[$a])) {
                         if ($comarchivo == ".htaccess") {
-                            $retorno = "archivoprohibido";
+                            $retorno = "seguridad";
                             $elerror = 1;
                         }
                     }
@@ -98,7 +99,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 for ($a = 0; $a < count($archivos); $a++) {
                     $test = substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']));
                     if ($_SESSION['RUTALIMITE'] != substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']))) {
-                        $retorno = substr($archivos[$a], 0, strlen($_SESSION['RUTALIMITE']));
+                        $retorno = "rutacambiada";
                         $elerror = 1;
                     }
                 }
