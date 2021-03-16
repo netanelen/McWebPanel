@@ -63,7 +63,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 //EVITAR Descargar .htaccess
                 if ($dirconfig == ".htaccess") {
-                    $elerror = 1;
+                    exit;
                 }
 
                 //COMPOBAR SI HAY ".." "..."
@@ -114,7 +114,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         echo '<div class="alert alert-danger" role="alert">Error: El archivo no tiene permisos de lectura.</div>';
                         echo ('</body></html>');
                     }
-                }else{
+                } else {
                     exit;
                 }
             }
