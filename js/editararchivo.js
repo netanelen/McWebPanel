@@ -16,45 +16,19 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
-
-    var observe;
-    if (window.attachEvent) {
-        observe = function(element, event, handler) {
-            element.attachEvent('on' + event, handler);
-        };
-    } else {
-        observe = function(element, event, handler) {
-            element.addEventListener(event, handler, false);
-        };
-    }
-
-
-    var text = document.getElementById('eleditor');
-
-    function resize() {
-        text.style.height = 'auto';
-        text.style.height = text.scrollHeight + 'px';
-    }
-    /* 0-timeout to get the already changed text */
-    function delayedResize() {
-        window.setTimeout(resize, 0);
-    }
-
-    resize();
-
+$(function () {
 
     document.getElementById("guardarfile").disabled = true;
 
-    $("#eleditor").keypress(function() {
+    $("#eleditor").keypress(function () {
         document.getElementById("guardarfile").disabled = false;
     });
 
-    $("#eleditor").change(function() {
+    $("#eleditor").change(function () {
         document.getElementById("guardarfile").disabled = false;
     });
 
-    $("#guardarfile").click(function() {
+    $("#guardarfile").click(function () {
         $.ajax({
             url: 'function/editarsavefile.php',
             data: {
@@ -62,7 +36,7 @@ $(function() {
                 eltexto: document.getElementById("eleditor").value
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "OK") {
                     location.href = "gestorarchivos.php";
@@ -71,14 +45,11 @@ $(function() {
                 } else if (data == "nowrite") {
                     alert("El archivo no tiene permisos de escritura");
                 }
-            },
-            error: function(errorThrown) {
-                alert(errorThrown);
             }
         });
     });
 
-    $("#cancelar").click(function() {
+    $("#cancelar").click(function () {
         location.href = "gestorarchivos.php";
     });
 
@@ -90,7 +61,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }

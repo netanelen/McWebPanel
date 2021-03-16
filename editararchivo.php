@@ -136,7 +136,7 @@ require_once("template/header.php");
 
                                                 ?>
                                                 <h1 class="h2 text-gray-800 mb-3">Archivo: <?php echo $nombrefile; ?></h1>
-                                                <textarea class="form-control textoeleditor" id="eleditor" name="eleditor"><?php echo $eltextofile; ?></textarea>
+                                                <textarea class="form-control textoeleditor" id="eleditor" name="eleditor" rows="30"><?php echo $eltextofile; ?></textarea>
                                                 <hr>
                                             </div>
                                         </div>
