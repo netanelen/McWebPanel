@@ -242,7 +242,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 exec($comando, $out, $oky);
 
                 //INICIAR SCREEN
-                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS '" . $nombrescreen . "' sh backup.sh";
+                $comando = "cd " . $dirtemp . " && umask 002 && screen -dmS " . $nombrescreen . " sh backup.sh";
                 exec($comando, $out, $oky);
 
                 if (!$oky) {

@@ -312,6 +312,7 @@ require_once("template/header.php");
                                                                 <p class="lead">Nombre Backup</p>
                                                                 <input class="form-control" id="inputbackup" type="text" maxlength="100">
                                                                 <button type="button" class="btn btn-primary btn-block btn-lg text-white mt-2" id="crearbackup">Crear Backup</button>
+                                                                <button type="button" class="btn btn-danger btn-block btn-lg text-white mt-2" id="cancelarbakup">Cancelar Backup</button>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <img class="" src="img/loading.gif" id="gifloading" alt="loading">

@@ -16,10 +16,14 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     if (document.getElementById('crearbackup') !== null) {
         document.getElementById("crearbackup").disabled = true;
+    }
+
+    if (document.getElementById('cancelarbakup') !== null) {
+        document.getElementById("cancelarbakup").disabled = true;
     }
 
     if (document.getElementById('inputbackup') !== null) {
@@ -31,7 +35,7 @@ $(function() {
     }
 
     if (document.getElementById('inputbackup') !== null) {
-        $("#inputbackup").keypress(function(e) {
+        $("#inputbackup").keypress(function (e) {
             if (e.keyCode == 32) {
                 return false;
             } else {
@@ -47,7 +51,7 @@ $(function() {
     if (document.getElementsByClassName('descargar') !== null) {
         var descargarbuttons = document.getElementsByClassName('descargar');
         for (var i = 0; i < descargarbuttons.length; i++) {
-            descargarbuttons[i].addEventListener("click", function() {
+            descargarbuttons[i].addEventListener("click", function () {
                 window.open('function/backupdownfile.php?action=' + this.value, '_blank', 'noopener noreferrer', "toolbar=no,scrollbars=yes,resizable=yes,top=400,left=500,width=400,height=100");
             });
         }
@@ -56,7 +60,7 @@ $(function() {
     if (document.getElementsByClassName('restaurar') !== null) {
         var restaurarbuttons = document.getElementsByClassName('restaurar');
         for (var i = 0; i < restaurarbuttons.length; i++) {
-            restaurarbuttons[i].addEventListener("click", function() {
+            restaurarbuttons[i].addEventListener("click", function () {
                 var eleccion = confirm("¡ATENCIÓN!\n\nAl Restaurar se borrarán todos los archivos del servidor minecraft.\n\n¿Seguro que quieres continuar?");
                 if (eleccion == true) {
 
@@ -66,7 +70,7 @@ $(function() {
                         data: {
                             action: this.value
                         },
-                        success: function(data) {
+                        success: function (data) {
 
                             if (data == "nowriteraiz") {
                                 document.getElementById("textoretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta raíz no tiene permisos de escritura.</div>";
@@ -101,7 +105,7 @@ $(function() {
     if (document.getElementsByClassName('borrar') !== null) {
         var borrarbuttons = document.getElementsByClassName('borrar');
         for (var i = 0; i < borrarbuttons.length; i++) {
-            borrarbuttons[i].addEventListener("click", function() {
+            borrarbuttons[i].addEventListener("click", function () {
                 var eleccion = confirm("¡ATENCIÓN!\n\n¿Estás seguro de eliminar el backup: " + this.value + " ?");
                 if (eleccion == true) {
 
@@ -111,7 +115,7 @@ $(function() {
                         data: {
                             action: this.value
                         },
-                        success: function(data) {
+                        success: function (data) {
 
                             if (data == "1") {
                                 location.reload();
@@ -130,7 +134,7 @@ $(function() {
     }
 
     if (document.getElementById('inputbackup') !== null) {
-        $("#inputbackup").keyup(function() {
+        $("#inputbackup").keyup(function () {
             if (document.getElementById("inputbackup").value == "") {
                 document.getElementById("crearbackup").disabled = true;
             } else {
@@ -138,45 +142,70 @@ $(function() {
             }
         });
 
-        document.getElementById("inputbackup").addEventListener('paste', function() {
+        document.getElementById("inputbackup").addEventListener('paste', function () {
             document.getElementById("crearbackup").disabled = false;
         });
     }
 
     if (document.getElementById('crearbackup') !== null) {
-        $("#crearbackup").click(function() {
+        $("#crearbackup").click(function () {
+            var eleccion = confirm("¡CONFIRMAR ACCION!\n\nSi el servidor está ejecutado el backup podría fallar.\n\n¿Seguro que quieres continuar?");
+            if (eleccion == true) {
+                var eltexto = document.getElementById("inputbackup").value;
+                $.ajax({
+                    type: "POST",
+                    url: "function/backupcreate.php",
+                    data: {
+                        action: eltexto
+                    },
+                    success: function (data) {
+
+                        if (data == "nobackup") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al crear el backup.</div>";
+                        } else if (data == "nowritable") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no tiene permisos de escritura.</div>";
+                        } else if (data == "noexiste") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no existe.</div>";
+                        } else if (data == "nolectura") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no se puede leer.</div>";
+                        } else if (data == "novalidoname") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no válido.</div>";
+                        } else if (data == "noejecutable") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
+                        } else if (data == "limitgbexceeded") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado el límite de GB para Backups.</div>";
+                        } else if (data == "backenejecucion") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Ya hay un backup en ejecución.</div>";
+                        } else if (data == "notempexiste") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no existe.</div>";
+                        } else if (data == "notempwritable") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no tiene permisos de escritura.</div>";
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    if (document.getElementById('cancelarbakup') !== null) {
+        $("#cancelarbakup").click(function () {
             var eltexto = document.getElementById("inputbackup").value;
             $.ajax({
                 type: "POST",
-                url: "function/backupcreate.php",
+                url: "function/backupcancel.php",
                 data: {
                     action: eltexto
                 },
-                success: function(data) {
-
+                success: function (data) {
+alert(data);
                     if (data == "nobackup") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al crear el backup.</div>";
                     } else if (data == "nowritable") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no tiene permisos de escritura.</div>";
-                    } else if (data == "noexiste") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no existe.</div>";
-                    } else if (data == "nolectura") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no se puede leer.</div>";
-                    } else if (data == "novalidoname") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no válido.</div>";
-                    } else if (data == "noejecutable") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
-                    } else if (data == "limitgbexceeded") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado el límite de GB para Backups.</div>";
-                    } else if (data == "backenejecucion") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Ya hay un backup en ejecución.</div>";
-                    } else if (data == "notempexiste") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no existe.</div>";
-                    } else if (data == "notempwritable") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta temp no tiene permisos de escritura.</div>";
                     }
                 }
             });
+
         });
     }
 
@@ -190,12 +219,16 @@ $(function() {
                 action: 'estadobackup'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "ON") {
 
                     if (document.getElementById('crearbackup') !== null) {
                         document.getElementById("crearbackup").disabled = true;
+                    }
+
+                    if (document.getElementById('cancelarbakup') !== null) {
+                        document.getElementById("cancelarbakup").disabled = false;
                     }
 
                     if (document.getElementById('inputbackup') !== null) {
@@ -206,6 +239,10 @@ $(function() {
                         document.getElementById("gifloading").style.visibility = "visible";
                     }
                 } else if (data == "OFF") {
+
+                    if (document.getElementById('cancelarbakup') !== null) {
+                        document.getElementById("cancelarbakup").disabled = true;
+                    }
 
                     if (document.getElementById('inputbackup') !== null) {
                         document.getElementById("inputbackup").disabled = false;
@@ -226,7 +263,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
