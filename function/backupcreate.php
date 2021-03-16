@@ -120,6 +120,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            if ($elerror == 0) {
+                if ($archivo == "") {
+                    $retorno = "noname";
+                    $elerror = 1;
+                }
+            }
+
             //Evitar poder ir a una ruta hacia atras
             if ($elerror == 0) {
                 if (strpos($archivo, '..') !== false || strpos($archivo, '*.*') !== false || strpos($archivo, '*/*.*') !== false) {
@@ -251,7 +258,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $retorno = "nobackup";
                 }
             }
+            echo $retorno;
         }
-        echo $retorno;
     }
 }

@@ -18,14 +18,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function () {
 
-    if (document.getElementById('crearbackup') !== null) {
-        document.getElementById("crearbackup").disabled = true;
-    }
-
-    if (document.getElementById('cancelarbakup') !== null) {
-        document.getElementById("cancelarbakup").disabled = true;
-    }
-
     if (document.getElementById('inputbackup') !== null) {
         document.getElementById("inputbackup").disabled = true;
     }
@@ -133,22 +125,9 @@ $(function () {
         }
     }
 
-    if (document.getElementById('inputbackup') !== null) {
-        $("#inputbackup").keyup(function () {
-            if (document.getElementById("inputbackup").value == "") {
-                document.getElementById("crearbackup").disabled = true;
-            } else {
-                document.getElementById("crearbackup").disabled = false;
-            }
-        });
-
-        document.getElementById("inputbackup").addEventListener('paste', function () {
-            document.getElementById("crearbackup").disabled = false;
-        });
-    }
-
     if (document.getElementById('crearbackup') !== null) {
         $("#crearbackup").click(function () {
+            document.getElementById("textobackupretorno").innerHTML = "<div class='lead'></div>";
             var eleccion = confirm("¡CONFIRMAR ACCION!\n\nSi el servidor está ejecutado el backup podría fallar.\n\n¿Seguro que quieres continuar?");
             if (eleccion == true) {
                 var eltexto = document.getElementById("inputbackup").value;
@@ -189,17 +168,18 @@ $(function () {
 
     if (document.getElementById('cancelarbakup') !== null) {
         $("#cancelarbakup").click(function () {
-            var eltexto = document.getElementById("inputbackup").value;
             $.ajax({
                 type: "POST",
                 url: "function/backupcancel.php",
                 data: {
-                    action: eltexto
+                    action: 'eltexto'
                 },
                 success: function (data) {
 
                     if (data == "ok") {
                         location.reload();
+                    } else if(data == "backupnoenjecucion"){
+                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay ningún backup en ejecución.</div>";
                     }
                 }
             });
@@ -221,14 +201,6 @@ $(function () {
 
                 if (data == "ON") {
 
-                    if (document.getElementById('crearbackup') !== null) {
-                        document.getElementById("crearbackup").disabled = true;
-                    }
-
-                    if (document.getElementById('cancelarbakup') !== null) {
-                        document.getElementById("cancelarbakup").disabled = false;
-                    }
-
                     if (document.getElementById('inputbackup') !== null) {
                         document.getElementById("inputbackup").disabled = true;
                     }
@@ -237,10 +209,6 @@ $(function () {
                         document.getElementById("gifloading").style.visibility = "visible";
                     }
                 } else if (data == "OFF") {
-
-                    if (document.getElementById('cancelarbakup') !== null) {
-                        document.getElementById("cancelarbakup").disabled = true;
-                    }
 
                     if (document.getElementById('inputbackup') !== null) {
                         document.getElementById("inputbackup").disabled = false;
