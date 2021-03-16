@@ -57,8 +57,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
         if (isset($_POST['action']) && !empty($_POST['action'])) {
 
-            if (!isset($_SESSION['BACKUPSTATUS'])) {
-                $_SESSION['BACKUPSTATUS'] = 0;
+            if (!isset($_SESSION['GESTARCHPROSSES'])) {
+                $_SESSION['GESTARCHPROSSES'] = 0;
             }
 
             $retorno = "";
