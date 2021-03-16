@@ -152,8 +152,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                     $fileName = $_FILES['uploadedFile']['name'];
 
-                    $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&');
-
+                    $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&','#', "|", '$','%','!','`','&','*','{','}', '?','=','@',"'",'"',"'\'");
+                    
                     for ($i = 0; $i < count($verificar); $i++) {
 
                         $test = substr_count($fileName, $verificar[$i]);
