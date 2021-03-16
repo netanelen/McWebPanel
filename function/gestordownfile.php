@@ -61,9 +61,9 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     exit;
                 }
 
-                //AÑADIR RUTA ACTUAL AL ARCHIVO
-                if ($elerror == 0) {
-                    $dirconfig = $_SESSION['RUTACTUAL'] . "/" . $dirconfig;
+                //EVITAR Descargar .htaccess
+                if ($dirconfig == ".htaccess") {
+                    $elerror = 1;
                 }
 
                 //COMPOBAR SI HAY ".." "..."
@@ -79,6 +79,11 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             exit;
                         }
                     }
+                }
+
+                //AÑADIR RUTA ACTUAL AL ARCHIVO
+                if ($elerror == 0) {
+                    $dirconfig = $_SESSION['RUTACTUAL'] . "/" . $dirconfig;
                 }
 
                 $getinfofile = pathinfo($dirconfig);
@@ -109,6 +114,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         echo '<div class="alert alert-danger" role="alert">Error: El archivo no tiene permisos de lectura.</div>';
                         echo ('</body></html>');
                     }
+                }else{
+                    exit;
                 }
             }
         }
