@@ -197,11 +197,9 @@ $(function () {
                     action: eltexto
                 },
                 success: function (data) {
-alert(data);
-                    if (data == "nobackup") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error al crear el backup.</div>";
-                    } else if (data == "nowritable") {
-                        document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta backups no tiene permisos de escritura.</div>";
+
+                    if (data == "ok") {
+                        location.reload();
                     }
                 }
             });
