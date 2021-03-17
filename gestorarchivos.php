@@ -23,6 +23,14 @@ require_once("template/errorreport.php");
 require_once("config/confopciones.php");
 require_once("template/header.php");
 
+function test_input($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
 //FUNCION DEVUELVE DATOS EN EL FORMATO B/KB/MB/GB/TB
 function devolverdatos($losbytes, $opcion)
 {
@@ -332,6 +340,10 @@ function devolverdatos($losbytes, $opcion)
                                                                 //RECORRER ARRAY Y AÑADIR LAS PROPIEDADES Y LOS BOTONES
                                                                 for ($i = 0; $i < count($fcarpetas); $i++) {
                                                                     $archivoconcreto = $rutaarchivo . "/" . $fcarpetas[$i];
+
+                                                                    //Se limpia el nombre de archivo
+                                                                    $fcarpetas[$i] = test_input($fcarpetas[$i]);
+                                                                    
                                                                     echo '<tr class = "menu-hover">';
 
                                                                     echo '<th class = "elclick1" scope="row" id="' . $i . '">';
