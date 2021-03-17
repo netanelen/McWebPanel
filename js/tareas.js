@@ -51,9 +51,6 @@ $(function () {
                             location.reload();
                         }
 
-                    },
-                    error: function (errorThrown) {
-                        alert(errorThrown);
                     }
                 });
             });
@@ -93,9 +90,6 @@ $(function () {
                             location.reload();
                         }
 
-                    },
-                    error: function (errorThrown) {
-                        alert(errorThrown);
                     }
                 });
             });
@@ -129,18 +123,19 @@ $(function () {
 
     function eltimerlog() {
 
-    if (document.getElementById('logcron') !== null) {
-        $.ajax({
-            url: 'function/tarealog.php',
-            data: {
-                action: 'getlog'
-            },
-            type: 'POST',
-            success: function (data) {
-                document.getElementById("logcron").value = data;
-            }
-        });
-    }}
+        if (document.getElementById('logcron') !== null) {
+            $.ajax({
+                url: 'function/tarealog.php',
+                data: {
+                    action: 'getlog'
+                },
+                type: 'POST',
+                success: function (data) {
+                    document.getElementById("logcron").value = data;
+                }
+            });
+        }
+    }
 
     setInterval(eltimerlog, 1000);
 

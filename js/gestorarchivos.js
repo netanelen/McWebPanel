@@ -604,6 +604,7 @@ $(function () {
                         },
                         type: 'POST',
                         success: function (data) {
+
                             if (data == "nocopy") {
                                 alert("Nada que borrar");
                             } else if (data == "rutacambiada") {
@@ -723,9 +724,6 @@ $(function () {
                     location.reload();
                 }
 
-            },
-            error: function (errorThrown) {
-                alert(errorThrown);
             }
         });
     }));
