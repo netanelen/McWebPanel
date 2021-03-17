@@ -51,7 +51,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $test = 0;
 
             $archivo = $_POST['action'];
-
             $renombre = $_POST['renombre'];
 
             //COMPROVAR SI ESTA VACIO RENOMBRE
@@ -62,10 +61,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 }
             }
 
+            //EVITAR RENOMBRAR .htaccess
+            if ($elerror == 0) {
+                if ($archivo == ".htaccess") {
+                    $retorno = "seguridad";
+                    $elerror = 1;
+                }
+            }
+
             //EVITAR CIERTAS EXTENSIONES
             if ($elerror == 0) {
 
-                $verificar = array('phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'exe', 'pl', 'asp', 'aspx', 'shtml', 'shtm', 'fcgi', 'fpl', 'jsp', 'htm', 'html', 'wml', 'js', 'xhtml', 'xht', 'asa', 'cer', 'asax', 'swf', 'xap', 'css', 'sh', 'ksh', 'bash', 'zsh', 'py', 'pdf', 'htaccess');
+                $verificar = array('phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'php7', 'phps', 'cgi', 'exe', 'pl', 'asp', 'aspx', 'shtml', 'shtm', 'fcgi', 'fpl', 'jsp', 'htm', 'html', 'wml', 'js', 'xhtml', 'xht', 'asa', 'cer', 'asax', 'swf', 'xap', 'css', 'sh', 'ksh', 'bash', 'zsh', 'py', 'pdf');
 
                 for ($i = 0; $i < count($verificar); $i++) {
 
@@ -105,7 +112,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //COMPOBAR SI HAY ".." "..." EN RENOMBRE
             if ($elerror == 0) {
 
-                $verificar = array('..', '...', '~', '../', './', '&&');
+                $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&','#', "|", '$','%','!','`','&','*','{','}', '?','=','@',"'",'"',"'\'");
 
                 for ($i = 0; $i < count($verificar); $i++) {
 
@@ -117,6 +124,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     }
                 }
             }
+
 
             //AÑADIR RUTAS
             if ($elerror == 0) {
