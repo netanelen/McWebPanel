@@ -34,6 +34,7 @@ function test_input($data)
 
 <!-- Custom styles for this template-->
 <link href="css/test.css" rel="stylesheet">
+<link href="css/status.css" rel="stylesheet">
 
 </head>
 
@@ -89,9 +90,12 @@ function test_input($data)
                                                             <p class="lead" id="textoram">Ram:</p>
                                                             <img class="d-block float-left mr-2" src="img/menu/users.png" alt="Players">
                                                             <p class="lead" id="jugadores">Jugadores Online:</p>
+                                                            <img class="d-block float-left mr-2" src="img/uptime.png" alt="Uptime">
                                                             <p class="lead" id="eluptime">Uptime:</p>
+                                                            <img class="d-block float-left mr-2" src="img/clock.png" alt="clock">
                                                             <p class="lead" id="horaserver">Hora Servidor:</p>
-                                                            <p class="lead" id="textoservidor">Servidor:</p>
+                                                            <p class="lead" id="textoservidor">Estado: <span class="cartel">Cargando</span></p>
+                                                            
                                                             <p class="lead" id="textoretorno"></p>
                                                         </div>
                                                     </div>

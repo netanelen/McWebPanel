@@ -102,7 +102,7 @@ $(function () {
             success: function (data) {
 
                 if (data == "ok") {
-                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Señal apagar servidor enviada correctamente.</div>";
+                    document.getElementById("textoretorno").innerHTML = "<div class='alert alert-success' role='alert'>Señal apagar servidor enviado correctamente.</div>";
                 }
             }
         });
@@ -150,10 +150,11 @@ $(function () {
             dataType: 'json',
             success: function (data) {
 
-                document.getElementById("textoservidor").innerHTML = "Servidor: " + String(data.encendido);
                 document.getElementById("horaserver").innerHTML = "Hora Servidor: " + String(data.hora);
 
                 if (data.encendido == "Apagado") {
+
+                    document.getElementById("textoservidor").innerHTML = "Estado: <span class='cartel offline'>Offline</span>";
 
                     if (document.getElementById('binicio') !== null) {
                         document.getElementById("binicio").disabled = false;
@@ -176,6 +177,8 @@ $(function () {
                     document.getElementById("eluptime").innerHTML = "Uptime:";
 
                 } else if (data.encendido == "Encendido") {
+
+                    document.getElementById("textoservidor").innerHTML = "Estado: <span class='cartel online'>Online</span>";
 
                     document.getElementById("textocpu").innerHTML = "Cpu: " + String(data.cpu) + "%";
 
