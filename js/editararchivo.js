@@ -18,16 +18,6 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function () {
 
-    document.getElementById("guardarfile").disabled = true;
-
-    $("#eleditor").keypress(function () {
-        document.getElementById("guardarfile").disabled = false;
-    });
-
-    $("#eleditor").change(function () {
-        document.getElementById("guardarfile").disabled = false;
-    });
-
     $("#guardarfile").click(function () {
         $.ajax({
             url: 'function/editarsavefile.php',
