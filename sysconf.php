@@ -532,17 +532,17 @@ require_once("template/header.php");
                                                         <?php
                                                         }
                                                         ?>
+                                                        <hr>
 
+                                                        <button class="btn btn-primary btn-block" id="guardaserver" name="guardarserver">Guardar Cambios</button>
+                                                        <input type="hidden" name="action" value="submit">
+                                                        <br>
                                                         <div class="form-group">
                                                             <span id="result"></span>
                                                         </div>
 
-                                                        <button class="btn btn-primary btn-block" id="guardaserver" name="guardarserver">Guardar Cambios</button>
-                                                        <input type="hidden" name="action" value="submit">
-
                                                     </form>
-
-
+                                                    <hr id="finpage">
                                                 </div>
                                             </div>
                                         </div>
