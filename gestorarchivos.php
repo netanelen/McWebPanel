@@ -25,10 +25,10 @@ require_once("template/header.php");
 
 function test_input($data)
 {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 //FUNCION DEVUELVE DATOS EN EL FORMATO B/KB/MB/GB/TB
@@ -343,7 +343,7 @@ function devolverdatos($losbytes, $opcion)
 
                                                                     //Se limpia el nombre de archivo
                                                                     $fcarpetas[$i] = test_input($fcarpetas[$i]);
-                                                                    
+
                                                                     echo '<tr class = "menu-hover">';
 
                                                                     echo '<th class = "elclick1" scope="row" id="' . $i . '">';
@@ -366,7 +366,7 @@ function devolverdatos($losbytes, $opcion)
 
                                                                     clearstatcache();
                                                                     if (is_dir($archivoconcreto)) {
-                                                                        echo '<img class="mr-2" src="img/gestorarchivos/carpeta.png">' . $fcarpetas[$i] . '</th>';
+                                                                        echo '<img class="mr-2" src="img/gestorarchivos/carpeta.png" alt="carpeta">' . $fcarpetas[$i] . '</th>';
                                                                     } else {
 
                                                                         //COMPRUEBA SI EL ARCHIVO TIENE EXTENSION
@@ -379,43 +379,27 @@ function devolverdatos($losbytes, $opcion)
 
                                                                         //VER TIPO Y AÑADIR ICONO
                                                                         if ($tipoarchivo == ".txt") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/txt.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/txt.png" alt="txt">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".jar") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/java.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/java.png" alt="java">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".yml") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/yml.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/yml.png" alt="yml">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".json") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/json.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/json.png" alt="json">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".htaccess") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/htaccess.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/htaccess.png" alt="htaccess">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".properties") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/mine.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".bmp") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".dib") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".jpg") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".jpeg") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".jpe") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".jfif") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".gif") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".tiff") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".png") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
-                                                                        } elseif ($tipoarchivo == ".heic") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/mine.png" alt="minecraft">' . $fcarpetas[$i] . '</th>';
+                                                                        } elseif ($tipoarchivo == ".bmp" || $tipoarchivo == ".dib" || $tipoarchivo == ".jpg" || $tipoarchivo == ".jpeg" || $tipoarchivo == ".jpe" || $tipoarchivo == ".jfif" || $tipoarchivo == ".gif" || $tipoarchivo == ".tiff" || $tipoarchivo == ".png" || $tipoarchivo == ".heic") {
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/img.png" alt="img">' . $fcarpetas[$i] . '</th>';
+                                                                        } elseif ($tipoarchivo == ".rar") {
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/rar.png" alt="rar">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".zip") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/zip.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/zip.png" alt="zip">' . $fcarpetas[$i] . '</th>';
                                                                         } elseif ($tipoarchivo == ".tar" || $tipoarchivo == ".bz2" || $tipoarchivo == ".gz" || $tipoarchivo == ".lz" || $tipoarchivo == ".lzma" || $tipoarchivo == ".xz" || $tipoarchivo == ".z" || $tipoarchivo == ".taz" || $tipoarchivo == ".tb2" || $tipoarchivo == ".tbz" || $tipoarchivo == ".tbz2" || $tipoarchivo == ".tgz" || $tipoarchivo == ".tlz" || $tipoarchivo == ".txz" || $tipoarchivo == ".tz") {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/tar.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/tar.png" alt="tar">' . $fcarpetas[$i] . '</th>';
                                                                         } else {
-                                                                            echo '<img class="mr-2" src="img/gestorarchivos/void.png">' . $fcarpetas[$i] . '</th>';
+                                                                            echo '<img class="mr-2" src="img/gestorarchivos/void.png" alt="noicon">' . $fcarpetas[$i] . '</th>';
                                                                         }
                                                                     }
 
