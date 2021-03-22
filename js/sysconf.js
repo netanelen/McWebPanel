@@ -18,13 +18,11 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function () {
 
-    document.getElementById("result").disabled = false;
-
     $("#guardaserver").click(function () {
         document.getElementById("result").innerHTML = '<img src="img/guardando.gif" alt="Guardando">'
 
         var eldata = $("#formconf :input").serializeArray();
-        
+
         document.getElementById('finpage').scrollIntoView();
 
         $.post($("#formconf").attr("action"), eldata, function (data) {
