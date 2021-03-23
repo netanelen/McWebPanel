@@ -205,12 +205,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         fwrite($file, "eula=true" . PHP_EOL);
                         fclose($file);
                     }
+
+                    //PERMISO EULA.TXT
+                    $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 eula.txt";
+                    exec($elcommando);
                 }
             }
-
-            //PERMISO EULA.TXT
-            $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 eula.txt";
-            exec($elcommando);
 
             //VERIFICAR SI HAY NOMBRE.JAR
             if ($elerror == 0) {
@@ -329,8 +329,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             }
 
             //PERMISO SERVER-ICON.PNG
-            $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 server-icon.png";
-            exec($elcommando);
+            if ($elerror == 0) {
+                $elcommando = "cd " . $rutaminecraffijo . " && chmod 664 server-icon.png";
+                exec($elcommando);
+            }
 
             //INICIAR VARIABLE JAVARUTA Y COMPROBAR SI EXISTE
             if ($elerror == 0) {
