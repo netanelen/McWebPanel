@@ -23,5 +23,5 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     background-color: #1e1e1e !important;
     text-align: left !important;
     resize: none !important;
-    overflow: hidden !important;
+    overflow-y: scroll !important;
 }
