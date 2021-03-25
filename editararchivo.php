@@ -127,16 +127,24 @@ require_once("template/header.php");
                                                 $_SESSION['EDITARFILE'] = "";
 
                                                 //LEER ARCHIVO
-                                                if ($elerror == 0) {
-                                                    $eltextofile = file_get_contents($elarchivo);
+                                                $getinfofile = pathinfo($elarchivo);
+                                                $nombrefile = $getinfofile['basename'];
 
-                                                    $getinfofile = pathinfo($elarchivo);
-                                                    $nombrefile = $getinfofile['basename'];
-                                                }
 
                                                 ?>
                                                 <h1 class="h2 text-gray-800 mb-3">Archivo: <?php echo $nombrefile; ?></h1>
-                                                <textarea class="form-control textoeleditor" id="eleditor" name="eleditor" rows="30"><?php echo $eltextofile; ?></textarea>
+                                                <textarea class="form-control textoeleditor" type="text" spellcheck="false" id="eleditor" name="eleditor" rows="30"><?php
+                                                                                                                                                                    $gestor = @fopen($elarchivo, "r");
+                                                                                                                                                                    if ($gestor) {
+                                                                                                                                                                        while (($bufer = fgets($gestor, 4096)) !== false) {
+                                                                                                                                                                            echo $bufer;
+                                                                                                                                                                        }
+                                                                                                                                                                        if (!feof($gestor)) {
+                                                                                                                                                                            echo "Error: fallo inesperado de fgets()\n";
+                                                                                                                                                                        }
+                                                                                                                                                                        fclose($gestor);
+                                                                                                                                                                    }
+                                                                                                                                                                    ?></textarea>
                                                 <hr>
                                             </div>
                                         </div>
