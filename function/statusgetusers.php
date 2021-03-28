@@ -41,6 +41,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         $retorno = "";
         $valor3 = "";
         $losjugadores = "";
+        $okinit = 0;
 
         //OBTENER PID SABER SI ESTA EN EJECUCION
         $elcomando = "";
@@ -66,9 +67,21 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //COMPROBAR QUE EL LOG SE PUEDA LEER
                 if (is_readable($larutascrrenlog)) {
                     //OBTENER LOG
-                    $devolucion = file_get_contents($larutascrrenlog);
-                    $buscadone = strrpos($devolucion, "Done (");
-                    if ($buscadone != "") {
+                    $gestor = @fopen($larutascrrenlog, "r");
+                    if ($gestor) {
+                        while (($bufer = fgets($gestor, 4096)) !== false) {
+                            $buscadone = strrpos($bufer, "Done (");
+                            if ($buscadone != "") {
+                                $okinit = 1;
+                            }
+                        }
+                        if (!feof($gestor)) {
+                            echo "Error: fallo inesperado de fgets()\n";
+                        }
+                        fclose($gestor);
+                    }
+
+                    if ($okinit == 1) {
 
                         //OBTENER JUGADORES ONLINE
                         $recpuerto = CONFIGPUERTO;
@@ -91,7 +104,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $Info = $Query->Query();
 
                             if (is_array($Info)) {
-                                
+
                                 if (isset($Info['players'])) {
                                     $subarray = $Info['players'];
                                     $maxplayers = $subarray['max'];
