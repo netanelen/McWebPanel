@@ -219,6 +219,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     if (!file_exists($elarchivo)) {
 
                         //OBTENER DATOS Y GENERAR ARRAY FINAL
+                        $t = time();
+                        $arrayfinal[0]['id'] = $t;
                         $arrayfinal[0]['nombre'] = test_input($_POST["nombretarea"]);
                         $arrayfinal[0]['accion'] = test_input($_POST["laaccion"]);
                         $arrayfinal[0]['estado'] = test_input("activado");
@@ -271,6 +273,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                             $elindice = count($arrayobtenido);
 
+                            $t = time();
+                            $arrayobtenido[$elindice]['id'] = $t;
                             $arrayobtenido[$elindice]['nombre'] = test_input($_POST["nombretarea"]);
                             $arrayobtenido[$elindice]['accion'] = test_input($_POST["laaccion"]);
                             $arrayobtenido[$elindice]['estado'] = test_input("activado");

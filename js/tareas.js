@@ -23,9 +23,7 @@ $(function () {
         for (var i = 0; i < actdesbuttons.length; i++) {
             actdesbuttons[i].addEventListener("click", function () {
                 var indexarray = String(this.value);
-                if (indexarray == 0) {
-                    indexarray = 'CERO';
-                }
+                
                 $.ajax({
                     url: 'function/tareaactdes.php',
                     data: {
@@ -62,9 +60,7 @@ $(function () {
         for (var i = 0; i < borrarbuttons.length; i++) {
             borrarbuttons[i].addEventListener("click", function () {
                 var indexarray = String(this.value);
-                if (indexarray == 0) {
-                    indexarray = 'CERO';
-                }
+
                 $.ajax({
                     url: 'function/tareaborrar.php',
                     data: {

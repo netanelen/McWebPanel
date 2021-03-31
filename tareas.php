@@ -147,22 +147,26 @@ require_once("template/header.php");
 
                                                                     //RECORRER ARRAY Y AÑADIR LAS PROPIEDADES Y LOS BOTONES
                                                                     for ($i = 0; $i < count($arrayobtenido); $i++) {
-                                                                        echo ('<tr class="menu-hover" id="' . $i . '">');
+                                                                        echo ('<tr class="menu-hover" id="' . $arrayobtenido[$i]["id"] . '">');
                                                                         echo ('<th scope="row">' . $arrayobtenido[$i]["nombre"] . '</th>');
                                                                         echo ('<td>' . devolver_accion($arrayobtenido[$i]["accion"]) . '</td>');
                                                                         echo ('<td>' . test_input(addslashes($arrayobtenido[$i]["comando"])) . '</td>');
                                                                         echo ('<td>' . $arrayobtenido[$i]["estado"] . '</td>');
                                                                         echo ('<td>');
 
+                                                                        ?>
+                                                                        <button type="button" class="editar btn btn-primary text-white mr-1" value="<?php echo $arrayobtenido[$i]["id"]; ?>">Editar</button>
+                                                                        <?php
+
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasactdes', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasactdes'] == 1) {
                                                                 ?>
-                                                                            <button type="button" class="actdes btn btn-info text-white mr-1" value="<?php echo $i ?>">Activar/Desactivar</button>
+                                                                            <button type="button" class="actdes btn btn-info text-white mr-1" value="<?php echo $arrayobtenido[$i]["id"]; ?>">Activar/Desactivar</button>
                                                                         <?php
                                                                         }
 
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasborrar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasborrar'] == 1) {
                                                                         ?>
-                                                                            <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $i ?>">Borrar</button>
+                                                                            <button type="button" class="borrar btn text-white btn-danger" value="<?php echo $arrayobtenido[$i]["id"]; ?>">Borrar</button>
                                                                         <?php
                                                                         }
                                                                         ?>

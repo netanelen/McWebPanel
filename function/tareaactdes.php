@@ -50,10 +50,6 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
 
                 $indexarrayborrar = test_input($_POST['action']);
 
-                if ($indexarrayborrar == 'CERO') {
-                    $indexarrayborrar = 0;
-                }
-
                 //OBTENER RUTA CONFIG
                 $rutaarchivo = dirname(getcwd()) . PHP_EOL;
                 $rutaarchivo = trim($rutaarchivo);
@@ -114,7 +110,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $elindice = count($arrayobtenido);
 
                             for ($i = 0; $i < $elindice; $i++) {
-                                if ($indexarrayborrar == $i) {
+                                if ($indexarrayborrar == $arrayobtenido[$i]['id']) {
                                     $getestado = $arrayobtenido[$i]['estado'];
 
                                     switch ($getestado) {
