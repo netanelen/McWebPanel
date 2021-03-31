@@ -85,8 +85,8 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
           $laconsola = shell_exec($elcomando);
         }
 
-        //COMPROBAR SI ES MAGMA O FORGE
-        if ($rectiposerv == "magma" || $rectiposerv == "forge") {
+        //COMPROBAR SI ES PAPER/ MAGMA / FORGE
+        if ($rectiposerv == "paper" || $rectiposerv == "magma" || $rectiposerv == "forge") {
 
           //CONVERTIR STRING EN ARRAY
           $arr = preg_split('/\n/', $laconsola);
