@@ -277,6 +277,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pprogtareascrear'] = 0;
                             }
 
+                            if (isset($_POST['pprogtareaseditar'])) {
+                                $arrayobtenido[$i]['pprogtareaseditar'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pprogtareaseditar'] = 0;
+                            }
+
                             if (isset($_POST['pprogtareasactdes'])) {
                                 $arrayobtenido[$i]['pprogtareasactdes'] = 1;
                             } else {

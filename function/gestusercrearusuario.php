@@ -263,6 +263,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['pprogtareascrear'] = 1;
                 }
 
+                if (isset($_POST['pprogtareaseditar'])) {
+                    $arrayobtenido[$elindice]['pprogtareaseditar'] = 1;
+                }
+
                 if (isset($_POST['pprogtareasactdes'])) {
                     $arrayobtenido[$elindice]['pprogtareasactdes'] = 1;
                 }

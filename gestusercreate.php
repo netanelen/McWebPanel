@@ -215,6 +215,14 @@ require_once("template/header.php");
 
                                                                             <div class="form-group">
                                                                                 <div>
+                                                                                    <input id="pprogtareaseditar" name="pprogtareaseditar" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="pprogtareaseditar">Editar Tareas</label>
+                                                                                </div>
+                                                                                <p>Permite editar tareas programadas.</p>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <div>
                                                                                     <input id="pprogtareasactdes" name="pprogtareasactdes" type="checkbox" value="1">
                                                                                     <label class="negrita mr-2" for="pprogtareasactdes">Activar / Desactivar Tareas</label>
                                                                                 </div>

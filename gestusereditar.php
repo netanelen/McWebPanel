@@ -284,6 +284,20 @@ require_once("template/header.php");
 
                                                                             <div class="form-group">
                                                                                 <div>
+                                                                                    <input id="pprogtareaseditar" name="pprogtareaseditar" type="checkbox" value="1" <?php
+                                                                                                                                                                    if (array_key_exists('pprogtareaseditar', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                        if ($_SESSION['EDITARUSUARIO']['pprogtareaseditar'] == 1) {
+                                                                                                                                                                            echo "checked";
+                                                                                                                                                                        }
+                                                                                                                                                                    }
+                                                                                                                                                                    ?>>
+                                                                                    <label class="negrita mr-2" for="pprogtareaseditar">Editar Tareas</label>
+                                                                                </div>
+                                                                                <p>Permite editar tareas programadas.</p>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <div>
                                                                                     <input id="pprogtareasactdes" name="pprogtareasactdes" type="checkbox" value="1" <?php
                                                                                                                                                                         if (array_key_exists('pprogtareasactdes', $_SESSION['EDITARUSUARIO'])) {
                                                                                                                                                                             if ($_SESSION['EDITARUSUARIO']['pprogtareasactdes'] == 1) {
