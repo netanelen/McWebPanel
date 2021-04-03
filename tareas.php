@@ -154,12 +154,14 @@ require_once("template/header.php");
                                                                         echo ('<td>' . $arrayobtenido[$i]["estado"] . '</td>');
                                                                         echo ('<td>');
 
-                                                                        ?>
-                                                                        <button type="button" class="editar btn btn-primary text-white mr-1" value="<?php echo $arrayobtenido[$i]["id"]; ?>">Editar</button>
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareaseditar', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareaseditar'] == 1) {
+                                                                ?>
+                                                                            <button type="button" class="editartarea btn btn-primary text-white mr-1" value="<?php echo $arrayobtenido[$i]["id"]; ?>">Editar</button>
                                                                         <?php
+                                                                        }
 
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pprogtareasactdes', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pprogtareasactdes'] == 1) {
-                                                                ?>
+                                                                        ?>
                                                                             <button type="button" class="actdes btn btn-info text-white mr-1" value="<?php echo $arrayobtenido[$i]["id"]; ?>">Activar/Desactivar</button>
                                                                         <?php
                                                                         }

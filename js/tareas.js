@@ -18,6 +18,43 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
 
 $(function () {
 
+    if (document.getElementsByClassName('editartarea') !== null) {
+        var actdesbuttons = document.getElementsByClassName('editartarea');
+        for (var i = 0; i < actdesbuttons.length; i++) {
+            actdesbuttons[i].addEventListener("click", function () {
+                var indexarray = String(this.value);
+                
+                $.ajax({
+                    url: 'function/tareascalleditar.php',
+                    data: {
+                        action: indexarray
+                    },
+                    type: 'POST',
+                    success: function (data) {
+                        var getdebug = 0;
+                        if (getdebug == 1) {
+                            alert(data);
+                        }
+                        if (data == "errarchnoconfig") {
+                            document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta config no existe.</div>";
+                        } else if (data == "errconfignoread") {
+                            document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta config no tiene permisos de lectura .</div>";
+                        } else if (data == "errconfignowrite") {
+                            document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta config no tiene permisos de escritura.</div>";
+                        } else if (data == "errjsonnoread") {
+                            document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: El archivo json no tiene permisos de lectura.</div>";
+                        } else if (data == "errjsonnowrite") {
+                            document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Hay que introducir un comando.</div>";
+                        } else if (data == 'OK') {
+                            location.href = "editartarea.php";
+                        }
+
+                    }
+                });
+            });
+        }
+    }
+
     if (document.getElementsByClassName('actdes') !== null) {
         var actdesbuttons = document.getElementsByClassName('actdes');
         for (var i = 0; i < actdesbuttons.length; i++) {
