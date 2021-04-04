@@ -465,6 +465,7 @@ require_once("template/header.php");
                                                         <p class="lead" id="textotarearetorno"></p>
                                                         <hr>
                                                         <button class="btn btn-lg btn-primary btn-block" id="creatarea" name="creatarea" type="submit">Crear Tarea</button>
+                                                        <button class="btn btn-secondary btn-block btn-lg" id="cancelar" type="button">Cancelar</button>
                                                         <input type="hidden" name="action" value="submit">
                                                     </form>
                                                 </div>

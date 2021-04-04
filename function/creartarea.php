@@ -49,6 +49,20 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if (isset($_POST['action']) && $_POST['action'] === 'submit') {
 
                 if ($elerror == 0) {
+                    if (empty($_POST["nombretarea"])) {
+                        $retorno = "errnombre";
+                        $elerror = 1;
+                    }
+                }
+
+                if ($elerror == 0) {
+                    if (empty($_POST["laaccion"])) {
+                        $retorno = "errlaaccion";
+                        $elerror = 1;
+                    }
+                }
+
+                if ($elerror == 0) {
                     if (empty($_POST["mes"])) {
                         $retorno = "errmes";
                         $elerror = 1;

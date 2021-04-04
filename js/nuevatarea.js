@@ -16,12 +16,12 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     document.getElementById("elcomando").disabled = true;
     document.getElementById("creatarea").disabled = true;
 
-    $("#laaccion").change(function() {
+    $("#laaccion").change(function () {
         if (document.getElementById("laaccion").value == "acc4") {
             document.getElementById("elcomando").disabled = false;
             if (document.getElementById("elcomando").value == "") {
@@ -40,7 +40,7 @@ $(function() {
         }
     });
 
-    $("#elcomando").keyup(function() {
+    $("#elcomando").keyup(function () {
         if (document.getElementById("elcomando").value == "") {
             document.getElementById("creatarea").disabled = true;
         } else {
@@ -49,11 +49,11 @@ $(function() {
 
     });
 
-    document.getElementById("elcomando").addEventListener('paste', function() {
+    document.getElementById("elcomando").addEventListener('paste', function () {
         document.getElementById("creatarea").disabled = false;
     });
 
-    $("#nombretarea").keyup(function() {
+    $("#nombretarea").keyup(function () {
         if (document.getElementById("nombretarea").value == "") {
             document.getElementById("creatarea").disabled = true;
         } else {
@@ -62,12 +62,16 @@ $(function() {
 
     });
 
-    $("#creatarea").click(function() {
+    $("#creatarea").click(function () {
         var eldata = $("#formtarea :input").serializeArray();
 
-        $.post($("#formtarea").attr("action"), eldata, function(data) {
+        $.post($("#formtarea").attr("action"), eldata, function (data) {
 
-            if (data == "errmes") {
+            if (data == "errnombre") {
+                document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La tarea tiene que tener un nombre.</div>";
+            } else if (data == "errlaaccion") {
+                document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La tarea tiene que tener una acción.</div>";
+            } else if (data == "errmes") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Tienes que seleccionar como mínimo un mes.</div>";
             } else if (data == "errsemana") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Tienes que seleccionar como mínimo una semana.</div>";
@@ -96,7 +100,11 @@ $(function() {
 
     });
 
-    $("#formtarea").submit(function() {
+    $("#cancelar").click(function () {
+        location.href = "tareas.php";
+    });
+
+    $("#formtarea").submit(function () {
         return false;
 
     });
@@ -109,7 +117,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
