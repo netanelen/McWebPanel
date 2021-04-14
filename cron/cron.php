@@ -537,16 +537,16 @@ if ($elerror == 0) {
                                                         case "acc3":
                                                             //BACKUP SERVIDOR
 
-                                                            function converdatoscarpbackup($losbytes, $opcion)
+                                                            function converdatoscarpbackup($losbytes, $opcion, $decimal)
                                                             {
                                                                 $eltipo = "GB";
                                                                 $result = $losbytes / 1048576;
 
                                                                 if ($opcion == 0) {
-                                                                    $result = str_replace(".", ",", strval(round($result, 2)));
+                                                                    $result = strval(round($result, $decimal));
                                                                     return $result;
                                                                 } elseif ($opcion == 1) {
-                                                                    $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+                                                                    $result = strval(round($result, $decimal)) . " " . $eltipo;
                                                                     return $result;
                                                                 }
                                                             }
@@ -566,7 +566,7 @@ if ($elerror == 0) {
                                                                 //OBTENER GIGAS CARPETA BACKUPS
                                                                 $getgigasbackup = shell_exec("du -s " . $dirconfig . " | awk '{ print $1 }' ");
                                                                 $getgigasbackup = trim($getgigasbackup);
-                                                                $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0);
+                                                                $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0, 2);
 
                                                                 //OBTENER GIGAS LIMITE BACKUPS
                                                                 $limitbackupgb = CONFIGFOLDERBACKUPSIZE;

@@ -30,20 +30,6 @@ function test_input($data)
     return $data;
 }
 
-function converdatoscarpbackup($losbytes, $opcion)
-{
-    $eltipo = "GB";
-    $result = $losbytes / 1048576;
-
-    if ($opcion == 0) {
-        $result = str_replace(".", ",", strval(round($result, 2)));
-        return $result;
-    } elseif ($opcion == 1) {
-        $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
-        return $result;
-    }
-}
-
 //COMPROVAR SI SESSION EXISTE SINO CREARLA CON NO
 if (!isset($_SESSION['VALIDADO']) || !isset($_SESSION['KEYSECRETA'])) {
     $_SESSION['VALIDADO'] = "NO";

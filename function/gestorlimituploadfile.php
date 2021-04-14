@@ -36,10 +36,10 @@ function converdatoscarpmine($losbytes, $opcion, $decimal)
     $result = $losbytes / 1048576;
 
     if ($opcion == 0) {
-        $result = str_replace(".", ",", strval(round($result, $decimal)));
+        $result = strval(round($result, $decimal));
         return $result;
     } elseif ($opcion == 1) {
-        $result = str_replace(".", ",", strval(round($result, $decimal))) . " " . $eltipo;
+        $result = strval(round($result, $decimal)) . " " . $eltipo;
         return $result;
     }
 }
@@ -50,10 +50,10 @@ function converdatoscarpmineGB($losbytes, $opcion, $decimal)
     $result = $losbytes / 1073741824;
 
     if ($opcion == 0) {
-        $result = str_replace(".", ",", strval(round($result, $decimal)));
+        $result = strval(round($result, $decimal));
         return $result;
     } elseif ($opcion == 1) {
-        $result = str_replace(".", ",", strval(round($result, $decimal))) . " " . $eltipo;
+        $result = strval(round($result, $decimal)) . " " . $eltipo;
         return $result;
     }
 }
@@ -132,7 +132,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         //COMPROVAR SI LO QUE SE SUBE ES MAYOR AL TAMAÑO RESTANTE DISPONIBLE
         if ($elerror == 0) {
             if ($limitmine >= 1) {
-                $laresta = str_replace(",", ".", $getgigasmine);
+                $laresta = $getgigasmine;
                 $espaciolibre = $limitmine - $laresta;
                 if ($archivosizegb > $espaciolibre) {
                     $retorno = "NOFREESPACE";

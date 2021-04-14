@@ -30,16 +30,16 @@ function test_input($data)
     return $data;
 }
 
-function converdatoscarpmine($losbytes, $opcion)
+function converdatoscarpmine($losbytes, $opcion, $decimal)
 {
     $eltipo = "GB";
     $result = $losbytes / 1048576;
 
     if ($opcion == 0) {
-        $result = str_replace(".", ",", strval(round($result, 2)));
+        $result = strval(round($result, $decimal));
         return $result;
     } elseif ($opcion == 1) {
-        $result = str_replace(".", ",", strval(round($result, 2))) . " " . $eltipo;
+        $result = strval(round($result, $decimal)) . " " . $eltipo;
         return $result;
     }
 }
@@ -205,7 +205,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
                 $getgigasmine = trim($getgigasmine);
-                $getgigasmine = converdatoscarpmine($getgigasmine, 0);
+                $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
                 //MIRAR SI ES ILIMITADO
                 if ($limitmine >= 1) {
