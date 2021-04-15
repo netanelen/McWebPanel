@@ -574,7 +574,7 @@ if ($elerror == 0) {
                                                                 //MIRAR SI ES ILIMITADO
                                                                 if ($limitbackupgb >= 1) {
                                                                     if ($getgigasbackup > $limitbackupgb) {
-                                                                        $retorno = "Error tarea Backup, se ha superado el límite GB para backups.";
+                                                                        $retorno = "Error Tarea Backup, se ha superado el límite GB para backups.";
                                                                         $elerror = 1;
                                                                     }
                                                                 }
