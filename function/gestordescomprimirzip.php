@@ -232,7 +232,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //DESCOMPRIMIR
             if ($elerror == 0) {
 
-                $elcomando1 = "unzip '" . $archivo . "' -d " . $lacarpeta;
+                $elcomando1 = "unzip '" . $archivo . "' -d " ."'" . $lacarpeta ."'";
                 $elcomando2 = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
                 $delsh = "rm " . $dirsh;
 

@@ -230,16 +230,16 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //DESCOMPRIMIR
             if ($elerror == 0) {
 
-                $elcomando1 = "tar -xvf " . $archivo . " -C " . $lacarpeta;
+                $elcomando1 = "tar -xvf " ."'" . $archivo ."'" . " -C " . "'" .$lacarpeta ."'";
                 $elcomando2 = "cd '" . $lacarpeta . "' && find . -name .htaccess -print0 | xargs -0 -I {} rm {}";
                 $delsh = "rm " . $dirsh;
 
                 $file = fopen($dirsh, "w");
                 fwrite($file, "#!/bin/bash" . PHP_EOL);
-                fwrite($file, "mkdir " . $lacarpeta . PHP_EOL);
+                fwrite($file, "mkdir " . "'" .$lacarpeta ."'" . PHP_EOL);
                 fwrite($file, $elcomando1 . PHP_EOL);
                 fwrite($file, $elcomando2 . PHP_EOL);
-                fwrite($file, $delsh . PHP_EOL);
+                //fwrite($file, $delsh . PHP_EOL);
                 fclose($file);
 
                 //DAR PERMISOS AL SH
