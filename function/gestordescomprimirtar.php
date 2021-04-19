@@ -239,7 +239,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, "mkdir " . "'" .$lacarpeta ."'" . PHP_EOL);
                 fwrite($file, $elcomando1 . PHP_EOL);
                 fwrite($file, $elcomando2 . PHP_EOL);
-                //fwrite($file, $delsh . PHP_EOL);
+                fwrite($file, $delsh . PHP_EOL);
                 fclose($file);
 
                 //DAR PERMISOS AL SH
