@@ -42,7 +42,6 @@ require_once("../template/errorreport.php");
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/install1.css">
 
   <!-- Script AJAX -->
   <script src="../js/jquery.min.js"></script>
@@ -73,12 +72,13 @@ $estamodulo = "";
               <div class="row">
                 <div class="col-md-3"><img class="d-block float-right" src="logo.png" alt="Logo"></div>
                 <div class="col-md-9">
-                  <h1 class="display-4 text-left">McWebPanel (Instalacíon)</h1>
+                  <h1 class="display-4 text-left">McWebPanel (Instalación)</h1>
                 </div>
               </div>
               <hr>
             </div>
           </div>
+          <br>
           <h4 class="mb-4 text-left">Requisitos del sistema</h4>
           <div class="table-responsive">
             <table class="table table-borderless table-striped">
@@ -88,7 +88,7 @@ $estamodulo = "";
               </thead>
               <tbody>
                 <tr>
-                  <td class="text-center">PHP comando Shell_exec/exec</td>
+                  <td class="text-center">PHP comando Shell_exec</td>
                   <td></td>
 
                   <?php
@@ -105,7 +105,7 @@ $estamodulo = "";
 
                 </tr>
                 <tr>
-                  <td class="text-center">Maquina Virtual Java</td>
+                  <td class="text-center">Máquina Virtual Java</td>
                   <td></td>
 
                   <?php
@@ -143,47 +143,7 @@ $estamodulo = "";
 
                 </tr>
                 <tr>
-                  <td class="text-center">GNU AWK</td>
-                  <td></td>
-
-                  <?php
-
-                  //REQUISITO GNU AWK
-                  $comreq = shell_exec('command -v awk >/dev/null && echo "yes" || echo "no"');
-                  $comreq = trim($comreq);
-                  if ($comreq == "no") {
-                    $losrequisitos = 1;
-                    echo '<td class="text-danger">Instalado - NO</td>';
-                  } elseif ($comreq == "yes") {
-                    echo '<td class="text-success">Instalado - SI</td>';
-                  }
-
-                  ?>
-
-                </tr>
-
-                <tr>
-                  <td class="text-center">GNU WGET</td>
-                  <td></td>
-
-                  <?php
-
-                  //REQUISITO GNU WGET
-                  $comreq = shell_exec('command -v wget >/dev/null && echo "yes" || echo "no"');
-                  $comreq = trim($comreq);
-                  if ($comreq == "no") {
-                    $losrequisitos = 1;
-                    echo '<td class="text-danger">Instalado - NO</td>';
-                  } elseif ($comreq == "yes") {
-                    echo '<td class="text-success">Instalado - SI</td>';
-                  }
-
-                  ?>
-
-                </tr>
-
-                <tr>
-                  <td class="text-center">PHP mbstring</td>
+                  <td class="text-center">Extensión PHP mbstring</td>
                   <td></td>
 
                   <?php
@@ -200,13 +160,13 @@ $estamodulo = "";
                 </tr>
 
                 <tr>
-                  <td class="text-center">PHP json</td>
+                  <td class="text-center">Extensión PHP ZIP</td>
                   <td></td>
 
                   <?php
 
-                  //REQUISITO JSON
-                  if (!extension_loaded('json')) {
+                  //REQUISITO phpzip
+                  if (!extension_loaded('zip')) {
                     $losrequisitos = 1;
                     echo '<td class="text-danger">Instalado - NO</td>';
                   } else {
@@ -224,46 +184,6 @@ $estamodulo = "";
 
                   //PHP CLI
                   $comreq = shell_exec('command -v php -v >/dev/null && echo "yes" || echo "no"');
-                  $comreq = trim($comreq);
-                  if ($comreq == "no") {
-                    $losrequisitos = 1;
-                    echo '<td class="text-danger">Instalado - NO</td>';
-                  } elseif ($comreq == "yes") {
-                    echo '<td class="text-success">Instalado - SI</td>';
-                  }
-
-                  ?>
-
-                </tr>
-
-                <tr>
-                  <td class="text-center">ZIP</td>
-                  <td></td>
-
-                  <?php
-
-                  //REQUISITO GNU ZIP
-                  $comreq = shell_exec('command -v zip >/dev/null && echo "yes" || echo "no"');
-                  $comreq = trim($comreq);
-                  if ($comreq == "no") {
-                    $losrequisitos = 1;
-                    echo '<td class="text-danger">Instalado - NO</td>';
-                  } elseif ($comreq == "yes") {
-                    echo '<td class="text-success">Instalado - SI</td>';
-                  }
-
-                  ?>
-
-                </tr>
-
-                <tr>
-                  <td class="text-center">UNZIP</td>
-                  <td></td>
-
-                  <?php
-
-                  //REQUISITO GNU UNZIP
-                  $comreq = shell_exec('command -v unzip >/dev/null && echo "yes" || echo "no"');
                   $comreq = trim($comreq);
                   if ($comreq == "no") {
                     $losrequisitos = 1;
@@ -304,7 +224,7 @@ $estamodulo = "";
                         } ?>" method="POST" id="login-install">
             <?php
             if ($losrequisitos == 1) {
-              echo '<div class="alert alert-danger text-center" role="alert">No cumples los requisitos para continuar la instalación.</div>';
+              echo '<button type="submit" class="btn btn-primary btn-block disabled">No cumples los requisitos para continuar la instalación.</button>';
             } elseif ($losrequisitos == 0) {
               echo '<button type="submit" class="btn btn-primary btn-block">Continuar Instalación</button>';
             }
