@@ -73,7 +73,7 @@ $estamodulo = "";
               <div class="row">
                 <div class="col-md-3"><img class="d-block float-right" src="logo.png" alt="Logo"></div>
                 <div class="col-md-9">
-                  <h1 class="display-4 text-left">McWebPanel (Instalacíon)</h1>
+                  <h1 class="display-4 text-left">McWebPanel (Instalación)</h1>
                 </div>
               </div>
               <hr>
@@ -105,7 +105,7 @@ $estamodulo = "";
 
                 </tr>
                 <tr>
-                  <td class="text-center">Maquina Virtual Java</td>
+                  <td class="text-center">Máquina Virtual Java</td>
                   <td></td>
 
                   <?php
