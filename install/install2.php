@@ -63,7 +63,7 @@ require_once("../template/errorreport.php");
         <div class="row">
           <div class="col-md-3"><img class="d-block float-right" src="logo.png" alt="Logo"></div>
           <div class="col-md-9">
-            <h1 class="display-4 text-left">McWebPanel (Instalación)</h1>
+            <h1 class="display-4 text-left">McWebPanel (Instalacíon)</h1>
           </div>
         </div>
         <hr>
@@ -77,19 +77,19 @@ require_once("../template/errorreport.php");
             <form class="text-left" action="install3.php" method="POST" id="login-install2">
 
               <div class="form-group">
-                <label for="eluser" class="">Nombre Usuario (SuperAdmin):</label>
+                <label for="eluser" class="">Nombre Usuario (SuperAdmin)</label>
                 <input type="text" class="form-control" id="eluser" name="eluser" required="required">
               </div>
 
               <div class="form-row">
 
                 <div class="form-group col-md-6">
-                  <label for="elpass">Contraseña:</label>
+                  <label for="elpass">Contraseña</label>
                   <input type="password" class="form-control" id="elpass" name="elpass" placeholder="••••" required="required">
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="elrepass">Confirmar Contraseña:</label>
+                  <label for="elrepass">Confirmar Contraseña</label>
                   <input type="password" class="form-control" id="elrepass" name="elrepass" placeholder="••••" required="required">
                 </div>
 
@@ -100,19 +100,19 @@ require_once("../template/errorreport.php");
               </div>
 
               <div class="form-group">
-                <label for="elnomserv">Nombre Servidor:</label>
+                <label for="elnomserv">Nombre Servidor</label>
                 <input type="text" class="form-control" id="elnomserv" name="elnomserv" required="required" placeholder="McWebPanel">
               </div>
 
               <div class="form-row">
 
                 <div class="form-group col-md-6">
-                  <label for="elport">Puerto:</label>
+                  <label for="elport">Puerto</label>
                   <input type="number" value="25565" class="form-control" id="elport" name="elport" required="required" placeholder="25565" max="65535" min="1025">
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="maxupload">Subida Archivos (Limite MB):</label>
+                  <label for="maxupload">Subida Archivos (Limite MB)</label>
                   <select id="maxupload" name="maxupload" class="form-control" required="required">
                     <option value="128">128 MB</option>
                     <option value="256">256 MB</option>
@@ -131,7 +131,7 @@ require_once("../template/errorreport.php");
               </div>
 
               <div class="form-row">
-                <div class="form-group col-md-6"> <label for="elram" class="">Memoria Ram Límite:</label>
+                <div class="form-group col-md-6"> <label for="elram" class="">Memoria Ram Limite</label>
                   <select id="elram" name="elram" class="form-control" required="required">
                     <?php
 
@@ -151,7 +151,7 @@ require_once("../template/errorreport.php");
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="eltipserv">Tipo Servidor:</label>
+                  <label for="eltipserv">Tipo Servidor</label>
                   <select id="eltipserv" name="eltipserv" class="form-control" required="required">
                     <option value="vanilla">Vanilla</option>
                     <option value="spigot">Spigot</option>
