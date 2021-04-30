@@ -186,7 +186,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 $getgigasmine = trim($getgigasmine);
                 $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
-                //OBTENER GIGAS LIMITE BACKUPS
+                //OBTENER GIGAS LIMITE MINECRAFT
                 $limitmine = CONFIGFOLDERMINECRAFTSIZE;
 
                 //MIRAR SI ES ILIMITADO
