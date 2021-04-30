@@ -85,7 +85,7 @@ $(function () {
             cache: false,
             processData: false,
             success: function (data) {
-alert(data);
+
                 document.getElementById("gifloading").style.visibility = "hidden";
 
                 if (data == "nojar") {
