@@ -20,6 +20,42 @@ $(function () {
 
     document.getElementById("elcomando").disabled = true;
 
+    if (document.getElementById('selectodashoras') !== null) {
+        $("#selectodashoras").click(function () {
+            for (var i = 0; i <= 23; i++) {
+                checkhoras = document.getElementById('h' + i);
+                checkhoras.checked = true;
+            }
+        });
+    }
+
+    if (document.getElementById('deselecionarhoras') !== null) {
+        $("#deselecionarhoras").click(function () {
+            for (var i = 0; i <= 23; i++) {
+                checkhoras = document.getElementById('h' + i);
+                checkhoras.checked = false;
+            }
+        });
+    }
+
+    if (document.getElementById('selectodosminutos') !== null) {
+        $("#selectodosminutos").click(function () {
+            for (var i = 0; i <= 59; i++) {
+                checkminutos = document.getElementById('m' + i);
+                checkminutos.checked = true;
+            }
+        });
+    }
+
+    if (document.getElementById('deselecionarminutos') !== null) {
+        $("#deselecionarminutos").click(function () {
+            for (var i = 0; i <= 59; i++) {
+                checkminutos = document.getElementById('m' + i);
+                checkminutos.checked = false;
+            }
+        });
+    }
+
     if (document.getElementById("laaccion").value == "acc4") {
         document.getElementById("elcomando").disabled = false;
     } else {
@@ -41,9 +77,9 @@ $(function () {
         var eldata = $("#formtarea :input").serializeArray();
         $.post($("#formtarea").attr("action"), eldata, function (data) {
 
-            if(data == "errnosession"){
+            if (data == "errnosession") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se ha encontrado la sessión.</div>";
-            }else if (data == "errnombre") {
+            } else if (data == "errnombre") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La tarea tiene que tener un nombre.</div>";
             } else if (data == "errlaaccion") {
                 document.getElementById("textotarearetorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La tarea tiene que tener una acción.</div>";

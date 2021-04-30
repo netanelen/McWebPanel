@@ -238,7 +238,7 @@ require_once("template/header.php");
 
                                                         <!-- CARD HORA -->
                                                         <div class="card text-white bg-primary mb-3">
-                                                            <div class="card-header text-white bg-primary">Hora:</div>
+                                                            <div class="card-header text-white bg-primary">Hora:<button class="btn btn-light float-right ml-2" id="deselecionarhoras" name="deselecionarhoras">Desactivar todo</button><button class="btn btn-light float-right" id="selectodashoras" name="selectodashoras">Activar todo</button></div>
                                                             <div class="card-body">
                                                                 <input id="h0" name="hora[]" type="checkbox" value="0" <?php
                                                                                                                         if ($_SESSION['EDITARTAREA'][0]['hora'] == 0) {
@@ -394,7 +394,7 @@ require_once("template/header.php");
 
                                                         <!-- CARD MINUTO -->
                                                         <div class="card text-white bg-primary mb-3">
-                                                            <div class="card-header text-white bg-primary">Minuto:</div>
+                                                            <div class="card-header text-white bg-primary">Minuto:<button class="btn btn-light float-right ml-2" id="deselecionarminutos" name="deselecionarminutos">Desactivar todo</button><button class="btn btn-light float-right" id="selectodosminutos" name="selectodosminutos">Activar todo</button></div>
                                                             <div class="card-body">
                                                                 <input id="m0" name="minuto[]" type="checkbox" value="00" <?php
                                                                                                                             if ($_SESSION['EDITARTAREA'][0]['minuto'] == "00") {
