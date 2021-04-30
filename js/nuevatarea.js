@@ -21,6 +21,42 @@ $(function () {
     document.getElementById("elcomando").disabled = true;
     document.getElementById("creatarea").disabled = true;
 
+    if (document.getElementById('selectodashoras') !== null) {
+        $("#selectodashoras").click(function () {
+            for (var i = 0; i <= 23; i++) {
+                checkhoras = document.getElementById('h' + i);
+                checkhoras.checked = true;
+            }
+        });
+    }
+
+    if (document.getElementById('deselecionarhoras') !== null) {
+        $("#deselecionarhoras").click(function () {
+            for (var i = 0; i <= 23; i++) {
+                checkhoras = document.getElementById('h' + i);
+                checkhoras.checked = false;
+            }
+        });
+    }
+
+    if (document.getElementById('selectodosminutos') !== null) {
+        $("#selectodosminutos").click(function () {
+            for (var i = 0; i <= 59; i++) {
+                checkminutos = document.getElementById('m' + i);
+                checkminutos.checked = true;
+            }
+        });
+    }
+
+    if (document.getElementById('deselecionarminutos') !== null) {
+        $("#deselecionarminutos").click(function () {
+            for (var i = 0; i <= 59; i++) {
+                checkminutos = document.getElementById('m' + i);
+                checkminutos.checked = false;
+            }
+        });
+    }
+
     $("#laaccion").change(function () {
         if (document.getElementById("laaccion").value == "acc4") {
             document.getElementById("elcomando").disabled = false;
