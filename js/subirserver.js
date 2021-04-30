@@ -16,12 +16,12 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     document.getElementById("botonsubir").disabled = true;
     document.getElementById("gifloading").style.visibility = "hidden";
 
-    $(".custom-file-input").on("change", function() {
+    $(".custom-file-input").on("change", function () {
         var elerror = 0;
         var fileName = $(this).val().split("\\").pop();
         var res = fileName.substring(fileName.length - 4, fileName.length);
@@ -44,7 +44,7 @@ $(function() {
                     action: eltamano
                 },
                 type: 'POST',
-                success: function(data) {
+                success: function (data) {
 
                     if (data == "OUTGIGAS") {
                         if (document.getElementById('botonsubir') !== null) {
@@ -74,7 +74,7 @@ $(function() {
 
     });
 
-    $("#form").on('submit', (function(e) {
+    $("#form").on('submit', (function (e) {
         document.getElementById("gifloading").style.visibility = "visible";
         e.preventDefault();
         $.ajax({
@@ -84,8 +84,8 @@ $(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
-
+            success: function (data) {
+alert(data);
                 document.getElementById("gifloading").style.visibility = "hidden";
 
                 if (data == "nojar") {
@@ -106,13 +106,15 @@ $(function() {
                     alert("Error al procesar el archivo");
                 } else if (data == "novalidoname") {
                     alert("Nombre no válido");
+                } else if (data == "OUTGIGAS") {
+                    alert("Has superado los GB asignados a la carpeta minecraft");
                 } else if (data == "OK") {
                     alert("Subido con éxito");
                     location.reload();
                 }
 
             },
-            error: function() {
+            error: function () {
                 alert("error");
             }
         });
@@ -126,7 +128,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
