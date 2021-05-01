@@ -16,7 +16,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
     if (document.getElementById('compilar') !== null) {
         document.getElementById("compilar").disabled = true;
@@ -31,7 +31,7 @@ $(function() {
     }
 
     if (document.getElementById('compilar') !== null) {
-        $("#compilar").click(function() {
+        $("#compilar").click(function () {
             verspigot = document.getElementById('serselectver').value
             $.ajax({
                 url: 'function/compilarspigot.php',
@@ -40,7 +40,7 @@ $(function() {
                     laversion: verspigot
                 },
                 type: 'POST',
-                success: function(data) {
+                success: function (data) {
                     if (data == "noreadraiz") {
                         alert("Error: No tienes permisos de lectura en la carpeta raíz, revisa los permisos de linux");
                     } else if (data == "nowriteraiz") {
@@ -59,6 +59,8 @@ $(function() {
                         alert("Error: Error: No hay memoria suficiente para ejecutar la compilacion de Spigot");
                     } else if (data == "OUTGIGAS") {
                         alert("Error: Has superado los GB asignados a la carpeta minecraft");
+                    } else if (data == "ERRORGETSIZE") {
+                        alert("Error: No se puede obtener los GB de la carpeta minecraft");
                     }
                 }
             });
@@ -67,14 +69,14 @@ $(function() {
 
     if (document.getElementById('killcompilar') !== null) {
 
-        $("#killcompilar").click(function() {
+        $("#killcompilar").click(function () {
             $.ajax({
                 url: 'function/compilarspigot.php',
                 data: {
                     action: 'matarcompilar'
                 },
                 type: 'POST',
-                success: function(data) {
+                success: function (data) {
 
                 }
             });
@@ -90,7 +92,7 @@ $(function() {
                 action: 'consola'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 var textoantiguo = document.getElementById("laconsola").value;
 
                 document.getElementById("laconsola").value = data;
@@ -108,7 +110,7 @@ $(function() {
                 action: 'estado'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "ON") {
 
                     if (document.getElementById('compilar') !== null) {
@@ -152,7 +154,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }
