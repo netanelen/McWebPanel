@@ -151,6 +151,8 @@ $(function () {
                             document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre no válido.</div>";
                         } else if (data == "noejecutable") {
                             document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La carpeta del servidor minecraft no tiene permisos de ejecución.</div>";
+                        } else if (data == "ERRORGETSIZE") {
+                            document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se puede obtener los GB de la carpeta Backups.</div>";
                         } else if (data == "limitgbexceeded") {
                             document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado el límite de GB para Backups.</div>";
                         } else if (data == "backenejecucion") {
@@ -178,7 +180,7 @@ $(function () {
 
                     if (data == "ok") {
                         location.reload();
-                    } else if(data == "backupnoenjecucion"){
+                    } else if (data == "backupnoenjecucion") {
                         document.getElementById("textobackupretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No hay ningún backup en ejecución.</div>";
                     }
                 }

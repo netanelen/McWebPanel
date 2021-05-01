@@ -154,6 +154,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasbackup = shell_exec("du -s " . $dirbackups . " | awk '{ print $1 }' ");
                 $getgigasbackup = trim($getgigasbackup);
+
+                if (!is_numeric($getgigasbackup)) {
+                    $retorno = "ERRORGETSIZE";
+                    $elerror = 1;
+                }
+            }
+
+            if ($elerror == 0) {
+
                 $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0, 2);
 
                 //OBTENER GIGAS LIMITE BACKUPS
