@@ -272,7 +272,12 @@ require_once("template/header.php");
                                                                     //OBTENER USADO
                                                                     $getgigasback = shell_exec("du -s " . $rutaarchivo . " | awk '{ print $1 }' ");
                                                                     $getgigasback = trim($getgigasback);
-                                                                    $getgigasback = number_format($getgigasback / 1048576, 2);
+
+                                                                    if (!is_numeric($getgigasback)) {
+                                                                        $getgigasback = "Error";
+                                                                    } else {
+                                                                        $getgigasback = number_format($getgigasback / 1048576, 2);
+                                                                    }
                                                                     ?>
 
                                                                     <tr>

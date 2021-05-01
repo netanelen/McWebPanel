@@ -506,7 +506,12 @@ function devolverdatos($losbytes, $opcion)
                                                                     //OBTENER USADO
                                                                     $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
                                                                     $getgigasmine = trim($getgigasmine);
-                                                                    $getgigasmine = number_format($getgigasmine / 1048576, 2);
+
+                                                                    if (!is_numeric($getgigasmine)) {
+                                                                        $getgigasback = "Error";
+                                                                    } else {
+                                                                        $getgigasmine = number_format($getgigasmine / 1048576, 2);
+                                                                    }
                                                                 ?>
 
                                                                     <tr>

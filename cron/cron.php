@@ -565,6 +565,15 @@ if ($elerror == 0) {
                                                                 //OBTENER GIGAS CARPETA BACKUPS
                                                                 $getgigasbackup = shell_exec("du -s " . $dirconfig . " | awk '{ print $1 }' ");
                                                                 $getgigasbackup = trim($getgigasbackup);
+
+                                                                if (!is_numeric($getgigasbackup)) {
+                                                                    $retorno = "Error Tarea Backup, no se puede obtener los GB de la carpeta Backups.";
+                                                                    $elerror = 1;
+                                                                }
+                                                            }
+
+                                                            if ($elerror == 0) {
+
                                                                 $getgigasbackup = converdatoscarpbackup($getgigasbackup, 0, 2);
 
                                                                 //OBTENER GIGAS LIMITE BACKUPS
