@@ -263,7 +263,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                             $arrayobtenido = unserialize($getarray);
                             $elindice = count($arrayobtenido);
 
-                            for ($x = 1; $x < $elindice; $x++) {
+                            for ($x = 0; $x < $elindice; $x++) {
                                 if ($_SESSION['SETEDITARTAREA'] == $arrayobtenido[$x]['id']) {
                                     $arrayobtenido[$x]['nombre'] = test_input($_POST["nombretarea"]);
                                     $arrayobtenido[$x]['accion'] = test_input($_POST["laaccion"]);
