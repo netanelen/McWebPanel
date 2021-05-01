@@ -114,9 +114,18 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             $rutacarpetamine = trim($rutacarpetamine);
             $rutacarpetamine .= "/" . $elnombredirectorio;
 
-            //OBTENER GIGAS CARPETA BACKUPS
+            //OBTENER GIGAS CARPETA MINECRAFT
             $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
             $getgigasmine = trim($getgigasmine);
+
+            if (!is_numeric($getgigasmine)) {
+                $retorno = "ERRORGETSIZE";
+                $elerror = 1;
+            }
+        }
+
+        if ($elerror == 0) {
+
             $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
             //MIRAR SI ES ILIMITADO

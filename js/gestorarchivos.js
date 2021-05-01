@@ -302,6 +302,8 @@ $(function () {
                             alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
                         } else if (data.eserror == "no") {
                             alert("Error al descomprimir");
+                        } else if (data.eserror == "ERRORGETSIZE") {
+                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
                         } else if (data.eserror == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data.eserror == "notempexiste") {
@@ -342,6 +344,8 @@ $(function () {
                             alert("El archivo no es .zip");
                         } else if (data.eserror == "carpyaexiste") {
                             alert("No se puede descomprimir, la carpeta: " + data.carpeta + " ya existe");
+                        } else if (data.eserror == "ERRORGETSIZE") {
+                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
                         } else if (data.eserror == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data.eserror == "fallo") {
@@ -387,6 +391,8 @@ $(function () {
                             alert("Error al comprimir");
                         } else if (data.eserror == "nopermenter") {
                             alert("No tienes permiso de ejecucion/enter en la carpeta");
+                        } else if (data.eserror == "ERRORGETSIZE") {
+                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
                         } else if (data.eserror == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data.eserror == "notempexiste") {
@@ -438,6 +444,14 @@ $(function () {
                     if (document.getElementById('botonsubir') !== null) {
                         document.getElementById("botonsubir").disabled = false;
                     }
+                } else if (data == "ERRORGETSIZE") {
+                    if (document.getElementById('botonsubir') !== null) {
+                        document.getElementById("botonsubir").disabled = true;
+
+                    }
+                    document.getElementById('fileName').value = "";
+                    $('#lvltext').text("Elija el archivo");
+                    alert("Error: No se puede obtener los GB de la carpeta minecraft");
                 } else if (data == "OUTUPLOAD") {
                     if (document.getElementById('botonsubir') !== null) {
                         document.getElementById("botonsubir").disabled = true;
@@ -493,6 +507,8 @@ $(function () {
                             alert("Renombre no válido");
                         } else if (data == "novalido") {
                             alert("Nombre no válido");
+                        } else if (data == "ERRORGETSIZE") {
+                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
                         } else if (data == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data == "OK") {
@@ -533,6 +549,8 @@ $(function () {
                             location.reload();
                         } else if (data == "nopermenter") {
                             alert("Hay carpetas que no tienen permiso de ejecucion/enter");
+                        } else if (data == "ERRORGETSIZE") {
+                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
                         } else if (data == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data == "OK") {
@@ -564,6 +582,8 @@ $(function () {
                             alert("Se cancela el pegado, el archivo no existe");
                         } else if (data == "nowrite") {
                             alert("La ruta a pegar no tiene permisos de escritura");
+                        } else if (data == "ERRORGETSIZE") {
+                            alert("Error: No se puede obtener los GB de la carpeta minecraft");
                         } else if (data == "OUTGIGAS") {
                             alert("Error: Has superado los GB asignados a la carpeta minecraft");
                         } else if (data == "notempexiste") {
@@ -714,6 +734,8 @@ $(function () {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se acepta ese tipo de archivo.</div>";
                 } else if (data == "novalidoname") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Nombre archivo no válido.</div>";
+                } else if (data == "ERRORGETSIZE") {
+                    document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se puede obtener los GB de la carpeta minecraft.</div>";
                 } else if (data == "OUTGIGAS") {
                     document.getElementById("textouploadretorno").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has superado los GB asignados a la carpeta minecraft.</div>";
                 } else if (data == "errprocess") {

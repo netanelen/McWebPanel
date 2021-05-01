@@ -165,6 +165,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
                 $getgigasmine = trim($getgigasmine);
+
+                if (!is_numeric($getgigasmine)) {
+                    $retorno = "ERRORGETSIZE";
+                    $elerror = 1;
+                }
+            }
+
+            if ($elerror == 0) {
+
                 $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
                 //MIRAR SI ES ILIMITADO
@@ -185,7 +194,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 fwrite($file, "#!/bin/bash" . PHP_EOL);
 
                 for ($b = 0; $b < count($copiados); $b++) {
-                    $ejecucion = "cp -r '" . $copiados[$b] . "' '" . $_SESSION['RUTACTUAL']."'";
+                    $ejecucion = "cp -r '" . $copiados[$b] . "' '" . $_SESSION['RUTACTUAL'] . "'";
                     fwrite($file, $ejecucion . PHP_EOL);
                 }
 

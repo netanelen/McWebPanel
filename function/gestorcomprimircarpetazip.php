@@ -204,6 +204,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
                 $getgigasmine = trim($getgigasmine);
+
+                if (!is_numeric($getgigasmine)) {
+                    $retorno = "ERRORGETSIZE";
+                    $elerror = 1;
+                }
+            }
+
+            if ($elerror == 0) {
+
                 $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
                 //MIRAR SI ES ILIMITADO
@@ -218,7 +227,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //COMPRIMIR
             if ($elerror == 0) {
                 $elcomando1 = "cd " . "'" . $_SESSION['RUTACTUAL'] . "'" . " && zip -r " . "'" . $dirtemp . "/" . $nombrecarpeta . ".zip" . "'" . " " . "'" . $nombrecarpeta . "'";
-                $elcomando2 = "mv " ."'" . $dirtemp . "/" . $nombrecarpeta . ".zip" ."' " . "'" . $_SESSION['RUTACTUAL'] . "'";
+                $elcomando2 = "mv " . "'" . $dirtemp . "/" . $nombrecarpeta . ".zip" . "' " . "'" . $_SESSION['RUTACTUAL'] . "'";
                 $delsh = "rm " . $dirsh;
 
                 $file = fopen($dirsh, "w");
