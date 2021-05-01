@@ -105,7 +105,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             //COMPOBAR SI HAY ".." "..."
             if ($elerror == 0) {
 
-                $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&','#', "|", '$','%','!','`','&','*','{','}', '?','=','@',"'",'"',"'\'");
+                $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '/', '\\', '&&', '#', "|", '$', '%', '!', '`', '&', '*', '{', '}', '?', '=', '@', "'", '"', "'\'");
 
                 for ($i = 0; $i < count($verificar); $i++) {
 
@@ -184,6 +184,15 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 //OBTENER GIGAS CARPETA BACKUPS
                 $getgigasmine = shell_exec("du -s " . $rutacarpetamine . " | awk '{ print $1 }' ");
                 $getgigasmine = trim($getgigasmine);
+
+                if (!is_numeric($getgigasmine)) {
+                    $retorno = "ERRORGETSIZE";
+                    $elerror = 1;
+                }
+            }
+
+            if ($elerror == 0) {
+
                 $getgigasmine = converdatoscarpmine($getgigasmine, 0, 2);
 
                 //OBTENER GIGAS LIMITE MINECRAFT

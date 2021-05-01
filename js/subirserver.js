@@ -106,6 +106,8 @@ $(function () {
                     alert("Error al procesar el archivo");
                 } else if (data == "novalidoname") {
                     alert("Nombre no válido");
+                } else if (data == "ERRORGETSIZE") {
+                    alert("No se puede obtener los GB de la carpeta minecraft");
                 } else if (data == "OUTGIGAS") {
                     alert("Has superado los GB asignados a la carpeta minecraft");
                 } else if (data == "OK") {
