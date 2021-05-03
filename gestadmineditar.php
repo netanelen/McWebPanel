@@ -252,12 +252,12 @@ require_once("template/header.php");
                                                                                     <div>
                                                                                         <input id="psystemconfjavaselect" name="psystemconfjavaselect" type="checkbox" value="1" <?php
 
-                                                                                                                                                                                if (array_key_exists('psystemconfjavaselect', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconfjavaselect'] == 1) {
-                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    if (array_key_exists('psystemconfjavaselect', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconfjavaselect'] == 1) {
+                                                                                                                                                                                            echo "checked";
+                                                                                                                                                                                        }
                                                                                                                                                                                     }
-                                                                                                                                                                                }
-                                                                                                                                                                                ?>>
+                                                                                                                                                                                    ?>>
 
                                                                                         <label class="negrita mr-2" for="psystemconfjavaselect">Selector JAVA</label>
                                                                                     </div>
@@ -268,12 +268,12 @@ require_once("template/header.php");
                                                                                     <div>
                                                                                         <input id="psystemconffoldersize" name="psystemconffoldersize" type="checkbox" value="1" <?php
 
-                                                                                                                                                                                if (array_key_exists('psystemconffoldersize', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconffoldersize'] == 1) {
-                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    if (array_key_exists('psystemconffoldersize', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconffoldersize'] == 1) {
+                                                                                                                                                                                            echo "checked";
+                                                                                                                                                                                        }
                                                                                                                                                                                     }
-                                                                                                                                                                                }
-                                                                                                                                                                                ?>>
+                                                                                                                                                                                    ?>>
 
                                                                                         <label class="negrita mr-2" for="psystemconffoldersize">Limite Almacenamiento</label>
                                                                                     </div>
@@ -284,12 +284,12 @@ require_once("template/header.php");
                                                                                     <div>
                                                                                         <input id="psystemconflinconsole" name="psystemconflinconsole" type="checkbox" value="1" <?php
 
-                                                                                                                                                                                if (array_key_exists('psystemconflinconsole', $_SESSION['EDITARSUPER'])) {
-                                                                                                                                                                                    if ($_SESSION['EDITARSUPER']['psystemconflinconsole'] == 1) {
-                                                                                                                                                                                        echo "checked";
+                                                                                                                                                                                    if (array_key_exists('psystemconflinconsole', $_SESSION['EDITARSUPER'])) {
+                                                                                                                                                                                        if ($_SESSION['EDITARSUPER']['psystemconflinconsole'] == 1) {
+                                                                                                                                                                                            echo "checked";
+                                                                                                                                                                                        }
                                                                                                                                                                                     }
-                                                                                                                                                                                }
-                                                                                                                                                                                ?>>
+                                                                                                                                                                                    ?>>
 
                                                                                         <label class="negrita mr-2" for="psystemconflinconsole">Líneas Consola</label>
                                                                                     </div>
@@ -313,6 +313,7 @@ require_once("template/header.php");
                                                                                                                                                                                         echo ('Editar Administrador');
                                                                                                                                                                                     }
                                                                                                                                                                                     ?></button>
+                                                                        <button class="btn btn-lg btn-secondary btn-block" id="btcancelar" name="btcancelar">Cancelar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>

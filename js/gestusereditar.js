@@ -16,9 +16,9 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-$(function() {
+$(function () {
 
-    $("#elpass").keyup(function() {
+    $("#elpass").keyup(function () {
         var getpass = document.getElementById("elpass").value;
         if (getpass == "") {
             document.getElementById("textoretorno").innerHTML = "";
@@ -30,7 +30,7 @@ $(function() {
                 },
                 type: 'POST',
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     if (data.error == 1) {
                         document.getElementById("textoretorno").innerHTML = data.texto;
                         document.getElementById("btcrearusuario").disabled = true;
@@ -43,7 +43,7 @@ $(function() {
         }
     });
 
-    $("#form-createuser").on('submit', (function(e) {
+    $("#form-createuser").on('submit', (function (e) {
         e.preventDefault();
         $.ajax({
             url: "function/gestusereditarusuario.php",
@@ -52,7 +52,7 @@ $(function() {
             contentType: false,
             cache: false,
             processData: false,
-            success: function(data) {
+            success: function (data) {
 
                 if (data == "nohayusuario") {
                     alert("No se ha recibido ningún usuario");
@@ -78,11 +78,15 @@ $(function() {
                 }
 
             },
-            error: function() {
+            error: function () {
                 alert("error");
             }
         });
     }));
+
+    $("#btcancelar").click(function () {
+        location.href = "gestorusers.php";
+    });
 
     function sessionTimer() {
 
@@ -92,7 +96,7 @@ $(function() {
                 action: 'status'
             },
             type: 'POST',
-            success: function(data) {
+            success: function (data) {
                 if (data == "SALIR") {
                     location.href = "index.php";
                 }

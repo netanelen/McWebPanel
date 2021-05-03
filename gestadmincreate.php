@@ -197,6 +197,7 @@ require_once("template/header.php");
                                                                     <div class="col-md-12">
                                                                         <br>
                                                                         <button class="btn btn-lg btn-primary btn-block" id="btcrearusuario" name="btcrearusuario" type="submit">Crear Administrador</button>
+                                                                        <button class="btn btn-lg btn-secondary btn-block" id="btcancelar" name="btcancelar">Cancelar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
