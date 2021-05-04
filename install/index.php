@@ -22,9 +22,12 @@ header("Content-Security-Policy: default-src 'none'; style-src 'self'; img-src '
 header('X-Content-Type-Options: nosniff');
 header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
 header("X-XSS-Protection: 1; mode=block");
+header("Referrer-Policy: no-referrer");
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 
 require_once("../template/errorreport.php");
-
 ?>
 
 <!doctype html>
@@ -33,9 +36,7 @@ require_once("../template/errorreport.php");
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin">
   <meta name="robots" content="noindex, nofollow">
-  <meta http-equiv="cache-control" content="no-cache">
   <meta name="description" content="Instalador">
   <meta name="author" content="Konata400">
   <title>McWebPanel Install</title>
