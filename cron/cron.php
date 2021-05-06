@@ -48,6 +48,7 @@ $elarchivo .= "/array.json";
 
 //COMPROVAR SI EXISTE CARPETA CONFIG
 if ($elerror == 0) {
+    clearstatcache();
     if (!file_exists($rutaarchivo)) {
         $elerror = 1;
     }
@@ -55,6 +56,7 @@ if ($elerror == 0) {
 
 //COMPROVAR SI CONFIG TIENE PERMISOS DE LECTURA
 if ($elerror == 0) {
+    clearstatcache();
     if (!is_readable($rutaarchivo)) {
         $retorno = "Error la carpeta config no tiene permisos de lectura.";
         $elerror = 1;
@@ -63,6 +65,7 @@ if ($elerror == 0) {
 
 //COMPROVAR SI CONFIG TIENE PERMISOS DE ESCRITURA
 if ($elerror == 0) {
+    clearstatcache();
     if (!is_writable($rutaarchivo)) {
         $retorno = "Error la carpeta config no tiene permisos de escritura.";
         $elerror = 1;
@@ -75,6 +78,7 @@ if ($elerror == 0) {
 
         //COMPROVAR SI SE PUEDE LEER EL JSON
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_readable($elarchivo)) {
                 $retorno = "Error el archivo de tareas no tiene permisos de lectura.";
                 $elerror = 1;
@@ -83,6 +87,7 @@ if ($elerror == 0) {
 
         //COMPROVAR SI SE PUEDE ESCRIVIR EL JSON
         if ($elerror == 0) {
+            clearstatcache();
             if (!is_writable($elarchivo)) {
                 $retorno = "Error el archivo de tareas no tiene permisos de escritura.";
                 $elerror = 1;
@@ -245,6 +250,7 @@ if ($elerror == 0) {
 
                                                                 //VERIFICAR SI EXISTE ARCHIVO /CONFIG/SERVERPROPERTIES
                                                                 if ($elerror == 0) {
+                                                                    clearstatcache();
                                                                     if (!file_exists($rutaconfigproperties)) {
                                                                         $elerror = 1;
                                                                         $retorno = "Error Tarea Iniciar Servidor, no existe el archivo /config/serverproperties.txt";
@@ -589,17 +595,21 @@ if ($elerror == 0) {
                                                             }
 
                                                             if ($elerror == 0) {
+                                                                clearstatcache();
                                                                 if (file_exists($dirconfig)) {
                                                                     //COMPROVAR SI SE PUEDE ESCRIVIR
+                                                                    clearstatcache();
                                                                     if (is_writable($dirconfig)) {
                                                                         $rutaarchivo = $RUTAPRINCIPAL;
                                                                         $rutaarchivo = trim($rutaarchivo);
                                                                         $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
+                                                                        clearstatcache();
                                                                         if (is_readable($rutaminelimpia)) {
                                                                             $rutaarchivo .= "/" . $reccarpmine . "/ .";
                                                                             $dirconfig = $dirconfig . "/" . $archivo . "-";
                                                                             $t = date("Y-m-d-G:i:s");
                                                                             $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
+                                                                            clearstatcache();
                                                                             if (is_executable($rutaminelimpia)) {
                                                                                 exec($elcomando, $out, $oky);
 
