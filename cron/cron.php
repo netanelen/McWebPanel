@@ -18,9 +18,14 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 header("Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; script-src 'self'; form-action 'self'; base-uri 'none'; connect-src 'self'; frame-ancestors 'none'");
-header('X-Content-Type-Options: nosniff');
+header('X-Content-Type-Options: nosniff'); 
 header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
 header("X-XSS-Protection: 1; mode=block");
+header("Referrer-Policy: no-referrer");
+header('Permissions-Policy: geolocation=(), microphone=()');
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 
 $RUTAPRINCIPAL = $_SERVER['PHP_SELF'];
 $RUTAPRINCIPAL = substr($RUTAPRINCIPAL, 0, -14);
