@@ -356,6 +356,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     $arrayobtenido[$elindice]['pgestorarchivossubir'] = 1;
                 }
 
+                if (isset($_POST['pgestorarchivosexcludefiles'])) {
+                    $arrayobtenido[$elindice]['pgestorarchivosexcludefiles'] = 1;
+                }
+
                 //GUARDAR EN ARCHIVO
                 $serialized = serialize($arrayobtenido);
                 file_put_contents($elarchivo, $serialized);

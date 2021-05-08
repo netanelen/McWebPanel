@@ -630,6 +630,20 @@ require_once("template/header.php");
                                                                                 <p>Permite subir archivos.</p>
                                                                             </div>
 
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="pgestorarchivosexcludefiles" name="pgestorarchivosexcludefiles" type="checkbox" value="1" <?php
+                                                                                                                                                                            if (array_key_exists('pgestorarchivosexcludefiles', $_SESSION['EDITARUSUARIO'])) {
+                                                                                                                                                                                if ($_SESSION['EDITARUSUARIO']['pgestorarchivosexcludefiles'] == 1) {
+                                                                                                                                                                                    echo "checked";
+                                                                                                                                                                                }
+                                                                                                                                                                            }
+                                                                                                                                                                            ?>>
+                                                                                    <label class="negrita mr-2" for="pgestorarchivosexcludefiles">Excluir/Incluir al backup</label>
+                                                                                </div>
+                                                                                <p>Permite excluir/incluir archivos y carpetas del backup.</p>
+                                                                            </div>
+
                                                                         </div>
 
                                                                     </div>

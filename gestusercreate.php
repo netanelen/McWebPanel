@@ -429,6 +429,14 @@ require_once("template/header.php");
                                                                                 <p>Permite subir archivos.</p>
                                                                             </div>
 
+                                                                            <div class="form-group">
+                                                                                <div>
+                                                                                    <input id="pgestorarchivosexcludefiles" name="pgestorarchivosexcludefiles" type="checkbox" value="1">
+                                                                                    <label class="negrita mr-2" for="pgestorarchivosexcludefiles">Excluir/Incluir al backup</label>
+                                                                                </div>
+                                                                                <p>Permite excluir/incluir archivos y carpetas del backup.</p>
+                                                                            </div>
+
                                                                         </div>
 
                                                                     </div>

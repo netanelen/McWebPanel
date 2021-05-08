@@ -414,6 +414,12 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                                 $arrayobtenido[$i]['pgestorarchivossubir'] = 0;
                             }
 
+                            if (isset($_POST['pgestorarchivosexcludefiles'])) {
+                                $arrayobtenido[$i]['pgestorarchivosexcludefiles'] = 1;
+                            } else {
+                                $arrayobtenido[$i]['pgestorarchivosexcludefiles'] = 0;
+                            }
+
                             $nuevoarray[] = $arrayobtenido[$i];
                         }
                     }
