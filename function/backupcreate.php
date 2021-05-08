@@ -239,11 +239,31 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                     unlink($borrastart);
                 }
 
+                $rutaexcluidos = trim(dirname(getcwd()) . "/config" . "/excludeback.json" . PHP_EOL);
                 $t = date("Y-m-d-G:i:s");
                 $rutacrearbackup = $dirtemp . "/" . $archivo . "-" . $t;
-                $rutaacomprimir = $dirminecraft . "/ .";
-                $elcomando = "tar -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
-                $moverabackups = "mv '" . $archivo . "-" . $t . ".tar.gz' " . $dirbackups . "/'" . $archivo . "-" . $t . ".tar.gz'";
+                $rutaacomprimir = "'".$dirminecraft . "/' .";
+
+                clearstatcache();
+                if (file_exists($rutaexcluidos)) {
+                    clearstatcache();
+                    if (is_readable($rutaexcluidos)) {
+                        $elcomando = "tar ";
+                        $buscaarray = file_get_contents($rutaexcluidos);
+                        $buscaexcluidos = unserialize($buscaarray);
+                        $contador = count($buscaexcluidos);
+
+                        for ($ni = 0; $ni < $contador; $ni++) {
+                            $elcomando .= "--exclude='" . $buscaexcluidos[$ni]['excluido'] . "' ";
+                        }
+                        $elcomando .= "-czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                    } else {
+                        $elcomando = "tar -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                    }
+                } else {
+                    $elcomando = "tar -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                }
+                $moverabackups = "mv '" . $archivo . "-" . $t . ".tar.gz' '" . $dirbackups . "/" . $archivo . "-" . $t . ".tar.gz'";
                 $delsh = "rm backup.sh";
 
                 $file = fopen($dirsh, "w");

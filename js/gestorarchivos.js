@@ -70,6 +70,76 @@ $(function () {
         }
     }
 
+    if (document.getElementsByClassName('excluirbackup') !== null) {
+        var excluirbackupbuttons = document.getElementsByClassName('excluirbackup');
+        for (var i = 0; i < excluirbackupbuttons.length; i++) {
+            excluirbackupbuttons[i].addEventListener("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "function/gestorexcludebackup.php",
+                    data: {
+                        action: this.value
+                    },
+                    success: function (data) {
+
+                        if (data == "ok") {
+                            location.reload();
+                        } else if (data == "nada") {
+                            alert("Ningún archivo/carpeta a excluir");
+                        } else if (data == "rutacambiada") {
+                            alert("Ruta no válida");
+                        } else if (data == "noexiste") {
+                            alert("Archivo/carpeta no existe");
+                        } else if (data == "duplicado") {
+                            alert("Archivo/carpeta ya excluido del backup");
+                        } else if (data == "noread") {
+                            alert("Error: El archivo excludeback.json no se puede leer");
+                        } else if (data == "nowriteconfig") {
+                            alert("Error: No hay permisos de escritura en config");
+                        } else if (data == "nowritearchivo") {
+                            alert("Error: El archivo excludeback.json no se puede escribir");
+                        }
+                    }
+                });
+
+            });
+        }
+    }
+
+    if (document.getElementsByClassName('incluirbackup') !== null) {
+        var incluirbackupbuttons = document.getElementsByClassName('incluirbackup');
+        for (var i = 0; i < incluirbackupbuttons.length; i++) {
+            incluirbackupbuttons[i].addEventListener("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "function/gestorincludebackup.php",
+                    data: {
+                        action: this.value
+                    },
+                    success: function (data) {
+
+                        if (data == "ok") {
+                            location.reload();
+                        } else if (data == "nada") {
+                            alert("Ningún archivo/carpeta a excluir");
+                        } else if (data == "rutacambiada") {
+                            alert("Ruta no válida");
+                        } else if (data == "noexiste") {
+                            alert("Archivo/carpeta no existe");
+                        } else if (data == "noread") {
+                            alert("Error: El archivo excludeback.json no se puede leer");
+                        } else if (data == "nowriteconfig") {
+                            alert("Error: No hay permisos de escritura en config");
+                        } else if (data == "nowritearchivo") {
+                            alert("Error: El archivo excludeback.json no se puede escribir");
+                        }
+                    }
+                });
+
+            });
+        }
+    }
+
     if (document.getElementsByClassName('borrarfile') !== null) {
         var borrarfilebuttons = document.getElementsByClassName('borrarfile');
         for (var i = 0; i < borrarfilebuttons.length; i++) {
