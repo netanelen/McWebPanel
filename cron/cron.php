@@ -18,7 +18,7 @@ Copyright (C) 2020 Cristina Ibañez, Konata400
     along with McWebPanel.  If not, see <https://www.gnu.org/licenses/>.
 */
 header("Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; script-src 'self'; form-action 'self'; base-uri 'none'; connect-src 'self'; frame-ancestors 'none'");
-header('X-Content-Type-Options: nosniff'); 
+header('X-Content-Type-Options: nosniff');
 header('Strict-Transport-Security: max-age=63072000; includeSubDomains; preload');
 header("X-XSS-Protection: 1; mode=block");
 header("Referrer-Policy: no-referrer");
@@ -610,10 +610,31 @@ if ($elerror == 0) {
                                                                         $rutaminelimpia = $rutaarchivo . "/" . $reccarpmine;
                                                                         clearstatcache();
                                                                         if (is_readable($rutaminelimpia)) {
-                                                                            $rutaarchivo .= "/" . $reccarpmine . "/ .";
+                                                                            $rutaarchivo = "'" . $rutaarchivo . "/" . $reccarpmine . "/'";
                                                                             $dirconfig = $dirconfig . "/" . $archivo . "-";
+                                                                            $rutaexcluidos = trim($RUTAPRINCIPAL . "/config" . "/excludeback.json" . PHP_EOL);
                                                                             $t = date("Y-m-d-G:i:s");
-                                                                            $elcomando = "tar -czvf " . $dirconfig . $t . ".tar.gz -C " . $rutaarchivo;
+
+                                                                            clearstatcache();
+                                                                            if (file_exists($rutaexcluidos)) {
+                                                                                clearstatcache();
+                                                                                if (is_readable($rutaexcluidos)) {
+                                                                                    $elcomando = "tar ";
+                                                                                    $buscaarray = file_get_contents($rutaexcluidos);
+                                                                                    $buscaexcluidos = unserialize($buscaarray);
+                                                                                    $contadorex = count($buscaexcluidos);
+
+                                                                                    for ($ni = 0; $ni < $contadorex; $ni++) {
+                                                                                        $elcomando .= "--exclude='" . $buscaexcluidos[$ni]['excluido'] . "' ";
+                                                                                    }
+                                                                                    $elcomando .= "-czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
+                                                                                } else {
+                                                                                    $elcomando = "tar -czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
+                                                                                }
+                                                                            } else {
+                                                                                $elcomando = "tar -czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
+                                                                            }
+
                                                                             clearstatcache();
                                                                             if (is_executable($rutaminelimpia)) {
                                                                                 exec($elcomando, $out, $oky);
