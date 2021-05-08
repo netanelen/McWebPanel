@@ -185,15 +185,17 @@ function devolverdatos($losbytes, $opcion)
                                                     }
 
                                                     //OBTENER ARRAY ARCHIVOS EXCLUIDOS BACKUP
-                                                    $rutaexcluidos = trim(getcwd() . "/config" . "/excludeback.json" . PHP_EOL);
-                                                    $buscaexcluidos = 0;
+                                                    if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosexcludefiles', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosexcludefiles'] == 1) {
+                                                        $rutaexcluidos = trim(getcwd() . "/config" . "/excludeback.json" . PHP_EOL);
+                                                        $buscaexcluidos = 0;
 
-                                                    clearstatcache();
-                                                    if (file_exists($rutaexcluidos)) {
                                                         clearstatcache();
-                                                        if (is_readable($rutaexcluidos)) {
-                                                            $buscaarray = file_get_contents($rutaexcluidos);
-                                                            $buscaexcluidos = unserialize($buscaarray);
+                                                        if (file_exists($rutaexcluidos)) {
+                                                            clearstatcache();
+                                                            if (is_readable($rutaexcluidos)) {
+                                                                $buscaarray = file_get_contents($rutaexcluidos);
+                                                                $buscaexcluidos = unserialize($buscaarray);
+                                                            }
                                                         }
                                                     }
 
@@ -465,21 +467,24 @@ function devolverdatos($losbytes, $opcion)
                                                                         }
 
                                                                         //BOTON EXCLUIR BACKUP ARCHIVO
-                                                                        $compararuta = trim($_SESSION['RUTACTUAL'] . "/" . $fcarpetas[$i]);
-                                                                        $excluirencontrado = 0;
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosexcludefiles', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosexcludefiles'] == 1) {
+                                                                            $compararuta = trim($_SESSION['RUTACTUAL'] . "/" . $fcarpetas[$i]);
+                                                                            $excluirencontrado = 0;
 
-                                                                        if ($buscaexcluidos != 0) {
-                                                                            for ($bucleexcluidos = 0; $bucleexcluidos < count($buscaexcluidos); $bucleexcluidos++) {
-                                                                                if ($buscaexcluidos[$bucleexcluidos]['completa'] == $compararuta) {
-                                                                                    $excluirencontrado = 1;
+                                                                            if ($buscaexcluidos != 0) {
+                                                                                for ($bucleexcluidos = 0; $bucleexcluidos < count($buscaexcluidos); $bucleexcluidos++) {
+                                                                                    if ($buscaexcluidos[$bucleexcluidos]['completa'] == $compararuta) {
+                                                                                        $excluirencontrado = 1;
+                                                                                    }
                                                                                 }
                                                                             }
-                                                                        }
 
-                                                                        if ($excluirencontrado == 0) {
-                                                                            echo '<button type="button" class="excluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Excluir archivo del backup"><img src="img/botones/excludeb.png" alt="Excluir archivo del backup"></button>';
-                                                                        } else {
-                                                                            echo '<button type="button" class="incluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Incluir archivo al backup"><img src="img/botones/includeb.png" alt="Incluir archivo al backup"></button>';
+
+                                                                            if ($excluirencontrado == 0) {
+                                                                                echo '<button type="button" class="excluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Excluir archivo del backup"><img src="img/botones/excludeb.png" alt="Excluir archivo del backup"></button>';
+                                                                            } else {
+                                                                                echo '<button type="button" class="incluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Incluir archivo al backup"><img src="img/botones/includeb.png" alt="Incluir archivo al backup"></button>';
+                                                                            }
                                                                         }
 
                                                                         //BOTON BORRAR ARCHIVO
@@ -514,21 +519,23 @@ function devolverdatos($losbytes, $opcion)
                                                                             }
 
                                                                             //BOTON EXCLUIR CARPETA BACKUP
-                                                                            $compararuta = trim($_SESSION['RUTACTUAL'] . "/" . $fcarpetas[$i]);
-                                                                            $excluirencontrado = 0;
+                                                                            if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosexcludefiles', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosexcludefiles'] == 1) {
+                                                                                $compararuta = trim($_SESSION['RUTACTUAL'] . "/" . $fcarpetas[$i]);
+                                                                                $excluirencontrado = 0;
 
-                                                                            if ($buscaexcluidos != 0) {
-                                                                                for ($bucleexcluidos = 0; $bucleexcluidos < count($buscaexcluidos); $bucleexcluidos++) {
-                                                                                    if ($buscaexcluidos[$bucleexcluidos]['completa'] == $compararuta) {
-                                                                                        $excluirencontrado = 1;
+                                                                                if ($buscaexcluidos != 0) {
+                                                                                    for ($bucleexcluidos = 0; $bucleexcluidos < count($buscaexcluidos); $bucleexcluidos++) {
+                                                                                        if ($buscaexcluidos[$bucleexcluidos]['completa'] == $compararuta) {
+                                                                                            $excluirencontrado = 1;
+                                                                                        }
                                                                                     }
                                                                                 }
-                                                                            }
 
-                                                                            if ($excluirencontrado == 0) {
-                                                                                echo '<button type="button" id="' . $fcarpetas[$i] . '" class="excluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Excluir carpeta del backup"><img src="img/botones/excludeb.png" alt="Excluir carpeta del backup"></button>';
-                                                                            } else {
-                                                                                echo '<button type="button" id="' . $fcarpetas[$i] . '" class="incluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Incluir carpeta al Backup"><img src="img/botones/includeb.png" alt="Incluir carpeta al Backup"></button>';
+                                                                                if ($excluirencontrado == 0) {
+                                                                                    echo '<button type="button" id="' . $fcarpetas[$i] . '" class="excluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Excluir carpeta del backup"><img src="img/botones/excludeb.png" alt="Excluir carpeta del backup"></button>';
+                                                                                } else {
+                                                                                    echo '<button type="button" id="' . $fcarpetas[$i] . '" class="incluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Incluir carpeta al Backup"><img src="img/botones/includeb.png" alt="Incluir carpeta al Backup"></button>';
+                                                                                }
                                                                             }
 
                                                                             //BOTON BORRAR CARPETA
