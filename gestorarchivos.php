@@ -241,25 +241,15 @@ function devolverdatos($losbytes, $opcion)
                                                     fwrite($file, "AllowOverride None" . PHP_EOL);
                                                     fclose($file);
 
-                                                    //SEPARAR RUTA EN ARRAY
-                                                    $getrutalimpia = explode("/", $_SESSION['RUTACTUAL']);
-
-                                                    //RECORRER ARRAY Y OBTENER SOLO A PARTIR DE LA CARPETA SERVER MINECRAFT
-                                                    for ($a = 0; $a < count($getrutalimpia); $a++) {
-                                                        if ($getrutalimpia[$a] == $reccarpmine) {
-                                                            $valencontrado = 1;
-                                                        }
-
-                                                        if ($valencontrado == 1) {
-                                                            $getrutaparseada .= $getrutalimpia[$a] . " / ";
-                                                        }
-                                                    }
+                                                    //PARSEAR RUTA QUITANDO LO ANTERIOR A LA CARPETA MINECRAFT
+                                                    $getrutaparseada = substr($_SESSION['RUTACTUAL'], strlen($dirraiz));
+                                                    $getrutaparseada = str_replace("/", " / ", $getrutaparseada);
 
                                                     ?>
 
                                                     <nav aria-label="breadcrumb">
                                                         <ol class="breadcrumb">
-                                                            <li class="breadcrumb-item active"><?php echo "Carpeta: / " . $getrutaparseada; ?></li>
+                                                            <li class="breadcrumb-item active"><?php echo "Carpeta: " . $getrutaparseada; ?></li>
                                                         </ol>
                                                     </nav>
 
@@ -348,9 +338,7 @@ function devolverdatos($losbytes, $opcion)
                                                                 }
 
                                                                 //JUNTAR ARRAYS
-                                                                for ($i = 0; $i < count($farchivos); $i++) {
-                                                                    $fcarpetas[] = $farchivos[$i];
-                                                                }
+                                                                $fcarpetas = array_merge($fcarpetas, $farchivos);
 
                                                                 //RECORRER ARRAY Y AÑADIR LAS PROPIEDADES Y LOS BOTONES
                                                                 for ($i = 0; $i < count($fcarpetas); $i++) {
