@@ -187,7 +187,6 @@ function devolverdatos($losbytes, $opcion)
                                                     //OBTENER ARRAY ARCHIVOS EXCLUIDOS BACKUP
                                                     if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosexcludefiles', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosexcludefiles'] == 1) {
                                                         $rutaexcluidos = trim(getcwd() . "/config" . "/excludeback.json" . PHP_EOL);
-                                                        $buscaexcluidos = 0;
 
                                                         clearstatcache();
                                                         if (file_exists($rutaexcluidos)) {
@@ -263,6 +262,7 @@ function devolverdatos($losbytes, $opcion)
                                                             <li class="breadcrumb-item active"><?php echo "Carpeta: / " . $getrutaparseada; ?></li>
                                                         </ol>
                                                     </nav>
+
                                                     <button type="button" id="bnactualizar" class="btn btn-primary mr-1" title="Actualizar"><img src="img/botones/refresh.png" alt="Actualizar"></button>
 
                                                     <?php
@@ -469,21 +469,11 @@ function devolverdatos($losbytes, $opcion)
                                                                         //BOTON EXCLUIR BACKUP ARCHIVO
                                                                         if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosexcludefiles', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosexcludefiles'] == 1) {
                                                                             $compararuta = trim($_SESSION['RUTACTUAL'] . "/" . $fcarpetas[$i]);
-                                                                            $excluirencontrado = 0;
 
-                                                                            if ($buscaexcluidos != 0) {
-                                                                                for ($bucleexcluidos = 0; $bucleexcluidos < count($buscaexcluidos); $bucleexcluidos++) {
-                                                                                    if ($buscaexcluidos[$bucleexcluidos]['completa'] == $compararuta) {
-                                                                                        $excluirencontrado = 1;
-                                                                                    }
-                                                                                }
-                                                                            }
-
-
-                                                                            if ($excluirencontrado == 0) {
-                                                                                echo '<button type="button" class="excluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Excluir archivo del backup"><img src="img/botones/excludeb.png" alt="Excluir archivo del backup"></button>';
-                                                                            } else {
+                                                                            if (in_array($compararuta, array_column($buscaexcluidos, 'completa'))) {
                                                                                 echo '<button type="button" class="incluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Incluir archivo al backup"><img src="img/botones/includeb.png" alt="Incluir archivo al backup"></button>';
+                                                                            } else {
+                                                                                echo '<button type="button" class="excluirbackup btn btn-warning text-white mr-1" id="' . $fcarpetas[$i] . '" value="' . $fcarpetas[$i] . '" title="Excluir archivo del backup"><img src="img/botones/excludeb.png" alt="Excluir archivo del backup"></button>';
                                                                             }
                                                                         }
 
@@ -521,20 +511,11 @@ function devolverdatos($losbytes, $opcion)
                                                                             //BOTON EXCLUIR CARPETA BACKUP
                                                                             if ($_SESSION['CONFIGUSER']['rango'] == 1 || $_SESSION['CONFIGUSER']['rango'] == 2 || array_key_exists('pgestorarchivosexcludefiles', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['pgestorarchivosexcludefiles'] == 1) {
                                                                                 $compararuta = trim($_SESSION['RUTACTUAL'] . "/" . $fcarpetas[$i]);
-                                                                                $excluirencontrado = 0;
 
-                                                                                if ($buscaexcluidos != 0) {
-                                                                                    for ($bucleexcluidos = 0; $bucleexcluidos < count($buscaexcluidos); $bucleexcluidos++) {
-                                                                                        if ($buscaexcluidos[$bucleexcluidos]['completa'] == $compararuta) {
-                                                                                            $excluirencontrado = 1;
-                                                                                        }
-                                                                                    }
-                                                                                }
-
-                                                                                if ($excluirencontrado == 0) {
-                                                                                    echo '<button type="button" id="' . $fcarpetas[$i] . '" class="excluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Excluir carpeta del backup"><img src="img/botones/excludeb.png" alt="Excluir carpeta del backup"></button>';
-                                                                                } else {
+                                                                                if (in_array($compararuta, array_column($buscaexcluidos, 'completa'))) {
                                                                                     echo '<button type="button" id="' . $fcarpetas[$i] . '" class="incluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Incluir carpeta al Backup"><img src="img/botones/includeb.png" alt="Incluir carpeta al Backup"></button>';
+                                                                                } else {
+                                                                                    echo '<button type="button" id="' . $fcarpetas[$i] . '" class="excluirbackup btn text-white btn-warning mr-1" value="' . $fcarpetas[$i] . '" title="Excluir carpeta del backup"><img src="img/botones/excludeb.png" alt="Excluir carpeta del backup"></button>';
                                                                                 }
                                                                             }
 
