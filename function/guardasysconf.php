@@ -128,11 +128,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
         if ($_SESSION['CONFIGUSER']['rango'] == 1 || array_key_exists('psystemconfjavaselect', $_SESSION['CONFIGUSER']) && $_SESSION['CONFIGUSER']['psystemconfjavaselect'] == 1) {
           $eljavaname = "0";
           $eljavamanual = "";
+          $eljavaselect = "";
 
           if (isset($_POST['configjavaselect'])) {
             $eljavaselect = test_input($_POST["configjavaselect"]);
-          } else {
-            $eljavaselect = "0";
           }
 
           if ($eljavaselect == "0") {
@@ -185,7 +184,13 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
               }
             } else {
               $eljavaselect = "0";
+              $eljavaname = "0";
+              $eljavamanual = "";
             }
+          } else {
+            $eljavaselect = "2";
+            $eljavaname = "0";
+            $eljavamanual = CONFIGJAVAMANUAL;
           }
         } else {
           //SI NO TIENE PERMISOS SE ASIGNA LOS QUE YA TIENE

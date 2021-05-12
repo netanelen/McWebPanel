@@ -402,6 +402,18 @@ require_once("template/header.php");
                                                                             </div>
                                                                         <?php
                                                                         }
+                                                                        if ($_SESSION['CONFIGUSER']['rango'] == 2 && $recjavaselect == "2") {
+                                                                        ?>
+                                                                            <br>
+                                                                            <div class="col-md-8">
+                                                                                <input type="radio" id="configjavaselect2" name="configjavaselect" value="" <?php if ($recjavaselect == "2") {
+                                                                                                                                                                    echo "checked";
+                                                                                                                                                                } ?>>
+                                                                                <label for="configjavaselect2">Ruta manual JAVA (Configurado por Superusuario)</label>
+                                                                                <input readonly type="text" class="form-control" value="<?php echo $recjavamanual; ?>">
+                                                                            </div>
+                                                                        <?php
+                                                                        }
                                                                         ?>
 
                                                                     </div>
