@@ -43,9 +43,15 @@ $(function () {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has asignado más gigas en minecraft de lo permitido.</div>";
             } else if (data == "valornonumerico") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: Has asignado un valor incorrecto no numérico.</div>";
+            } else if (data == "novalido") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: La ruta introducida no es válida.</div>";
+            } else if (data == "inpanel") {
+                document.getElementById("result").innerHTML = "<div class='alert alert-danger' role='alert'>Error: No se puede asignar una ruta dentro del panel.</div>";
             } else if (data == "saveconf") {
                 document.getElementById("result").innerHTML = "<div class='alert alert-success' role='alert'>Configuración Guardada.</div>";
                 document.getElementById("guardaserver").disabled = true;
+            }else{
+                document.getElementById("result").innerHTML = "";
             }
         });
 

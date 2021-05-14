@@ -174,12 +174,44 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
             if ($_SESSION['CONFIGUSER']['rango'] == 1) {
               if (isset($_POST['javamanual'])) {
                 $eljavamanual = test_input($_POST["javamanual"]);
-                $existjavaruta = $eljavamanual;
+                $existjavaruta = trim($eljavamanual);
                 $existjavaruta .= "/bin/java";
+                $test = 0;
+
+                //COMPOBAR SI HAY ".." "..."
+                if ($elerror == 0) {
+
+                  $verificar = array('..', '...', '/.', '~', '../', './', ';', ':', '>', '<', '\\', '&&', '#', "|", '$', '%', '!', '`', '&', '*', '{', '}', '?', '=', '@', "'", '"', "'\'");
+
+                  for ($i = 0; $i < count($verificar); $i++) {
+
+                    $test = substr_count($existjavaruta, $verificar[$i]);
+
+                    if ($test >= 1) {
+                      $retorno = "novalido";
+                      $elerror = 1;
+                    }
+                  }
+                }
+
+                //COMPROBAR QUE NO ESTE DENTRO DE LA CARPETA RAIZ
+                if ($elerror == 0) {
+                  $rutacheck = trim(dirname(getcwd()));
+                  $rutajavacheck = substr($existjavaruta, 0, strlen($rutacheck));
+
+                  if ($rutajavacheck == $rutacheck) {
+                    $elerror = 1;
+                    $retorno = "inpanel";
+                  }
+                }
+
+                //COMPROBAR SI ESTA JAVA EN LA RUTA
                 clearstatcache();
-                if (!file_exists($existjavaruta)) {
-                  $retorno = "nojavaenruta";
-                  $elerror = 1;
+                if ($elerror == 0) {
+                  if (!file_exists($existjavaruta)) {
+                    $retorno = "nojavaenruta";
+                    $elerror = 1;
+                  }
                 }
               }
             } else {
