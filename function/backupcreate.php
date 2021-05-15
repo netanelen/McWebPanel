@@ -248,7 +248,7 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                 if (file_exists($rutaexcluidos)) {
                     clearstatcache();
                     if (is_readable($rutaexcluidos)) {
-                        $elcomando = "tar ";
+                        $elcomando = "tar --warning=no-file-changed ";
                         $buscaarray = file_get_contents($rutaexcluidos);
                         $buscaexcluidos = unserialize($buscaarray);
                         $contador = count($buscaexcluidos);
@@ -258,10 +258,10 @@ if ($_SESSION['VALIDADO'] == $_SESSION['KEYSECRETA']) {
                         }
                         $elcomando .= "-czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
                     } else {
-                        $elcomando = "tar -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                        $elcomando = "tar --warning=no-file-changed -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
                     }
                 } else {
-                    $elcomando = "tar -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
+                    $elcomando = "tar --warning=no-file-changed -czvf '" . $rutacrearbackup . ".tar.gz' -C " . $rutaacomprimir;
                 }
                 $moverabackups = "mv '" . $archivo . "-" . $t . ".tar.gz' '" . $dirbackups . "/" . $archivo . "-" . $t . ".tar.gz'";
                 $delsh = "rm backup.sh";

@@ -513,6 +513,7 @@ if ($elerror == 0) {
                                                                         unlink($larutascrrenlog);
                                                                     }
 
+                                                                    //RECOLECTOR
                                                                     if ($recgarbagecolector == "1") {
                                                                         $inigc = "-XX:+UseConcMarkSweepGC";
                                                                     } elseif ($recgarbagecolector == "2") {
@@ -619,7 +620,7 @@ if ($elerror == 0) {
                                                                             if (file_exists($rutaexcluidos)) {
                                                                                 clearstatcache();
                                                                                 if (is_readable($rutaexcluidos)) {
-                                                                                    $elcomando = "tar ";
+                                                                                    $elcomando = "tar --warning=no-file-changed ";
                                                                                     $buscaarray = file_get_contents($rutaexcluidos);
                                                                                     $buscaexcluidos = unserialize($buscaarray);
                                                                                     $contadorex = count($buscaexcluidos);
@@ -629,10 +630,10 @@ if ($elerror == 0) {
                                                                                     }
                                                                                     $elcomando .= "-czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
                                                                                 } else {
-                                                                                    $elcomando = "tar -czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
+                                                                                    $elcomando = "tar --warning=no-file-changed -czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
                                                                                 }
                                                                             } else {
-                                                                                $elcomando = "tar -czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
+                                                                                $elcomando = "tar --warning=no-file-changed -czvf '" . $dirconfig . $t . ".tar.gz' -C " . $rutaarchivo . " .";
                                                                             }
 
                                                                             clearstatcache();
